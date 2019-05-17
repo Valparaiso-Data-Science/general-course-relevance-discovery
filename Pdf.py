@@ -15,13 +15,16 @@ pageObj = pdf.getPage(0)
 
 text = pageObj.extractText()
 
+#this regex grabs 3-4 capital letters, a space, and 3-4 numbers
+classCodeRegex = "[A-Z]{3,4}\s[0-9]{3,4}"
+
+
 
 for line in text:
-    if re.search("ent", line):
+    if re.search(classCodeRegex, line):
         print(line)
-#print(re.findall("ent", text))
+print(re.findall(classCodeRegex, text))
 
-#print(type(text))
 
 file.write(pageObj.extractText())
 file.close()
