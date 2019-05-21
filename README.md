@@ -9,3 +9,6 @@ Pdf.py TODO list
   Output to a file other than our current write to text
 
   Either in Py or in the "CSV naive regex" we need to merge duplicate classes found (I think this will be easier in the CSV cleaning rather than the py stuff, py is getting kinda complex)
+
+  Another way to refine the regex is we already check 1st line for MATH 220, we check the 2nd line (which is the 3rd line cause formatting issues rn) for a capital letter (the start of a title always capital)
+  BUT now we can add a search to the 3rd line (which idk if its the 4th or 5th cause of newlines but we need to clear that too) for a capital A and space or a capital letter and lowercase letter (courses start with"A study about..." or "The study of")

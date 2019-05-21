@@ -25,13 +25,13 @@ for page in range(pdf.numPages):
     #updated = filter(None, updated)
     #Go through every line
     for line in range(len(updated)):
+        #print(repr(updated[line]))
         if updated[line] != " ":
-            #print(repr(line))
             #See if the current line is a header (MATH 240)
             newClass = bool(re.search("[A-Z]{3,5}\s[0-9]{3,4}", updated[line]))
             #TODO, the current 'updated' array has a bunch of empty strings, need to filter() them but revert back to an array to we can len(range()) it
-            if newClass and (line+2)<len(updated):
-                newClass = bool(re.search("^[A-Z]",updated[line+2]))
+            #if newClass and (line+2)<len(updated):
+                #newClass = bool(re.search("^[A-Z]",updated[line+2]))
             if newClass:
                 #First loop combines nothing, but after that details is an array of details about the class
                 #| is for conveince so we see what each detail is being joined into output
@@ -41,9 +41,11 @@ for page in range(pdf.numPages):
                 details.clear()
                 #Once you find a class header, set to true
                 start = True
+                #print(updated[line])
                 details.append(updated[line])
                 #Once one class header is found, you can start recording information
             elif start:
+                #if len(details) > 6:
                 details.append(updated[line])
 
 file.close()
