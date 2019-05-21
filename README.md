@@ -12,3 +12,10 @@ Pdf.py TODO list
 
   Another way to refine the regex is we already check 1st line for MATH 220, we check the 2nd line (which is the 3rd line cause formatting issues rn) for a capital letter (the start of a title always capital)
   BUT now we can add a search to the 3rd line (which idk if its the 4th or 5th cause of newlines but we need to clear that too) for a capital A and space or a capital letter and lowercase letter (courses start with"A study about..." or "The study of")
+
+IDEAS  
+  #topic modeling on data?
+  #When you find a course description that is definintely accurate, learn the new words in that description data related and search using the new words aswell
+  #End term, store in a database or some storage of the classes found to be relavent (and what keyword(s) made it relavant) to be able to search for "machine learning" and all the classes that are relavant to that will show up (from valpo, smith, brown, or all at once)
+  #Probably not possible: try to find who last taught the relavent course (which will require a different pdf for some like valpo) (Brown includes them)
+  #schmitt talk is next thursday
