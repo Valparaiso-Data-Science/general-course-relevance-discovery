@@ -28,7 +28,7 @@ for page in range(pdf.numPages):
         #print(repr(updated[line]))
         if updated[line] != " ":
             #See if the current line is a header (MATH 240)
-            newClass = bool(re.search("[A-Z]{3,5}\s[0-9]{3,4}", updated[line]))
+            newClass = bool(re.search("[A-Z]{3,5}\s[0-9]{3,4}[A-Z]{0,1}", updated[line]))
             #TODO, the current 'updated' array has a bunch of empty strings, need to filter() them but revert back to an array to we can len(range()) it
             #if newClass and (line+2)<len(updated):
                 #newClass = bool(re.search("^[A-Z]",updated[line+2]))
