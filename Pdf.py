@@ -22,12 +22,15 @@ for page in range(pdf.numPages):
     pageObj = pdf.getPage(page)
     text = pageObj.extractText()
     updated = text.split("\n")
-    #updated = filter(None, updated)
+    #updated = list(filter(None, updated))
     #Go through every line
     for line in range(len(updated)):
         #print(repr(updated[line]))
         if updated[line] != " ":
+            print(re.search("ENT", updated[line]))
             #See if the current line is a header (MATH 240)
+            print(re.search("[A-Z]{3,5}\s[0-9]{3,4}[A-Z]{0,1}", updated[line]))
+
             newClass = bool(re.search("[A-Z]{3,5}\s[0-9]{3,4}[A-Z]{0,1}", updated[line]))
             #TODO, the current 'updated' array has a bunch of empty strings, need to filter() them but revert back to an array to we can len(range()) it
             #if newClass and (line+2)<len(updated):
