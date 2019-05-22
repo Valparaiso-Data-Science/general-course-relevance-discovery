@@ -76,7 +76,7 @@ for page in range(pdf.numPages):
         #        newClass = bool(re.search("^[A-Z][a-z]",updated[line+9]) or re.search("^[A-Z]\s",updated[line+9]))
         #    else:
         #        newClass = False
-
+#test
             #If you are a new class title:
             if newClass:
                 print("YESSSSSSSSS", updated[line])
