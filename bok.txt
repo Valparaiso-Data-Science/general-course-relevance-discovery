@@ -1,0 +1,126 @@
+Data Science
+Business Analytics
+Data Analytics
+Data Science Engineering
+Data Management
+Research Methods Project Management
+Business Analytics
+Business Analytics
+Business Intelligence
+methods data analysis
+cognitive technologies
+Machine Learning 
+reinforced learning
+systems software 
+engineering principles 
+organizations information 
+system design development
+data management
+data governance strategy 
+data architecture
+Data Management Plan
+DMP
+research methods 
+research principles 
+data driven 
+data handling
+Data Mining
+Cloud Computing
+cloud powered services
+design data infrastructure
+data handling services
+Data storage systems
+data archive services
+digital libraries
+operational models
+data collection process
+data collection
+Processes Management
+BPM
+Agile Data Driven
+enterprises
+data lifecycle
+data lifecycle management 
+model data collection 
+data quality evaluation
+quality evaluation
+Econometrics
+data analysis applications
+Predictive Analytics
+DevOps 
+continuous improvement cycle
+data types
+data formats
+data modeling design
+structured approach
+use cases analysis
+Customer Relations Management
+CRP
+User Experience 
+UX
+Prescriptive Analytics
+data security
+data access
+data anonymisation
+federated access control 
+federated access control systems
+data provenance
+linked data
+Use cases analysis
+Graph Data Analytics
+organisational network analysis
+organizational network analysis
+compliance based security models
+IPR protection
+data curation 
+data quality controls
+data integration 
+data interoperability
+project management 
+scope
+quality risk management
+team management
+Data Warehouses technologies
+data integration analytics
+Qualitative analytics
+relational databases
+non relational databases
+SQL
+NoSQL
+Data Warehouse solutions
+ETL
+Extract Transform Load
+OLTP
+OLAP
+open data
+process structured data
+process unstructured data
+Data driven marketing technologies
+Apply analytics statistics methods data preparation pre-processing
+Big Data infrastructures
+high performance networks
+metadata
+meta-data
+meta data
+PID
+data registries
+data factories
+accuracy metrics
+data analytics assessment
+modeling simulation 
+Open Data
+Open Science
+Open Access
+ORCID
+Mechanism Design
+Latent Dirichlet Allocation
+data visualisation
+data visualization
+data dashboard
+collaborative system
+Natural Language Processing
+Operations Research
+Recommender Ranking system
+Optimisation
+Optimization
+Simulation
