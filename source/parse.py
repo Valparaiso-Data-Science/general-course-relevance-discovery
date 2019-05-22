@@ -2,7 +2,7 @@ import PyPDF2   #PDF Reader
 import re       #Regex
 import csv      #CSV
 #Grab PDF and create outpute file
-pdfFileObj = open("C:/Users/cpacker/Desktop/general-course-relevance-discovery/fullPDFs/ValpoUni.pdf", 'rb')
+pdfFileObj = open("C:/Users/cpacker/Desktop/general-course-relevance-discovery/testPDFs/ValpoTest.pdf", 'rb')
 pdf = PyPDF2.PdfFileReader(pdfFileObj)
 file = open("Output.txt","w")
 
@@ -12,7 +12,7 @@ newClass = False
 attempt1 = False
 attempt2 = False
 attempt3 = False
-dict = {}
+myDict = {}
 
 #Go through every page
 for page in range(pdf.numPages):
@@ -22,7 +22,7 @@ for page in range(pdf.numPages):
     updated = text.split("\n")
     #Go through every line
     for line in range(len(updated)):
-        #print(repr(updated[line]))
+        #print(updated[line])
         #Current fix to the newline issue, will be removed when fixed (but doesnt have to be)
         if updated[line] != " ":
             #Check for course level (MATH 240)
@@ -68,8 +68,11 @@ for page in range(pdf.numPages):
                 output = '|'.join(details)
 
                 if len(details)>2:
-                    d = {(details.pop(0),details.pop(0)):".".join(details)}
-                    dict.update(d)
+                    level = details.pop(0)
+                    title = details.pop(0)
+                    myDict[level]={"Title": title, "Description":".".join(details)}
+                    #d = {(details.pop(0):".".join(details)}
+                    #dict.update(d)
                 file.write(output+"\n\n")
                 #Once you write the class details, forget it
                 details.clear()
@@ -82,6 +85,6 @@ for page in range(pdf.numPages):
                 #This is potential for avoiding newlines? Kinda bootleg atm and would be better to remove comments from the getgo
                 #if len(details) > 6:
                 details.append(updated[line])
-print("\n".join("{}\t{}".format(k, v) for k, v in dict.items()))
+print("\n".join("{}\t{}".format(k, v) for k, v in myDict.items()))
 file.close()
 pdfFileObj.close()
