@@ -19,9 +19,7 @@ data management
 data governance strategy 
 data architecture
 Data Management Plan
-DMP
-research methods 
-research principles 
+DMP 
 data driven 
 data handling
 Data Mining

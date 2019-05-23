@@ -14,10 +14,14 @@ doc = PyPDF2.PdfFileReader(pdfFileObj)
 #dictionary = getClasses(pdfFileObj)
 for i in doc.pages:
     #print(i.extractText())
-    d.update(parse(i.extractText(),"[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}"))
+    newClasses = parse(i.extractText(),"[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}")
+    for classID in newClasses:
+        if classID in d:
+            d[classID] += newClasses[classID]
+        else:
+            d[classID] = newClasses[classID]
 pdfFileObj.close()
 #print(d)
-print(findRelevant(d))
 
 
 f= open("../output/output.json", "w")
