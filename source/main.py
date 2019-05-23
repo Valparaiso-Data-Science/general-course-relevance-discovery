@@ -18,7 +18,7 @@ for i in doc.pages:
     for classID in newClasses:
         if classID in d:
             d[classID] += newClasses[classID]
-        else:
+        else:x
             d[classID] = newClasses[classID]
 pdfFileObj.close()
 #print(d)
