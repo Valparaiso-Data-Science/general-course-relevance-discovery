@@ -12,12 +12,14 @@ classes = {"CLS 217":"Greek Art and Archaeology Same as ARH 217. This course is 
         "DATA 433":"Data Mining and Applications 2+2, 3 Cr. Data mining is a broad area that integrates techniques from several fields, including machine learning, statistics, pattern recognition, artificial intelligence, and database systems, for the analysis of large volumes of data. This course gives a wide exposition of these techniques and their software tools. Prerequisite: DATA 151 or CS 157 and one of STAT 140, STAT 240, IDS 205, PSY 201, or CE 202. Students may not receive credit for both DATA 433 and BUS 440.",
         "ECON 325":"Econometrics 3 Cr. The application of mathematical and statistical techniques to the analysis of economic issues. Development of simple and multiple regression as tools of analysis. Use of computer facilities and statistical programs to apply the tools to current economic data. Prerequisites: ECON 221, ECON 222, MATH 131 and one of the following: STAT 140, STAT 240, PSY 201, or IDS 205."
         }
-bagWords = open("../bok.txt").read().splitlines()
-result = {}
 
-for i,j in classes.items():
-    for l in bagWords:
-        if l in j:
-            result[i] = j
-            
-print(result.keys())
+def findRelevant(classes):
+                    
+    bagWords = open("../bok.txt").read().splitlines()
+    result = {}
+    
+    for i,j in classes.items():
+        for l in bagWords:
+            if l in j:
+                result[i] = j
+    return result

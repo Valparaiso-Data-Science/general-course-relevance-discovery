@@ -19,7 +19,7 @@ def getClasses(fileObj):
         text = pageObj.extractText()
         line = text.split("\n")
         for number in range(len(line)):
-            #print(line[number])
+            #print(repr(line[number]))
             if line[number] != " ":
                 #Check for course level (MATH 240)
                 newClass = bool(re.search("[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}", line[number]))
