@@ -18,8 +18,9 @@ def findRelevant(classes):
     bagWords = open("../bok.txt").read().splitlines()
     result = {}
     
-    for i,j in classes.items():
-        for l in bagWords:
-            if l in j:
-                result[i] = j
+    for classID,desc in classes.items():
+        for relevantTerm in bagWords:
+            if relevantTerm in desc:
+                desc = desc.replace(relevantTerm,"*" + relevantTerm + "*")
+                result[classID] = desc
     return result
