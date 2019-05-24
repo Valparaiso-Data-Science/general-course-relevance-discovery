@@ -3,10 +3,11 @@ from parse import parse
 import PyPDF2
 from RD import findRelevant
 import json
+import csv
 
 d = {}
-testing = True
-school = "Valpo2"
+testing = False
+school = "Valpo"
 
 filePath = "../%sPDFs/%s.pdf" % (("test" if testing else "full"), school)
 
@@ -23,13 +24,22 @@ for i in doc.pages:
             d[classID] = newClasses[classID]
 pdfFileObj.close()
 
-f= open("../output/output%s.json" % school, "w")
+x = findRelevant(d)
+with open("../output/output%s.csv" % school, "w") as f:
+    f.write('ClassID,Desc\n')
+    for key in x:
+        f.write('%s,"%s"\n'%(key,x[key]))
 
 
-json = json.dumps(findRelevant(d))
+#for x in findRelevant(d):
+#    print(x)
+#f= open("../output/output%s.csv" % school, "w")
 
-f.write(json)
-f.close()
+
+#json = json.dumps(findRelevant(d))
+
+#f.write(json)
+#f.close()
 
 
 
