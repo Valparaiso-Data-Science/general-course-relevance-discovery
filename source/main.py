@@ -5,9 +5,10 @@ from RD import findRelevant
 import json
 
 d = {}
-testing = False
+testing = True
+school = "Valpo2"
 
-filePath = "../%sPDFs/Valpo.pdf" % ("test" if testing else "full")
+filePath = "../%sPDFs/%s.pdf" % (("test" if testing else "full"), school)
 
 pdfFileObj = open(filePath, 'rb')
 doc = PyPDF2.PdfFileReader(pdfFileObj)
@@ -18,14 +19,15 @@ for i in doc.pages:
     for classID in newClasses:
         if classID in d:
             d[classID] += newClasses[classID]
-        else:x
+        else:
             d[classID] = newClasses[classID]
 pdfFileObj.close()
-#print(d)
+
+f= open("../output/output%s.json" % school, "w")
 
 
-f= open("../output/output.json", "w")
 json = json.dumps(findRelevant(d))
+
 f.write(json)
 f.close()
 

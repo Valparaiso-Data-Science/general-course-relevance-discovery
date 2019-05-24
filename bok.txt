@@ -36,7 +36,7 @@ BPM
 Agile Data Driven
 enterprises
 data lifecycle
-data lifecycle management 
+data lifecycle management
 model data collection 
 data quality evaluation
 quality evaluation
@@ -73,7 +73,6 @@ data quality controls
 data integration 
 data interoperability
 project management 
-scope
 quality risk management
 team management
 Data Warehouses technologies
@@ -91,8 +90,10 @@ OLAP
 open data
 process structured data
 process unstructured data
-Data driven marketing technologies
-Apply analytics statistics methods data preparation pre-processing
+data driven marketing technologies
+statistics methods
+data preparation
+data pre-processing
 Big Data infrastructures
 high performance networks
 metadata
