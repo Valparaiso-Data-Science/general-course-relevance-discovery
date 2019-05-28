@@ -14,10 +14,10 @@ classes = {"CLS 217":"Greek Art and Archaeology Same as ARH 217. This course is 
         }
 
 def findRelevant(classes):
-                    
+
     bagWords = open("../bok.txt").read().splitlines()
     result = {}
-    
+
     for classID,desc in classes.items():
         for relevantTerm in bagWords:
             if relevantTerm in desc:
