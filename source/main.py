@@ -24,11 +24,13 @@ for i in doc.pages:
             d[classID] = newClasses[classID]
 pdfFileObj.close()
 
-x = findRelevant(d)
+#Uncomment this for reduced csv of relavant
+#x = findRelevant(d)
 with open("../output/output%s.csv" % school, "w") as f:
     f.write('ClassID,Desc\n')
-    for key in x:
-        f.write('%s,"%s"\n'%(key,x[key]))
+    #replace d with x if wanting reduce format
+    for key in d:
+        f.write('%s,"%s"\n'%(key,d[key]))
 
 
 #for x in findRelevant(d):
