@@ -1,6 +1,17 @@
 import re       #Regex
 import csv      #CSV
 
+###PDFMINER###
+from pdfminer.converter import TextConverter
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.pdfpage import PDFPage
+import io
+resource_manager = PDFResourceManager()
+fake_file_handle = io.StringIO()
+converter = TextConverter(resource_manager, fake_file_handle)
+page_interpreter = PDFPageInterpreter(resource_manager, converter)
+
 #parse is a function that, given a *string* of text, will pull out the class descriptions
 def parse(text, regex):
     #clear the new lines
@@ -43,6 +54,20 @@ def parse(text, regex):
             else:
                 result[classID] += text[startDesc:endDesc]
     return result
+
+def PDFtoTXT(filePath):
+    with open(filePath, 'rb') as fh:
+        ###PDFMiner stuff
+        for page in PDFPage.get_pages(fh,
+                                        caching=True,
+                                        check_extractable=True):
+            page_interpreter.process_page(page)
+
+        text = fake_file_handle.getvalue()
+        converter.close()
+        fake_file_handle.close()
+        ###End of PDFMiner stuff
+    return text
 
 
 
