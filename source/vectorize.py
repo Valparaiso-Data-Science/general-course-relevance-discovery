@@ -20,19 +20,27 @@ with open('../output/fullValpo.csv', newline='', encoding='utf-8') as f:
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
 vectors = vectorizer.fit_transform(desc).toarray()
-#vocab = np.array(vectorizer.get_feature_names())
 
 #Print all "relevant" courses
 count = 0
 classIndex = 0
-for x in vectors:
-    if np.sum(x) > 0:
-        print(courseID[classIndex])
-        print(x)
+vocabKeyWord = []
+with open("../output/vectorized.csv", "w") as f:
+    for x in vectors:
+        element = 0
+        if np.sum(x) > 0:
+            for vocab in np.nditer(x):
+                if vocab > 0:
+                    vocabKeyWord.append(bokVocab[element])
+                element = element + 1
+            f.write('%s,"%s"\n'%(courseID[classIndex],vocabKeyWord))
+            vocabKeyWord.clear()
         count = count+1
-    classIndex = classIndex + 1
-print(count)
-
+            #print(np.sum(x))
+            #print(x)
+            #print()
+        classIndex = classIndex + 1
+#print(count)
 #DebugPrints
 #print(bokVocab)
 #print(vocab)
