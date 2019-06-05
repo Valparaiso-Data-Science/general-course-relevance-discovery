@@ -22,6 +22,7 @@ vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
 vectors = vectorizer.fit_transform(desc).toarray()
 
 #Print all "relevant" courses
+#This block is purely for visuals, we will be working with x (array of arrays each line is an array)
 count = 0
 classIndex = 0
 vocabKeyWord = []
@@ -36,13 +37,13 @@ with open("../output/vectorized.csv", "w") as f:
             f.write('%s,"%s"\n'%(courseID[classIndex],vocabKeyWord))
             vocabKeyWord.clear()
         count = count+1
-            #print(np.sum(x))
-            #print(x)
-            #print()
         classIndex = classIndex + 1
-#print(count)
+
 #DebugPrints
+#print(count)
 #print(bokVocab)
 #print(vocab)
 #print(courseID[45])
 #print(repr(desc[45]))
+#print(np.sum(x))
+#print(x)
