@@ -27,12 +27,21 @@ for classID in newClasses:
 
 #If x is uncommented, will csv discovered relevant classses
 #If x is commented, will csv all classes
-#x = findRelevant(d)
-with open("../output/output%s.csv" % school, "w", encoding='utf8', errors='ignore') as f:
+with open("../output/output%ss.csv" % school, "w", encoding='utf8', errors='ignore') as f:
     f.write('ClassID,Desc\n')
     #replace d with x if wanting reduce format
     for key in d:
         try:
             f.write('%s,"%s"\n'%(key,d[key]))
+        except:
+            print(key)
+
+x = findRelevant(d)
+with open("../output/output%s.csv" % school, "w", encoding='utf8', errors='ignore') as f:
+    f.write('ClassID,Desc\n')
+    #replace d with x if wanting reduce format
+    for key in x:
+        try:
+            f.write('%s,"%s"\n'%(key,x[key]))
         except:
             print(key)
