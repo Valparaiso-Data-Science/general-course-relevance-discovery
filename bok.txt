@@ -1,7 +1,6 @@
 Data Science
 Data Analytics
 Data Science Engineering
-Data Management
 Research Methods Project Management
 Business Analytics
 Business Intelligence
@@ -49,7 +48,6 @@ data types
 data formats
 data modeling design
 structured approach
-use cases analysis
 Customer Relations Management
 CRP
 User Experience 
@@ -87,7 +85,6 @@ ETL
 Extract Transform Load
 OLTP
 OLAP
-open data
 process structured data
 process unstructured data
 data driven marketing technologies

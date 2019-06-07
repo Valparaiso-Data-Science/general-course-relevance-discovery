@@ -3,14 +3,15 @@ import os
 import numpy as np
 import sys
 #np.set_printoptions(threshold=sys.maxsize)
-
+#FullSmith.csv is too large (current workaround is to add memory :))
+csv.field_size_limit(sys.maxsize)
 #Grab vocab into a list
 bokVocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
 desc = []
 courseID = []
 
 #Create list of all class descriptions and course IDs
-with open('../output/fullValpo.csv', newline='', encoding='utf-8') as f:
+with open('../output/fullSmith.csv', newline='', encoding='utf-8') as f:
     reader = csv.reader(f)
     for column in reader:
         desc.append(column[0].lower()+column[1].lower())
