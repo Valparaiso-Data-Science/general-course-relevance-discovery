@@ -6,7 +6,7 @@ import os
 
 d = {}          #Dictionary of all classses
 testing = False  #Grab PDF from small files (fast) or big files (slow)
-school = "Valpo"
+school = "Brown"
 
 #Will replace this with a loop of all files when ready
 filePath = "../%sPDFs/%s.pdf" % (("test" if testing else "full"), school)
