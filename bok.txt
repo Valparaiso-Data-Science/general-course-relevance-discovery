@@ -6,18 +6,18 @@ Business Analytics
 Business Intelligence
 methods data analysis
 cognitive technologies
-Machine Learning 
+Machine Learning
 reinforced learning
-systems software 
-engineering principles 
-organizations information 
+systems software
+engineering principles
+organizations information
 system design development
 data management
-data governance strategy 
+data governance strategy
 data architecture
 Data Management Plan
-DMP 
-data driven 
+DMP
+data driven
 data handling
 Data Mining
 Cloud Computing
@@ -36,13 +36,13 @@ Agile Data Driven
 enterprises
 data lifecycle
 data lifecycle management
-model data collection 
+model data collection
 data quality evaluation
 quality evaluation
 Econometrics
 data analysis applications
 Predictive Analytics
-DevOps 
+DevOps
 continuous improvement cycle
 data types
 data formats
@@ -50,13 +50,13 @@ data modeling design
 structured approach
 Customer Relations Management
 CRP
-User Experience 
+User Experience
 UX
 Prescriptive Analytics
 data security
 data access
 data anonymisation
-federated access control 
+federated access control
 federated access control systems
 data provenance
 linked data
@@ -66,11 +66,11 @@ organisational network analysis
 organizational network analysis
 compliance based security models
 IPR protection
-data curation 
+data curation
 data quality controls
-data integration 
+data integration
 data interoperability
-project management 
+project management
 quality risk management
 team management
 Data Warehouses technologies
@@ -101,7 +101,7 @@ data registries
 data factories
 accuracy metrics
 data analytics assessment
-modeling simulation 
+modeling simulation
 Open Data
 Open Science
 Open Access

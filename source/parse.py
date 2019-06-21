@@ -62,7 +62,6 @@ def PDFtoTXT(filePath):
                                         caching=True,
                                         check_extractable=True):
             page_interpreter.process_page(page)
-
         text = fake_file_handle.getvalue()
         converter.close()
         fake_file_handle.close()
