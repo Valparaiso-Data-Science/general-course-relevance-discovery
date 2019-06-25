@@ -14,15 +14,16 @@ def graph(xAxis,yAxis):
     plt.xlabel("Actual Significance")
     plt.ylabel("Predicted Significance")
     plt.show()
-    
+
 def machineLearn(type):
     type.fit(X_train, y_train)
     predictions = type.predict(X_test)
     print(type.score(X_test, y_test))
+    print(predictions.tolist())
     cm1 = ConfusionMatrix(y_test.values,predictions.tolist())
-    #print(cm1)
-    #graph(y_test,predictions)
-    
+    print(cm1)
+    graph(y_test,predictions)
+
     #Once we pick our working machine language
     # output = (type.predict(df[df.bokVocab[2:130]]))
     # row = 0
@@ -45,7 +46,7 @@ for x in files:
         reader = csv.reader(f)
         for column in reader:
             desc.append(column[0].lower()+column[1].lower())
-            courseID.append(column[0])    
+            courseID.append(column[0])
 courseID = pd.Series(courseID)
 
 #Vectorize using bok.txt
@@ -72,13 +73,13 @@ vectors = vectorizer.fit_transform(desc).toarray()
 #             vocabKeyWord.clear()
 #         count = count+1
 #         classIndex = classIndex + 1
-        
+
 #Create target list for machine learning to use
 relevant = []
 for x in vectors:
     relevant.append(np.sum(x))
-    
-#Dataframe all information together    
+
+#Dataframe all information together
 df = pd.DataFrame(vectors, columns = bokVocab)
 df["relevant"] = relevant
 df["CourseID"] = courseID
@@ -89,22 +90,22 @@ y = df[df.columns[1:2]]
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=.75)
-    
+
 import sklearn.linear_model
 slm = sklearn.linear_model
-# from sklearn.svm import SVC
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.tree import DecisionTreeClassifier
-# from sklearn.tree import DecisionTreeRegressor
-# from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.naive_bayes import GaussianNB
 
-# 
-#plt.title("Ridge")
+# #
+# plt.title("Ridge")
 # machineLearn(slm.Ridge())
 # plt.title("SVC")
 # machineLearn(SVC())
-plt.title("LogisticRegression")
-machineLearn(slm.LogisticRegression())
+# plt.title("LogisticRegression")
+# machineLearn(slm.LogisticRegression())
 # plt.title("BayesianRidge")
 # machineLearn(slm.BayesianRidge())
 # plt.title("SGDC")
@@ -112,7 +113,7 @@ machineLearn(slm.LogisticRegression())
 # plt.title("SGDR")
 # machineLearn(slm.SGDRegressor())
 # plt.title("KNeighbors")
-# machineLearn(KNeighborsClassifier(n_neighbors=3))
+# #machineLearn(KNeighborsClassifier(n_neighbors=3))
 # plt.title("DecisionTree")
 # machineLearn(DecisionTreeClassifier())
 # plt.title("DecisionTreeRegressor")

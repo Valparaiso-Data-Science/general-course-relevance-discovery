@@ -1,7 +1,7 @@
 from parse import parse
 from parse import PDFtoTXT
-from vectorize import vectorizePDFs
-from vectorize import machine
+#from vectorize import vectorizePDFs
+#from vectorize import machine
 from RD import findRelevant
 import time
 import csv
@@ -12,9 +12,10 @@ testing = True  #Grab PDF from small files (fast) or big files (slow)
 school = "Valpo"
 
 #Current issues when 2+ files in folder, pdfminer doesnt like it
-files = os.listdir('../FullPDFs/')
+files = os.listdir('../TestPDFs/')
 for x in files:
     filePath = "../%sPDFs/%s" % (("test" if testing else "full"), x)
+    print(filePath)
     text = PDFtoTXT(filePath)
     #From the string of the entire pdf, grab all discovered classes using this function and this regex format
     newClasses = parse(text,"[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}")
@@ -37,9 +38,9 @@ for x in files:
                 print(key)
         d.clear()
 
-    
-    
-    
+
+
+
 #Basic Relevancy Discover
 # x = findRelevant(d)
 # with open("../output/Reduced%s.csv" % school, "w", encoding='utf8', errors='ignore') as f:
