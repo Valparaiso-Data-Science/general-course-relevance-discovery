@@ -8,11 +8,11 @@ import csv
 import os
 
 d = {}          #Dictionary of all classses
-testing = True  #Grab PDF from small files (fast) or big files (slow)
+testing = False  #Grab PDF from small files (fast) or big files (slow)
 school = "Valpo"
 
 #Current issues when 2+ files in folder, pdfminer doesnt like it
-files = os.listdir('../TestPDFs/')
+files = os.listdir('../FullPDFs/')
 for x in files:
     filePath = "../%sPDFs/%s" % (("test" if testing else "full"), x)
     print(filePath)

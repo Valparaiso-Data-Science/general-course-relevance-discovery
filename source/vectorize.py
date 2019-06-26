@@ -3,11 +3,24 @@ import os
 import numpy as np
 import sys
 import pandas as pd
-from matplotlib import pyplot as plt
+#from matplotlib import pyplot as plt
 from pycm import ConfusionMatrix
 
 np.set_printoptions(threshold=sys.maxsize)
 csv.field_size_limit(sys.maxsize)
+
+import matplotlib.pyplot as plt
+def plot_confusion_matrix(df_confusion, title='Confusion matrix', cmap=plt.cm.gray_r):
+    plt.matshow(df_confusion, cmap=cmap) # imshow
+    #plt.title(title)
+    plt.colorbar()
+    tick_marks = np.arange(len(df_confusion.columns))
+    plt.xticks(tick_marks, df_confusion.columns, rotation=45)
+    plt.yticks(tick_marks, df_confusion.index)
+    #plt.tight_layout()
+    plt.ylabel(df_confusion.index.name)
+    plt.xlabel(df_confusion.columns.name)
+
 
 def graph(xAxis,yAxis):
     plt.scatter(xAxis, yAxis)
@@ -19,10 +32,14 @@ def machineLearn(type):
     type.fit(X_train, y_train)
     predictions = type.predict(X_test)
     print(type.score(X_test, y_test))
+    #print(predictions.tolist())
+    cm1 = ConfusionMatrix(actual_vector=y_test.values,predict_vector=predictions.tolist())
+    cm1.save_html("ConfusionMatrix",color=(100,50,250))
     print(predictions.tolist())
-    cm1 = ConfusionMatrix(y_test.values,predictions.tolist())
-    print(cm1)
-    graph(y_test,predictions)
+    print(y_test.values)
+    #print(cm1)
+    #cm1.save_csv
+    #graph(y_test,predictions)
 
     #Once we pick our working machine language
     # output = (type.predict(df[df.bokVocab[2:130]]))
@@ -54,7 +71,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
 vectors = vectorizer.fit_transform(desc).toarray()
 
-#Output of relevant
+#UNCOMMENT TO PRINT RELEVANT CLASSES TO CSV
 # count = 0
 # classIndex = 0
 # vocabKeyWord = []
@@ -99,9 +116,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.naive_bayes import GaussianNB
 
-# #
-# plt.title("Ridge")
-# machineLearn(slm.Ridge())
+
+plt.title("Ridge")
+machineLearn(slm.Ridge())
 # plt.title("SVC")
 # machineLearn(SVC())
 # plt.title("LogisticRegression")
