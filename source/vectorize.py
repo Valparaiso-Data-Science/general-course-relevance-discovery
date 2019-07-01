@@ -15,6 +15,7 @@ def graph(xAxis,yAxis):
     plt.xlabel("Actual Significance")
     plt.ylabel("Predicted Significance")
     plt.show()
+
 #Convert vectorized variable into csv output
 def toCSV(vectors):
     classIndex = 0
@@ -27,20 +28,24 @@ def toCSV(vectors):
                     if vocab > 0:
                         vocabKeyWord.append(bokVocab[element])
                     element = element + 1
-                f.write('%s,"%s"\n'%(courseID[classIndex],vocabKeyWord))
+                try:
+                    f.write('%s,"%s"\n'%(courseID[classIndex],vocabKeyWord))
+                except:
+                    print("1")
                 vocabKeyWord.clear()
             classIndex = classIndex + 1
-#Use machine learning to predict value
-def machineLearn(type):
-    type.fit(X_train, y_train.values.ravel())
-    predictions = type.predict(X_test)
-    print(type.score(X_test, y_test))
-    #print(predictions.tolist())
-    #print(y_test.values)
-    cm1 = ConfusionMatrix(actual_vector=y_test.values.ravel(),predict_vector=predictions.tolist())
-    cm1.save_html("ConfusionMatrix",color=(100,50,250))
-    #graph(y_test,predictions)
 
+#Use machine learning to predict value
+def machineLearn(type,string):
+    type.fit(features_train, targets_train.values.ravel())
+    predictions = type.predict(features_test)
+    print(string)
+    print(type.score(features_test, targets_test))
+    #print(predictions.tolist())
+    #print(targets_test.values)
+    #graph(targets_test,predictions)
+    cm1 = ConfusionMatrix(actual_vector=targets_test.values.ravel(),predict_vector=predictions.tolist())
+    cm1.save_html(string,color=(100,50,250))
     #Once we pick our working machine language
     # output = (type.predict(df[df.bokVocab[2:130]]))
     # row = 0
@@ -48,6 +53,7 @@ def machineLearn(type):
     #     if x > 0:
     #         print(df.loc[[row]])
     #     row = row + 1
+    print()
 
 #Vocab and dataframe prep
 bokVocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
@@ -56,7 +62,7 @@ bokVocab.insert(1, "relevant")
 desc = []
 courseID = []
 
-#Open every file in Full output, and read it into desc and courseID
+#Read all CSV's into list
 files = [f for f in os.listdir('../output/Full/')]
 for x in files:
     with open("../output/Full/%s" % x, "r", encoding='utf8', errors='ignore') as f:
@@ -64,7 +70,6 @@ for x in files:
         for column in reader:
             desc.append(column[0].lower()+column[1].lower())
             courseID.append(column[0])
-courseID = pd.Series(courseID)
 
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
@@ -75,53 +80,26 @@ vectors = vectorizer.fit_transform(desc).toarray()
 
 #Create target list for machine learning to use
 relevant = []
-for x in vectors:
-    relevant.append(np.sum(x))
-    #if np.sum(x)>5:
-    #     relevant.append(2)
-    # elif np.sum(x)>0:
-    #     relevant.append(1)
-    # else:
-    #     relevant.append(0)
+for features in vectors:
+    #relevant.append(np.sum(features))
+    if np.sum(features)>3:
+        relevant.append(2)
+    elif np.sum(features)>0:
+        relevant.append(1)
+    else:
+        relevant.append(0)
 
 #Dataframe all information together
-df = pd.DataFrame(vectors, columns = bokVocab)
-df["relevant"] = relevant
-df["CourseID"] = courseID
-
-#All features and target features
-X = df[df.columns[2:130]]
-y = df[df.columns[1:2]]
+courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
+courseFeatures_df["relevant"] = relevant
+courseFeatures_df["CourseID"] = pd.Series(courseID)
 
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(X,y, train_size=.75)
+#2:130 = vocab/features,1:2=target
+features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
 
-import sklearn.linear_model
-slm = sklearn.linear_model
-from sklearn.svm import SVC
-from sklearn.neighbors import KNeighborsClassifier
+#import sklearn.linear_model
+#slm = sklearn.linear_model
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.naive_bayes import GaussianNB
 
-
-plt.title("Ridge")
-machineLearn(slm.RidgeClassifier())
-# plt.title("SVC")
-# machineLearn(SVC())
-# plt.title("LogisticRegression")
-# machineLearn(slm.LogisticRegression())
-# plt.title("BayesianRidge")
-# machineLearn(slm.BayesianRidge())
-# plt.title("SGDC")
-# machineLearn(slm.SGDClassifier())
-# plt.title("SGDR")
-# machineLearn(slm.SGDRegressor())
-# plt.title("KNeighbors")
-# #machineLearn(KNeighborsClassifier(n_neighbors=3))
-# plt.title("DecisionTree")
-# machineLearn(DecisionTreeClassifier())
-# plt.title("DecisionTreeRegressor")
-# machineLearn(DecisionTreeRegressor())
-# plt.title("Gaussiann")
-# machineLearn(GaussianNB())
+machineLearn(DecisionTreeClassifier(),"DecisionC")
