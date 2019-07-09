@@ -1,4 +1,4 @@
-Data Science
+data science
 Data Analytics
 Data Science Engineering
 Research Methods Project Management

@@ -18,7 +18,8 @@ for x in files:
     print(filePath)
     text = PDFtoTXT(filePath)
     #From the string of the entire pdf, grab all discovered classes using this function and this regex format
-    newClasses = parse(text,"[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}")
+    newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
+
     #Go through dictionary and combine duplicates into 1 row
     #   because our regex can only be so specific, and will have to include times when the description isn't mentioned but the class is
     for classID in newClasses:
@@ -32,10 +33,7 @@ for x in files:
         f.write('ClassID,Desc\n')
         #replace d with x if wanting reduce format
         for key in d:
-            try:
                 f.write('%s,"%s"\n'%(key,d[key]))
-            except:
-                print(key)
         d.clear()
 
 

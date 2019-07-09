@@ -17,7 +17,9 @@ def parse(text, regex):
     #clear the new lines
     #print(text)
     text = text.replace("\n","")
-
+    # file1 = open("fullpdftotext.txt","wb")
+    # file1.write(text.encode('ascii','ignore'))
+    # file1.close()
     #create a list of match objects that each contain the indices of the matches
     matches = list(re.finditer(regex, text))
 
@@ -49,10 +51,22 @@ def parse(text, regex):
             """
             #if the class has not been found before, add it to the dict
             #otherwise append the found descriptions together
+            #print(text[startDesc:endDesc])
+            #print("----\n")
+                                # text = text.replace("\n","")
+                                # file2 = open("descriptions.txt","w")
+                                # try:
+                                #     file2.write(text[startDesc:endDesc])
+                                #     file2.write("\n\n")
+                                # except:
+                                #     print("NOPE")
+            #text.encode('ascii','ignore'))
+            #file2.close()
             if classID not in result:
                 result[classID] = text[startDesc:endDesc]
             else:
                 result[classID] += text[startDesc:endDesc]
+    #print(result)
     return result
 
 def PDFtoTXT(filePath):

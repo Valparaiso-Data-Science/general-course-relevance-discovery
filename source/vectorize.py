@@ -3,19 +3,19 @@ import os
 import numpy as np
 import sys
 import pandas as pd
-#from matplotlib import pyplot as plt
+from nltk.stem.porter import *
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from matplotlib import pyplot as plt
 from pycm import ConfusionMatrix
-np.set_printoptions(threshold=sys.maxsize)
-csv.field_size_limit(sys.maxsize)
 import matplotlib.pyplot as plt
-
+csv.field_size_limit(sys.maxsize)
 #Matplotlib graph
 def graph(xAxis,yAxis):
     plt.scatter(xAxis, yAxis)
     plt.xlabel("Actual Significance")
     plt.ylabel("Predicted Significance")
     plt.show()
-
 #Convert vectorized variable into csv output
 def toCSV(vectors):
     classIndex = 0
@@ -34,7 +34,6 @@ def toCSV(vectors):
                     print("1")
                 vocabKeyWord.clear()
             classIndex = classIndex + 1
-
 #Use machine learning to predict value
 def machineLearn(type,string):
     type.fit(features_train, targets_train.values.ravel())
@@ -54,46 +53,59 @@ def machineLearn(type,string):
     #         print(df.loc[[row]])
     #     row = row + 1
     print()
+#Reader /output/Full csvs and convert to dataframe of CourseID and
+def cleanData(path):
+    desc = []
+    courseID = []
+    stop_words = set(stopwords.words('english'))
+    stop_words.add('topic')
+    cleanDesc=[]
+    cleanSentences=""
+    cleanDataFrame=pd.DataFrame(columns={"CourseID","Description"})
+    files = [f for f in os.listdir(path)]
+    for x in files:
+        with open("../output/Full/%s" % x, "r", encoding='utf8', errors='ignore') as f:
+            reader = csv.reader(f)
+            for column in reader:
+                for words in word_tokenize(column[1].lower()):
+                    if words not in stop_words:
+                        cleanSentences+=(ps.stem(words)+" ")
+                cleanDataFrame = cleanDataFrame.append({"CourseID" : column[0],'Description':cleanSentences},ignore_index=True)
+                cleanSentences = ""
+    return cleanDataFrame
 
-#Vocab and dataframe prep
-bokVocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
-bokVocab.insert(0, "CourseID")
-bokVocab.insert(1, "relevant")
-desc = []
-courseID = []
-
-#Read all CSV's into list
-files = [f for f in os.listdir('../output/Full/')]
-for x in files:
-    with open("../output/Full/%s" % x, "r", encoding='utf8', errors='ignore') as f:
-        reader = csv.reader(f)
-        for column in reader:
-            desc.append(column[0].lower()+column[1].lower())
-            courseID.append(column[0])
-
+#get cleaned vocabulary
+vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
+bokVocab = []
+holderVar =""
+ps = PorterStemmer()
+for word in vocab:
+    for x in word.split():
+        holderVar += ps.stem(x) + " "
+    holderVar = holderVar[:-1]
+    bokVocab.append(holderVar)
+    holderVar=""
+courseAndDescDataFrame = cleanData('../output/Full/')
+courseAndDescDataFrame.to_csv("desc.csv")
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
-vectors = vectorizer.fit_transform(desc).toarray()
+vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarray()
 
 #toCSV(vectors)
 
 #Create target list for machine learning to use
 relevant = []
 for features in vectors:
-    #relevant.append(np.sum(features))
-    if np.sum(features)>3:
-        relevant.append(2)
-    elif np.sum(features)>0:
-        relevant.append(1)
-    else:
-        relevant.append(0)
+    relevant.append(np.sum(features))
 
 #Dataframe all information together
 courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
 courseFeatures_df["relevant"] = relevant
-courseFeatures_df["CourseID"] = pd.Series(courseID)
+courseFeatures_df["CourseID"] = courseAndDescDataFrame['CourseID']
 
+courseFeatures_df.to_csv("count.csv")
+#print(courseFeatures_df)
 from sklearn.model_selection import train_test_split
 #2:130 = vocab/features,1:2=target
 features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
@@ -102,4 +114,4 @@ features_train, features_test, targets_train, targets_test = train_test_split(co
 #slm = sklearn.linear_model
 from sklearn.tree import DecisionTreeClassifier
 
-machineLearn(DecisionTreeClassifier(),"DecisionC")
+#machineLearn(DecisionTreeClassifier(),"DecisionC")
