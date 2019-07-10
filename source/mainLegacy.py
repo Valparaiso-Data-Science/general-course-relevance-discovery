@@ -7,7 +7,8 @@ import time
 import csv
 import os
 
-d = {}          #Dictionary of all classses
+
+         #Dictionary of all classses
 testing = False  #Grab PDF from small files (fast) or big files (slow)
 school = "Valpo"
 
@@ -21,7 +22,8 @@ for x in files:
     newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
 
     #Go through dictionary and combine duplicates into 1 row
-    #   because our regex can only be so specific, and will have to include times when the description isn't mentioned but the class is
+    #   because our regex can only be so specific, 
+    #   and will have to include times when the description isn't mentioned but the class is
     for classID in newClasses:
         if classID in d:
             d[classID] += newClasses[classID]
