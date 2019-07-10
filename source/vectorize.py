@@ -8,8 +8,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from matplotlib import pyplot as plt
 from pycm import ConfusionMatrix
-import matplotlib.pyplot as plt
-csv.field_size_limit(sys.maxsize)
+
+csv.field_size_limit(100000000)
+import nltk
+nltk.download('punkt')
+
 #Matplotlib graph
 def graph(xAxis,yAxis):
     plt.scatter(xAxis, yAxis)
@@ -78,6 +81,7 @@ def cleanData(path):
 vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
 bokVocab = []
 holderVar =""
+
 ps = PorterStemmer()
 for word in vocab:
     for x in word.split():
@@ -85,15 +89,17 @@ for word in vocab:
     holderVar = holderVar[:-1]
     bokVocab.append(holderVar)
     holderVar=""
+    
 courseAndDescDataFrame = cleanData('../output/Full/')
 courseAndDescDataFrame.to_csv("desc.csv")
+
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
 vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarray()
 
 #toCSV(vectors)
-
+'''
 #Create target list for machine learning to use
 relevant = []
 for features in vectors:
@@ -115,3 +121,4 @@ features_train, features_test, targets_train, targets_test = train_test_split(co
 from sklearn.tree import DecisionTreeClassifier
 
 #machineLearn(DecisionTreeClassifier(),"DecisionC")
+'''

@@ -1,16 +1,11 @@
-import re       #Regex
-import csv      #CSV
-
-###PDFMINER###
+import re       
 from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 import io
-#resource_manager = PDFResourceManager()
-#fake_file_handle = io.StringIO()
-#converter = TextConverter(resource_manager, fake_file_handle)
-#page_interpreter = PDFPageInterpreter(resource_manager, converter)
+import os
+
 
 #parse is a function that, given a *string* of text, will pull out the class descriptions
 def parse(text, regex):
@@ -69,6 +64,7 @@ def parse(text, regex):
     #print(result)
     return result
 
+
 def PDFtoTXT(filePath):
     resource_manager = PDFResourceManager()
     fake_file_handle = io.StringIO()
@@ -85,7 +81,38 @@ def PDFtoTXT(filePath):
         ###End of PDFMiner stuff
     return text
 
+def parseDirectory(path):
+    #our use case will be just "../fullPDFs/", however we will likly run this on others
+    d = {} 
+    files = os.listdir(path)
+    for x in files:
+        text = PDFtoTXT(files)
+        #From the string of the entire pdf, grab all discovered classes using this function and this regex format
+        newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
+    
+        #Go through dictionary and combine duplicates into 1 row
+        #   because our regex can only be so specific, 
+        #   and will have to include times when the description isn't mentioned but the class is
+        for classID in newClasses:
+            if classID in d:
+                d[classID] += newClasses[classID]
+            else:
+                d[classID] = newClasses[classID]
 
 
 
-#print(parse(text,"[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
