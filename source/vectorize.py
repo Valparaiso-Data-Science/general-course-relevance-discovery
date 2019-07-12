@@ -76,8 +76,10 @@ def cleanData(path):
 
 #get cleaned vocabulary
 vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
+#bokVocab.append("")
 bokVocab = []
 holderVar =""
+#emphasis, sele1cted, comparative,honors,work
 ps = PorterStemmer()
 for word in vocab:
     for x in word.split():
@@ -86,10 +88,11 @@ for word in vocab:
     bokVocab.append(holderVar)
     holderVar=""
 courseAndDescDataFrame = cleanData('../output/Full/')
-courseAndDescDataFrame.to_csv("desc.csv")
+print(courseAndDescDataFrame)
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
+#vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
+vectorizer = CountVectorizer()
 vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarray()
 
 #toCSV(vectors)
@@ -98,14 +101,15 @@ vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarra
 relevant = []
 for features in vectors:
     relevant.append(np.sum(features))
-
+print("llll")
 #Dataframe all information together
-courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
+#courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
+courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names())
 courseFeatures_df["relevant"] = relevant
 courseFeatures_df["CourseID"] = courseAndDescDataFrame['CourseID']
 
-courseFeatures_df.to_csv("count.csv")
-#print(courseFeatures_df)
+courseFeatures_df.to_csv("full.csv")
+print(courseFeatures_df)
 from sklearn.model_selection import train_test_split
 #2:130 = vocab/features,1:2=target
 features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
