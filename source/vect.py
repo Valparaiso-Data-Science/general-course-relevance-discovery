@@ -15,3 +15,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 vectorizer = CountVectorizer()
 
 vectors = vectorizer.fit_transform(df['Description'])
+
+
+
+
+

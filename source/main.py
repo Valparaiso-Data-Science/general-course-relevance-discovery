@@ -4,10 +4,14 @@ Created on Wed Jul 10 16:25:36 2019
 
 @author: nrandle
 """
-testing = True
+from parse import parseDirectory
 
-from parse import parse
-from parse import PDFtoTXT
+
+
+
+
+
+
 
 
 
