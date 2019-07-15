@@ -12,6 +12,7 @@ from parse import parseDirectory
 
 
 
+pdfs = parseDirectory("../learningPDFs/")
 
 
 

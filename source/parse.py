@@ -48,21 +48,27 @@ def parse(text, regex):
             """
             #if the class has not been found before, add it to the dict
             #otherwise append the found descriptions together
-            #print(text[startDesc:endDesc])
-            #print("----\n")
-                                # text = text.replace("\n","")
-                                # file2 = open("descriptions.txt","w")
-                                # try:
-                                #     file2.write(text[startDesc:endDesc])
-                                #     file2.write("\n\n")
-                                # except:
-                                #     print("NOPE")
-            #text.encode('ascii','ignore'))
-            #file2.close()
             if classID not in result:
-                result[classID] = text[startDesc:endDesc]
+                result[classID] = [text[startDesc:endDesc]]
             else:
-                result[classID] += text[startDesc:endDesc]
+                result[classID].append(text[startDesc:endDesc])
+            
+    for i in result:
+        while True:
+            longestEntry = max(result[i],key=len)
+            print(longestEntry)
+            oneEntry = len(result[i]) == 1
+            maxTooLong = len(longestEntry) > 1000
+            maxContains_x0c = bool(re.search("\\x0c",longestEntry))
+            
+            if (maxTooLong or maxContains_x0c) and not oneEntry:
+                result[i].remove(max(result[i],key=len))
+                continue
+            else:
+                result[i] = longestEntry
+                break
+            
+            
     #print(result)
     return result
 
@@ -88,18 +94,17 @@ def parseDirectory(path):
     d = {}
     files = os.listdir(path)
     for x in files:
-        text = PDFtoTXT(files)
+        print(x)
+        text = PDFtoTXT(path+x)
+        print("texted: " + x)
         #From the string of the entire pdf, grab all discovered classes using this function and this regex format
         newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
-        
+        print("found classes in: " + x)
         #Go through dictionary and combine duplicates into 1 row
         #   because our regex can only be so specific, 
         #   and will have to include times when the description isn't mentioned but the class is
         for classID in newClasses:
-            if classID in d:
-                d[classID] += newClasses[classID]
-            else:
-                d[classID] = newClasses[classID]
+            d[(x,classID)] = newClasses[classID]
                 
     return d
 

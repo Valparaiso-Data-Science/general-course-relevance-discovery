@@ -1,8 +1,7 @@
-from parse import parse
-from parse import PDFtoTXT
+
+from parse import parseDirectory
 #from vectorize import vectorizePDFs
 #from vectorize import machine
-from RD import findRelevant
 
 import os
 
@@ -10,8 +9,7 @@ import os
 
 
 
-
-
+'''
 #Write PDFS into CSV format
 with open("../output/Full/%s.csv" % x, "w", encoding='utf8', errors='ignore') as f:
     f.write('ClassID,Desc\n')
@@ -19,7 +17,7 @@ with open("../output/Full/%s.csv" % x, "w", encoding='utf8', errors='ignore') as
     for key in d:
             f.write('%s,"%s"\n'%(key,d[key]))
     d.clear()
-
+'''
 
 
 
