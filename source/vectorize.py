@@ -9,6 +9,8 @@ from nltk.corpus import stopwords
 from matplotlib import pyplot as plt
 from pycm import ConfusionMatrix
 import matplotlib.pyplot as plt
+import pyfpgrowth
+sys.setrecursionlimit(6000)
 csv.field_size_limit(sys.maxsize)
 #Matplotlib graph
 def graph(xAxis,yAxis):
@@ -88,7 +90,12 @@ for word in vocab:
     bokVocab.append(holderVar)
     holderVar=""
 courseAndDescDataFrame = cleanData('../output/Full/')
-print(courseAndDescDataFrame)
+#print(courseAndDescDataFrame['Description'].values.tolist())
+fpgrowth = []
+for x in courseAndDescDataFrame['Description'].values.tolist():
+    fpgrowth.append(x.split())
+patterns = pyfpgrowth.find_frequent_patterns(fpgrowth, 20)
+print(patterns)
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 #vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
@@ -101,15 +108,14 @@ vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarra
 relevant = []
 for features in vectors:
     relevant.append(np.sum(features))
-print("llll")
+
 #Dataframe all information together
 #courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
 courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names())
 courseFeatures_df["relevant"] = relevant
 courseFeatures_df["CourseID"] = courseAndDescDataFrame['CourseID']
-
 courseFeatures_df.to_csv("full.csv")
-print(courseFeatures_df)
+
 from sklearn.model_selection import train_test_split
 #2:130 = vocab/features,1:2=target
 features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
