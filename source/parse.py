@@ -7,6 +7,9 @@ from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
 import io
+import fileinput
+import pandas
+import numpy as np
 #resource_manager = PDFResourceManager()
 #fake_file_handle = io.StringIO()
 #converter = TextConverter(resource_manager, fake_file_handle)
@@ -14,20 +17,15 @@ import io
 
 #parse is a function that, given a *string* of text, will pull out the class descriptions
 def parse(text, regex):
-    #clear the new lines
-    #print(text)
-    text = text.replace("\n","")
-    # file1 = open("fullpdftotext.txt","wb")
-    # file1.write(text.encode('ascii','ignore'))
-    # file1.close()
-    #create a list of match objects that each contain the indices of the matches
+    text = text.replace("\n", "")
+    text = text.replace(',', '')
+    prereqs = np.array(re.findall(r'((?:Prerequisite.*?\.))', text))
+    for prereq in prereqs:
+        text = text.replace(prereq, "")
+    # reMatches = np.array(re.findall(r'[A-Z]{2,5} [0-9]{2,5}[A-Z]?[.]?', text))
     matches = list(re.finditer(regex, text))
-
-    result  = {}
-
-    #computing the length of matches here for that sweet optimization
+    result = {}
     lengthMatches = len(matches)
-
     #loop through the match objects, enumerate makes it so the index is available
     for i,m in enumerate(matches):
 
@@ -35,7 +33,6 @@ def parse(text, regex):
             classID = m.group(0)
             #the start of the current class's description starts with the END of the ClassID
             startDesc = m.end()
-
             #if we are not on the last item,
             #the end of the description will be at the start of the next ClassID found
             #otherwise the description ends at the end of the text
@@ -43,31 +40,28 @@ def parse(text, regex):
                 endDesc = matches[i+1].start()
             else:
                 endDesc = len(text)-1
-            """
-            @terry, as you can see this check is does twice, once on the current page
-            once after we are done finding the current page.
-            This is bad, see if there's a way to do this check as a function or
-            if there's a better way to do this
-            """
-            #if the class has not been found before, add it to the dict
-            #otherwise append the found descriptions together
-            #print(text[startDesc:endDesc])
-            #print("----\n")
-                                # text = text.replace("\n","")
-                                # file2 = open("descriptions.txt","w")
-                                # try:
-                                #     file2.write(text[startDesc:endDesc])
-                                #     file2.write("\n\n")
-                                # except:
-                                #     print("NOPE")
-            #text.encode('ascii','ignore'))
-            #file2.close()
             if classID not in result:
-                result[classID] = text[startDesc:endDesc]
+                if(len(text[startDesc:endDesc]) > 200 and len(text[startDesc:endDesc]) < 750):
+                    print(text[startDesc:endDesc])
+                    print()
+                    result[classID] = text[startDesc:endDesc]
             else:
-                result[classID] += text[startDesc:endDesc]
+                if(len(text[startDesc:endDesc]) > 75 and len(text[startDesc:endDesc]) < 750):
+                    print(text[startDesc:endDesc])
+                    print()
+                    result[classID] += text[startDesc:endDesc]
     #print(result)
     return result
+
+def getDataFromTxt(text):
+    courses = np.array(re.findall(r'(?P<SECTION>[A-Z]{2,5} [0-9]{2,5}[A-Z]?[\.]?)(?P<TITLE>[^.]+\.)(?P<DESCRIPTION>.*\n)', text))
+    print(courses)
+    return courses
+    #
+    # with open("./output.csv", "w+") as courseList:
+    #     courseList.write('SECTION,TITLE,DESCRIPTION\n')
+    #     for course in courses:
+    #         courseList.write(u'%s,%s,%s' % (course[0], course[1], course[2]))
 
 def PDFtoTXT(filePath):
     resource_manager = PDFResourceManager()
