@@ -9,6 +9,7 @@ from nltk.corpus import stopwords
 from pycm import ConfusionMatrix
 import matplotlib.pyplot as plt
 import pyfpgrowth
+from pyspark.mllib.fpm import FPGrowth
 sys.setrecursionlimit(6000)
 csv.field_size_limit(sys.maxsize)
 #Convert vectorized variable into csv output
@@ -52,7 +53,20 @@ def machineLearn(type,string):
 def cleanData(path):
     desc = []
     courseID = []
-    basicWords = ['too', 'about', 'hadn', 'before', 'over', 'why', 's', 'had', 'wouldn', 'shan', "you're", 'herself', 'with', 'if', 'more', 'yourself', 'myself', 'aren', 'in', 'and', "wasn't", "haven't", 'now', "that'll", 'out', 'they', 'all', 'should', 'weren', "won't", 'him', 'me', 'itself', "isn't", 'your', "doesn't", 'don', 'ma', 'each', 'because', 'we', 'there', 'have', 'was', 'themselves', 'does', 'of', 'yours', 'shouldn', 'but', 'been', 'doesn', 'you', 'are', 'our', 'o', 't', 'my', 'after', 'who', 'wasn', 'by', 'she', 'only', 'this', 'y', 'her', "don't", "needn't", 'into', 'again', 'during', 'be', 'both', 'he', 'mightn', 'theirs', 'i', "couldn't", 'while', 'through', 'above', 'd', "you'll", 'no', "shan't", 'or', 'on', 'ourselves', 'his', "shouldn't", 'won', 'under', "mightn't", 'is', 'a', 'at', 've', 'nor', 'against', 'as', 'yourselves', 'when', 'will', 'how', 'then', "hadn't", 'whom', 'to', 'once', 'up', "wouldn't", 'which', 'their', 'here', 'having', 'that', 'has', 'ain', 'not', 'ours', "hasn't", 'isn', 'them', 'other', 'some', 'what', 'were', "didn't", 'am', "weren't", 'for', 'couldn', "she's", 'mustn', 'haven', 'most', 'it', 'than', 'll', 'its', 'doing', 'any', "aren't", "you've", 'own', 'do', 'same', 'himself', 'these', 'from', 'an', 're', "you'd", 'just', 'those', 'the', 'hasn', "mustn't", 'being', 'between', 'off', 'further', 'hers', 'such', "should've", 'did', 'so', 'very', 'where', 'few', 'until', 'need', 'down', 'can', 'below', 'didn', 'm', "it's"]
+    basicWords = ['too', 'about', 'hadn', 'before', 'over', 'why', 's', 'had', 'wouldn',
+    'shan', "you're", 'herself', 'with', 'if', 'more', 'yourself', 'myself', 'aren', 'in', 'and',
+    "wasn't", "haven't", 'now', "that'll", 'out', 'they', 'all', 'should', 'weren', "won't", 'him', 'me',
+    'itself', "isn't", 'your', "doesn't", 'don', 'ma', 'each', 'because', 'we', 'there', 'have', 'was', 'themselves',
+    'does', 'of', 'yours', 'shouldn', 'but', 'been', 'doesn', 'you', 'are', 'our', 'o', 't', 'my', 'after', 'who',
+    'wasn', 'by', 'she', 'only', 'this', 'y', 'her', "don't", "needn't", 'into', 'again', 'during', 'be', 'both',
+    'he', 'mightn', 'theirs', 'i', "couldn't", 'while', 'through', 'above', 'd', "you'll", 'no', "shan't", 'or', 'on',
+    'ourselves', 'his', "shouldn't", 'won', 'under', "mightn't", 'is', 'a', 'at', 've', 'nor', 'against', 'as', 'yourselves',
+    'when', 'will', 'how', 'then', "hadn't", 'whom', 'to', 'once', 'up', "wouldn't", 'which', 'their', 'here', 'having', 'that',
+    'has', 'ain', 'not', 'ours', "hasn't", 'isn', 'them', 'other', 'some', 'what', 'were', "didn't", 'am', "weren't", 'for',
+    'couldn', "she's", 'mustn', 'haven', 'most', 'it', 'than', 'll', 'its', 'doing', 'any', "aren't", "you've", 'own',
+    'do', 'same', 'himself', 'these', 'from', 'an', 're', "you'd", 'just', 'those', 'the', 'hasn', "mustn't", 'being',
+    'between', 'off', 'further', 'hers', 'such', "should've", 'did', 'so', 'very', 'where', 'few', 'until', 'need',
+    'down', 'can', 'below', 'didn', 'm', "it's"]
     stop_words = ['course','courses','offer','credit','student','cr','study','year','years','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american','and','of','the','in','to','offered','credits','be','for','on','students','with','as','is','this','or','an','are','from','each','years','by','include','will','their','at','enrollment','we','how','both','have','used','such','these','it','about','all','who','must','only','more','can','its','minor','what','do','us', 'topics','that','required','through','other','requirements','not','which','permission','emphasis','they','majors','some','based','but','no','year','century','semesters','our','has','any','within','during','using','should','in','than','the','and','if','when','them','or','many','above','why','was','you','education','general','including','health','humanities','arts','art','experience','skills','skill','includes','history','studies','university','grade','repeated','following','(',
     ')','.',',','/',';',':','?','<','>','|','[',']','~','`','~','!','@','#','$','%','^','&','*','-','_','+','']
     stop_words.append(basicWords)
@@ -77,8 +91,6 @@ def cleanData(path):
                         totalWords += 1
                 cleanDataFrame = cleanDataFrame.append({"CourseID" : column[0],'Description':cleanSentences},ignore_index=True)
                 cleanSentences = ""
-    print(wordsRemoved)
-    print(totalWords)
     print(wordsRemoved/totalWords)
     return cleanDataFrame
 
@@ -96,14 +108,18 @@ ps = PorterStemmer()
 #     holderVar = holderVar[:-1]
 #     bokVocab.append(holderVar)
 #     holderVar=""
-
 courseAndDescDataFrame = cleanData('../output/Full/')
+print(courseAndDescDataFrame)
 courseAndDescDataFrame.to_csv("percentremoved.csv")
+model = FPGrowth.train(courseAndDescDataFrame['Description'].values.tolist(), minSupport=0.2, numPartitions=10)
+result = model.freqItemsets().collect()
+for fi in result:
+    print(fi)
 # fpgrowth = []
 # for x in courseAndDescDataFrame['Description'].values.tolist():
 #     fpgrowth.append(x.split())
-# patterns = pyfpgrowth.find_frequent_patterns(fpgrowth, 20)
-# print(patterns)
+# patterns = pyfpgrowth.find_frequent_patterns(fpgrowth, 2)
+
 
 #Vectorize using bok.txt
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
