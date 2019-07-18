@@ -9,7 +9,8 @@ from nltk.corpus import stopwords
 from pycm import ConfusionMatrix
 import matplotlib.pyplot as plt
 import pyfpgrowth
-from pyspark.mllib.fpm import FPGrowth
+from pyspark.ml.fpm import FPGrowth
+
 sys.setrecursionlimit(6000)
 csv.field_size_limit(sys.maxsize)
 #Convert vectorized variable into csv output
@@ -93,14 +94,25 @@ def cleanData(path):
                 cleanSentences = ""
     print(wordsRemoved/totalWords)
     return cleanDataFrame
+#Get significance weight of each word in the descriptions
+def tfidf(description):
+    cv=CountVectorizer()
+    word_count_vector=cv.fit_transform(description)
+    vectorizer = TfidfVectorizer(use_idf=True)
+    vectors = vectorizer.fit_transform(description).toarray()
 
+    df_idf = pd.DataFrame(vectorizer.idf_, index=cv.get_feature_names(),columns=["tf_idf_weights"])
+    df_idf.sort_values(by=['tf_idf_weights'])
+    return df_idf
+def noNumbers(inputString):
+    return not any(char.isdigit() for char in inputString)
 #get cleaned vocabulary
+
 #vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
 #bokVocab.append("")
 #bokVocab = []
 #holderVar =""
 
-#emphasis, sele1cted, comparative,honors,work
 ps = PorterStemmer()
 # for word in vocab:
 #     for x in word.split():
@@ -109,12 +121,8 @@ ps = PorterStemmer()
 #     bokVocab.append(holderVar)
 #     holderVar=""
 courseAndDescDataFrame = cleanData('../output/Full/')
-print(courseAndDescDataFrame)
 courseAndDescDataFrame.to_csv("percentremoved.csv")
-model = FPGrowth.train(courseAndDescDataFrame['Description'].values.tolist(), minSupport=0.2, numPartitions=10)
-result = model.freqItemsets().collect()
-for fi in result:
-    print(fi)
+
 # fpgrowth = []
 # for x in courseAndDescDataFrame['Description'].values.tolist():
 #     fpgrowth.append(x.split())
@@ -125,35 +133,47 @@ for fi in result:
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 #vectorizer = CountVectorizer(vocabulary=bokVocab, ngram_range=(1, 5))
-cv=CountVectorizer()
-word_count_vector=cv.fit_transform(courseAndDescDataFrame['Description'])
-vectorizer = TfidfVectorizer(use_idf=True)
-vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarray()
+x = tfidf(courseAndDescDataFrame['Description'])
+x.to_csv("test.csv")
 
-df_idf = pd.DataFrame(vectorizer.idf_, index=cv.get_feature_names(),columns=["tf_idf_weights"])
-df_idf.sort_values(by=['tf_idf_weights'])
-print(df_idf)
-df_idf.to_csv("test.csv")
-####################
+vectorizer=CountVectorizer()
+vectors = vectorizer.fit_transform(courseAndDescDataFrame['Description']).toarray()
 #toCSV(vectors)
-#
-#
-# #Create target list for machine learning to use
-# relevant = []
-# for features in vectors:
-#     relevant.append(np.sum(features))
-#
-# #Dataframe all information together
-# #courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
-# courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names())
-# courseFeatures_df["relevant"] = relevant
-# courseFeatures_df["CourseID"] = courseAndDescDataFrame['CourseID']
-# #courseFeatures_df.to_csv("full.csv")
-#
-# from sklearn.model_selection import train_test_split
-# #2:130 = vocab/features,1:2=target
-# #features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
-#
-# from sklearn.tree import DecisionTreeClassifier
-#
-# #machineLearn(DecisionTreeClassifier(),"DecisionC")
+
+#Create target list for machine learning to use
+relevant = []
+for features in vectors:
+    relevant.append(np.sum(features))
+
+#Dataframe all information together
+#courseFeatures_df = pd.DataFrame(vectors, columns = bokVocab)
+courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names())
+courseFeatures_df["relevant"] = relevant
+courseFeatures_df["CourseID"] = courseAndDescDataFrame['CourseID']
+#courseFeatures_df.to_csv("full.csv")
+cleanDF = pd.DataFrame()
+list = []
+count = 0
+total = 0
+for column in courseFeatures_df:
+    if noNumbers(column):
+        if column != 'CourseID':
+            if (int(courseFeatures_df[column].sum()) > 2):
+                list.append(column)
+                count += 1
+                total +=1
+            else:
+                total +=1
+print(total)
+print(count)
+list.append("CourseID")
+cleanDF=courseFeatures_df[list].copy()
+cleanDF.to_csv("full.csv")
+
+from sklearn.model_selection import train_test_split
+#2:130 = vocab/features,1:2=target
+#features_train, features_test, targets_train, targets_test = train_test_split(courseFeatures_df[courseFeatures_df.columns[2:130]],courseFeatures_df[courseFeatures_df.columns[1:2]], train_size=.75)
+
+from sklearn.tree import DecisionTreeClassifier
+
+#machineLearn(DecisionTreeClassifier(),"DecisionC")
