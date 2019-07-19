@@ -1,3 +1,6 @@
+advanced
+Civil Engineering
+Artificial Intelligence
 data science
 Data Analytics
 Data Science Engineering

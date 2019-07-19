@@ -1,17 +1,17 @@
-import csv
-import os
+#import csv
+#import os
 import numpy as np
-import sys
+#import sys
 import pandas as pd
 from nltk.stem.porter import *
 from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
+#from nltk.corpus import stopwords
 from pycm import ConfusionMatrix
-import matplotlib.pyplot as plt
-import pyfpgrowth
-from pyspark.ml.fpm import FPGrowth
-from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
-from sklearn.feature_extraction.text import TfidfTransformer
+#import matplotlib.pyplot as plt
+#import pyfpgrowth
+#from pyspark.ml.fpm import FPGrowth
+from sklearn.feature_extraction.text import CountVectorizer
+#from sklearn.feature_extraction.text import TfidfTransformer
 
 
 #Convert vectorized variable into csv output
@@ -128,7 +128,7 @@ def cleanVectorizer(df):
     for column in df:
         if noNumbers(column):
             if column != 'CourseID':
-                if (int(df[column].sum()) > 2):
+                if (int(df[column].sum()) > 1):
                     list.append(column)
                     count += 1
                     total +=1
@@ -149,19 +149,7 @@ def labelTargetsdf(df):
         vocabSplit.append(word.split())
 
     for words in vocabSplit:
-        if len(words) == 1:
-            print(df["advanced"])
-            df["curricula relevance"] = df["curricula relevance"].astype("bool") | df[str(words)].astype("bool")
-            
-        else:
-            try:
-                cumulative = df[words[0]]
-                for word in words:
-                    cumulative = df[word] & cumulative
-                df["curricula relevance"] = df["curricula relevance"].bool() | cumulative.bool()
-            except:
-                print(words)
-                pass
+        df["curricula relevance"] = df[words].any(1) | df["curricula relevance"]
     return df
 #x = tfidf(courseAndDescDataFrame['Description'])
 #x.to_csv("test.csv")
