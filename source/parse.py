@@ -1,4 +1,4 @@
-import re       
+import re
 from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
@@ -52,23 +52,22 @@ def parse(text, regex):
                 result[classID] = [text[startDesc:endDesc]]
             else:
                 result[classID].append(text[startDesc:endDesc])
-            
+
     for i in result:
         while True:
             longestEntry = max(result[i],key=len)
-            print(longestEntry)
             oneEntry = len(result[i]) == 1
             maxTooLong = len(longestEntry) > 1000
             maxContains_x0c = bool(re.search("\\x0c",longestEntry))
-            
+
             if (maxTooLong or maxContains_x0c) and not oneEntry:
                 result[i].remove(max(result[i],key=len))
                 continue
             else:
                 result[i] = longestEntry
                 break
-            
-            
+
+
     #print(result)
     return result
 
@@ -88,7 +87,7 @@ def PDFtoTXT(filePath):
         fake_file_handle.close()
         ###End of PDFMiner stuff
     return text
-
+#terrystuff here
 def parseDirectory(path):
     #our use case will be just "../fullPDFs/", however we will likly run this on others
     d = {}
@@ -101,9 +100,9 @@ def parseDirectory(path):
         newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
         print("found classes in: " + x)
         #Go through dictionary and combine duplicates into 1 row
-        #   because our regex can only be so specific, 
+        #   because our regex can only be so specific,
         #   and will have to include times when the description isn't mentioned but the class is
         for classID in newClasses:
             d[(x,classID)] = newClasses[classID]
-                
+
     return d
