@@ -101,6 +101,8 @@ def tfidf(description):
     df_idf = pd.DataFrame(vectorizer.idf_, index=cv.get_feature_names(),columns=["tf_idf_weights"])
     df_idf.sort_values(by=['tf_idf_weights'])
     return df_idf
+
+
 def noNumbers(inputString):
     return not any(char.isdigit() for char in inputString)
 
