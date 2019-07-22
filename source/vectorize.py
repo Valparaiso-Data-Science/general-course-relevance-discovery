@@ -128,14 +128,15 @@ def cleanVectorizer(df):
     for column in df:
         if noNumbers(column):
             if column != 'CourseID':
+                #change this to greather than 2 or something when we arent using temp pdfs
                 if (int(df[column].sum()) > 1):
                     list.append(column)
                     count += 1
                     total +=1
                 else:
                     total +=1
-    print(total)
-    print(count)
+    #print(total)
+    #print(count)
     #list.append(df.index)
     cleanDF=df[list].copy()
     cleanDF["curricula relevance"] = False
@@ -149,7 +150,11 @@ def labelTargetsdf(df):
         vocabSplit.append(word.split())
 
     for words in vocabSplit:
-        df["curricula relevance"] = df[words].any(1) | df["curricula relevance"]
+        try:
+            df["curricula relevance"] = df[words].all(1) | df["curricula relevance"]
+        #Keyword not found at all (so no column to begin with)
+        except:
+            pass
     return df
 #x = tfidf(courseAndDescDataFrame['Description'])
 #x.to_csv("test.csv")

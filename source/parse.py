@@ -95,10 +95,10 @@ def parseDirectory(path):
     for x in files:
         print(x)
         text = PDFtoTXT(path+x)
-        print("texted: " + x)
+        #print("texted: " + x)
         #From the string of the entire pdf, grab all discovered classes using this function and this regex format
         newClasses = parse(text,"(?!FL)(?!IN)(?!NJ)[A-Z]{2,5}\s(?!2018)(?!4638)(?!2019)[0-9]{3,4}[A-Z]{0,1}")
-        print("found classes in: " + x)
+        #print("found classes in: " + x)
         #Go through dictionary and combine duplicates into 1 row
         #   because our regex can only be so specific,
         #   and will have to include times when the description isn't mentioned but the class is
