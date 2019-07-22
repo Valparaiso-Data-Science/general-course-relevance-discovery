@@ -7,6 +7,7 @@ import pandas as pd
 
 from sklearn.model_selection import train_test_split
 from sklearn import tree,metrics
+from sklearn.tree.export import export_text
 
 
 
@@ -26,8 +27,7 @@ labeled_df = labelTargetsdf(pruned_df)
 print("\tfound targets")
 
 #%%
-
-os.environ["PATH"] += os.pathsep + 'C:\Program Files (x86)\Graphviz2.38\bin'
+import matplotlib.pyplot as plt
 features = labeled_df.drop("curricula relevance",axis = 1)
 labels = labeled_df["curricula relevance"]
 
@@ -36,12 +36,17 @@ feature_train, feature_test, answer_train, answer_test = train_test_split(featur
                                                                           labels,
                                                                           test_size=0.2)
 
-dTree = decisionTree(feature_train,answer_train)
+dTree = decisionTree(feature_train,answer_train,10)
 
 test_set_prediction = dTree.predict(feature_test)
 print("Accuracy:",metrics.accuracy_score(answer_test, test_set_prediction))
     
-graph = visTree(dTree)
+graph = export_text(dTree,feature_names=list(features.columns))
+print(graph)
 
+
+plot = tree.plot_tree(dTree,feature_names=list(features.columns),fontsize=10)
+
+plot.set_size_inches(15, 10)
 
 

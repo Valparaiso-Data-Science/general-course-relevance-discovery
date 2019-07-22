@@ -1,5 +1,3 @@
-advanced
-Civil Engineering
 Artificial Intelligence
 data science
 Data Analytics

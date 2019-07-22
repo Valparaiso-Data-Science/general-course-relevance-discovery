@@ -13,11 +13,11 @@ import pydotplus
 import graphviz
 
 
-def decisionTree(feature_train,answer_train):  
+def decisionTree(feature_train,answer_train,depth):  
           
     
     
-    treeClassifier = tree.DecisionTreeClassifier()    
+    treeClassifier = tree.DecisionTreeClassifier(max_depth=depth)    
     treeClassifier = treeClassifier.fit(feature_train,answer_train)    
     
     return treeClassifier
