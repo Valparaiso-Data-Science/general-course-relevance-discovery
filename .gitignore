@@ -5,3 +5,5 @@ bok/bokClean.txt
 bok/BoKCleaning.py
 bok/~$bok.xlsx
 *.pdf
+*.csv
+
