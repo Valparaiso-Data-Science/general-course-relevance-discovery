@@ -1,6 +1,7 @@
 import xml.etree.ElementTree as ET
 import numpy as np
 import pandas as pd
+import sys
 
 def extractTextFromXML(filepath):
     tree = ET.parse(filepath)
@@ -13,6 +14,3 @@ def extractTextFromXML(filepath):
             df = df.append({"Section": Ptags[0].text, "Description": Ptags[1].text}, ignore_index=True)
     df.to_csv("./output.csv")
     print(df)
-
-
-extractTextFromXML("C:/Users/terra/Documents/Python/DataProject/source/ProcessPDF/textXML/BrownCourses.xml")
