@@ -46,3 +46,4 @@ print("Accuracy:",metrics.accuracy_score(answer_test, test_set_prediction))
 
 graph = export_text(dTree,feature_names=list(features.columns))
 print(graph)
+#print(export_graphviz(dTree,feature_names=list(features.columns),filled=True,impurity=False,label='root'))
