@@ -1,123 +1,123 @@
+accuracy metrics
+Agile Data Driven
 Artificial Intelligence
-data science
-Data Analytics
-Data Science Engineering
-Research Methods Project Management
+Big Data infrastructures
+BPM
 Business Analytics
 Business Intelligence
-methods data analysis
-cognitive technologies
-Machine Learning
-reinforced learning
-systems software
-engineering principles
-organizations information
-system design development
-data management
-data governance strategy
-data architecture
-Data Management Plan
-DMP
-data driven
-data handling
-Data Mining
 Cloud Computing
 cloud powered services
-design data infrastructure
-data handling services
-Data storage systems
+cognitive technologies
+collaborative system
+compliance based security models
+continuous improvement cycle
+CRP
+Customer Relations Management
+data access
+data analysis applications
+Data Analytics
+data analytics assessment
+data anonymisation
+data architecture
 data archive services
-digital libraries
-operational models
-data collection process
 data collection
-Processes Management
-BPM
-Agile Data Driven
-enterprises
+data collection process
+data curation
+data dashboard
+data driven
+data driven marketing technologies
+data factories
+data formats
+data governance strategy
+data handling
+data handling services
+data integration
+data integration analytics
+data interoperability
 data lifecycle
 data lifecycle management
-model data collection
-data quality evaluation
-quality evaluation
-Econometrics
-data analysis applications
-Predictive Analytics
-DevOps
-continuous improvement cycle
-data types
-data formats
+data management
+Data Management Plan
+Data Mining
+data modeling
 data modeling design
-structured approach
-Customer Relations Management
-CRP
-User Experience
-UX
-Prescriptive Analytics
-data security
-data access
-data anonymisation
-federated access control
-federated access control systems
-data provenance
-linked data
-Use cases analysis
-Graph Data Analytics
-organisational network analysis
-organizational network analysis
-compliance based security models
-IPR protection
-data curation
-data quality controls
-data integration
-data interoperability
-project management
-quality risk management
-team management
-Data Warehouses technologies
-data integration analytics
-Qualitative analytics
-relational databases
-non relational databases
-SQL
-NoSQL
-Data Warehouse solutions
-ETL
-Extract Transform Load
-OLTP
-OLAP
-process structured data
-process unstructured data
-data driven marketing technologies
-statistics methods
 data preparation
-data pre-processing
 data preprocessing
-
-Big Data infrastructures
-high performance networks
-metadata
-meta-data
-meta data
-PID
+data pre-processing
+data provenance
+data quality controls
+data quality evaluation
 data registries
-data factories
-accuracy metrics
-data analytics assessment
-modeling simulation
-Open Data
-Open Science
-Open Access
-ORCID
-Mechanism Design
-Latent Dirichlet Allocation
+data science
+Data Science Engineering
+data security
+Data storage systems
+data types
 data visualisation
 data visualization
-data dashboard
-collaborative system
+Data Warehouse solutions
+Data Warehouses technologies
+design data infrastructure
+DevOps
+digital libraries
+DMP
+Econometrics
+engineering principles
+enterprises
+ETL
+Extract Transform Load
+federated access control
+federated access control systems
+Graph Data Analytics
+high performance networks
+IPR protection
+Latent Dirichlet Allocation
+linked data
+Machine Learning
+Mechanism Design
+meta data
+metadata
+meta-data
+methods data analysis
+model data collection
+modeling simulation
 Natural Language Processing
+non relational databases
+NoSQL
+OLAP
+OLTP
+Open Access
+Open Data
+Open Science
+operational models
 Operations Research
-Recommender Ranking system
 Optimisation
 Optimization
+ORCID
+organisational network analysis
+organizational network analysis
+organizations information
+PID
+Predictive Analytics
+Prescriptive Analytics
+process structured data
+process unstructured data
+Processes Management
+project management
+Qualitative analytics
+quality evaluation
+quality risk management
+Recommender Ranking system
+reinforced learning
+relational databases
+Research Methods Project Management
 Simulation
+SQL
+statistics methods
+structured approach
+system design development
+systems software
+team management
+Use cases analysis
+User Experience
+UX
