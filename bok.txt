@@ -9,13 +9,13 @@ Cloud Computing
 cloud powered services
 cognitive technologies
 collaborative system
-compliance based security models
 continuous improvement cycle
 CRP
 Customer Relations Management
 data access
 data analysis applications
 Data Analytics
+data analysis
 data analytics assessment
 data anonymisation
 data architecture
@@ -25,7 +25,8 @@ data collection process
 data curation
 data dashboard
 data driven
-data driven marketing technologies
+data marketing technologies
+data driven marketing
 data factories
 data formats
 data governance strategy
@@ -67,7 +68,6 @@ enterprises
 ETL
 Extract Transform Load
 federated access control
-federated access control systems
 Graph Data Analytics
 high performance networks
 IPR protection
@@ -93,7 +93,6 @@ operational models
 Operations Research
 Optimisation
 Optimization
-ORCID
 organisational network analysis
 organizational network analysis
 organizations information
@@ -110,7 +109,8 @@ quality risk management
 Recommender Ranking system
 reinforced learning
 relational databases
-Research Methods Project Management
+Research Methods
+Project Management
 Simulation
 SQL
 statistics methods

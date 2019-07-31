@@ -80,14 +80,14 @@ def cleanData(df):
     cleanSentences=""
     cleanDataFrame=pd.DataFrame()
     #Wordcount remove low freq words
-    word_counts = Counter(word_tokenize('\n'.join(df[1])))
+    word_counts = Counter(word_tokenize('\n'.join(df["Description"])))
     lowFreqWords = []
     for word, count in word_counts.items():
         #WE CAN ALSO GET RID OF MISSED HIGHLY OCCURING WORDS
-        if count < 3 or len(word) < 3:
+        if count < 2 or len(word) < 3:
             lowFreqWords.append(word.lower())
     for i, row in df.iterrows():
-        for words in word_tokenize(row[0].lower()):
+        for words in word_tokenize(row[1].lower()):
             if words not in stop_words:
                 if words not in lowFreqWords:
                             #cleanSentences+=(ps.stem(words)+" ")
@@ -96,11 +96,12 @@ def cleanData(df):
             else:
                 wordsRemoved += 1
                 totalWords += 1
-        cleanDataFrame = cleanDataFrame.append({"CourseID" : i,'Description':cleanSentences},ignore_index=True)
+        cleanDataFrame = cleanDataFrame.append({"CourseID" : row[0],'Description':cleanSentences},ignore_index=True)
+        cleanDataFrame["Description"] = cleanDataFrame["Description"]
+        #I have to add the courseID to the description so labeling targets searches it aswell (or fix xml to dataframe to put name in description)+ cleanDataFrame["CourseID"]
         cleanSentences = ""
     #print(wordsRemoved/totalWords)
     word_counts = Counter(word_tokenize('\n'.join(cleanDataFrame["Description"])))
-    print("\t\t",word_counts.most_common(10))
     return cleanDataFrame
 #Get significance weight of each word in the descriptions
 def tfidf(description):
@@ -118,7 +119,7 @@ def noNumbers(inputString):
     return not any(char.isdigit() for char in inputString)
 
 def vectorizer(courseDesc_df):
-    vectorizer=CountVectorizer(ngram_range=(1, 1))
+    vectorizer=CountVectorizer(ngram_range=(1, 3))
     vectors = vectorizer.fit_transform(courseDesc_df['Description']).toarray()
 
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
@@ -161,8 +162,8 @@ def labelTargetsdf(df):
     vocabSplit = []
     for word in vocab:
         vocabSplit.append(word.split())
+    print(df)
     for words in vocabSplit:
-        print(words)
         try:
             df["curricula relevance"] = df[words].all(1) | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
