@@ -11,6 +11,7 @@ from pycm import ConfusionMatrix
 #import pyfpgrowth
 #from pyspark.ml.fpm import FPGrowth
 from sklearn.feature_extraction.text import CountVectorizer
+from collections import Counter
 #from sklearn.feature_extraction.text import TfidfTransformer
 
 
@@ -70,7 +71,7 @@ def cleanData(df):
     'between', 'off', 'further', 'hers', 'such', "should've", 'did', 'so', 'very', 'where', 'few', 'until', 'need',
     'down', 'can', 'below', 'didn', 'm', "it's"]
     stop_words = ['course','courses','offer','credit','student','cr','study','year','years','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american','and','of','the','in','to','offered','credits','be','for','on','students','with','as','is','this','or','an','are','from','each','years','by','include','will','their','at','enrollment','we','how','both','have','used','such','these','it','about','all','who','must','only','more','can','its','minor','what','do','us', 'topics','that','required','through','other','requirements','not','which','permission','emphasis','they','majors','some','based','but','no','year','century','semesters','our','has','any','within','during','using','should','in','than','the','and','if','when','them','or','many','above','why','was','you','education','general','including','health','humanities','arts','art','experience','skills','skill','includes','history','studies','university','grade','repeated','following','(',
-    ')','.',',','/',';',':','?','<','>','|','[',']','~','`','~','!','@','#','$','%','^','&','*','-','_','+','']
+    ')','.',',','/',';',':','?','<','>','|','[',']','~','`','~','!','@','#','$','%','^','&','*','-','_','+','a','{','}',"'","’"]
     stop_words.append(basicWords)
     #,'offer','credit','student','cr','study','year','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american'))
     cleanDesc=[]
@@ -78,18 +79,28 @@ def cleanData(df):
     totalWords = 0
     cleanSentences=""
     cleanDataFrame=pd.DataFrame()
+    #Wordcount remove low freq words
+    word_counts = Counter(word_tokenize('\n'.join(df[1])))
+    lowFreqWords = []
+    for word, count in word_counts.items():
+        #WE CAN ALSO GET RID OF MISSED HIGHLY OCCURING WORDS
+        if count < 3 or len(word) < 3:
+            lowFreqWords.append(word.lower())
     for i, row in df.iterrows():
         for words in word_tokenize(row[0].lower()):
             if words not in stop_words:
-                        #cleanSentences+=(ps.stem(words)+" ")
-                cleanSentences+=(words+" ")
-                totalWords +=1
+                if words not in lowFreqWords:
+                            #cleanSentences+=(ps.stem(words)+" ")
+                    cleanSentences+=(words+" ")
+                    totalWords +=1
             else:
                 wordsRemoved += 1
                 totalWords += 1
         cleanDataFrame = cleanDataFrame.append({"CourseID" : i,'Description':cleanSentences},ignore_index=True)
         cleanSentences = ""
     #print(wordsRemoved/totalWords)
+    word_counts = Counter(word_tokenize('\n'.join(cleanDataFrame["Description"])))
+    print("\t\t",word_counts.most_common(10))
     return cleanDataFrame
 #Get significance weight of each word in the descriptions
 def tfidf(description):
@@ -107,7 +118,7 @@ def noNumbers(inputString):
     return not any(char.isdigit() for char in inputString)
 
 def vectorizer(courseDesc_df):
-    vectorizer=CountVectorizer()
+    vectorizer=CountVectorizer(ngram_range=(1, 1))
     vectors = vectorizer.fit_transform(courseDesc_df['Description']).toarray()
 
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
@@ -150,8 +161,8 @@ def labelTargetsdf(df):
     vocabSplit = []
     for word in vocab:
         vocabSplit.append(word.split())
-
     for words in vocabSplit:
+        print(words)
         try:
             df["curricula relevance"] = df[words].all(1) | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
