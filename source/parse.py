@@ -1,8 +1,8 @@
 import re
-from pdfminer.converter import TextConverter
-from pdfminer.pdfinterp import PDFPageInterpreter
-from pdfminer.pdfinterp import PDFResourceManager
-from pdfminer.pdfpage import PDFPage
+#from pdfminer.converter import TextConverter
+#from pdfminer.pdfinterp import PDFPageInterpreter
+#from pdfminer.pdfinterp import PDFResourceManager
+#from pdfminer.pdfpage import PDFPage
 
 import xml.etree.ElementTree as ET
 import numpy as np
@@ -120,6 +120,12 @@ def extractTextFromXMLBrown(filepath):
         if(len(Ptags) > 2):
             df = df.append({"Section": Ptags[0].text, "Description": Ptags[1].text}, ignore_index=True)
     return df
+
+def extractTextFromXMLValpo(filepath):
+	tree = ET.parse(filepath)
+	root= tree.getroot()
+	test = root.findall("text")
+	return test
 
 def extractTextFromXMLPurdue(filepath):
     tree = ET.parse(filepath)

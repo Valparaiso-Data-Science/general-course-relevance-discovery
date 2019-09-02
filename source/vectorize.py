@@ -70,8 +70,7 @@ def cleanData(df):
     'do', 'same', 'himself', 'these', 'from', 'an', 're', "you'd", 'just', 'those', 'the', 'hasn', "mustn't", 'being',
     'between', 'off', 'further', 'hers', 'such', "should've", 'did', 'so', 'very', 'where', 'few', 'until', 'need',
     'down', 'can', 'below', 'didn', 'm', "it's"]
-    stop_words = ['course','courses','offer','credit','student','cr','study','year','years','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american','and','of','the','in','to','offered','credits','be','for','on','students','with','as','is','this','or','an','are','from','each','years','by','include','will','their','at','enrollment','we','how','both','have','used','such','these','it','about','all','who','must','only','more','can','its','minor','what','do','us', 'topics','that','required','through','other','requirements','not','which','permission','emphasis','they','majors','some','based','but','no','year','century','semesters','our','has','any','within','during','using','should','in','than','the','and','if','when','them','or','many','above','why','was','you','education','general','including','health','humanities','arts','art','experience','skills','skill','includes','history','studies','university','grade','repeated','following','(',
-    ')','.',',','/',';',':','?','<','>','|','[',']','~','`','~','!','@','#','$','%','^','&','*','-','_','+','a','{','}',"'","’"]
+    stop_words = ['course','courses','offer','credit','student','cr','study','year','years','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american','and','of','the','in','to','offered','credits','be','for','on','students','with','as','is','this','or','an','are','from','each','years','by','include','will','their','at','enrollment','we','how','both','have','used','such','these','it','about','all','who','must','only','more','can','its','minor','what','do','us', 'topics','that','required','through','other','requirements','not','which','permission','emphasis','they','majors','some','based','but','no','year','century','semesters','our','has','any','within','during','using','should','in','than','the','and','if','when','them','or','many','above','why','was','you','education','general','including','health','humanities','arts','art','experience','skills','skill','includes','history','studies','university','grade','repeated','following','(']
     stop_words.append(basicWords)
     #,'offer','credit','student','cr','study','year','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american'))
     cleanDesc=[]
@@ -84,7 +83,7 @@ def cleanData(df):
     lowFreqWords = []
     for word, count in word_counts.items():
         #WE CAN ALSO GET RID OF MISSED HIGHLY OCCURING WORDS
-        if count < 2 or len(word) < 3:
+        if count < 5 or len(word) < 3 or not noNumbers(word):
             lowFreqWords.append(word.lower())
     for i, row in df.iterrows():
         for words in word_tokenize(row[1].lower()):
@@ -143,7 +142,7 @@ def cleanVectorizer(df):
         if noNumbers(column):
             if column != 'CourseID':
                 #change this to greather than 2 or something when we arent using temp pdfs
-                if (int(df[column].sum()) > 1):
+                if (int(df[column].sum()) > 2):
                     list.append(column)
                     count += 1
                     total +=1
@@ -161,14 +160,12 @@ def labelTargetsdf(df):
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
     vocabSplit = []
     for word in vocab:
-        vocabSplit.append(word.split())
-    print(df)
-    for words in vocabSplit:
+        print(word)
         try:
-            df["curricula relevance"] = df[words].all(1) | df["curricula relevance"]
+	        df["curricula relevance"] = df[word] | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
         except:
-            pass
+	        pass
     return df
 #x = tfidf(courseAndDescDataFrame['Description'])
 #x.to_csv("test.csv")
