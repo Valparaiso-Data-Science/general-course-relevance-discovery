@@ -136,3 +136,40 @@ def extractTextFromXMLPurdue(filepath):
         Ptags = element.findall("P")
         df = df.append({"Section": Ptags[0].text, "Description": Ptags[1].text}, ignore_index=True)
     return df
+
+def parseXML(filepath):
+    tree = ET.parse(filepath)
+    root = tree.getroot()
+    file = open("xmlformat.txt","w")
+    recursive(root, 10)
+        #print(loopThroughTags(a, 6))    
+    #for a in root:
+    #     for b in a:
+    #         for c in b:
+    #             for d in c:
+    #                 for e in d:
+    #                    for f in e:
+    #                         print("6::",f.text)
+    #                         # for g in f:
+    #                         #     try:
+    #                         #         print(g.text)
+    #                         #     except:
+    #                         #         print(g.text)
+    # #file.close()
+    
+def recursive(text, num):
+    tree = text
+    print(tree)
+    print("SS")
+#    tree.clear()
+    print(tree)
+    print("XX")
+    
+    if (num == 0):
+        return text
+
+    else:
+        for branch in text:
+            tree += branch
+        recursive(tree, num-1)
+        
