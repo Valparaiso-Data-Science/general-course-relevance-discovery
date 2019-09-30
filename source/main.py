@@ -1,4 +1,4 @@
-from parse import parseDirectory, extractTextFromXMLBrown, extractTextFromXMLValpo, extractTextFromXMLPurdue
+from parse import parseDirectory, extractTextFromXMLBrown, extractTextFromXMLValpo, extractTextFromXMLPurdue, parseXML
 from vectorize import cleanData, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
 

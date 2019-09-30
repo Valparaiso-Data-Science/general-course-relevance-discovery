@@ -141,35 +141,18 @@ def parseXML(filepath):
     tree = ET.parse(filepath)
     root = tree.getroot()
     file = open("xmlformat.txt","w")
-    recursive(root, 10)
-        #print(loopThroughTags(a, 6))    
-    #for a in root:
-    #     for b in a:
-    #         for c in b:
-    #             for d in c:
-    #                 for e in d:
-    #                    for f in e:
-    #                         print("6::",f.text)
-    #                         # for g in f:
-    #                         #     try:
-    #                         #         print(g.text)
-    #                         #     except:
-    #                         #         print(g.text)
-    # #file.close()
-    
-def recursive(text, num):
-    tree = text
-    print(tree)
-    print("SS")
-#    tree.clear()
-    print(tree)
-    print("XX")
-    
-    if (num == 0):
-        return text
+    print("Final: ", recursive(root, 20))
 
+def recursive(text, num):
+    if (num == 0):
+        return text.text
     else:
-        for branch in text:
-            tree += branch
-        recursive(tree, num-1)
+        try:
+            if re.match("[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}",text[0].text) is not None and len(text[0].text)>20 and text[1].text is not None:
+                print("Course: ", text[0].text)
+                print("Desc: ", text[1].text)
+            for x in list(text):
+                recursive(x,num-1)
+        except:
+            pass
         
