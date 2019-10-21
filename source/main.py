@@ -14,6 +14,7 @@ pd.options.display.max_columns = 14
 pd.set_option('display.width', 600)
 
 for filename in os.listdir('../fullPDFs/'):
+    print(filename)
     parseXML("../fullPDFs/"+filename).to_csv("../courses/"+filename.replace("xml","csv"))
 
 #pd.concat([young_df,cornell_df,smith_df,brown_df,purdue_df]).to_csv("output.csv")
