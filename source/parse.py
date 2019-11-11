@@ -1,38 +1,46 @@
 import re
 import xml.etree.ElementTree as ET
-import numpy as np
 import pandas as pd
-import sys
-import io
 import os
 
-
-def parseXML(filepath):
-    #Get xml into a variable to work on
+def parseXML(filepath, courseTag, descTag, descTagsFromID):
+    # Get xml (tree) into a list (stack) and find courses (courseID & descriptions)
     tree = ET.parse(filepath)
-    root = tree.getroot()
+    text = tree.getroot()
     courseID = []
     descriptions = []
-    for x in tree.iter():
-        #if x.text != None:
-        try:
-            if re.match("[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}",x[0].text) is not None and x[1].text is not None:
-                courseID.append(x[0].text)
-                descriptions.append(x[1].text)
-                #print("1: " + x[0].tag + " " + x[0].text)
-                #print("\t2: " + x[1].tag + " " + x[1].text)
-        except:
-            pass
-    #recursive(root, courseID, descriptions)
-    courses_df = pd.DataFrame({'School': os.path.basename(filepath.replace(".xml","")), 'CourseID':courseID, 'Descriptions':descriptions})
-    return(courses_df)
+    stack = []
 
-def recursive(text, courseID, descriptions):
-        #Check if current tag holds the course ID
-        if re.match("[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}",text[0].text) is not None and text[1].text is not None:
-            #courses_df = df.append({'CourseID':text[0].text,'Description':text[1].text},ignore_index=True)
-            courseID.append(text[0].text)
-            descriptions.append(text[1].text)
-            #If there are lower levels (nested tags), follow down to the bottom tag
-        for subLevel in list(text):
-            recursive(subLevel, courseID, descriptions)
+    #Convert xml text into stack list
+    for subLevel in text:
+        recursive(subLevel, stack)
+
+    counter = 0
+    for xml in stack:
+        if xml.text is not None:
+            #Check if description is greater than 50char? (to remove more tables)
+            if re.match("[A-Z]{2,5}\s[0-9]{3,4}[A-Z]{0,1}", xml.text) is not None and \
+                    (xml.tag == courseTag) and \
+                    (stack[counter + descTagsFromID].tag == descTag) and \
+                    len(stack[counter + descTagsFromID].text) > 30:
+
+                courseID.append(xml.tag + " " + xml.text)
+                descriptions.append(stack[counter + descTagsFromID].tag + " " + stack[counter + descTagsFromID].text)
+
+                # print(xml.tag, xml.text)
+                # print(stack[counter + descTagsFromID].tag, stack[counter + descTagsFromID].text)
+        counter += 1
+
+    courses_df = pd.DataFrame({'School': os.path.basename(filepath.replace(".xml", "")), 'CourseID': courseID, 'Descriptions': descriptions})
+
+    return (courses_df)
+
+
+def recursive(xml, stack):
+    #Remove null and blank lines
+    if xml.text is not None:
+        if not xml.text.isspace():
+            stack.append(xml)
+    #Loop to bottom of a nested xml tag
+    for subLevel in xml:
+        recursive(subLevel, stack)
