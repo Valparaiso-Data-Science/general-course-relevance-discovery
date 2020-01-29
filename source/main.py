@@ -15,7 +15,7 @@ pd.set_option('display.width', 600)
 
 for filename in os.listdir('../fullPDFs/'):
     print(filename)
-    parseXML("../fullPDFs/"+filename, 'P', 'P', 1).to_csv("../courses/"+filename.replace("xml","csv"))
+    parseXML("../fullPDFs/"+filename, 'P', 'P', 1).to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
 #pd.concat([young_df,cornell_df,smith_df,brown_df,purdue_df]).to_csv("output.csv")
 # 
