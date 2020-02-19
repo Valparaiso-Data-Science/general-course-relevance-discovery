@@ -53,55 +53,25 @@ def machineLearn(type,string):
     #     row = row + 1
     print()
 #Reader /output/Full csvs and convert to dataframe of CourseID and
-def cleanData(df):
-    desc = []
+def newClean(df):
+    import string
+    schoolID = []
     courseID = []
-    basicWords = ['too', 'about', 'hadn', 'before', 'over', 'why', 's', 'had', 'wouldn',
-    'shan', "you're", 'herself', 'with', 'if', 'more', 'yourself', 'myself', 'aren', 'in', 'and',
-    "wasn't", "haven't", 'now', "that'll", 'out', 'they', 'all', 'should', 'weren', "won't", 'him', 'me',
-    'itself', "isn't", 'your', "doesn't", 'don', 'ma', 'each', 'because', 'we', 'there', 'have', 'was', 'themselves',
-    'does', 'of', 'yours', 'shouldn', 'but', 'been', 'doesn', 'you', 'are', 'our', 'o', 't', 'my', 'after', 'who',
-    'wasn', 'by', 'she', 'only', 'this', 'y', 'her', "don't", "needn't", 'into', 'again', 'during', 'be', 'both',
-    'he', 'mightn', 'theirs', 'i', "couldn't", 'while', 'through', 'above', 'd', "you'll", 'no', "shan't", 'or', 'on',
-    'ourselves', 'his', "shouldn't", 'won', 'under', "mightn't", 'is', 'a', 'at', 've', 'nor', 'against', 'as', 'yourselves',
-    'when', 'will', 'how', 'then', "hadn't", 'whom', 'to', 'once', 'up', "wouldn't", 'which', 'their', 'here', 'having', 'that',
-    'has', 'ain', 'not', 'ours', "hasn't", 'isn', 'them', 'other', 'some', 'what', 'were', "didn't", 'am', "weren't", 'for',
-    'couldn', "she's", 'mustn', 'haven', 'most', 'it', 'than', 'll', 'its', 'doing', 'any', "aren't", "you've", 'own',
-    'do', 'same', 'himself', 'these', 'from', 'an', 're', "you'd", 'just', 'those', 'the', 'hasn', "mustn't", 'being',
-    'between', 'off', 'further', 'hers', 'such', "should've", 'did', 'so', 'very', 'where', 'few', 'until', 'need',
-    'down', 'can', 'below', 'didn', 'm', "it's"]
-    stop_words = ['course','courses','offer','credit','student','cr','study','year','years','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american','and','of','the','in','to','offered','credits','be','for','on','students','with','as','is','this','or','an','are','from','each','years','by','include','will','their','at','enrollment','we','how','both','have','used','such','these','it','about','all','who','must','only','more','can','its','minor','what','do','us', 'topics','that','required','through','other','requirements','not','which','permission','emphasis','they','majors','some','based','but','no','year','century','semesters','our','has','any','within','during','using','should','in','than','the','and','if','when','them','or','many','above','why','was','you','education','general','including','health','humanities','arts','art','experience','skills','skill','includes','history','studies','university','grade','repeated','following','(']
-    stop_words.append(basicWords)
-    #,'offer','credit','student','cr','study','year','require','may','use','major','enroll','work','department','social','next','one','fall','spring','semester','also','permiss','class','seminar','instructor','college','well','fulfill','academic','understand','world','learn','american'))
-    cleanDesc=[]
-    wordsRemoved = 0
-    totalWords = 0
-    cleanSentences=""
-    cleanDataFrame=pd.DataFrame()
-    #Wordcount remove low freq words
-    word_counts = Counter(word_tokenize('\n'.join(df["Description"])))
-    lowFreqWords = []
-    for word, count in word_counts.items():
-        #WE CAN ALSO GET RID OF MISSED HIGHLY OCCURING WORDS
-        if count < 5 or len(word) < 3 or not noNumbers(word):
-            lowFreqWords.append(word.lower())
+    description = []
+    stopwords = ['credits','spring','fall','course','students','offered','hours','credit','grade','typically']
     for i, row in df.iterrows():
-        for words in word_tokenize(row[1].lower()):
-            if words not in stop_words:
-                if words not in lowFreqWords:
-                            #cleanSentences+=(ps.stem(words)+" ")
-                    cleanSentences+=(words+" ")
-                    totalWords +=1
-            else:
-                wordsRemoved += 1
-                totalWords += 1
-        cleanDataFrame = cleanDataFrame.append({"CourseID" : row[0],'Description':cleanSentences},ignore_index=True)
-        cleanDataFrame["Description"] = cleanDataFrame["Description"]
-        #I have to add the courseID to the description so labeling targets searches it aswell (or fix xml to dataframe to put name in description)+ cleanDataFrame["CourseID"]
-        cleanSentences = ""
-    #print(wordsRemoved/totalWords)
-    word_counts = Counter(word_tokenize('\n'.join(cleanDataFrame["Description"])))
-    return cleanDataFrame
+        cleanDesc = row['Descriptions']
+        cleanDesc = cleanDesc.translate(cleanDesc.maketrans(string.punctuation, "\\" * len(string.punctuation)))
+        cleanDesc = cleanDesc.replace("\\", '')
+        cleanDesc = ' '.join([word for word in cleanDesc.split() if word.lower() not in stopwords])
+        schoolID.append(row['School'])
+        courseID.append(row['CourseID'])
+        description.append(cleanDesc)
+
+    cleanDF = pd.DataFrame(list(zip(schoolID, courseID, description)), columns=['School', 'CourseID', 'Descriptions'])
+    print(cleanDF.head())
+    return (cleanDF)
+
 #Get significance weight of each word in the descriptions
 def tfidf(description):
     cv=CountVectorizer()

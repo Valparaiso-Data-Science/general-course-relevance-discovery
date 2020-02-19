@@ -1,26 +1,30 @@
 from parse import parseXML
-from vectorize import cleanData, vectorizer, cleanVectorizer, labelTargetsdf
+from topicModel import plot_10_most_common_words, listofDSCourse
+from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
 
 import os
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 import sys
 
-from sklearn.model_selection import train_test_split
-from sklearn import tree,metrics
-from sklearn.tree.export import export_text
-from sklearn.tree import export_graphviz
-pd.options.display.max_columns = 14
-pd.set_option('display.width', 600)
-
+topicModel = pd.DataFrame()
 for filename in os.listdir('../fullPDFs/'):
     print(filename)
-    parseXML("../fullPDFs/"+filename, 'P', 'P', 1).to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    CSV = parseXML("../fullPDFs/"+filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    topicModel= pd.concat([topicModel,CSV])
 
-#pd.concat([young_df,cornell_df,smith_df,brown_df,purdue_df]).to_csv("output.csv")
-# 
-# print("\tfound courses")
-# cleaned_df = cleanData(courses_df)
+cleanData = newClean(topicModel)
+
+topicModel_df = listofDSCourse(cleanData)
+
+from sklearn.feature_extraction.text import CountVectorizer
+count_vectorizer = CountVectorizer(stop_words='english')
+count_data = count_vectorizer.fit_transform(topicModel_df['Descriptions'])
+plot_10_most_common_words(count_data, count_vectorizer)
+
 # print("\tcleaned")
 # vect_df = vectorizer(cleaned_df)
 # print("\tvect")
@@ -51,4 +55,4 @@ for filename in os.listdir('../fullPDFs/'):
 # 
 # answer_test.append(mlaoutput).to_csv("answer.csv")
 # answer_test['Predicted'] = pd.Series(test_set_prediction)
-# 
+#
