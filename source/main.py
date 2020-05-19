@@ -16,43 +16,36 @@ for filename in os.listdir('../fullPDFs/'):
     CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     topicModel= pd.concat([topicModel,CSV])
 
-cleanData = newClean(topicModel)
+cleaned_df = newClean(topicModel)
+#Previously untouched last semester Spring2020 from here down
+print("\tcleaned")
+vect_df = vectorizer(cleaned_df)
+print("\tvect")
+pruned_df = cleanVectorizer(vect_df)
+print("\tpruned")
+labeled_df = labelTargetsdf(pruned_df)
+print("\tfound targets")
+#%%
+features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
+labels = labeled_df["curricula relevance"]
 
-topicModel_df = listofDSCourse(cleanData)
+print("Splitting Data")
+feature_train, feature_test, answer_train, answer_test = train_test_split(features,
+                                                                          labels,
+                                                                          test_size=0.2)
+print("training tree")
+dTree = decisionTree(feature_train,answer_train,20)
+test_set_prediction = dTree.predict(feature_test)
 
-from sklearn.feature_extraction.text import CountVectorizer
-count_vectorizer = CountVectorizer(stop_words='english')
-count_data = count_vectorizer.fit_transform(topicModel_df['Descriptions'])
-plot_10_most_common_words(count_data, count_vectorizer)
+print("Accuracy:",metrics.accuracy_score(answer_test, test_set_prediction))
 
-# print("\tcleaned")
-# vect_df = vectorizer(cleaned_df)
-# print("\tvect")
-# pruned_df = cleanVectorizer(vect_df)
-# print("\tpruned")
-# labeled_df = labelTargetsdf(pruned_df)
-# print("\tfound targets")
-# #%%
-# features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
-# labels = labeled_df["curricula relevance"]
-# 
-# print("Splitting Data")
-# feature_train, feature_test, answer_train, answer_test = train_test_split(features,
-#                                                                           labels,
-#                                                                           test_size=0.2)
-# print("training tree")
-# dTree = decisionTree(feature_train,answer_train,20)
-# test_set_prediction = dTree.predict(feature_test)
-# 
-# print("Accuracy:",metrics.accuracy_score(answer_test, test_set_prediction))
-# 
-# graph = export_text(dTree,feature_names=list(features.columns))
-# print(graph)
-# print(export_graphviz(dTree,feature_names=list(features.columns),filled=True,impurity=False,label='root'))
-# 
-# 
-# mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
-# 
-# answer_test.append(mlaoutput).to_csv("answer.csv")
-# answer_test['Predicted'] = pd.Series(test_set_prediction)
-#
+graph = export_text(dTree,feature_names=list(features.columns))
+print(graph)
+print(export_graphviz(dTree,feature_names=list(features.columns),filled=True,impurity=False,label='root'))
+
+
+mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
+
+answer_test.append(mlaoutput).to_csv("answer.csv")
+answer_test['Predicted'] = pd.Series(test_set_prediction)
+

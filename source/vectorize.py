@@ -89,7 +89,7 @@ def noNumbers(inputString):
 
 def vectorizer(courseDesc_df):
     vectorizer=CountVectorizer(ngram_range=(1, 3))
-    vectors = vectorizer.fit_transform(courseDesc_df['Description']).toarray()
+    vectors = vectorizer.fit_transform(courseDesc_df['Descriptions']).toarray()
 
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
 

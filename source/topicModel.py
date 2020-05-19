@@ -12,6 +12,7 @@ def listofDSCourse(df):
     schoolID = []
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
     for CourseID, desc, school in zip(df['CourseID'],df['Descriptions'],df['School']):
+        #Could also check if courseID has an edison body word (like Data 101)
         if any(item in desc for item in vocab):
             courseID.append(CourseID)
             DSCourses_df.append(desc)
@@ -19,7 +20,6 @@ def listofDSCourse(df):
     DS_df=pd.DataFrame(list(zip(schoolID, courseID, DSCourses_df)),columns =['School','CourseID','Descriptions'])
     return(DS_df)
 
-####TOPIC MODELING TEST CODE####
 # Helper function
 def plot_10_most_common_words(count_data, count_vectorizer):
     import matplotlib.pyplot as plt
