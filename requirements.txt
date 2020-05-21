@@ -11,3 +11,4 @@ pyfpgrowth
 pyspark
 seaborn
 sklearn
+IPython
