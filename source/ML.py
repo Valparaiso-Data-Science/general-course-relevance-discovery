@@ -21,7 +21,6 @@ def decisionTree(feature_train,answer_train,depth):
 
     treeClassifier = tree.DecisionTreeClassifier(max_depth=depth)
     treeClassifier = treeClassifier.fit(feature_train,answer_train)
-
     return treeClassifier
 
 def visTree(dTree):

@@ -2,7 +2,10 @@ from parse import parseXML
 from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
-
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+from sklearn.tree import export_text
+from sklearn.tree import export_graphviz
 import os
 import pandas as pd
 import numpy as np
@@ -30,14 +33,13 @@ features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
 labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
-feature_train, feature_test, answer_train, answer_test = train_test_split(features,
-                                                                          labels,
-                                                                          test_size=0.2)
+feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
+
 print("training tree")
 dTree = decisionTree(feature_train,answer_train,20)
 test_set_prediction = dTree.predict(feature_test)
 
-print("Accuracy:",metrics.accuracy_score(answer_test, test_set_prediction))
+print("Accuracy:",accuracy_score(answer_test, test_set_prediction))
 
 graph = export_text(dTree,feature_names=list(features.columns))
 print(graph)
