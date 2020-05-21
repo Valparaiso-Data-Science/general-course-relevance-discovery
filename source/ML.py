@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import tree,metrics
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import export_graphviz
-from sklearn.externals.six import StringIO
+from io import StringIO
 from IPython.display import Image
 import pydotplus
 import graphviz
