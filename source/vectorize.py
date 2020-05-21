@@ -88,7 +88,9 @@ def noNumbers(inputString):
     return not any(char.isdigit() for char in inputString)
 
 def vectorizer(courseDesc_df):
-    vectorizer=CountVectorizer(ngram_range=(1, 3))
+    vectorizer=CountVectorizer(ngram_range=(1, 1))
+    courseDesc_df = courseDesc_df.head(5000)
+    print(type(courseDesc_df))
     vectors = vectorizer.fit_transform(courseDesc_df['Descriptions']).toarray()
 
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])

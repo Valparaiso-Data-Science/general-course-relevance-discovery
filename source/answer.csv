@@ -1,198 +1,1004 @@
 ,0,machineAlg
-THEA 312 History of the Theatre II (4) ,False,
-SOC 490 Research in Sociology (1–4) ,False,
-HIST 427 Westward Movement in the United States (4) ,False,
-MUS 213 Aural Skills III (2) ,False,
-CRWR 510 Writing for Screen and Television (4) ,False,
-BIOL 212 Biology of Animals (4) ,False,
-BA 450 Applied Portfolio Management (3) ,False,
-REL 301 Christianity and Culture (3) ,False,
-ART 330 Explorations in Digital Arts (4) ,False,
-POSC 409 Women and Politics (4) ,False,
-REL 505 Old Testament History (4) ,False,
-SPME 110 Introduction to Exercise Sciences (1) ,False,
-BIOL 491 Biology Senior Seminar (1) ,False,
-MUS 305 Pepperdine University Concert Choir (0–1) ,False,
-BIOL 440 Immunohistology (4) ,False,
-FRE 430 French in Society (4) ,False,
-POSC 448 Arms Control and International Security (4) ,False,
-PHYS 240 Introduction to Numerical Programming (3) ,True,
-HIST 400 Native Americans (4) ,False,
-CRWR 405 Advanced Fiction Writing (4) ,False,
-INTS 419 Modern Asian Political Philosophy (4) ,False,
-CHEM 121 General Chemistry II (3) ,False,
-SOC 431 Wealth and Poverty in America (4) ,False,
-MATH 150 Calculus I (4) ,False,
-SPAD 295 Experiential Learning in Sport Administration (1) ,False,
-BIOL 331 Advanced Cellular Biochemistry (4) ,False,
-"MATH 141 Probability, Linear Systems, and Multivariable Optimization (4) ",False,
-REL 526 Religions of the World (GE)............................................(4) ,False,
-FILM 431 African American Cinema (4) ,False,
-POSC 455 Immigration Politics and Ethnic Relations (4) ,False,
-REL 302 Introduction to Biblical Interpretation (4) ,False,
-ECON 442 Comparative Economic Systems (4) ,False,
-FRE 356 Major French Authors (4) ,False,
-MUS 205 Italian Diction for Singers (1) ,False,
-COM 322 Communication Training and Techniques (3) ,False,
-COM 302 Introduction to Qualitative Communication Research (3) ,False,
-NUTR 370 Nutrition Issues in Global Health (4) ,False,
-MUS 206 German Diction for Singers (1) ,False,
-PHYS 410 Electricity and Magnetism I (3) ,False,
-SPAD 370 Sport Law (3) ,False,
-ENG 327 Writing Center Practicum (2) ,False,
-COM 630 Qualitative Communication Research Methods (4) ,True,
-IPIN 495L International Programs’ Internship II (1–3) ,False,
-PHIL 290 Logic (4) ,False,
-HEB 551 Intermediate Biblical Hebrew I (4) ,False,
-MATH 270 Foundations of Elementary Mathematics I (4) ,False,
-MATH 335 Combinatorics (4) ,False,
-SPAN 251 Second-Year Spanish I (4) ,False,
-ADV 375 Advertising Media (4) ,False,
-FRE 345 French Conversation and Phonetics (4) ,False,
-NUTR 292 Special Topics (1–4) ,False,
-BIOL 106 Principles of Biology (4) ,False,
-REL 519 Revelation and Apocalyptic Literature (4) ,False,
-FRE 490 Research in French Studies (1–4) ,False,
-PHYS 211 Physics II (5) ,False,
-SART 495 Screen Arts Internship (1–4) ,False,
-SPME 350 Human Prosection (1–2) ,False,
-ADV 499 Directed Studies (1–4) ,False,
-MUS 140 Percussion Ensemble (0–1) ,False,
-CHEM 120L General Chemistry Laboratory (GE).................................(1) ,False,
-BA 448 Investments (4) ,False,
-SPAN 390 History and Culture of Spain (4) ,False,
-MUS 135 Pepperdine University Symphony (0–1) ,False,
-MATH 271 Foundations of Elementary Mathematics II (3) ,False,
-EDUC 462 Educational Foundations (3) ,False,
-ECON 310 Introduction to Statistics and Econometrics (4) ,False,
-ART 374 Explorations in Ceramics (4) ,False,
-ECON 450 The Political Economy of Terrorism and Counter-Terrorism (4) ,False,
-MATH 355 Complex Variables (4) ,False,
-REL 538 History of Religion in America (4) ,False,
-MUS 338 Jazz Ensemble (0–1) ,False,
-SPME 360 Physiology of Exercise (4) ,False,
-WMST 300 Introduction to Women’s Studies.....................................(4) ,False,
-THEA 240 Stagecraft I (4) ,False,
-MUS 115 Music Theory II (2) ,False,
-GSHU 113 Great Books Collegium (1) ,False,
-ENG 328 Style and Editing Workshop (2) ,False,
-ARTH 442 Islamic Art (4) ,False,
-MUS 106 Guitar Class I (2) ,False,
-EDUC 501 Clinical Experience I (0) ,False,
-MUS 204 IPA and English and Latin Diction for Singers (1) ,False,
-ARTH 490 Senior Thesis in Art History (4) ,False,
-POSC 353 Comparative European Politics (4) ,False,
-MUS 215 Music Theory IV (2) ,False,
-SPAN 380 History and Culture of Latin America (4) ,False,
-EDUC 463 Literacy Theory and Methods—Multiple Subjects (4) ,False,
-ECON 320 Intermediate Microeconomic Theory (4) ,False,
-THEA 210 Acting I: Introduction to Acting (4) ,False,
-ART 450 Practices in Sculpture (4) ,False,
-PSYC 290 Directed Research in Psychology (1–6) ,True,
-SPAN 499 Directed Studies (1–4) ,False,
-EDUC 461 Instructional Design (3) ,False,
-SPME 450 Foundations of Health and Fitness (4) ,False,
-THEA 350 Theatre Ensemble (0–2) ,False,
-ART 250 Foundations in Sculpture (4) ,False,
-MUS 150 Guitar Ensemble (0–1) ,False,
-MUS 139 Woodwind Ensemble (0–1) ,False,
-THEA 201 Introduction to Theatre Research (4) ,False,
-ECON 421 Public Finance (4) ,False,
-REL 507 The Wisdom Literature (4) ,False,
-POSC 459 Religion and Politics in Comparative Perspectives (4) ,False,
-COM 299 Directed Studies (1–4) ,False,
-REL 527 Philosophy of Religion (4) ,False,
-COM 515 Intercultural Communication: Case Studies (3) ,False,
-COM 205 Storytelling Through Media (3) ,False,
-SART 490 Topics in Screen Arts (3–4) ,False,
-HIST 435 Topics in the History of Women in the United States (4) ,False,
-PHYS 411 Electricity and Magnetism II (3) ,False,
-CHEM 400 Environmental Chemistry (3) ,False,
-ART 376 Explorations in Digital Photography (4) ,False,
-SOC 436 Crime and Delinquency (4) ,False,
-ITAL 562 Italian Cinema from Neo-Realism to the Present (4) ,False,
-GER 441 Seminar in Contemporary German Culture (4) ,False,
-HIST 423 United States 1877–1920 (4) ,False,
-THEA 150 Theatre Ensemble (0–2) ,False,
-CHEM 310L Organic Chemistry I Laboratory (1) ,False,
-MUS 102 Private Instruction (1) ,False,
-FA 241 Introduction To Music (3) ,False,
-COM 450 Communication and Leadership (3) ,False,
-MUS 350 Guitar Ensemble (0–1) ,False,
-SAAJ 122 Social Action and Justice Colloquium II (4) ,False,
-THEA 313 Multicultural Theatre (4) ,False,
-COM 695 Graduate Internship and Fieldwork (0–4) ,False,
-BIOL 299 Directed Studies (1–4) ,False,
-MATH 340 Differential Equations (4) ,False,
-NUTR 301 Food and Nutrition Policy (1) ,False,
-INTS 344 International Relations (4) ,False,
-FRE 435 Modern French Linguistics (4) ,False,
-COM 581 Contemporary Voices of Leadership (4) ,False,
-NUTR 440 Public Health Nutrition (4) ,False,
-STW 601 The Storyteller as Cultural Leader (4) ,False,
-COM 590 Seminar In Communication (2–4) ,False,
-HIST 406 Topics in National History (4) ,False,
-PHIL 320 Ethics (4) ,False,
-FRE 380 French Civilization (4) ,False,
-POSC 310 Introduction to Research Methodology (4) ,True,
-COM 690 Thesis (1–6) ,False,
-PSYC 230 Interpersonal Behavior (3) ,False,
-SOC 446 Global Society & Its Citizens (4) ,False,
-INTS 453 Theories of International Relations: From Middle Earth to World War I (4) ,False,
-CHEM 370L Physical Chemistry I Laboratory (1) ,False,
-MUS 114 Piano Class II (2) ,False,
-ENG 489 Literary Theory (3) ,False,
-JOUR 445 Journalism Presentation and Principles (4) ,False,
-MATH 380 Algebraic Structures I (4) ,False,
-SPAN 430 Spanish in Society (4) ,False,
-REL 521 Systematic Theology I: God and Providence (4) ,False,
-CHEM 340 Quantitative Chemistry (3) ,False,
-PSYC 434 Child Clinical Psychology (4) ,True,
-POSC 451 Politics of Revolution and Protest (4) ,False,
-MUS 103L Private Instruction Lab--Studio Class for Music Majors and Minors (0) ,False,
-MUS 392 Recital I (0) ,False,
-MPRD 653 Cinematic Media Marketing (2) ,False,
-COM 430 Family Communication (3) ,False,
-ART 310 Explorations in Painting (4) ,False,
-SART 207 Screen Arts Production I (4) ,False,
-"COM 507 Public Opinion, Propaganda, and Attitude Change (4) ",False,
-MPRD 602 Visual Design (4) ,False,
-THEA 241 Drafting for The Theatre (4) ,False,
-CHEM 320 Physiological Chemistry (4) ,False,
-BIOL 492 Selected Topics (1–4) ,False,
-REL 612 Women in the Early Church (4) ,False,
-SPAD 480 Sport Facility and Event Administration (4) ,False,
-HEB 152 Elementary Biblical Hebrew II (4) ,False,
-SPME 300 Foundations of Coaching (4) ,False,
-HIST 410 The Greco-Roman World (4) ,False,
-BIOL 211 Biology of Cells (4) ,False,
-FILM 565 Japanese and Asian Film (4) ,False,
-BIOL 107 Plants and the Environment (4) ,False,
-SPME 498 Health and Fitness Internship (3) ,False,
-ENG 304 Library and Archival Sources in a Digital Environment (4) ,False,
-REL 548 Contemporary Issues and Approaches in Practical Theology (4) ,False,
-SOC 250 Introductory Statistics (4) ,False,
-PHYS 430 Statistical Physics and Thermodynamics (3) ,False,
-HEB 151 Elementary Biblical Hebrew I (4) ,False,
-COM 411 Gender and Communication (3) ,False,
-WMST 441 Women and Film (4) ,False,
-CHEM 311L Organic Chemistry II Laboratory (1) ,False,
-CHEM 340L Quantitative Analysis Laboratory (1) ,False,
-PSYC 210 Foundations of Psychology (4) ,False,
-MUS 143 Collegium Musicum (0–1) ,False,
-CHIN 351 Advanced Chinese I (4) ,False,
-MUS 339 Woodwind Ensemble (0–1) ,False,
-HIST 415 Europe in the Nineteenth Century (4) ,False,
-THEA 430 Stage Directing II (4) ,False,
-SPAD 495 Sport Administration Internship (1–4) ,False,
-GER 443 Survey of German Culture and Civilization II (4) ,False,
-ENG 620 Directed Readings in American Literature (4) ,False,
-FRE 350 French for the Professions (4) ,False,
-NPM 330 Introduction to Community-Based Research in the Nonprofit Sector (3) ,False,
-COM 483 Small Group Communication (4) ,False,
-MUS 460 Music In Secondary Schools (4) ,False,
-SPME 410 Neuroscience and Motor Control (4) ,False,
-NUTR 210 Contemporary Issues in Nutrition (4) ,False,
+PS 1584 - GREECE IN ITS NEIGHBORHOOD: EUROPE  EASTERN MEDITERRANEAN ,False,
+HIST 1083 - HISTORY OF SPORTS ,False,
+PORT 0020 - CONVERSATION ,False,
+RUSS 0740 -EVENING RUSSIAN 4 ,False,
+THEA 1488 - THEATRE PRODUCTION ,False,
+ASM 49800 - Directed Experience In Teaching Mechanized Agriculture ,False,
+CEE 1700 - TRAFFIC MANAGEMENT AND OPERATIONS ,False,
+PHIL 1901 - INDEPENDENT STUDY--UNDERGRADUATE ,False,
+HPS 1508 - CLASSICS IN HISTORY OF SCIENCE ,False,
+GEOL 1339 - ENVIRONMENTAL ISSUES: MINING AND GAS DRILLING ISSUES ,False,
+ASTR 36300 - The Solar System ,False,
+BIOL 43600 - Neurobiology ,False,
+AGEC 40000 - Agricultural Economics Study Abroad ,False,
+AD 28500 - Interior Components And Materials ,False,
+ENGR 1900 - INTRODUCTION TO SUSTAINABLE WATER TECHNOLOGY  DESIGN ,False,
+GSWS 1220 - WOMEN OF COLOR FEMINISM ,False,
+SWE 1909 - SPECIAL TOPICS IN SWEDISH ,False,
+ASM 10400 - Introduction To Agricultural Systems ,False,
+SPAN 1805 -CONTEMPORARY HISPANIC LITERATURE AND SOCIETY ,False,
+HPA 1491 - TEACHING HEALTH AND WELLNESS IN ELEMENTARY SCHOOLS ,False,
+AD 61600 - Electronic And Time-Based Art ,False,
+GER 0022 - GERMAN READING 2 ,False,
+PHYS 1370 -INTRODUCTION TO QUANTUM MECHANICS 1 ,False,
+MEMS 1111 - MATERIALS FOR ENERGY GENERATION AND STORAGE ,False,
+LATIN 1303 - LATIN AUTHORS 2: WRITING PRACTICUM ,False,
+ANTH 38500 - Community Engagement In Anthropology ,False,
+ARAB 22400 - Arabic level IV: Business Arabic ,False,
+BIOL 42000 - Eukaryotic Cell Biology ,False,
+CHEM 1255 - INSTRUMENTAL ANALYSIS LAB ,False,
+ANTH 59200 - Selected Topics In Anthropology ,False,
+ANTH 50600 - The Development Of Modern Anthropology ,False,
+MEMS 1072 - APPLIED FLUID DYNAMICS ,False,
+PETE 1209 -HYDRAULIC FRACTURING MECHANICS AND APPLICATIONS ,False,
+IRISH 1615 - IRISH CULTURE AND TRADITIONS ,False,
+AT 30900 - Unmanned Autonomous Aerial Systems ,True,
+BIOL 56200 - Neural Systems ,False,
+PHIL 1330 - TOPICS IN POLITICAL PHILOSOPHY ,False,
+BIOSC 1830 - BIOCHEMISTRY LABORATORY ,False,
+BME 39699 - Professional Practice Internship ,False,
+ARTSC 1004 - GLOBAL DIVERSITY ,False,
+ANTH 0538 - THE ARCHEOLOGIST LOOKS AT DEATH ,False,
+ANSC 49200 - Special Assignments ,False,
+ANTH 0620 - BIOCULTURAL ANTHROPOLOGY ,False,
+AAS 27700 - African American Popular Culture ,False,
+SOC 1446 - CONSUMPTION  EVERYDAY LIFE ,False,
+CLASS 1902 - DIRECTED STUDY FOR UNDERGRADS ,False,
+"ARTSC 1805 - EXCHANGE: INST SCIENCES PO, FRANCE ",False,
+QUECH 0102 - QUECHUA 2 ,False,
+PEDC 0040 -CHOREOGRAPHY ,False,
+BIOL 20500 - Biology For Elementary School Teachers ,False,
+LCTL 0412 - ICELANDIC 2 ,False,
+ENGR 1256 - ENGINEERING IN THE AMERICAS ,False,
+BMS 81200 - Systemic Mammalian Physiology II ,False,
+CHIN 0007 -INTRODUCTION TO CHINESE CIVILIZATION AND CULTURE ,False,
+ELI 0034 - WRITING LEVEL 3 ,False,
+BIOSC 0100 - PREPARATION FOR BIOLOGY ,False,
+MEMS 1065 - THERMAL SYSTEMS DESIGN ,True,
+SLI 0067 - BEGINNING INTENSIVE LATVIAN ,False,
+MEMS 1101 - FERROUS PHYSICAL METALLURGY ,False,
+CLASS 1903 - DIRECTED RESEARCH FOR UNDERGRADS ,False,
+BIOSC 1360 - ECOLOGY OF FUNGI ,False,
+HAA 0165 - GODS AND KINGS: ART IN ANCIENT MESOPOTAMIA ,False,
+"ARTSC 1820 - EXCHANGE: RITSUMEIKAN, JAPAN ",False,
+AGEC 39000 - Cooperative Professional Programs In Agricultural Economics ,False,
+SA 1240 - SCULPTURE STUDIO 2 ,False,
+PS 1301 - COMPETING PERSPECTIVES ON GLOBAL ENERGY: FROM WESTERN PA TO EASTERN EUROPE ,False,
+PSYED 1005 - TEACHING GLOBALLY AND LOCALLY IN A DIVERSE WORLD ,False,
+PS 1213 - LAW AND POLITICS ,False,
+PS 1214 - US CONGRESS ,False,
+AD 59100 - Practicum For Art And Design Teaching Assistants ,False,
+HIST 1055 - HISTORY OF DANCE ,False,
+HPS 1616 - ARTFCL INTELGNC  PHIL OF SCI ,False,
+LATIN 1033 - MEDIEVAL LATIN AUTHORS 2: WRITING PRACTICUM ,False,
+CS 1666 - PRINCIPLES OF COMPUTER GAME DESIGN AND IMPLEMENTATION ,False,
+MATH 0250 - MATRIX THEORY  DIFFT EQUATIONS ,False,
+BIOSC 1350 - PLANT BIOLOGY ,False,
+JS 0625 - DETECTIVE FICTION ,False,
+"CSD 1903 - USA IRELAND: SURVEY OF HEALTH, SOCIAL SERVICES, EDUCATION AND CULTURE ",False,
+ASM 40000 - Agricultural Systems Management Study Abroad ,False,
+ARTSC 1705 - PITT IN BRAZIL ,False,
+AT 24800 - Commercial Flight II ,False,
+ANSC 47200 - Horse Judging ,False,
+PETE 1212 -CO2 FOR ENHANCED OIL RECOVERY AND FRACKING ,False,
+GEOL 1904 - DIRECTED READING ,False,
+BME 69600 - Advanced Biomedical Engineering Projects ,False,
+ANTH 0710 - SPECIAL TOPICS IN CULTURAL ANTHROPOLOGY ,False,
+SOC 1324 - SOCIAL PROBLEMS AND MORAL CRUSADES ,False,
+IL 1850 - PRESCHOOL SPECIAL EDUCATION/PRIMARY LIFE SKILLS PRACTICUM ,False,
+PSYED 1004 - ATTENTIONAL TEACHING PRACTICES ,False,
+HIST 1775 - ORIGINS OF CHRISTIANITY ,False,
+AT 57400 - Exploratory Studies In Aviation Human Factors ,False,
+MATH 1119 - APPLIED PROBABILITY FOR ACTUARIAL MATHEMATICS ,False,
+PHIL 0460 - INTRODUCTION TO PHILOSOPHY OF MIND ,False,
+HIST 1121 - TUDOR ENGLAND ,False,
+ECON 1200 - GAME THEORY ,False,
+BMS 59800 - Introduction To Research In Basic Medical Sciences ,False,
+ARTSC 1593 - STUDY ABROAD: SPAIN AND BONAIRE ,False,
+AGEC 63200 - The Economics Of Health Care And Health Policy ,False,
+ABE 20100 - Thermodynamics In Biological Systems I ,False,
+ENGR 1637 - STRATA CONTROL ENGINEERING ,False,
+ITAL 0100 - ITALIAN FOR THE PROFESSIONS ,False,
+SLI 0063 - BEGINNING INTENSIVE ESTONIAN ,False,
+AGRY 35000 - Global Awareness ,False,
+BME 38399 - Professional Practice Co-Op III ,False,
+CHIN 0003 -SECOND YEAR CHINESE 1 ,False,
+PSY 0160 - PSYCHOLOGY OF PERSONALITY ,False,
+PEDC 0099 -BASIC ROCK CLIMBING ,False,
+SLAV 0211 -INTENSIVE BEGINNING HUNGARIAN ,False,
+HIST 0663 - 20THC AFRICAN AMERICAN WOMEN'S HISTORY ,False,
+BIOL 39700 - Introduction To Research ,False,
+ARTSC 0114 - RIGHT START TO COLLEGE 4 ,False,
+AT 44000 - Turbojet Flight Engineer Procedures Laboratory I ,False,
+BME 30400 - Biomedical Transport Fundamentals ,False,
+AT 26900 - Air Traffic Control I ,False,
+AT 36300 - Fundamentals Of Powerplant Systems ,False,
+PEDC 0265 -YOGA AND PILATES TOTAL BODY TONER ,False,
+GEOL 2054 - SOILS: GEOBIOCHEMICAL LANDSCAPES ,False,
+AT 24100 - Aircraft Systems For Flight Crews ,False,
+HAA 1914 - ARCHITECTURE AND DIGITAL MEDIA 2 ,False,
+HAA 0100 - SPECIAL TOPICS-ANCIENT ,False,
+GEOL 1003 - IGNEOUS  METAMORPHIC PETROLOGY ,False,
+CEE 2202 - CONSTRUCTION SCHEDULING ,False,
+STAT 1291 -TOPICS APPLIED STATISTICS 1 ,False,
+PS 0200 - AMERICAN POLITICS ,False,
+AGRY 44100 - Synoptic Laboratory I ,False,
+AD 45400 - Modern Architecture ,False,
+CLASS 1316 - HELLENISTIC PHILOSOPHY ,False,
+HAA 0302 - RENAISSANCE ART ,False,
+MUSIC 1742 - JAZZ IMPROVISATION 2 ,False,
+CHEM 0760 - UHC GENERAL CHEMISTRY FOR ENGINEERS 1 ,False,
+THEA 1104 - ACTING 3 ,False,
+SOC 0230 - SOCIAL RESEARCH METHODS ,False,
+CEE 1220 - ENERGY TECHNOLOGIES AND THE ENVIRONMENT ,False,
+BIOL 48300 - Great Issues: Environmental And Conservation Biology ,False,
+MUSIC 0234 - HISTORY OF THE SYMPHONY ,False,
+PSY 1325 - DEVELOPMENTAL PSYCHOLOGY: SOCIAL DEVELOPMENT ,False,
+AGEC 40600 - Natural Resource And Environmental Economics ,False,
+JS 1260 - AMERICAN JEWISH EXPERIENCE ,False,
+BIOL 51100 - Introduction To X-Ray Crystallography ,False,
+ITAL 1089 - SPECIAL TOPICS ,False,
+AT 38201 - Advanced Flight Instructor Lecture ,False,
+ANTH 1603 - HUMAN ORIGINS ,False,
+HIST 1753 - THE OTTOMAN EMPIRE (1300-1923) ,False,
+JS 0026 - INTERMEDIATE HEBREW 4 ,False,
+MUSIC 1904 - SENIOR SEMINAR ,False,
+ITAL 0101 - ITALIAN: HERE AND NOW ,False,
+AGEC 52800 - Global Change And The Challenge Of Sustainably Feeding A Growing Planet ,False,
+AAE 50800 - Optimization In Aerospace Engineering ,True,
+ENGR 1215 - STUDY ABROAD: HONG KONG ,False,
+ABE 32500 - Soil And Water Resource Engineering ,False,
+ANTH 1780 - INTRODUCTION TO ANTHROPOLOGY ,False,
+FR 1038 - STRUCTURE OF MODERN FRENCH ,False,
+SA 1570 - DIRECTED STUDY-DIGITAL ,False,
+ANTH 20300 - Biological Bases Of Human Social Behavior ,False,
+CEE 1203 - CONSTRUCT PROFSSN DEVELOPMENT ,False,
+AD 31200 - Ancient Roman Art ,False,
+BIOSC 1280 - MICROBIAL GENETIC ENGINEERING ,False,
+PHIL 0442 - MINDS AND MACHINES/WRITING PRACTICUM ,False,
+AD 67000 - Textile Art ,False,
+ARTSC 1624 - STUDY ABROAD: CROATIA ,False,
+BIOL 28000 - Genetics And Molecular Biology ,False,
+AT 45300 - Aviation Global Experience ,False,
+SOC 1437 - COMMUNITY/TOURISM ANALYSIS ,False,
+BIOL 20400 - Human Anatomy And Physiology ,False,
+AAE 55600 - Aeroelasticity ,False,
+AAS 37100 - The African American Experience ,False,
+HRS 1718 - PROJECT BASED TECHNOLOGY DESIGN ,False,
+GEOL 1460 - INTRODUCTION TO REMOTE SENSING ,False,
+ARTSC 1647 - STUDY ABROAD: CAMBODIA ,False,
+ANSC 44500 - Commercial Poultry Management ,False,
+EM 1199 - INDEPENDENT STUDY ,False,
+CHEM 1902 - DIRECTED STUDY ,False,
+ANSC 33200 - Environmental Physiology Of Domestic Animals ,False,
+CHE 0601 - SYSTEMS ENGINEERING 2: DESIGN LABORATORY ,False,
+AD 49200 - Advanced Seminar In Art History ,False,
+"GEOL 1056 - UHC ENVIRONMENTAL ETHICS, SCIENCE AND PUBLIC POLICY ",False,
+MUSIC 0844 - THE MUSIC OF THE BEATLES ,False,
+"PSYED 1021 - THEORY, MEANING AND PRACTICE OF PLAY AND ACTIVITY ",False,
+CLASS 0034 - WOMEN AND MEN IN ANCIENT MEDITERRANEAN ,False,
+BAND 36000 - Wind Ensemble II ,False,
+NUR 0032 - MICROBIOLOGY LABORATORY ,False,
+SLI 0052 - BEGINING HUNGARIAN PITT-HUNGARY ,False,
+SLAV 0202 -BEGINNING INTENSIVE CZECH PITT-PRAGUE ,False,
+AD 34600 - Italian Renaissance Art ,False,
+ENGR 1254 - EXCHANGE: UNIVERSITY OF EXETER ,False,
+ECE 1898 - ENGINEERING PROJECT ,False,
+AAE 54600 - Aerospace Structural Dynamics And Stability ,False,
+MATH 1050 - COMBINATORIAL MATHEMATICS ,False,
+ARTSC 1748 - STUDY ABROAD: MONGOLIA ,False,
+CHEM 1701 - UNDERGRAD RES SEMINAR WRIT PRAC ,False,
+ELI 0022 - SPEAKING LEVEL 2 ,False,
+JS 1254 - HOLOCAUST LITERATURE AND FILM ,False,
+HIM 1480 - HIM CLINICAL EDUCATION 3 ,False,
+ARTSC 0120 - FIRST EXPERIENCES IN RESEARCH ,False,
+ANSC 40000 - Animal Sciences Study Abroad ,False,
+HIST 1762 - RELIGION AND POLITICS OF THE MIDDLE EAST ,False,
+BAND 11600 - Symphonic Band ,False,
+HAA 0440 - FRANK LLOYD WRIGHT ,False,
+ADMJ 1100 - CRIME SCENE INVESTIGATION ,False,
+MATH 0100 - PREP FOR BUSINESS CALCULUS ,False,
+AFT 47100 - National Security Affairs I ,False,
+"NPHS 1530 -ANALYSIS, INTELLIGENCE AND DECISION TOOLS FOR EMERGENCY PREPAREDNESS ",True,
+ENGR 1251 - GE3 EXCHANGE: AUSTRALIA ,False,
+AGEC 69200 - Workshop In Applied Economics ,False,
+HPA 0032 - MODERN DANCE 2 ,False,
+BIOSC 1550 - ECOLOGY AND EVOLUTION SEMINAR ,False,
+GER 0002 - ELEMENTARY GERMAN 2 ,False,
+SPAN 1707 -AFRCN PRESEN LAT AMERN LIT/CULT ,False,
+ECE 1885 - DEPARTMENTAL SEMINAR ,False,
+ASL 20200 - American Sign Language IV ,False,
+THEA 1120 - DRAMA AND PERFORMANCE IN CLASSROOM ,False,
+AGRY 65000 - Clay Mineralogy ,False,
+HIST 0789 - WOMENAND MEN IN ANCIENT MEDITERRANEAN SOCIETY/WRITING PRACTICUM ,False,
+PS 1702 - CODING AND COMPUTATION SOCIAL SCIENCE ,False,
+GEOL 1334 - ENVIRONMENTAL POLICY ,False,
+AGRY 55500 - Soil And Plant Analysis ,False,
+JS 0037 - ADVANCED HEBREW 5 ,False,
+GER 1005 - GERMAN MEDIA ,False,
+BCHM 60400 - Introduction To Graduate Research In Biochemistry II ,False,
+BIOL 44400 - Human Genetics ,False,
+ECON 1720 - PRO-SEMINAR MONETARY  MACROECON ,False,
+EM 1172 - ISSUES IN HEALTH CARE - WEB ,False,
+PEDC 0146 -FIRST AID AND CPR ,False,
+SOC 0446 - SOCIOLOGY OF GENDER ,False,
+SLAV 0232 -ADVANCED INTENSIVE CZECH - PRAGUE ,False,
+AGEC 63100 - The Theory And Practice Of Spatial Econometrics ,True,
+ARTSC 1511 - STUDY ABROAD: BOLIVIA ,False,
+AAE 55500 - Mechanics Of Composite Materials ,False,
+GREEK 1700 - GREEK PROSE COMPOSITION ,False,
+ENGR 1869 - INTRO ELEC ENGRG FOR NON EE'S ,False,
+COE 1896 - SENIOR DESIGN PROJECT ,False,
+BUS 1990 - STUDY ABROAD: SEMESTER-AT-SEA ,False,
+ENGR 1223 - EXCHANGE ENGLAND-UNIVERSITY OF SUSSEX ,False,
+ANTH 1530 - ORIGINS OF CITIES ,False,
+"NUR 1250 - NURSING CARE OF MOTHERS, NEWBORNS AND FAMILIES ",False,
+ENGR 1213 - ENGR SERVICE LEARNING: BRAZIL ,False,
+ELI 0053 - READING LEVEL 5 ,False,
+PEDC 0175 -AEROBIC FITNESS BOXING ,False,
+SPAN 1255 -INTRODUCTION TO HISPANIC LITERARY AND CULTURAL CRITICISM ,False,
+ARTSC 1507 - STUDY ABROAD: AUSTRIA ,False,
+GER 1108 - GREEN GERMANY ,False,
+HIST 1181 - TWENTIETH CENTURY BRITAIN ,False,
+ANTH 41001 - Senior Capstone In Anthropology ,False,
+LATIN 0220 - INTERMEDIATE LATIN: VERSE ,False,
+"PHYS 0475 -INTRODUCTION TO PHYSICS, SCIENCE AND ENGINEERING 1 ",False,
+HIM 1455 - QUALITY MANAGEMENT ,False,
+MEMS 1103 - PRINCIPLES AND APPLICATIONS OF STEEL PROCESSING AND DESIGN ,False,
+ANSC 34500 - Animal Health Management ,False,
+AMST 30100 - Perspectives On America ,False,
+GEOL 1002 - HUMAN DRIVEN GLOBAL CHANGE ,False,
+BIOSC 1640 - BIOINFORMATICS SOFTWARE DESIGN ,False,
+ASM 53000 - Power And Machinery Management ,False,
+BIOL 49500 - Special Assignments ,False,
+PHIL 0302 - INTRODUCTION TO ETHICS/WRITING PRACTICUM ,False,
+PHIL 1890 - ISSUES IN PHILOSOPHY (VARIOUS) ,False,
+PS 1318 - EUROPEAN GOVERNMENT AND POLITICS ,False,
+"HIST 1692 - LGBTQ IN THE USA, 1900-PRESENT ",False,
+ARTSC 1827 - INTERNATIONAL EXCHANGE ,False,
+HIST 1016 - THE IRISH IN AMERICA ,False,
+HIST 1731 - THE HISTORY OF GOD ,False,
+GER 1528 - VIENNA ,False,
+EM 1115 - INTRODUCTION TO PHYSICAL ASSESSMENT ,False,
+ANTH 1787 - SPECIAL TOPICS IN CULTURAL ANTHROPOLOGY ,False,
+BAND 11800 - Collegiate Band ,False,
+HIST 0501 - MODERN LATIN AMERICA ,False,
+CLASS 1730 - SANSKRIT 3 ,False,
+HRS 1018 - SURVEY OF HEALTH AND REHABILITATION PROFESSIONALS ,False,
+AD 31500 - Design Methodology ,False,
+ENGR 1295 - STUDY ABROAD: SWEDEN ,False,
+LCTL 0822 - WELSH 2 ,False,
+SLI 0065 - INTERMEDIATE INTENSIVE LITHUANIAN ,False,
+CS 1680 - TEAM PROJECT DESIGN AND IMPLEMENTATION ,False,
+CEE 1750 - PROJECT DEVELOPMENT AND IMPLEMENTATION ,False,
+BAND 33100 - Summer Jazz Bands ,False,
+RMC 0001 - CROSS-REGISTRATION ,False,
+ANTH 21000 - Technology And Culture ,False,
+ANTH 1613 - PRIMATE BIOLOGY ,False,
+GEOL 1315 - COMMUNICATION IN GEOSCIENCES/WRIT REQUIREMENT ,False,
+SLI 0040 - BEGINNING INTENSIVE TURKISH ,False,
+"ENGR 1234 - EXCHANGE: UNIVERSITIES OF APPLIED SCIENCE EXCHANGE, GERMANY ",False,
+IL 1562 - ASSESSMENT: YOUNG CHILDREN WITH DISABILITIES ,False,
+SPAN 1404 -LATIN AMERICAN TOPICS ,False,
+CGS 1124 - FIELD STUDY: NORTHERN IRELAND ,False,
+ABE 20200 - Thermodynamics In Biological Systems II ,False,
+AGEC 26000 - Mentoring Leadership ,False,
+PSY 0510 - SENSATION AND PERCEPTION ,False,
+ASM 34500 - Power Units And Power Trains ,False,
+CHE 1085 - DEPARTMENTAL SEMINAR ,False,
+PEDC 0236 -AEROBIC MIX ,False,
+PHIL 1840 - SCIENCE AND RELIGION ,False,
+"ARTSC 1804 - EXCHANGE: CIDE, MEXICO ",False,
+HAA 1030 - SPECIAL TOPICS- MUSEUM STUDIES ,False,
+NUR 1138 - COMMUNITY HEALTH NURSING CLINICAL ,False,
+AT 39500 - Turbine Aircraft Simulation Laboratory ,False,
+PSY 1305 - EXPERIMENTAL CHILD PSYCHOLOGY ,False,
+ENGR 0027 - INTERNATIONAL FIELD PROJECT- FRANCE ,False,
+AGRY 44200 - Synoptic Laboratory II ,False,
+ECE 1266 - APPLICTIONS OF FIELDS  WAVES ,False,
+AGR 40000 - Agriculture Study Abroad ,False,
+"AD 38200 - A Global History Of Art, Eighteenth-Nineteenth Centuries ",False,
+AD 59000 - Special Art Problems ,False,
+ENGR 1210IS - INSA LYON: FRANCE IN-STATE - IS ,False,
+SA 1604 - SENIOR EXHIBITION ,False,
+BME 40500 - Biomedical Engineering Design Project ,False,
+RUSS 1760 -RUSSIAN DRAMA WORKSHOP ,False,
+ENGR 1770 - ENGINEERING FOUNDATIONS OF MUSIC ,False,
+CHE 0300 - TRANSPORT PHENOMENA ,False,
+ANSC 32400 - Applied Animal Nutrition ,False,
+AGRY 38500 - Environmental Soil Chemistry ,False,
+IL 1479 - INTRO TO MATHEMATICS EDUC ,False,
+AD 23600 - Lighting Fundamentals For Photography ,False,
+SOC 0333 - IDEOLOGIES AND SOCIAL CHANGE ,False,
+CS 1635 - INTERFACE DESIGN METHODOLOGY ,False,
+MUSIC 0609 - GOSPEL CHOIR ,False,
+NUR 1042 - NURSING CARE OF CHILDREN AND THEIR FAMILIES CLINICAL ,False,
+SPAN 1801 -DON QUIJOTE AND THE NOVEL ,False,
+CLASS 1231 - EMERG GRECO-ROMAN/WRIT PRAC ,False,
+HAA 1903 - HISTORY OF ART AND ARCHITECTURE INTERNSHIP ,False,
+CEE 2360 - DYNAMICS OF STRUCTURES ,False,
+MEMS 1063 - PHASE TRANSFORMATION AND MICROSTRUCTURE EVOLUTION ,False,
+ARTSC 1852 - CAMBRIDGE COURSE 2 ,False,
+NUR 1632 - HEALTH CARE DELIVERY IN ITALY ,False,
+HIST 1116 - INTRODUCTION TO THE RENAISSANCE ,False,
+BCHM 49900 - Honors Thesis In Biochemistry ,False,
+AGRY 59800 - Special Problems ,False,
+ANTH 60900 - Seminar In Anthropology ,False,
+CLASS 1630 - MARGINALITY IN THE ANCIENT GREEK WORLD ,False,
+SOC 1362 - REVOLUTIONARY SOCIAL MOVEMENTS ,False,
+MUSIC 1442 - ELECTRONIC AND COMPUTER MUSIC 2 ,False,
+ECE 1552 - SIGNALS AND SYSTEMS ANALYSIS ,False,
+"ANTH 1740 - GENDER, SEXUALITY, AND CHILDHOOD IN A GLOBAL CONTEXT ",False,
+BME 63000 - Introduction To Biomedical Imaging Systems ,False,
+RUSS 0020 -ELEMENTARY RUSSIAN 2 ,False,
+CEE 2818 - ADVANCED FOUNDATION ENGINEERING ,False,
+CEE 1821 - FOUNDATION ENGINEERING ,False,
+ASAM 34000 - Contemporary Issues In Asian American Studies ,False,
+ARTSC 1622 - STUDY ABROAD: GEORGIA ,False,
+PHIL 0890 - TOPICS IN PHILOSOPHY (VARIOUS) ,False,
+AFT 12100 - Air Force ROTC Leadership Laboratory II ,False,
+HPS 0685 - MATHEMATICS AND CULTURE ,False,
+AAE 64600 - Elastic Wave Propagation ,False,
+BCHM 56200 - General Biochemistry II ,False,
+ABE 45700 - Transport Operations In Food And Biological Engineering I ,False,
+RUSS 0811 -MADNESS AND MADMEN IN RUSS CULTURE ,False,
+GEOL 1701 - GEOLOGY OF THE PLANETS ,False,
+ENGR 1450 - ENGINEERING- THE GERMAN WAY ,True,
+THEA 0850 - INTRODUCTION TO SHAKESPEARE ,False,
+BIOL 21200 - The Social Impact Of The Biological Sciences ,False,
+BIOSC 1850 - MICROBIOLOGY ,False,
+ADMJ 1220 - DEVIANCE AND THE LAW ,False,
+ENGR 1247 - GE3 EXCHANGE: ENGLAND ,False,
+LCTL 0393 - HUNGARIAN 3 ,False,
+ECON 1905 - SPECIAL TOPICS ,False,
+AD 19400 - Cooperative And Professional Work Experience IV ,False,
+PERS 0101 -PERSIAN (FARSI) 1 ,False,
+HPA 0497 - WATER SAFETY INSTRUCTOR ,False,
+ADMJ 1225 - THE JUVENILE JUSTICE PROCESS ,False,
+GREEK 1301 - GREEK AUTHORS 1-WRITING PRACTICUM ,False,
+BUS 1906 - CAREER EXPLORATION INTERNSHIP ,False,
+RUSS 0240 -INTENSIVE FOURTH-YEAR RUSSIAN ,False,
+ARTSC 1525 - STUDY ABROAD: ENGLAND ,False,
+ARTSC 0600 - ESL EDUCATION ,False,
+CEE 2205 - CONSTRCT FINANCE  COST CONTROL ,False,
+MUSIC 0520 - OBOE ,False,
+"ARTSC 1599 - EXCHANGE: UNIVERSITY OF EXETER, UNITED KINGDOM ",False,
+"ANTH 1557 - ARCHAEOLOGY OF RUSSIA, CENTRAL ASIA, AND MONGOLIA ",False,
+ARAB 58700 - Modern Arab Thought ,False,
+STAT 1000 -APPLIED STATISTICAL METHODS ,False,
+MATH 0500 - PROFESSIONAL DEVELOPMENT ,False,
+HAA 0101 - FOUNDATIONS OF ART HISTORY ,False,
+JPNSE 1035 - PRAGMATICS OF JAPANESE ,False,
+BCHM 32200 - Analytical Biochemistry II ,False,
+AT 20300 - Aviation Operations Management ,False,
+PHYS 0111 -INTRODUCTION TO PHYSICS 2 ,False,
+MUSIC 0417 - THEORY 3 ,False,
+FR 0008 - INTENSIVE FRENCH FOR READING 2 ,False,
+AT 54200 - Aviation Fuels And Exhaust Emissions ,False,
+LCTL 0791 - URDU 1 ,False,
+SOC 0436 - SOCIAL ASPECTS OF SEXUALITY ,False,
+HAA 1160 - ROMAN ARCHITECTURE ,False,
+ANSC 62600 - Nutritional Biochemistry And Physiology II ,False,
+PEDC 1002 -TAE KWON DO 1 ,False,
+THEA 1483 - DIRECTED PROJECT DIRECTING/PERF ,False,
+ARTSC 1002 - INTERNATIONAL STUDIES - CUBA ,False,
+SA 0120 - PAINTING STUDIO 1 ,False,
+PS 1327 - POLITICS OF REVOLUTION ,False,
+ANTH 31200 - The Archaeology Of Ancient Egypt And The Near East ,False,
+HIST 1080 - EMPIRES AND THE ENVIRONMENT IN WORLD HISTORY ,False,
+ADMJ 1235 - ORGANIZED CRIME ,False,
+CHIN 1088 -NEW CHINESE CINEMA ,False,
+CSD 1233 - INTRODUCTION TO RESEARCH ,False,
+HPA 1998 - DIRECTED STUDY ,False,
+"ARTSC 1810 - EXCHANGE: SOPHIA UNIVERSITY, JAPAN ",False,
+ENGR 1236 - STUDY ABROAD: BRAZIL ,False,
+BIOL 39300 - Preparing For Your Future In Biology ,False,
+GEOL 1336 - ENVIRONMENTAL ISSUES: AIR QUALITY (W) ,False,
+PEDC 0197 -BOOTCAMP FITNESS ,False,
+PEDC 0340 -KETTLE BELL AND CONDITIONING ,False,
+AD 30000 - Life Drawing II ,False,
+CLASS 1740 - SANSKRIT 4 ,False,
+AT 46500 - Transport Aircraft Operations Lecture III ,False,
+MUSIC 0529 - GUITAR ,False,
+BIOL 41600 - Viruses And Viral Disease ,False,
+ANTH 43800 - Field Methods In Biological Anthropology ,False,
+FR 1090 - INTRODUCTION TO TRANSLATION STUDIES ,False,
+BIOL 39600 - Premedical Planning Seminar ,False,
+AGR 11100 - Introduction To Agricultural And Biological Engineering Academic Programs ,False,
+IE 1040 - ENGINEERING ECONOMIC ANALYSIS ,False,
+AD 20500 - Design III ,False,
+PHIL 1670 - PHILOSOPHY OF NEUROSCIENCE ,False,
+NUR 1066 - NURSING CARE OF CLIENTS WITH PSYCHIATRIC MENTAL HEALTH PROBLEMS CLINICAL ,False,
+HIST 1763 - POLITICS OF CONTEMPORARY MIDDLE EAST ,False,
+BIOSC 0391 - ECOLOGY LABORATORY WRITING PRACTICUM ,False,
+HIST 1115 - THE WEST AND THE WORLD ,False,
+ANTH 1537 - BASIC LABORATORY ANALYSIS ,False,
+PEDC 0015 -KAYAK PADDLING ,False,
+PHYS 1900 -INTERNSHIP ,False,
+IE 2097 - FINANCIAL ENGINEERING ,False,
+PHIL 0472 - PHILOSOPHY OF RELIGION/WRITING PRACTICUM ,False,
+ENGR 1704 - THE FRENCH NUCLEAR CYCLE ,False,
+ASTR 56200 - Introduction To High Energy Astrophysics ,False,
+PS 1583 - TOPCS IN INTERNATIONAL RELATIONS ,False,
+AT 36900 - Air Traffic Control ,False,
+HAA 1450 - ART IN THE WEIMAR REPUBLIC ,False,
+ARTSC 1586 - STUDY ABROAD: ZIMBABWE ,False,
+ARTSC 1548 - STUDY ABROAD: LITHUANIA ,False,
+EM 1260 - COGNITIVE PSYCHOLOGY OF DECISION MAKING ,False,
+PS 0600 - POLITICAL THEORY ,False,
+RUSS 0040 -INTERMEDIATE RUSSIAN 2 ,False,
+RUSS 1400 -MORPHOLOGY AND STRUCTURE OF RUSSIAN ,False,
+SA 1504 - DIRECTED STUDY: STUDIO ,False,
+ABE 59000 - Special Problems ,False,
+ABE 49500 - Select Topics In Agricultural And Biological Engineering ,False,
+IE 1076 - TOTAL QUALITY MANAGEMENT ,False,
+HAA 1230 - PAGANS AND CHRISTIANS: THE EARLY MIDDLE AGES ,False,
+PHYS 0310 -FIRST YEAR SEMINAR IN PHYSICS AND ASTRONOMY ,False,
+BUS 0010 - YOUR ACADEMIC AND CAREER SUCCESS ,False,
+LCTL 0732 - TAMIL 2 ,False,
+MATH 0032 - TRIGONOMETRY AND FUNCTIONS ,False,
+IL 1000 - INTRODUCTION TO TEACHING ,False,
+CSD 1230 - INTRODUCTION TO SPEECH LANGUAGE PATHOLOGY ,False,
+GREEK 1416 - ADVANCED READINGS IN GREEK HISTORIANS ,False,
+MUSIC 0672 - CHAMBER MUSIC ,False,
+"ANTH 1447 - LANGUAGE, CULTURE, AND SOCIETY ",False,
+AGEC 42700 - Advanced Agribusiness Marketing ,False,
+PHIL 1942 - HONORS THESIS 3/MAJORS ,False,
+AT 43500 - Supervised Instructional Experience ,False,
+ENGR 1065 - NANOMANUFACTURING  NANOMATERIALS FOR PHOTOVOLTAICS ,False,
+FR 1085 - WOMEN'S VOICES IN FRENCH LITERATURE ,False,
+NUR 0082C - NURSING MANAGEMENT OF ADULT WITH ACUTE/CHRONIC HEALTH PROBLEMS CLINICAL ,False,
+ARTSC 1530 - STUDY ABROAD: FINLAND ,False,
+HIST 0675 - WITCHES TO WALDEN POND ,False,
+MEMS 1058 - ELECTROMAGNETIC PROPERTIES OF MATERIALS ,False,
+"GEOL 1055 - ENVIRONMENTAL ETHICS, SCIENCE, AND PUBLIC POLICY ",False,
+GER 1252 - CURRENT LITERATURE AND CULTURE ,False,
+AD 10600 - Design II ,False,
+ASL 1800 - INTRODUCTION TO ASL-ENGLISH INTERPRETING ,False,
+CSD 1905 - SOCIAL AND HEALTH ISSUES IN EAST AFRICA ,False,
+HAA 1020 - MUSEUM STUDIES EXHIBITION SEMINAR ,False,
+SLAV 1865 -THE YEAR COMMUNISM CRUMBLED ,False,
+SOC 1414 - SPECIAL TOPICS ,False,
+HIM 1482 - LEGAL ASPECTS OF HEALTH CARE ,False,
+PHIL 1060 - HELLENISTIC PHILOSOPHY ,False,
+HRS 1425 - GENOMICS AND PERSONALIZED CARE ,False,
+SA 1430 - DRAWING STUDIO: PERSPECTIVE ,False,
+PEDC 0207 -PILATES ,False,
+GER 1240 - 20TH CENTURY LITERATURE AND CULTURE ,False,
+SPAN 1400 -SURVEY LATIN AMERICAN LITERATURE ,False,
+ARTSC 1571 - STUDY ABROAD: SWITZERLAND ,False,
+CHEM 1260 - INTERMEDIATE ANALYTICAL CHEMISTRY ,False,
+BIOL 44215 - Multidisciplinary Design Of Systems And Devices For Physiology Measurements ,False,
+HPS 1702 - JR/SR SEMINAR FOR HPS MAJORS ,False,
+BCHM 29000 - Experimental Design Seminar ,False,
+HAA 1103 - RELIGIONS OF ANCIENT EGYPT ,False,
+LING 1878 -ACCELERATED PHONETICS AND PHONEMICS ,False,
+ANTH 50700 - Theory In Sociocultural Anthropology ,False,
+CEE 1610 - ENGINEERING AND SUSTAINABLE DEVELOPMENT ,False,
+ANTH 1525 - EASTERN NORTH AMERICAN ARCHEOLOGY ,False,
+LCTL 0752 - THAI 2 ,False,
+ELI 0063 - READING LEVEL 6 ,False,
+GREEK 1300 - GREEK AUTHORS 1 ,False,
+AD 36900 - Lithographic Printmaking ,False,
+SOC 0474 - SOCIETY AND THE LAW ,False,
+"HAA 1533 - THOMMAS JEFFERSON, ARCHITECT ",False,
+PS 1311 - WESTERN EUROPEAN GOVERNMENT AND POLITICS ,False,
+HAA 0011 - INTRODUCTION TO ART/WRITING PRACTICUM ,False,
+"FR 0012 - FRENCH KISS: LOVE, SEX, FRANCE ",False,
+AAE 55000 - Multidisciplinary Design Optimization ,True,
+ANTH 23500 - The Great Apes ,False,
+BIOL 44100 - Biology Senior Seminar In Genetics ,False,
+ELI 0044 - WRITING LEVEL 4 ,False,
+MATH 0126 - CALCULUS FOR BUSINESS 2 ,False,
+SA 1270 - DIGITAL STUDIO: IMAGING ,False,
+ANSC 37000 - Livestock Evaluation ,False,
+ASM 49100 - Special Topics ,False,
+NUR 2010 - HEALTH PROMO/DISEASE PRVNTN ,False,
+ECON 0900 - ECONOMICS: INTRODUCTION TO THE FIELD MAJORS ,False,
+ANTH 1520 - SEDIMENTOLOGY AND STRATIGRAPHY ,False,
+ENGR 1633 - MINERALS INDUSTRY RISK MANAGEMENT ,False,
+SPAN 1321 -BUSINESS SPANISH 1 ,False,
+AT 39300 - Industrial Practice III ,False,
+ABE 48500 - Agricultural Engineering Project Management And Design ,False,
+ARAB 10200 - Standard Arabic Level II ,False,
+PSYED 1002 - DEVELOPMENT: CONCEPTION THROUGH EARLY CHILDHOOD ,False,
+PSYED 1198 - DIRECTED STUDY ,False,
+COE 0447 - COMPUTER ORGANIZATION AND ASSEMBLY LANGUAGE ,False,
+NUR 1281 - FOUNDATIONS OF NURSING PRACTICE 1 ,False,
+BIOL 58210 - Ecological Statistics ,False,
+PERS 0102 -PERSIAN (FARSI) 2 ,False,
+ANSC 18100 - Orientation To Animal Sciences ,False,
+PS 1531 - NATIONAL SECURITY POLICY ,False,
+ASAM 24000 - Introduction To Asian American Studies ,False,
+CS 0004 - INTRODUCTION TO COMPUTER PROGRAMMING-BASIC ,False,
+CHEM 0755 - UHC Organic Chemistry Lab: Research Exploration ,False,
+BUS 1970 - STUDY ABROAD: ISRAEL ,False,
+ECE 0142 - COMPUTER ORGANIZATION ,False,
+AD 64000 - Special Topics In Interior Design ,False,
+THEA 0880 - THEATRICAL PRODUCTION ,False,
+BIOL 65300 - Advanced Evolution Discussion ,False,
+CHE 1533 - CONTROLLED DRUG DELIVERY ,False,
+NUR 0067 - NURSING RESEARCH: AN INTRODUCTION TO CRITICAL APPRAISAL AND EVIDENCEBASED PRACTICE ,False,
+ITAL 0011 - ELEMN ITALIAN 1: PITT IN ITALY ,False,
+PSY 1902 - DIRECTED INDIVIDUAL READING ,False,
+AGR 12500 - Introduction To Plant Science ,False,
+AD 61400 - Graduate Installation And Critique ,False,
+AGEC 57300 - International Business Analysis ,False,
+ECON 1500 - INTERMEDIATE INTERNATIONAL TRADE ,False,
+ARTSC 1818 - EXCHANGE: KOBE UNIVERSITY JAPAN ,False,
+FR 0540 - WORLD FILM HISTORY ,False,
+AT 10900 - Unmanned Aerial Systems Design And Construction ,False,
+AD 60600 - Problems In Visual Design ,False,
+AGEC 29600 - Selected Topics In Agricultural Economics ,False,
+ABE 33000 - Design Of Machine Components ,False,
+BIOL 69600 - Seminar ,False,
+HIST 0712 - A GLOBAL HISTORY OF TERRORISM ,False,
+HIST 1766 - MODERN ISRAEL AND PALESTINE ,False,
+PHIL 0012 - CONCEPTS HUMAN NATURE/WRITING PRACTICUM ,False,
+AMST 69500 - American Studies Service Learning/Internship ,False,
+CEE 0085 - SOPHOMORE SEMINAR ,False,
+CLASS 1144 - GREEK AND ROMAN LYRIC POETRY ,False,
+HPS 1670 - PHILOSOPHY OF NEUROSCIENCE ,False,
+GREEK 0220 - INTERMEDIATE GREEK: VERSE ,False,
+"PSY 1237 - NICOTINE, TOBACCO, AND HEALTH ",False,
+HIST 0752 - EMPIRES OF THE STEPPE: EURASIA FROM THE MONGOLS TO THE SOVIET UNION ,False,
+ARAB 20100 - Standard Arabic Level III ,False,
+THEA 1401 - BUSINESS MANAGEMENT ,False,
+AAE 20000 - Undergraduate Sophomore Seminar ,False,
+AD 13000 - Interior Design Communication ,False,
+AT 30800 - Aircraft Materials Processes ,False,
+ECON 1030 - INTELLCL FOUNDTNS OF CAPITALISM ,False,
+CHIN 1084 -MASTERPIECES OF CHINESE LITERATURE: MODERN ,False,
+BIOSC 1820 - METABOLIC PATHWAYS AND REGULATION ,False,
+HRS 1095 - COMMUNITY CONNECTOR COURSE ,False,
+PS 1509 - CONFLICT AND WAR THEORY ,False,
+AT 48100 - Aviation Safety Problems ,False,
+ANSC 39300 - Animal Industry Travel Course ,False,
+HAA 1908 - INDEPENDENT PROJECT ,False,
+PORT 1010 - PORTUGUESE FOR SPANISH SPEAKERS 1 ,False,
+AD 19000 - Special Topics In Art And Design ,False,
+JPNSE 1028 - READING JAPANESE 1 ,False,
+AD 31400 - Experimental Drawing ,False,
+JPNSE 0081 - EAST ASIA IN THE WORLD ,False,
+SPAN 0102 -ELEMENTARY SPANISH 2 ,False,
+ENGR 1093 - CMP SCI COOPERATIVE PROGRAM ,False,
+AAE 30100 - Signal Analysis For Aerospace Engineering ,False,
+MATH 0413 - INTRO THEORETICAL MATHEMATICS ,False,
+"HIST 1768 - CHRISTIANS, MUSLIMS, JEWS IN THE MIDDLE AGES: CONNECTION AND CONFLICT ",False,
+BIOL 44208 - DNA Sequencing Laboratory ,False,
+CHEM 1281 - INSTRUMENTAL ANAL WRITING PRACT ,False,
+CS 0699 - SPECIAL TOPICS IN COMPUTER SCIENCE ,False,
+BIOL 36700 - Principles Of Development ,False,
+MUSIC 1725 - JAZZ AND PROTEST ,False,
+RUSS 1307 -CHEKHOV ,False,
+ECON 1630 - ECONOMIC DEVELOPMENT OF CHINA ,False,
+SOC 1486 - WAR  MILITARY IN UNITED STATES ,False,
+PEDC 0362 -TOTAL BODY FUSION ,False,
+AD 43400 - Professional Practice For Visual Communication Designers ,False,
+"ABE 68000 - Bioseparations And Bioprocess Engineering:Principles, Practice And Economics ",False,
+AD 53200 - Cognition In Design ,False,
+AT 22300 - Human Factors For Flight Crews ,False,
+SOC 0477 - MEDICAL SOCIOLOGY ,False,
+HIST 1108 - COMPARATIVE EUROPEAN HISTORY ,False,
+CSD 1023 - ANATOMY AND PHYSIOLOGY OF SPEECH ,False,
+HIST 1706 - GLOBAL PHARMACEUTICALS ,False,
+ELI 0055 - GRAMMAR LEVEL 5 ,False,
+"ENGR 1252 - GLOBAL ENGINEERING EDUCATION EXCHANGE: MIDDLE EAST TECHNICAL UNIVERSITY, TURKEY ",False,
+BIOSC 0825 - SPECIAL TOPICS IN BIOLOGY FOR NON-MAJORS ,False,
+ENGR 1259 - ENGINEERING EXCHANGE: YONSEI ,False,
+"HIST 1049 - RETRIBUTION, RECONSTRUCTION, AND RECONCILIATION: POSTWAR EUROPE ",False,
+ANTH 1784 - JAPANESE SOCIETY ,False,
+PEDC 0206 -BODY SCULPTING 1 ,False,
+MATH 1100 - LINEAR PROGRAMMING ,False,
+MATH 0280 - INTRO TO MATRICES  LINEAR ALG ,False,
+CSD 1902 - DIRECTED STUDY ,False,
+AT 32400 - Transport Aircraft Operations Lab II ,False,
+CEE 1209 - LIFE CYCLE ASSESSMENT METHODS AND TOOLS ,False,
+JPNSE 0080 - CITY LIFE AND EAST ASIAN CULTURE ,False,
+PHIL 1500 - SYMBOLIC LOGIC ,False,
+ASL 1905 - UNDERGRADUATE TEACHING ASSISTANT IN AMERICAN SIGN LANGUAGE ,False,
+AT 44100 - Turbojet Flight Engineer Procedures Laboratory II ,False,
+ASTR 56000 - Stellar Evolution ,False,
+AT 36700 - Light Sport Aircraft Glider Instructor ,False,
+AT 42201 - Aerospace Risk Management ,False,
+THEA 1393 - THEATRE AND THE BLACK LIVES MATTER MOVEMENT ,False,
+EM 1182 - CRITICAL CARE MANAGEMENT-WEB ,False,
+HPA 0033 - BALLET 1 ,False,
+AGEC 59500 - Internship ,False,
+EDUC 1011 - CULTURALLY RESPONSIVE PEDAGOGY ,False,
+HIM 1495 - HIM CLINICAL EDUCATION 4 ,False,
+SPAN 1323 -MEDICAL SPANISH ,False,
+LING 0135 -MODERN STANDARD ARABIC 5 ,False,
+PHYS 1378 -INTRODUCTION TO NUCLEAR AND PARTICLE PHYSICS ,False,
+ANSC 49900 - Thesis Research ,False,
+MUSIC 0540 - NON-WESTERN INSTRUMENTS ,False,
+EM 1123 - CARDIOLOGY LAB ,False,
+"BIOL 13200 - Laboratory In Biology II: Development, Structure, And Function Of Organisms ",False,
+ARTSC 1875 - PITT IN THE PACIFIC ELECTIVE 5 ,False,
+THEA 1404 - PERFORMING ,False,
+PEDC 0079 -ICE SKATING ,False,
+CHIN 1040 -LITERARY CHINESE 1 CLASSICAL ,False,
+ENGR 1628 - BRAZIL TODAY ,False,
+BIOSC 1430 - ECOPHYSIOLOGY ,False,
+AD 30200 - Theory And Practice Of Elementary School Art ,False,
+HAA 1919 - DESIGN STUDIO 4 ,False,
+MUSIC 1431 - INSTRUMENTATION ORCHESTRATION ,False,
+ENGR 1060 - SOCIAL ENTREPRENEURSHIP- ENGINEERING FOR HUMANITY ,False,
+PERS 0103 -PERSIAN (FARSI) 3 ,False,
+PSY 0011 - INTRODUCTION TO THE FIELD ,False,
+HIST 1102 - UNITING EUROPE. THE HISTORY OF THE EUROPEAN UNION ,False,
+CEE 2340 - CONCRETE STRUCTURES 2 ,False,
+SLAV 0223 -INTM INTNSV BULGARIAN/BULGARIA ,False,
+SWE 0104 - SWEDISH 4 ,False,
+NUR 1121C - ADVANCED CLINICAL PROBLEM SOLVING CLINICAL ,False,
+ENGR 1440 - INTRODUCTION TO KOREAN LANGUAGE AND CULTURE ,False,
+ARTSC 0150 - INTRODUCTION TO GLOBAL STUDIES ,False,
+HPA 0042 - JAZZ 2 ,False,
+ANSC 29400 - Exploring International Animal Agriculture ,False,
+PHIL 1380 - BUSINESS ETHICS ,False,
+HIST 1111 - MEDIEVAL HISTORY 2 ,False,
+"BIOL 53800 - Molecular, Cellular, And Developmental Neurobiology ",False,
+CHEM 0710 - UHC GENERAL CHEMISTRY 1 ,False,
+MUSIC 1732 - JAZZ COMPOSITION AND ARRANGING 2 ,False,
+CEE 1233 - CONSTRUCTION DESIGN PROJECT ,False,
+BCHM 27500 - Honors Course - Lower Division ,False,
+MUSIC 1326 - AFRICAN-AMERICAN MUSIC IN U.S. ,False,
+COE 1161 - EMBEDDED COMPUTER SYS DESIGN 2 ,False,
+STAT 1632 -INTERMEDIATE MATHEMATICAL STATISTICAL ,False,
+PHIL 0850 - PHILOSOPHY AND LIBERAL DEMOCRACY ,False,
+ANTH 69800 - Research MS Thesis ,False,
+BIOL 20100 - Human Anatomy And Physiology ,False,
+AT 20802 - Aircraft Materials ,False,
+HIM 1406 - DATA MANAGEMENT AND ANALYTICS FOR HIM PROFESSIONALS ,False,
+JPNSE 1999 - CAPSTONE PROJECT ,False,
+ELI 0032 - SPEAKING LEVEL 3 ,False,
+HAA 1602 - SPECIAL TOPICS-ASIAN ,False,
+"CHEM 1620 - ATOMS, MOLECULES AND MATERIALS ",False,
+IRISH 0102 - IRISH (GAEILGE) 2 ,False,
+HPA 1012 - APPLIED HUMAN ANATOMY LAB ,False,
+CHEM 1710 - UNDERGRADUATE RESEARCH ,False,
+CEE 1522 - FATE AND TRANSPORT IN ENVIRONMENTAL ENGINEERING ,False,
+ENGR 1090 - ENGINEERING COOPERATIVE PROGRAM ,False,
+"AT 20200 - Aerospace Vehicle Systems Design, Analysis And Operations ",False,
+MATH 1290 - TOPICS IN GEOMETRY ,False,
+MUSIC 0115 - THE ALEXANDER TECHNIQUE ,False,
+BIOL 54100 - Molecular Genetics Of Bacteria ,False,
+BMS 23400 - Clinical Physiology For Veterinary Technicians ,False,
+HAA 0502 - SPECIAL TOPICS: LATIN AMERICAN ART ,False,
+ENGR 1231 - STUDY ABROAD: TANZANIA ,False,
+HPS 1612 - PHIL OF 20TH CENTURY PHYSICS ,False,
+HIST 1060 - THE GLOBAL HISTORY OF PIRACY ,False,
+PEDC 1240 -AEROBICS FOR INSTRUCTORS ,False,
+BCHM 69900 - Research PhD Thesis ,False,
+CLASS 1908 - DIRECTED WRITING FOR MAJORS ,False,
+AGRY 50500 - Forage Management ,False,
+AGEC 59600 - Seminars In Current Issues In Agricultural Economics ,False,
+GEOL 0800 - GEOLOGY ,False,
+LCTL 0231 - DANISH 1 ,False,
+GEOL 1960 - FIELD CAMP ,False,
+ANSC 39000 - Animal Sciences Internship ,False,
+HPA 1172 - GROUP FITNESS INSTRUCTOR ,False,
+AGEC 41100 - Farm Management ,False,
+CSD 1024 - ANATOMY AND PHYSIOLOGY OF HEARING ,False,
+LCTL 0794 - URDU 4 ,False,
+PEDC 0023 -WEIGHT TRAINING ,False,
+ABE 30800 - Heat And Mass Transfer In Food And Biological Systems ,False,
+AAS 39200 - Caribbean History And Culture ,False,
+ADMJ 0500 - INTRODUCTION TO ADMINISTRATION OF JUSTICE ,False,
+ARTSC 1695 - PITT IN AMSTERDAM ,False,
+PEDC 0065 -VOLLEYBALL ,False,
+ENGR 1281 - CLEAN ENERGY GRID ENGINEERING: SCANDINAVIA UG ,False,
+CHE 1097 - SPECIAL PROJECT ,False,
+BIOL 13800 - Information And Communication Skills ,False,
+MUSIC 1360 - ROMANI / GYPSY MUSIC ,False,
+PSY 1155 - PSYCHOLOGY OF SMALL GROUPS ,False,
+CEE 1515 - WASTEWATER COLLECTION AND TREATMENT PLANT DESIGN ,False,
+STAT 1902 -DIRECTED STUDY ,False,
+PSY 1320 - LANGUAGE DEVELOPMENT ,False,
+ARTSC 1553 - STUDY ABROAD: NEW ZEALAND ,False,
+CLASS 1650 - WARFARE: ANCIENT MEDITERRANEAN ,False,
+EM 1179 - HEALTH CARE MANAGEMENT - WEB ,False,
+"ARTSC 1845 - EXCHANGE: UNIVERSITY DE MONTEVIDEO, URUGUAY ",False,
+PEDC 0162 -DANCE BASICS ,False,
+ANTH 1755 - URBAN ANTHROPOLOGY ,False,
+IE 1108 - HEALTH SYSTEMS ENGINEERING ,False,
+NUR 0092 - NURSING MANAGEMENT OF ADULT WITH ACUTE/CHRONIC HEALTH PROBLEMS CLINICAL ,False,
+BIOL 49800 - Biology Teaching ,False,
+BME 30500 - Bioinstrumentation Circuit And Measurement Principles ,False,
+AD 32200 - Computer Modeling And Animation ,False,
+HAA 1805 - EARLY FRENCH FILM ,False,
+AGRY 12500 - Environmental Science And Conservation ,False,
+ANTH 1524 - CHINESE ARCHAEOLOGY ,False,
+BIOL 46600 - Developmental Biology ,False,
+PS 1231 - POLITICAL PARTIES AND ELECTIONS ,False,
+SWE 0101 - SWEDISH 1 ,False,
+JPNSE 1045 - LANGUAGE OF JAPANESE AESTHETICS ,False,
+AD 63500 - Advanced Materials And Processes ,False,
+ANTH 37700 - Anthropology Of Hunter-Gatherer Societies ,False,
+AGEC 51600 - Mathematical Tools For Agricultural And Applied Economics ,True,
+CS 1645 - INTRODUCTION TO HIGH PERFORMANCE COMPUTING SYSTEMS ,False,
+AGEC 61400 - Advanced Agricultural Production Economics ,False,
+HAA 1820 - DOCUMENTARY FILM ,False,
+ABE 69400 - Graduate Research Training ,False,
+NUR 0081 - FOUNDATIONS OF NURSING PRACTICE 2 ,False,
+AGRY 43100 - Atmospheric Thermodynamics ,False,
+ARTSC 1534 - STUDY ABROAD: HONG KONG ,False,
+BIOSC 1581 - BIOCHEMISTRY SEMINAR WRITING PRACTICUM ,False,
+HAA 0510 - PITTSBURGH ARCHITEC/URBANISM ,False,
+LCTL 0824 - WELSH 4 ,False,
+ANSC 53600 - The Digestive System In Health And Disease ,False,
+AAE 20400 - Aeromechanics II ,False,
+HIST 1790 - MEDITERRANEAN WORLD ,False,
+PHIL 0441 - MINDS AND MACHINES/RECITATION ,False,
+PHIL 1540 - COMPUTABILITY THEORY ,False,
+ELI 0035 - GRAMMAR LEVEL 3 ,False,
+AAE 64200 - Graduate Professional Practice ,False,
+ITAL 1905 - INTERNSHIP IN ITALIAN ,False,
+PTSEM 0001 - CROSS-REGISTRATION ,False,
+BAND 11700 - Concert Band ,False,
+CHEM 1430 - PHYSICAL CHEMISTRY LABORATORY 1 ,False,
+BIOSC 1310 - WETLAND ECOLOGY AND MANAGEMENT ,False,
+BMS 80600 - Clinical Anatomy Of Exotic Pets ,False,
+PSYED 1036 - DEVELOPMNTL MEANING CULTL DISTN ,False,
+ENGR 1219 - STUDY ABROAD: ECUADOR ,False,
+ENGR 1228 - EXCHANGE URUGUAY-UNIVERSITY OF MONTEVIDEO ,False,
+GEOL 1330 - SUSTAINABILITY FLASH LAB ,False,
+PSY 0105 - INTRODUCTION TO SOCIAL PSYCHOLOGY ,False,
+IE 1302 - ENGINEERING FOR PROCESS SAFETY ,False,
+ARTSC 1710IS - PITT IN SCOTLAND - IS ,False,
+PERS 1901 -INDEPENDENT STUDY ,False,
+ABE 49800 - Undergraduate Research In Agricultural And Biological Engineering ,False,
+AD 51200 - Interaction Design Studies ,False,
+PS 1317 - POLITICS OF THE EUROPEAN UNION ,False,
+AAS 57400 - Research Methods In African American Studies ,False,
+COE 1170 - SPECIAL TOPICS: COMPUTER ,False,
+BME 58300 - Biomaterials ,False,
+JPNSE 1023 - ASPECTS OF THE JAPANESE LANGUAGE ,False,
+CEE 2401 - OPEN CHANNEL HYDRAULICS ,False,
+ASM 49000 - Special Problems ,False,
+JS 1253 - INTRODUCTION TO HOLOCAUST LITERATURE ,False,
+IL 0210 - COLLEGE READING  STUDY SKILLS ,False,
+GEOL 1015 - GEOLOGY COLLOQUIUM ,False,
+AT 34300 - Aircraft Pulse And Microwave Systems ,False,
+AD 60300 - Theory In Art Seminar ,False,
+BIOL 23000 - Biology Of The Living Cell ,False,
+CEE 2341 - STEEL STRUCTURES 2 ,False,
+HIST 1760 - JEWS AND JUDAISM IN THE MEDIEVAL WORLD ,False,
+CEE 1221 - CONSTRUCTION COST ENGINEERING ,False,
+HIST 1123 - MODERN BRITAIN ,False,
+IE 1061 - HUMAN FACTORS ENGINEERING ,False,
+FR 1052 - SPECIAL TOPICS IN FRENCH CIVILIZATION ,False,
+"HIST 1109 - FRANCE, SPAIN AND ITALY IN THE 20TH CENTURY ",False,
+ARTSC 1554 - STUDY ABROAD: NORWAY ,False,
+PSY 0505 - INTRODUCTION TO BIOPSYCHOLOGY ,False,
+HIST 1153 - EUROPEAN INTELLECTUAL HISTORY 2 1870-1940 ,False,
+CHIN 1089 -THE WORLD OF CHINA ,False,
+GSWS 1450 - GENDER AND SUSTAINABILITY ,False,
+FR 1053 - GLOBAL FRENCH ,False,
+SOC 1901 - INDEPENDENT STUDY ,False,
+ARTSC 1505 - STUDY ABROAD: ARGENTINA ,False,
+PEDC 0147 -WATER SAFETY INSTRUCTOR ,False,
+PS 1614 - THEORIES OF JUSTICE ,False,
+GER 1504 - EUROPEAN IDENTITY BETWEEN HISTORY AND EUROPEAN UNION CULTURAL POLICY ,False,
+GEOL 1335 - ENVIRONMENTAL ISSUES: AIR QUALITY ,False,
+NUR 1765 - RISK FACTORS AND HEALTH ,False,
+PHYS 1371 -INTRODUCTION TO QUANTUM MECHANICS 2 ,False,
+BCHM 49801 - Head Start To Biochemistry Research ,False,
+PSYED 1080 - PSYCHOLOGY AND THE MEDIA ,False,
+HPA 1211 - ATHLETIC INJURY PREVENTION ,False,
+CHEM 0970 - GENERAL CHEM FOR ENGINEERS 2 ,False,
+ENGR 1270 - STUDY ABROAD: AUSTRALIA ,False,
+NUR 0082 - NURSING MANAGEMENT OF ADULT WITH ACUTE/CHRONIC HEALTH PROBLEMS ,False,
+AGEC 69900 - Research PhD Thesis ,False,
+AAE 53800 - Air Breathing Propulsion ,False,
+AD 69000 - Advanced Problems In Art And Design ,False,
+PEDC 0225 -BUDO ,False,
+MATH 1530 - ADVANCED CALCULUS 1 ,False,
+PETE 1207 -PETROLEUM AND NATURAL GAS PROCESSING ,False,
+BIOL 28700 - Organisms And Populations ,False,
+EM 1152 - ISSUES IN HEALTH CARE ,False,
+ECE 1170 - SPECIAL TOPICS: COMPUTER ,False,
+PHIL 0010 - CONCEPTS OF HUMAN NATURE ,False,
+"ENGR 1627 - CHINA TODAY: INDUSTRY, INNOVATION, EDUCATION ",False,
+BME 55300 - Biomedical Optics ,False,
+JS 1475 - RELIGIOUS DIVERSITY ,False,
+ENGR 0015 - INTRODUCTION TO ENGINEERING ANALYSIS ,False,
+ENGR 1209 - STUDY ABROAD: COSTA RICA ,False,
+GEOL 1515 - ENVIRONMENTAL GEOCHEMISTRY ,False,
+PS 1383 - POLITICS OF CONTEMPORARY MIDDLE EAST ,False,
+EM 1180 - HEALTH CARE MANAGEMENT ,False,
+HIST 1425 - HISTORY OF MEDICINE IN CHINA ,False,
+PSY 1514 - EVOLUTIONARY PSYCHOLOGY ,False,
+BIOSC 1440 - ANIMAL BEHAVIOR ,False,
+RUSS 1900 -RUSSIAN INTERNSHIP ,False,
+LCTL 0563 - NORWEGIAN 3 ,False,
+BMS 23300 - Introduction To Pharmacology For Veterinary Technicians ,False,
+SOC 1903 - DIRECTED RESEARCH ,False,
+JPNSE 1800 - SPECIAL TOPICS ,False,
+"HAA 0303 - LANDSCAPE PAINTING, 1500-1700 ",False,
+"ECE 1773 - POWER GENERATION, OPERATION, AND CONTROL ",False,
+CGS 1901 - INDEPENDENT STUDY ,False,
+MUSIC 1450 - MUSIC PRODUCTION AND RECORDING ,False,
+ABE 65100 - Environmental Informatics ,False,
+"ARTSC 1813 - EXCHANGE: UNIVERSITE LIBRE DE BRUXELLES, BELGIUM ",False,
+ELI 0062 - SPEAKING LEVEL 6 ,False,
+HIST 1157 - HISTORY OF MAPS AND SPATIAL REPRESENTATION ,False,
+LING 0134 -MODERN STANDARD ARABIC 4 ,False,
+LING 1023 -ASPECTS OF THE KOREAN LANGUAGE ,False,
+HPA 0040 - CHOREOGRAPHY ,False,
+ASL 1901 - INDEPENDENT STUDY ,False,
+FR 1905 - INTERNSHIP IN FRENCH ,False,
+ARTSC 1570 - STUDY ABROAD: SWEDEN ,False,
+ANTH 51400 - Anthropological Linguistics ,False,
+CLASS 0037 - MYTH IN ANCIENT WORLD/WRITING PRACTICUM ,False,
+AT 10000 - Introduction To Aviation Technology ,False,
+ENGR 1207 - PITT ENGINEERING AUSTRALIA ET NP ,False,
+JPNSE 0085 - JAPANESE TALES OF THE SUPERNATURAL ,False,
+NUR 1282C - NURSING MANAGEMENT OF ADULT WITH ACUTE/CHRONIC HEALTH PROBLEMS CLINICAL ,False,
+ASM 49400 - Project Planning And Management ,False,
+PHIL 1650 - PHILOSOPHY OF BIOLOGY ,False,
+AGRY 32000 - Genetics ,False,
+HAA 1470 - PHOTGRPHR PHOTGRPHY SINC WWII ,False,
+AD 26700 - Digital Media I: Photography And Digital Imaging ,False,
+HIST 1655 - AMERICAN WORKERS 19TH CENTURY ,False,
+SLAV 0210 -BEGINNING INTENSIVE TURKISH ,False,
+AGRY 49900 - Thesis Research ,False,
+BIOSC 0191 - DISCOVERING LIFE: AN INTRODUCTION TO THE BIOLOGICAL WORLD 2 ,False,
+CEE 1105 - MATERIALS OF CONSTRUCTION ,False,
+AT 33400 - Advanced Transport Aircraft Systems And Procedures Lab ,False,
+NUR 1060C - NURSING CARE OF CLIENTS WITH PSYCHIATRIC MENTAL HEALTH PROBLEMS CLINICAL ,False,
+GER 1204 - GERMAN FOR SOCIAL SCIENTISTS 2 ,False,
+CS 1632 - SOFTWARE QUALITY ASSURANCE ,False,
+AD 33400 - New Media Culture ,False,
+HPA 0244 - DANCE PRODUCTION 2 ,False,
+BAND 11100 - Symphony Orchestra ,False,
+BME 69900 - Research PhD Thesis ,False,
+JPNSE 1057 - JAPANESE CULTURE AND SOCIETY THROUGH CINEMA ,False,
+ITAL 0013 - MODERN AND CONTEMPORARY CULTURE ,False,
+BIOSC 0350 - GENETICS ,False,
+AT 69900 - Research PhD Thesis ,False,
+PSYED 1043 - CHILD AND YOUTH WORK PRACTICE 2 ,False,
+PHYS 1361 -WAVE MOTION AND OPTICS ,False,
+MUSIC 0523 - FRENCH HORN ,False,
+ARTSC 1579 - STUDY ABROAD: AUSTRALIA AND NEW ZEALAND ,False,
+PSY 1580 - LANGUAGE AND THE MIND ,False,
+JS 0014 - ELEMENTARY HEBREW 2 ,False,
+PHYS 1376 -INTRODUCTION TO BIOLOGICAL PHYSICS ,False,
+AFT 23000 - The Evolution Of USAF Air And Space Power I ,False,
+STAT 2131 -APPLIED STATISTICAL METHODS 1 ,False,
+AT 20900 - Civilian Unmanned Aerial Systems ,False,
+COE 0031 - LINEAR CIRCUITS AND SYSTEMS 1 ,False,
+AT 44200 - Turbojet Flight Engine Procedures Laboratory III ,False,
+DSPHL 1010 - DENTAL PHARMACOLOGY ,False,
+"GSWS 1160 - RACE, GENDER, AND CLASS ",False,
+CS 1675 - INTRODUCTION TO MACHINE LEARNING ,False,
+ABE 54500 - Design Of Off-Highway Vehicles ,False,
+JS 1645 - THE HISTORICAL JESUS ,False,
+VIET 0102 - VIETNAMESE 2 ,False,
+JS 1900 - INTERNSHIP ,False,
+HAA 0320 - SPECIAL TOPICS-NORTHERN EUROPEAN ,False,
+HPS 0630 - SCIENCE AND PSEUDOSCIENCE ,False,
+SWE 1901 - INDEPENDENT STUDY ,False,
+AGR 12400 - Introduction To College Of Agriculture Pre Veterinary Medicine Academic Programs ,False,
+HAA 0470 - PHOTOGRAPHY AND ART ,False,
+COE 1898 - ENGINEERING PROJECT ,False,
+CHE 0613 - SYSTEM ENGINEERING 2: PROCESS DESIGN ,True,
+PS 1211 - LEGISLATIVE PROCESS ,False,
+HIST 1062 - HUMAN RIGHTS IN WORLD HISTORY ,False,
+BIOSC 1200 - VERTEBRATE MORPHOLOGY ,False,
+AAE 58500 - Air Transportation Systems ,False,
+NUR 2000 - RESEARCH FOR EVIDENCE-BASED PRACTICE 1 ,False,
+BIOL 45500 - Animal Physiology ,False,
+ARTSC 0020 - LATIN AMERICA AND CARIBBEAN ,False,
+THEA 0115 - THE ALEXANDER TECHNIQUE ,False,
+MATH 0400 - FINITE MATHEMATICS ,False,
+ENGR 0023 - PLUS 3 COSTA RICA ,False,
+BIOSC 1590 - SPECIAL TOPICS IN BIOLOGICAL SCIENCE ,False,
+JPNSE 1056 - JAPANESE LITERATURE AND THE WEST ,False,
+STAT 1152 -INTRODUCTION TO MATHEMATICAL STATISTICS ,False,
+CS 1950 - DIRECTED RESEARCH ,False,
+CS 1652 - DATA COMMUNICATION AND COMPUTER NETWORKS ,False,
+BUS 1982 - STUDY ABROAD: RUSSIA ,False,
+JS 1222 - JEWISH MYSTICISM ,False,
+AT 49401 - Capstone Project Proposal ,False,
+AAE 56800 - Applied Optimal Control And Estimation ,False,
+AGRY 15500 - Introduction To Soil Morphology ,False,
+ENGR 1240 - STUDY ABROAD: ENGLAND ,False,
+PSY 1950 - PSYCHOLOGY SENIOR SEMINAR ,False,
+BCHM 39000 - Professional Development Seminar ,False,
+HAA 1605 - EARLY CHINA: POWER  IDENTITY ,False,
+SA 0140 - SCULPTURE STUDIO 1 ,False,
+FP 0001 - ACADEMIC FOUNDATIONS ,False,
+BTNY 30100 - Introductory Plant Pathology ,False,
+PHYS 1902 -DIRECTED READING ,False,
+"ARTSC 1809 - EXCHANGE: REMIN UNIVERSITY, CHINA ",False,
+CHEM 1830 - SYNTHETIC BIOLOGY ,False,
+BUS 1915 - DIRECTED RESEARCH ,False,
+STVC 0001 -CROSS-REGISTRATION ,False,
+PSY 1471 - MAPPING BRAIN CONNECTIVITY ,False,
+GER 1053 - MAJOR CULTURAL PERIODS 2 ,False,
+ARTSC 1500 - STUDY ABROAD: EL SALVADOR ,False,
+AAE 56100 - Introduction To Convex Optimization ,True,
+AT 32100 - Transport Aircraft Operations Lectures I ,False,
+SLAV 1710 -UNDERGRADUATE TEACHER TRAINING ,False,
+MUSIC 0522 - SAXOPHONE ,False,
+ENGR 1211 - STUDY ABROAD: SWITZERLAND ,False,
+RUSS 0871 -RUSSIAN FILM STALIN TO PUTIN ,False,
+FR 1032 - ADVANCED GRAMMAR AND STYLISTICS ,False,
+AGEC 60200 - Preparation And Procedures For Policy Analysis ,False,
+"ARTSC 1597 - STUDY ABROAD: ARGENTINA, SOUTH AFRICA, VIETNAM ",False,
+LING 1721 -SOCIOLINGUISTICS OF SIGN LANGUAGE ,False,
+BIOL 20600 - Biology For Elementary School Teachers ,False,
+ANTH 39200 - Selected Topics In Anthropology ,False,
+FR 1033 - BUSINESS FRENCH: LE FRANCAIS DES AFFAIRES ,False,
+AAE 62400 - Laminar-Turbulent Transition ,False,
+RUSS 0410 -ADVANCED RUSSIAN 2 ,False,
+AAE 29299 - Professional Practice Extensive Co-Op II ,False,
+BME 60000 - Mentoring For Combined Degree (MD/PhD) Students in BME ,False,
+AGRY 57300 - Molecular Cytogenetics Laboratory ,False,
+NUR 1120C - ADVANCED NURSING MANAGEMENT OF THE ADULT WITH ACUTE/COMPLEX HEALTH PROBLEMS CLINICAL ,False,
+AT 54000 - Aviation And Aerospace Sustainability ,False,
+BME 38299 - Professional Practice Co-Op II ,False,
+CHIN 0002 -FIRST YEAR CHINESE 2 ,False,
+ANTH 1801 - HIMALAYAN BIODIVERSITY ,False,
+NUTR 1605 - PRINCIPLES OF NUTRITION EDUCATION AND COUNSELING ,False,
+ARTSC 1846 - EXCHANGE: NATIONAL UNIVERSITY OF SINGAPORE ,False,
+PEDC 0263 -YOGA 2 ,False,
+PHYS 0088 -THE PHYSICS OF ENERGY ,False,
+AAS 37000 - Black Women Rising ,False,
+HAA 1105 - JERUSALEM HISTORY AND IMAGINATION ,False,
+CLASS 1146 - GREEK AND ROMAN HISTORIANS ,False,
+AT 30300 - Aircraft Service ,False,
+SLAV 1901 -INDEPENDENT STUDY ,False,
+AD 40600 - Industrial Design IV ,False,
+CLASS 0020 - ROMAN CIVILIZATION ,False,
+ANTH 20500 - Human Cultural Diversity ,False,
+HIST 1422 - LATE IMPERIAL CHINA ,False,
+AAS 37700 - African American Sexuality And Society ,False,
+HIST 1250 - INDEPENDENT STUDY: CZECH REPUBLIC AND POLAND: IMPACT OF EUROPEAN UNION AND GLOBALIZATION ,False,
+MATH 0031 - ALGEBRA ,False,
+BMS 13500 - Physiology For VT-DL ,False,
+NUR 1127 - COMMUNITY HEALTH NURSING ,False,
+BIOSC 1901 - INDEPENDENT STUDY ,False,
+JS 1065 - BIBLICAL HEBREW ,False,
+SWE 0102 - SWEDISH 2 ,False,
+HIST 1641 - MODERN AMERICAN POLITICS ,False,
+"ARTSC 1817 - EXCHANGE: UNIVERSITY OF KITAKYUSHU, JAPAN ",False,
+"GER 0058 - MUNICH: HISTORY, CULTURE, SOCIETY ",False,
+PETE 1160 -PETROLEUM RESERVOIR ENGINEERING ,False,
+PEDC 0022 -AEROBIC DANCE ,False,
+IE 1089 - ADDITIVE MANUFACTURING ,False,
+ENGR 1010 - COMMUNICTN SKILLS FOR ENGINEERS ,False,
+HRS 1706 - INTRODUCTION TO REHABILITATION ENGINEERING DESIGNS ,False,
+AGR 49600 - Multicultural Professional Experience ,False,
+LATIN 1400 - ADVANCED READINGS IN LATIN EPIC ,False,
+BCHM 69800 - Research MS Thesis ,False,
+PSY 1213 - PSYCHOPATHOLOGY ADVANCED LAB ,False,
+AT 34001 - Aerospace Business Statistics ,False,
+"ANTH 37800 - Archaeology And Cultural Anthropology Of Mesoamerica (Mexico, Belize And Guatemala) ",False,
+ANSC 59500 - Special Topics In Animal Sciences ,False,
+BME 30100 - Bioelectricity ,False,
+IRISH 0106 - IRISH (GAEILGE) 6 ,False,
+ENGR 0240 - NANOTECHNOLOGY AND NANO-ENGINEERING ,False,
+AGRY 58000 - Soil Microbiology ,False,
+"AT 31900 - Unmanned Aerial Systems Applications, Data And Documentation ",False,
+ENGR 1631 - INTRODUCTION TO MINING ENGINEERING ,False,
+HPA 0474 - LIFETIME ACTIVITIES 1 ,False,
+HAA 1025 - HISTORY AND ETHICS OF COLLECTING ,False,
+GEOL 1060 - GEOMORPHOLOGY ,False,
+ANTH 1605 - PRIMATE ANATOMY ,False,
+AD 33000 - Interior Design III ,False,
+IE 1103 - LEAN SIX SIGMA II (BLACK BELT) ,False,
+BIOL 44211 - Laboratory In Anatomy And Physiology ,False,
+AGRY 51000 - Turfgrass Science ,False,
+ARTSC 1871 - PITT IN THE PACIFIC ELECTIVE 1 ,False,
+HAA 0420 - VAN GOGH ,False,
+GEOL 0850 - NATURAL SCIENCES 1 ,False,
+BMS 80200 - Comparative Anatomy II ,False,
+PHIL 1400 - RIGHTS AND HUMAN RIGHTS ,False,
+ENGR 1635 - MINE VENTILATION ENGINEERING ,False,
+CEE 2507 - INDUSTRIAL WASTE MANAGEMENT ,False,
 0,,False
 1,,False
 2,,False
@@ -210,7 +1016,7 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 14,,False
 15,,False
 16,,False
-17,,True
+17,,False
 18,,False
 19,,False
 20,,False
@@ -227,14 +1033,14 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 31,,False
 32,,False
 33,,False
-34,,False
+34,,True
 35,,False
 36,,False
 37,,False
 38,,False
 39,,False
 40,,False
-41,,True
+41,,False
 42,,False
 43,,False
 44,,False
@@ -249,7 +1055,7 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 53,,False
 54,,False
 55,,False
-56,,False
+56,,True
 57,,False
 58,,False
 59,,False
@@ -282,7 +1088,7 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 86,,False
 87,,False
 88,,False
-89,,True
+89,,False
 90,,False
 91,,False
 92,,False
@@ -328,7 +1134,7 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 132,,False
 133,,False
 134,,False
-135,,True
+135,,False
 136,,False
 137,,False
 138,,False
@@ -340,8 +1146,8 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 144,,False
 145,,False
 146,,False
-147,,False
-148,,True
+147,,True
+148,,False
 149,,False
 150,,False
 151,,False
@@ -387,3 +1193,809 @@ NUTR 210 Contemporary Issues in Nutrition (4) ,False,
 191,,False
 192,,False
 193,,False
+194,,False
+195,,False
+196,,False
+197,,False
+198,,False
+199,,False
+200,,False
+201,,True
+202,,False
+203,,False
+204,,False
+205,,False
+206,,False
+207,,False
+208,,False
+209,,False
+210,,False
+211,,False
+212,,False
+213,,False
+214,,False
+215,,False
+216,,False
+217,,False
+218,,False
+219,,False
+220,,False
+221,,False
+222,,False
+223,,False
+224,,False
+225,,True
+226,,False
+227,,False
+228,,False
+229,,False
+230,,False
+231,,False
+232,,False
+233,,False
+234,,False
+235,,False
+236,,False
+237,,False
+238,,False
+239,,False
+240,,False
+241,,False
+242,,False
+243,,False
+244,,False
+245,,False
+246,,False
+247,,False
+248,,False
+249,,False
+250,,False
+251,,False
+252,,False
+253,,False
+254,,False
+255,,False
+256,,False
+257,,False
+258,,False
+259,,False
+260,,False
+261,,False
+262,,False
+263,,False
+264,,False
+265,,False
+266,,False
+267,,False
+268,,False
+269,,False
+270,,False
+271,,False
+272,,False
+273,,False
+274,,False
+275,,False
+276,,False
+277,,False
+278,,False
+279,,False
+280,,False
+281,,False
+282,,False
+283,,False
+284,,False
+285,,False
+286,,False
+287,,False
+288,,False
+289,,False
+290,,False
+291,,False
+292,,False
+293,,False
+294,,False
+295,,False
+296,,False
+297,,False
+298,,False
+299,,False
+300,,False
+301,,False
+302,,False
+303,,False
+304,,False
+305,,False
+306,,False
+307,,False
+308,,False
+309,,False
+310,,False
+311,,False
+312,,False
+313,,False
+314,,False
+315,,False
+316,,False
+317,,False
+318,,False
+319,,False
+320,,False
+321,,False
+322,,False
+323,,False
+324,,False
+325,,False
+326,,False
+327,,False
+328,,False
+329,,False
+330,,False
+331,,False
+332,,False
+333,,False
+334,,False
+335,,False
+336,,False
+337,,False
+338,,False
+339,,False
+340,,False
+341,,False
+342,,False
+343,,False
+344,,False
+345,,True
+346,,False
+347,,False
+348,,False
+349,,False
+350,,False
+351,,False
+352,,False
+353,,False
+354,,False
+355,,False
+356,,False
+357,,False
+358,,False
+359,,False
+360,,False
+361,,False
+362,,False
+363,,False
+364,,False
+365,,False
+366,,False
+367,,False
+368,,False
+369,,False
+370,,False
+371,,False
+372,,False
+373,,False
+374,,False
+375,,False
+376,,False
+377,,False
+378,,False
+379,,False
+380,,False
+381,,False
+382,,False
+383,,False
+384,,False
+385,,False
+386,,False
+387,,False
+388,,False
+389,,False
+390,,False
+391,,False
+392,,False
+393,,False
+394,,False
+395,,False
+396,,False
+397,,False
+398,,False
+399,,False
+400,,False
+401,,False
+402,,False
+403,,False
+404,,False
+405,,False
+406,,False
+407,,False
+408,,False
+409,,False
+410,,False
+411,,False
+412,,False
+413,,False
+414,,False
+415,,False
+416,,False
+417,,False
+418,,False
+419,,False
+420,,False
+421,,False
+422,,False
+423,,False
+424,,False
+425,,False
+426,,False
+427,,False
+428,,False
+429,,False
+430,,False
+431,,False
+432,,False
+433,,False
+434,,False
+435,,False
+436,,False
+437,,False
+438,,False
+439,,False
+440,,False
+441,,False
+442,,False
+443,,False
+444,,False
+445,,False
+446,,False
+447,,False
+448,,False
+449,,False
+450,,False
+451,,False
+452,,False
+453,,False
+454,,False
+455,,False
+456,,False
+457,,False
+458,,False
+459,,False
+460,,False
+461,,False
+462,,False
+463,,False
+464,,False
+465,,False
+466,,False
+467,,False
+468,,False
+469,,False
+470,,False
+471,,False
+472,,False
+473,,False
+474,,False
+475,,False
+476,,False
+477,,False
+478,,False
+479,,False
+480,,False
+481,,False
+482,,False
+483,,False
+484,,False
+485,,False
+486,,False
+487,,True
+488,,False
+489,,False
+490,,False
+491,,False
+492,,False
+493,,False
+494,,False
+495,,False
+496,,False
+497,,False
+498,,False
+499,,False
+500,,False
+501,,False
+502,,False
+503,,False
+504,,False
+505,,False
+506,,False
+507,,False
+508,,False
+509,,False
+510,,False
+511,,False
+512,,False
+513,,False
+514,,False
+515,,False
+516,,False
+517,,False
+518,,False
+519,,False
+520,,False
+521,,False
+522,,False
+523,,False
+524,,False
+525,,False
+526,,False
+527,,False
+528,,False
+529,,False
+530,,False
+531,,False
+532,,False
+533,,False
+534,,False
+535,,False
+536,,False
+537,,False
+538,,False
+539,,False
+540,,False
+541,,False
+542,,False
+543,,False
+544,,False
+545,,False
+546,,False
+547,,False
+548,,False
+549,,False
+550,,False
+551,,False
+552,,False
+553,,False
+554,,False
+555,,False
+556,,False
+557,,False
+558,,False
+559,,False
+560,,False
+561,,False
+562,,False
+563,,False
+564,,False
+565,,False
+566,,False
+567,,False
+568,,False
+569,,False
+570,,False
+571,,False
+572,,False
+573,,False
+574,,False
+575,,False
+576,,False
+577,,False
+578,,False
+579,,False
+580,,False
+581,,False
+582,,False
+583,,False
+584,,False
+585,,False
+586,,False
+587,,False
+588,,False
+589,,False
+590,,False
+591,,False
+592,,False
+593,,False
+594,,False
+595,,False
+596,,False
+597,,False
+598,,False
+599,,False
+600,,False
+601,,False
+602,,False
+603,,False
+604,,False
+605,,False
+606,,False
+607,,False
+608,,False
+609,,False
+610,,False
+611,,False
+612,,False
+613,,False
+614,,False
+615,,False
+616,,False
+617,,False
+618,,False
+619,,False
+620,,False
+621,,False
+622,,False
+623,,False
+624,,False
+625,,False
+626,,False
+627,,False
+628,,False
+629,,False
+630,,False
+631,,False
+632,,False
+633,,False
+634,,False
+635,,False
+636,,False
+637,,False
+638,,False
+639,,False
+640,,False
+641,,False
+642,,False
+643,,False
+644,,False
+645,,False
+646,,False
+647,,False
+648,,False
+649,,False
+650,,False
+651,,False
+652,,False
+653,,False
+654,,False
+655,,False
+656,,False
+657,,False
+658,,False
+659,,False
+660,,False
+661,,False
+662,,False
+663,,False
+664,,False
+665,,False
+666,,False
+667,,False
+668,,False
+669,,False
+670,,False
+671,,False
+672,,False
+673,,False
+674,,False
+675,,False
+676,,False
+677,,False
+678,,False
+679,,False
+680,,False
+681,,False
+682,,False
+683,,False
+684,,False
+685,,False
+686,,False
+687,,False
+688,,False
+689,,False
+690,,False
+691,,False
+692,,False
+693,,False
+694,,False
+695,,False
+696,,False
+697,,False
+698,,False
+699,,False
+700,,False
+701,,False
+702,,False
+703,,False
+704,,False
+705,,False
+706,,False
+707,,False
+708,,False
+709,,False
+710,,False
+711,,False
+712,,False
+713,,False
+714,,False
+715,,False
+716,,False
+717,,True
+718,,False
+719,,False
+720,,False
+721,,False
+722,,False
+723,,False
+724,,False
+725,,False
+726,,False
+727,,False
+728,,False
+729,,False
+730,,False
+731,,False
+732,,False
+733,,False
+734,,False
+735,,False
+736,,False
+737,,False
+738,,False
+739,,False
+740,,False
+741,,False
+742,,False
+743,,False
+744,,False
+745,,False
+746,,False
+747,,False
+748,,False
+749,,False
+750,,False
+751,,False
+752,,False
+753,,False
+754,,False
+755,,False
+756,,False
+757,,False
+758,,False
+759,,False
+760,,False
+761,,False
+762,,False
+763,,False
+764,,False
+765,,False
+766,,False
+767,,False
+768,,False
+769,,False
+770,,False
+771,,False
+772,,False
+773,,False
+774,,False
+775,,False
+776,,False
+777,,False
+778,,False
+779,,False
+780,,False
+781,,False
+782,,False
+783,,False
+784,,False
+785,,False
+786,,False
+787,,False
+788,,False
+789,,False
+790,,False
+791,,False
+792,,False
+793,,False
+794,,False
+795,,False
+796,,False
+797,,False
+798,,False
+799,,False
+800,,False
+801,,False
+802,,False
+803,,False
+804,,False
+805,,False
+806,,False
+807,,False
+808,,False
+809,,False
+810,,False
+811,,False
+812,,False
+813,,False
+814,,False
+815,,False
+816,,False
+817,,False
+818,,False
+819,,False
+820,,False
+821,,False
+822,,False
+823,,False
+824,,False
+825,,False
+826,,False
+827,,False
+828,,False
+829,,False
+830,,False
+831,,False
+832,,False
+833,,False
+834,,False
+835,,False
+836,,False
+837,,False
+838,,False
+839,,False
+840,,False
+841,,False
+842,,False
+843,,False
+844,,False
+845,,False
+846,,False
+847,,False
+848,,False
+849,,False
+850,,False
+851,,False
+852,,False
+853,,False
+854,,False
+855,,False
+856,,False
+857,,False
+858,,False
+859,,False
+860,,False
+861,,False
+862,,False
+863,,False
+864,,False
+865,,False
+866,,False
+867,,False
+868,,False
+869,,False
+870,,False
+871,,False
+872,,False
+873,,False
+874,,False
+875,,False
+876,,False
+877,,False
+878,,False
+879,,False
+880,,False
+881,,False
+882,,False
+883,,False
+884,,True
+885,,False
+886,,False
+887,,False
+888,,False
+889,,False
+890,,False
+891,,False
+892,,False
+893,,False
+894,,False
+895,,False
+896,,False
+897,,False
+898,,False
+899,,False
+900,,False
+901,,False
+902,,False
+903,,False
+904,,False
+905,,False
+906,,False
+907,,False
+908,,False
+909,,False
+910,,False
+911,,False
+912,,False
+913,,False
+914,,False
+915,,False
+916,,False
+917,,False
+918,,False
+919,,False
+920,,True
+921,,False
+922,,False
+923,,False
+924,,False
+925,,False
+926,,False
+927,,False
+928,,False
+929,,False
+930,,False
+931,,False
+932,,False
+933,,False
+934,,False
+935,,False
+936,,False
+937,,False
+938,,False
+939,,False
+940,,False
+941,,False
+942,,False
+943,,False
+944,,False
+945,,False
+946,,False
+947,,False
+948,,False
+949,,False
+950,,False
+951,,False
+952,,False
+953,,False
+954,,False
+955,,False
+956,,False
+957,,False
+958,,False
+959,,False
+960,,False
+961,,False
+962,,False
+963,,False
+964,,False
+965,,False
+966,,False
+967,,False
+968,,False
+969,,False
+970,,False
+971,,False
+972,,False
+973,,False
+974,,False
+975,,False
+976,,False
+977,,False
+978,,False
+979,,False
+980,,False
+981,,False
+982,,False
+983,,False
+984,,False
+985,,False
+986,,False
+987,,False
+988,,False
+989,,False
+990,,False
+991,,False
+992,,False
+993,,False
+994,,False
+995,,False
+996,,False
+997,,False
+998,,False
+999,,False
