@@ -1,18 +1,18 @@
 #import csv
 #import os
-import numpy as np
 #import sys
-import pandas as pd
-from nltk.stem.porter import *
-from nltk.tokenize import word_tokenize
 #from nltk.corpus import stopwords
-from pycm import ConfusionMatrix
 #import matplotlib.pyplot as plt
 #import pyfpgrowth
 #from pyspark.ml.fpm import FPGrowth
+#from sklearn.feature_extraction.text import TfidfTransformer
+import numpy as np
+import pandas as pd
+from nltk.stem.porter import *
+from nltk.tokenize import word_tokenize
+from pycm import ConfusionMatrix
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
-#from sklearn.feature_extraction.text import TfidfTransformer
 
 
 #Convert vectorized variable into csv output
