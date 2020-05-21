@@ -8,7 +8,6 @@ pandas
 pycm
 pydotplus
 pyfpgrowth
-pyspark
 seaborn
 sklearn
 IPython
