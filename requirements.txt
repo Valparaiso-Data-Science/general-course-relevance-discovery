@@ -1,0 +1,14 @@
+pandas
+graphviz
+lxml
+matplotlib
+nltk
+numpy
+pandas
+pycm
+pydotplus
+pyfpgrowth
+pyspark
+seaborn
+sklearn
+IPython
