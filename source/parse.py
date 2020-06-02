@@ -38,6 +38,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     return (courses_df)
 
 
+#cody said that the wordninja step would be here?
 def recursive(xml, stack):
     #Remove null and blank lines
     if xml.text is not None:
