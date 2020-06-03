@@ -11,3 +11,4 @@ pyfpgrowth
 seaborn
 sklearn
 IPython
+wordninja
