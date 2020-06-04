@@ -43,6 +43,16 @@ def recursive(xml, stack):
     #Remove null and blank lines
     if xml.text is not None:
         if not xml.text.isspace():
+            # we want to split with word ninja here I think
+            #words = xml.text.split(' ')
+            #split_words = wordninja.split(xml.text)
+            #if (len(words) != len(split_words):
+            #   output = split_words[0]
+            #   for i in range(1, len(split_words)):
+            #       output_args = (output, split_words[i])
+            #       output = ' '.join(output_args)
+            #   stack.append(output)
+            #else:
             stack.append(xml)
     #Loop to bottom of a nested xml tag
     for subLevel in xml:
