@@ -3,6 +3,8 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import os
 from lxml import etree
+import wordninja
+
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
     # Get xml (tree) into a list (stack) and find courses (courseID & descriptions)
@@ -44,16 +46,16 @@ def recursive(xml, stack):
     if xml.text is not None:
         if not xml.text.isspace():
             # we want to split with word ninja here I think
-            #words = xml.text.split(' ')
-            #split_words = wordninja.split(xml.text)
-            #if (len(words) != len(split_words):
-            #   output = split_words[0]
-            #   for i in range(1, len(split_words)):
-            #       output_args = (output, split_words[i])
-            #       output = ' '.join(output_args)
-            #   stack.append(output)
-            #else:
-            stack.append(xml)
+            words = xml.text.split(' ')
+            split_words = wordninja.split(xml.text)
+            if len(words) != len(split_words):
+                output = split_words[0]
+                for i in range(1, len(split_words)):
+                    output_args = (output, split_words[i])
+                    output = ' '.join(output_args)
+                stack.append(output)
+            else:
+                stack.append(xml)
     #Loop to bottom of a nested xml tag
     for subLevel in xml:
         recursive(subLevel, stack)
