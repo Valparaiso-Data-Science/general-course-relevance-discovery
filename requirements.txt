@@ -12,3 +12,4 @@ seaborn
 sklearn
 IPython
 wordninja
+pytest
