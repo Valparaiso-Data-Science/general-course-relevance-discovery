@@ -45,10 +45,10 @@ def recursive(xml, stack):
     #Remove null and blank lines
     if xml.text is not None:
         if not xml.text.isspace():
-            if textNeedsToBeSplit(xml.text):
-                stack.append(wnSplitText)
-            else:
-                stack.append(xml.text)
+ #           if textNeedsToBeSplit(xml.text):
+ #               stack.append(xml)
+ #           else:
+            stack.append(xml)
     #Loop to bottom of a nested xml tag
     for subLevel in xml:
         recursive(subLevel, stack)
