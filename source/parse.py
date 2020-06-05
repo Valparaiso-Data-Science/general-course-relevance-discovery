@@ -59,7 +59,7 @@ def textNeedsToBeSplit(text):
     IN: a string
     OUT: a boolean on whether word ninja thinks it'd be a good idea to split it or not
     '''
-    str_split_words = xml.text.split(' ')
+    str_split_words = text.split(' ')
     wn_split_words = wordninja.split(text)
     if len(str_split_words) != len(wn_split_words):
         return True
