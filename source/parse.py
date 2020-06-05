@@ -46,11 +46,13 @@ def recursive(xml, stack):
     if xml.text is not None:
         if not xml.text.isspace():
             # we want to split with word ninja here I think
-            words = xml.text.split(' ')
+            words = xml.text.split(' ') # get words based off of spaces
             split_words = wordninja.split(xml.text)
+            # if the number of words from spaces is different than the
+            # number wordninja thinks there should be
             if len(words) != len(split_words):
                 output = split_words[0]
-                for i in range(1, len(split_words)):
+                for i in range(1, len(split_words)): # I think this is where the current bug is
                     output_args = (output, split_words[i])
                     output = ' '.join(output_args)
                 stack.append(output)
