@@ -69,7 +69,7 @@ def textNeedsToBeSplit(text):
 def wnSplitText(nstext):
     '''
     IN: a non split text string
-    OUT: a split text string
+    OUT: a split text string (via word ninja)
     '''
     wn_split_words = wordninja.split(nstext)
     for word in wn_split_words:
