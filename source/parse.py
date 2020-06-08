@@ -7,6 +7,10 @@ import wordninja
 
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
+    '''
+    IN: the file path, the tag for courses, the tag for descriptions, and the number of tags down the description will be
+    OUT: a dataframe of the courses
+    '''
     # Get xml (tree) into a list (stack) and find courses (courseID & descriptions)
     parser = etree.XMLParser(recover=True)
     tree = ET.parse(filepath, parser=parser)
@@ -39,8 +43,13 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     courses_df = pd.DataFrame({'School': os.path.basename(filepath.replace(".xml", "")), 'CourseID': courseID, 'Descriptions': descriptions})
     return (courses_df)
 
-
+# potential renaming of this function could be 'createStack'?
 def recursive(xml, stack):
+    '''
+    IN: the xml object?
+    OUT: the stack
+    Responsible for creating the 'stack' (the thing that has all of the parsible xml text in it)
+    '''
     #Remove null and blank lines
     if xml.text is not None:
         if not xml.text.isspace():
