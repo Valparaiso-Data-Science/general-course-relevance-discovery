@@ -7,9 +7,5 @@ numpy
 pandas
 pycm
 pydotplus
-pyfpgrowth
 seaborn
-sklearn
-IPython
 wordninja
-pytest
