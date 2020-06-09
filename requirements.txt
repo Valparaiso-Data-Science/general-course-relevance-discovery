@@ -12,3 +12,6 @@ seaborn
 sklearn
 IPython
 wordninja
+pyenchant
+pytest
+spacy
