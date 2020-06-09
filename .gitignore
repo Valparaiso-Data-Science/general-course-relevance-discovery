@@ -4,7 +4,7 @@ bok/bok.xlsx
 bok/bokClean.txt
 bok/BoKCleaning.py
 bok/~$bok.xlsx
-source/__pycache__/*
+__pycache__/
 source/answer.csv
 .idea/
 *.pdf
