@@ -9,6 +9,7 @@ import xml.etree.ElementTree as ET
 
 from punct_split import punct_split
 
+# node trackers for progress print statement
 current_element_num = 0
 total_num_elements = 0
 
