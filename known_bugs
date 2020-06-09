@@ -1,0 +1,1 @@
+* when running pytest in any directory that isn't tests, it will complain and refuse to run - I think this is due to a missing __init__.py
