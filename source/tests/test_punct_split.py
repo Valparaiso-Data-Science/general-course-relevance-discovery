@@ -1,7 +1,7 @@
 import sys
 #hacky way to get around doing things with modules
 sys.path.append("..") #https://stackoverflow.com/questions/8951255/import-script-from-a-parent-directory
-from punct_split import *
+from punct_split import * # this line is the cause of the bug with pytest
 
 # functions:
 # - space_parantheses
