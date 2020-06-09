@@ -8,3 +8,4 @@ source/__pycache__/*
 source/answer.csv
 .idea/
 *.pdf
+.DS_Store
