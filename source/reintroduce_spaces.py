@@ -17,7 +17,7 @@ total_num_elements = 0
 wordninja_split = True
 
 if wordninja_split:
-    split = wordninja.split
+    split = lambda text: " ".join(wordninja.split(text))
 else:
     split = punct_split
 
@@ -49,7 +49,7 @@ def main(argv):
         filename = argv[1]
 
     # read xml file as a tree
-    tree = ET.parse(data_in_path + filename)
+    tree = ET.parse(data_in_path + filename, ET.XMLParser(encoding='utf-8'))
     root = tree.getroot()
 
     # count how many total children and subchildren have information in their text field
