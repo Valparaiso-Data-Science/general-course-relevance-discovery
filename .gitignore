@@ -5,6 +5,7 @@ bok/bokClean.txt
 bok/BoKCleaning.py
 bok/~$bok.xlsx
 __pycache__/
+TRIMMED/
 source/answer.csv
 .idea/
 *.pdf
