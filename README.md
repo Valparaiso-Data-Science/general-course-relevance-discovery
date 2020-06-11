@@ -10,8 +10,8 @@ python getReqs.py
 
 You will also need the 'enchant' c library installed:
 * Linux and BSD users - just use your package manager
-* macOS, so there's no need to get it, just make sure you have homebrew installed
-* Windows users, you're on your own
+* macOS users - getReqs.py takes care of it for you, just make sure you have homebrew installed
+* Windows users - you're on your own
 
 ## Repo Structure
 
