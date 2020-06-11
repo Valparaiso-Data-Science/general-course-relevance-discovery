@@ -4,8 +4,9 @@ This repo is intended to house code that allows for data science topics discover
 # Getting Started
 Make sure that you have python 3 installed and optionally a POSIX compliant shell interpreter (bash or dash will work).
 To install all of the required dependencies, run:
-> python getReqs.py
-
+```
+python getReqs.py
+```
 This is currently only on the 'wordninja' branch, but will be merged into master soon
 
 # Repo Structure
