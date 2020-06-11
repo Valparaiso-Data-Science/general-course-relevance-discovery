@@ -1,4 +1,5 @@
 # general-course-relevance-discovery
+
 This repo is intended to house code that allows for data science topics discovery from university course catalogs
 
 ## Getting Started
@@ -27,3 +28,8 @@ This repo has a number of direcories, each with a function.
 * bok.txt - Edison body of knowledge words that are agreed to describe data science
 * known\_bugs - Known bugs are kept here, instead of ussing issues
 * requirements.txt - Contains all of the python libraries that are needed for this project
+
+## Development Guidelines
+
+* Small commits (easily understood)
+* Branches for new features (as to not disrupt people using master)
