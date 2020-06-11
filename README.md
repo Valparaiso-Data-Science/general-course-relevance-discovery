@@ -8,8 +8,10 @@ To install all of the required dependencies, run:
 python getReqs.py
 ```
 
-You will also need the 'enchant' c library installed, for Linux and BSD users, just use your package manager.
-getReqs.py automatically gets this library for mac users, so there's no need to get it, just make sure you have homebrew installed. And finally for Windows users, you're on your own, because enchant does not have a Windows download from what I have seen.
+You will also need the 'enchant' c library installed:
+* Linux and BSD users - just use your package manager
+* macOS, so there's no need to get it, just make sure you have homebrew installed
+* Windows users, you're on your own
 
 ## Repo Structure
 
