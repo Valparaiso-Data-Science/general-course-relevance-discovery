@@ -62,6 +62,7 @@ def recursive(xml, stack):
         recursive(subLevel, stack)
 
 
+"""Let's not use this – it is a superficial test that would have us split a lot of files that don't need splitting"""
 def textNeedsToBeSplit(text):
     '''
     IN: a string
@@ -74,6 +75,8 @@ def textNeedsToBeSplit(text):
     else:
         return False
 
+
+"""Let's not use this – it is too simple a way to split and it uses the .join method incorrectly"""
 def wnSplitText(nstext):
     '''
     IN: a non split text string
