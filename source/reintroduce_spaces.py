@@ -17,18 +17,16 @@ total_num_elements = 0
 # when we're done implementing it
 wordninja_split = True
 
-if wordninja_split:
-    split = lambda text: " ".join(wordninja.split(text))
-else:
-    split = punct_split
-
 
 def clean_recursively(root):
     """
     At current node, reintroduce spaces into the text. Then proceed to child nodes.
     """
     if root.text is not None:
-        root.text = split(root.text)
+        if wordninja_split:
+            root.text = " ".join(wordninja.split(root.text))
+        else:
+            root.text = punct_split(root.text)
 
         global current_element_num
         current_element_num += 1
