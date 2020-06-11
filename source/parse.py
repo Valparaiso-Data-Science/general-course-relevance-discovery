@@ -57,3 +57,27 @@ def recursive(xml, stack):
     #Loop to bottom of a nested xml tag
     for subLevel in xml:
         recursive(subLevel, stack)
+
+
+def textNeedsToBeSplit(text):
+    '''
+    IN: a string
+    OUT: a boolean on whether word ninja thinks it'd be a good idea to split it or not
+    '''
+    str_split_words = text.split(' ')
+    wn_split_words = wordninja.split(text)
+    if len(str_split_words) != len(wn_split_words):
+        return True
+    else:
+        return False
+
+def wnSplitText(nstext):
+    '''
+    IN: a non split text string
+    OUT: a split text string (via word ninja)
+    '''
+    wn_split_words = wordninja.split(nstext)
+    for word in wn_split_words:
+        stext = ' '.join(word)
+    return stext
+

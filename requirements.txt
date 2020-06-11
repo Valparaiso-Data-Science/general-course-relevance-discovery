@@ -9,3 +9,6 @@ pycm
 pydotplus
 seaborn
 wordninja
+pyenchant
+pytest
+spacy
