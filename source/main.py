@@ -1,8 +1,9 @@
 # files in the current directory
 from parse import parseXML
-from topicModel import plot_10_most_common_words, listofDSCourse
-from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree
+from parse import cleanXML
+#from topicModel import plot_10_most_common_words, listofDSCourse
+#from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
+#from ML import decisionTree,visTree
 
 #libraries
 from sklearn.model_selection import train_test_split
@@ -14,14 +15,20 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+import re
+
 
 topicModel = pd.DataFrame()
-for filename in os.listdir('../fullPDFs/'):
-    print(filename)
-    CSV = parseXML("../fullPDFs/"+filename, 'P', 'P', 1)
-    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    topicModel= pd.concat([topicModel,CSV])
+for filename in os.listdir('../source/TRIMMED'):
+    cleanXML(filename)
 
+for filename in os.listdir('../source/superTrimmedPDFs'):
+    print(filename)
+    CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    #topicModel= pd.concat([topicModel,CSV])
+
+'''
 cleaned_df = newClean(topicModel)
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
@@ -53,4 +60,4 @@ mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
 
 answer_test.append(mlaoutput).to_csv("answer.csv")
 answer_test['Predicted'] = pd.Series(test_set_prediction)
-
+'''

@@ -18,29 +18,65 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     courseID = []
     descriptions = []
     stack = []
-    #Convert xml text into stack list
-    #Probably here: if file is .xml do this, if file is .pkl skip this and set stack equal to that
+    inCD = True
+    match = re.search('superTrimmedPDFs/',filepath)
+    filename = filepath[match.end():]
+    special_colleges = ['Alma', 'Northwestern','Sagu']
+    for college in special_colleges:
+        if re.match(college,filename) is not None:
+            extParse = True
+            break
+        else:
+            extParse = False
+    # Convert xml text into stack list
+    # Probably here: if file is .xml do this, if file is .pkl skip this and set stack equal to that
     for subLevel in text:
         recursive(subLevel, stack)
 
     counter = 0
     for xml in stack:
         if xml.text is not None:
-            #Course ID, Tags of ID and desc, CourseID less than 15 words, description longer than 20, CourseID of only 1 in first element, Description doesnt start with courseID
-            if re.match("[A-Z]{2,5}\s+[0-9]{3,4}[A-Z]{0,1}", xml.text) is not None and \
-                (xml.tag == courseTag) and \
-                (stack[counter + descTagsFromID].tag) == descTag and \
-                len(re.findall(r'\w+', xml.text)) < 15 and \
-                len(re.findall(r'\w+', stack[counter + descTagsFromID].text)) > 6 and \
-                len(re.findall("[A-Z]{2,5}\s+[0-9]{3,4}[A-Z]{0,1}", xml.text)) < 2 and \
-                re.match("^.{0,10}([A-Z]{2,5}\s+[0-9]{3,4}[A-Z]{0,1})", stack[counter + descTagsFromID].text) is None:
+            if counter + descTagsFromID >= len(stack):
+                inCD = False
+            if inCD:
+                # Course ID, Tags of ID and desc, CourseID less than 15 words, description longer than 20, CourseID of only 1 in first element, Description doesnt start with courseID
+                if re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text) is not None and \
+                        (xml.tag == courseTag) and \
+                        (stack[counter + descTagsFromID].tag) == descTag and \
+                        len(re.findall(r'\w+', xml.text)) < 19 and \
+                        len(re.findall(r'\w+', stack[counter + descTagsFromID].text)) > 6 and \
+                        len(re.findall("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text)) < 2 and \
+                        re.match("^.{0,10}([A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1})", stack[counter + descTagsFromID].text) is None:
                     # print("0:", xml.tag, xml.text)
                     # print("1:", stack[counter+1].tag, stack[counter+1].text)
+                    description = stack[counter + descTagsFromID].text
+                    for extTags in range(1,7):
+                        if (counter + descTagsFromID + extTags) < len(stack) and \
+                            (stack[counter + descTagsFromID + extTags].tag) == descTag and \
+                            len(re.findall(r'\w+',stack[counter + descTagsFromID + extTags].text)) >= 6 and \
+                            re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", stack[counter + descTagsFromID + extTags].text) is None:
+                                description += stack[counter + descTagsFromID + extTags].text
+                                if extTags == 6:
+                                    description = stack[counter + descTagsFromID].text
+                        else:
+                            break
                     courseID.append(xml.text)
-                    descriptions.append(stack[counter + descTagsFromID].text)
-        #list Counter
+                    descriptions.append(description)
+                elif re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text) is not None and\
+                    (len(re.findall("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text)) < 2 or (len(re.findall("preq|prereq",xml.text.lower())) >= 1))and\
+                    len(re.findall(r'\w+', xml.text)) >= 15 and\
+                    (xml.tag == courseTag) and \
+                    extParse:
+                        matchID = re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text) 
+                        courseID.append(xml.text[matchID.start():matchID.end()])
+                        descriptions.append(xml.text[matchID.end():])
+                # list Counter
+        #print(counter)
+        #print(stack[counter + descTagsFromID].text)
         counter += 1
-    courses_df = pd.DataFrame({'School': os.path.basename(filepath.replace(".xml", "")), 'CourseID': courseID, 'Descriptions': descriptions})
+
+    courses_df = pd.DataFrame(
+        {'School': os.path.basename(filepath.replace(".xml", "")), 'CourseID': courseID, 'Descriptions': descriptions})
     return (courses_df)
 
 # potential renaming of this function could be 'createStack'?
@@ -81,3 +117,44 @@ def wnSplitText(nstext):
         stext = ' '.join(word)
     return stext
 
+def cleanXML(filename):
+    isFig = False
+    with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
+        with open("../source/superTrimmedPDFs/"+filename.replace("TRIMMED", "SUPERTRIMMED"),
+                  "w", encoding='utf-8') as newfile:
+            newfile.write("<Part>\n")
+            for line in file:
+                # turn file into string
+                text = str(line)
+                # take care of figures
+                if len(re.findall("</Figure>", text)) == 1:
+                    text = ""
+                    isFig = False
+                if isFig:
+                    text = ""
+                if len(re.findall("<Figure>", text)) == 1:
+                    text = text.replace("<Figure>","")
+                    isFig = True
+                # remove Sect tags
+                text = text.replace("</Sect>", "")
+                text = text.replace("<Sect/>", "")
+                text = text.replace("<Sect>", "")
+                # remove Div tags
+                text = text.replace("</Div>", "")
+                text = text.replace("<Div>", "")
+                # remove caption tags
+                text = text.replace("</Caption>", "")
+                # rmove part tags
+                text = text.replace("<Part>","")
+                text = text.replace("</Part>","")
+                # fix p tags
+                text = text.replace("<Span/>","")
+                
+                #text = text.replace("</Figure>", "")  # fix this later!! this creates extra <P> tags in some xmls (but still works??)
+
+                newfile.write(text)
+            newfile.write("</Part>\n")
+
+#with open("/Users/sasha/PycharmProjects/course-catalogs/superTrimmedPDFs/AlmaTEST.xml", "r") as newfile:
+#    for line in newfile:
+#        print(line)
