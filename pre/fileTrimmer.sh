@@ -11,7 +11,7 @@
 #
 #Not tested with non-GNU tools
 
-#Optargs:
+#Optargs: #neither of these have been implemented yet, they will not work
 # -c <catalog>.csv
 # -d <source_xml_directory>/
 
