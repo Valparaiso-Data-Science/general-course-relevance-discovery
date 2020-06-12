@@ -33,3 +33,16 @@ This repo has a number of direcories, each with a function.
 
 * Small commits (easily understood)
 * Branches for new features (as to not disrupt people using master)
+
+Current Branches:
+* master
+* superninja
+
+Historical Branches:
+* nfrankie
+* wordninja
+* frankie
+* unit-tests
+* pdf\_layout\_analysis
+* refactored-code
+* proto
