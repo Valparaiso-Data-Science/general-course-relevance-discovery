@@ -1,0 +1,2 @@
+* refactor parse.py - multiple different things that we could do, it'd be good to start with looking at the regex for courses (make the checks into a function (like 'isACourseID'))
+
