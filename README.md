@@ -10,7 +10,7 @@ python getReqs.py
 ```
 
 You will also need the 'enchant' c library installed:
-* Linux and BSD users - just use your package manager
+* Linux/BSD users - just use your package manager
 * macOS users - getReqs.py takes care of it for you, just make sure you have homebrew installed
 * Windows users - you're on your own
 
@@ -28,6 +28,7 @@ This repo has a number of direcories, each with a function.
 * bok.txt - Edison body of knowledge words that are agreed to describe data science
 * known\_bugs - Known bugs are kept here, instead of ussing issues
 * requirements.txt - Contains all of the python libraries that are needed for this project
+* todo - current todo list for the project
 
 ## Development Guidelines
 
