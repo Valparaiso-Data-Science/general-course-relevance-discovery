@@ -56,7 +56,7 @@ do
 	#the sed command below just prints the stream from "startLine" to "endLine"
 	#the -n is important as well, because if you didn't have it, sed would print out
 	#the entire file and then apply the filters, and that is definitely not what you want
-	sed -n "${startLine},${endLine}p" "$inputDir/$fileName.xml" > "$OUTPUT_DIR/${fileName}TRIMMED.xml" & #overwrites the file in the directory
+	sed -n "${startLine},${endLine}p" "$inputDir/$fileName.xml" > "$OUTPUT_DIR/${fileName}TRIMMED.xml" 2> /dev/null & #overwrites the file in the directory
 done
 wait
 
