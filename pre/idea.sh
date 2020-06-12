@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file="ucat1920.xml" # change to $1
+file="$1"
 
 die(){
 	echo $1 ; exit 1
