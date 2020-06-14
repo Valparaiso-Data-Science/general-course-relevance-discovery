@@ -15,7 +15,7 @@ total_num_elements = 0
 
 # keep this boolean True for now – it applies simple wordninja spacing; we'll make fancy spacing default later,
 # when we're done implementing it
-wordninja_split = True
+wordninja_split = False
 
 
 def clean_recursively(root):

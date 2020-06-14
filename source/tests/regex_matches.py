@@ -40,7 +40,7 @@ def traverse_node(root, pattern, match_stack):
 def main(argv):
 
     patterns = [r"[a-z][A-Z]",          # midword capitals
-                r"\b[A-Za-z'][A-Za-z']{17,}\b"]  # words that are too long (possibly wrongly concatenated during PDF->XML)
+                r"\b[A-Za-z'][A-Za-z']{17,}\b"]  # words that are too long (possibly wrongly spaced during PDF->XML)
 
     target = "../fullPDFs/Carlow.xml"
 
