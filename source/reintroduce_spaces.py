@@ -6,6 +6,7 @@ import sys
 import wordninja
 
 import xml.etree.ElementTree as ET
+from lxml import etree
 
 from punct_split import punct_split
 
@@ -48,7 +49,7 @@ def main(argv):
         filename = argv[1]
 
     # read xml file as a tree
-    tree = ET.parse(data_in_path + filename, ET.XMLParser(encoding='utf-8'))
+    tree = ET.parse(data_in_path + filename, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
     # count how many total children and subchildren have information in their text field
@@ -60,7 +61,6 @@ def main(argv):
 
     if total_num_elements >= 150:
         print("\rProcessed 100.00%% of all XML nodes.")
-
     tree.write(data_out_path + "wordninjaed_" + filename, encoding="utf8")
 
 

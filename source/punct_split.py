@@ -18,7 +18,8 @@ pre_space_punct = {" ", ".", ",", ":", ";", "!", "?", ")", "]", "}", ">"}
 def correct_apostrophe(input_string):
     """
     sometimes, apostrophe is represented as UTF-8 character ’ with ordinal 8217, which is not processed correctly by
-    wordninja; replace every instance of ’ (ordinal 8217) with ' (ordinal 39), which wordninja can handle
+    wordninja;
+    replace every instance of ’ (ordinal 8217) with ' (ordinal 39), which wordninja can handle
     """
 
     return input_string.replace(chr(8217), chr(39))

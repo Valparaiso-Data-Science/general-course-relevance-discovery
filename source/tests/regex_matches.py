@@ -49,8 +49,7 @@ def main(argv):
         target = argv[1]
 
     # read xml file as a tree
-    parser = etree.XMLParser(recover=True)
-    tree = ET.parse(target, parser=parser)
+    tree = ET.parse(target, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
     pattern = re.compile(patterns[1])
