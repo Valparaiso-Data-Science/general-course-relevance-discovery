@@ -4,7 +4,8 @@ import pandas as pd
 import os
 from lxml import etree
 import wordninja
-
+from reintroduce_spaces import main
+from punct_split import punct_split
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
     '''
@@ -60,6 +61,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                                     description = stack[counter + descTagsFromID].text
                         else:
                             break
+                    description = re.sub('^\s+', '', description)
                     courseID.append(xml.text)
                     descriptions.append(description)
                 elif re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text) is not None and\
@@ -112,13 +114,21 @@ def wnSplitText(nstext):
     IN: a non split text string
     OUT: a split text string (via word ninja)
     '''
+    stext=''
     wn_split_words = wordninja.split(nstext)
     for word in wn_split_words:
-        stext = ' '.join(word)
+        stext += ' '+word
     return stext
 
 def cleanXML(filename):
     isFig = False
+    wn_colleges = ['Carlow','Caldwell']
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
     with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
         with open("../source/superTrimmedPDFs/"+filename.replace("TRIMMED", "SUPERTRIMMED"),
                   "w", encoding='utf-8') as newfile:
@@ -149,12 +159,17 @@ def cleanXML(filename):
                 text = text.replace("</Part>","")
                 # fix p tags
                 text = text.replace("<Span/>","")
+                # remove story tags
+                text = text.replace("<Story>","")
+                text = text.replace("</Story>","")
+                if re.match('<P>\n', text) is not None:
+                    text = text.replace('\n', '')
                 
                 #text = text.replace("</Figure>", "")  # fix this later!! this creates extra <P> tags in some xmls (but still works??)
-
+                text = punct_split(text)
                 newfile.write(text)
             newfile.write("</Part>\n")
-
-#with open("/Users/sasha/PycharmProjects/course-catalogs/superTrimmedPDFs/AlmaTEST.xml", "r") as newfile:
-#    for line in newfile:
-#        print(line)
+    if needsWN:
+        main(filename.replace('TRIMMED','SUPERTRIMMED'))
+        os.remove('../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED'))
+    

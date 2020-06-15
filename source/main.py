@@ -2,7 +2,7 @@
 from parse import parseXML
 from parse import cleanXML
 #from topicModel import plot_10_most_common_words, listofDSCourse
-#from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
+from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 #from ML import decisionTree,visTree
 
 #libraries
@@ -26,12 +26,14 @@ for filename in os.listdir('../source/superTrimmedPDFs'):
     print(filename)
     CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
     CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    #topicModel= pd.concat([topicModel,CSV])
+    topicModel= pd.concat([topicModel,CSV])
 
-'''
+
 cleaned_df = newClean(topicModel)
+cleaned_df.to_csv('../courses/AllSchools.csv',encoding="utf-8-sig")
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
+'''
 vect_df = vectorizer(cleaned_df)
 print("\tvect")
 pruned_df = cleanVectorizer(vect_df)
