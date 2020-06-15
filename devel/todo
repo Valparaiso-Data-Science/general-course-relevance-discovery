@@ -1,3 +1,4 @@
 * refactor parse.py - multiple different things that we could do, it'd be good to start with looking at the regex for courses (make the checks into a function (like 'isACourseID'))
 * change the directory 'fullPDFs' into something more accurate, like 'rawXML'
 	- related to above point, move all of our raw data into a folder called 'data/' with 'rawXML/' as a subdirectory. and move bok.txt to data/ aswell. there are only a few lines in total that we would need to change
+* consider adding courses/ to .gitignore?
