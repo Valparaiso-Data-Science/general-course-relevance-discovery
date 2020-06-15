@@ -6,6 +6,7 @@
 import sys
 import re
 import xml.etree.ElementTree as ET
+from lxml import etree
 
 
 total_matches = 0
@@ -48,7 +49,8 @@ def main(argv):
         target = argv[1]
 
     # read xml file as a tree
-    tree = ET.parse(target, ET.XMLParser(encoding='utf-8'))
+    parser = etree.XMLParser(recover=True)
+    tree = ET.parse(target, parser=parser)
     root = tree.getroot()
 
     pattern = re.compile(patterns[1])

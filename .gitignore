@@ -9,3 +9,4 @@ source/answer.csv
 .idea/
 *.pdf
 .DS_Store
+source/garbage.py
