@@ -3,10 +3,7 @@
 """
 
 import sys
-import wordninja
-
 import xml.etree.ElementTree as ET
-from lxml import etree
 
 from punct_split import punct_split
 
@@ -14,20 +11,13 @@ from punct_split import punct_split
 current_element_num = 0
 total_num_elements = 0
 
-# keep this boolean True for now – it applies simple wordninja spacing; we'll make fancy spacing default later,
-# when we're done implementing it
-wordninja_split = False
-
 
 def clean_recursively(root):
     """
     At current node, reintroduce spaces into the text. Then proceed to child nodes.
     """
     if root.text is not None:
-        if wordninja_split:
-            root.text = " ".join(wordninja.split(root.text))
-        else:
-            root.text = punct_split(root.text)
+        root.text = punct_split(root.text)
 
         global current_element_num
         current_element_num += 1
@@ -39,17 +29,15 @@ def clean_recursively(root):
 
 
 def main(argv):
-    data_in_path = "../fullPDFs/"
-    data_out_path = "../fullPDFs/"
 
-    filename = "Carlow.xml"
+    filename = "../fullPDFs/Carlow.xml"
 
     # if user specified another file as input
     if len(argv) > 1:
         filename = argv[1]
 
     # read xml file as a tree
-    tree = ET.parse(data_in_path + filename, ET.XMLParser(encoding="utf-8"))
+    tree = ET.parse(filename, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
     # count how many total children and subchildren have information in their text field
@@ -61,7 +49,7 @@ def main(argv):
 
     if total_num_elements >= 150:
         print("\rProcessed 100.00%% of all XML nodes.")
-    tree.write(data_out_path + "wordninjaed_" + filename, encoding="utf8")
+    tree.write(filename[:filename.rfind(".")] + "_wordninjaed" + filename[filename.rfind("."):], encoding="utf8")
 
 
 if __name__ == "__main__":
