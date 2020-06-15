@@ -16,3 +16,11 @@ This repo has a number of direcories, each with a function.
 * *courses/* - The output csvs that we run machine learning on
 * *fullPDFs/* - The source XML (aka the raw data)
 
+# XMLs with spacing problems
+-2011Cornell <br>
+-Brown <br>
+-Carlow  <br>
+-Caldwell  <br>
+-Denison  <br>
+-Pittsburgh (broken XML, we're currently working on a fix) <br>
+-Youngstown <br>
