@@ -5,7 +5,7 @@ import os
 from lxml import etree
 import wordninja
 from reintroduce_spaces import main
-from punct_split import punct_split
+#from punct_split import punct_split
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
     '''
@@ -166,7 +166,7 @@ def cleanXML(filename):
                     text = text.replace('\n', '')
                 
                 #text = text.replace("</Figure>", "")  # fix this later!! this creates extra <P> tags in some xmls (but still works??)
-                text = punct_split(text)
+                #text = punct_split(text)
                 newfile.write(text)
             newfile.write("</Part>\n")
     if needsWN:
