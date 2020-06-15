@@ -5,7 +5,7 @@ import re
 import enchant
 
 # word tokenizer
-nlp = spacy.load("en")
+nlp = spacy.load("en_core_web_sm")
 
 # spell checker
 spell = enchant.Dict("en_US")
