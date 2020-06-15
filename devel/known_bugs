@@ -1,3 +1,5 @@
 * when running pytest in any directory that isn't tests, it will complain and refuse to run - I think this is due to a missing __init__.py
 	~ pytest complains that there is no module named (in this case) 'punct_split'
-
+* when running on some computers, spacy can't load 'en'
+	~ only seemed to happen on windows, but it also happened on ubuntu 18.04
+	$ fixed when we switch the load command to be 'spacy.load("en_core_web_sm")'
