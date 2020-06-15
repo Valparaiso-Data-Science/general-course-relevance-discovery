@@ -6,8 +6,8 @@ import sys
 import wordninja
 
 import xml.etree.ElementTree as ET
-
-from punct_split import punct_split
+from lxml import etree
+#from punct_split import punct_split
 
 # node trackers for progress print statement
 current_element_num = 0
@@ -40,17 +40,18 @@ def clean_recursively(root):
 
 
 def main(argv):
-    data_in_path = "../fullPDFs/"
-    data_out_path = "../fullPDFs/"
+    data_in_path = "../source/superTrimmedPDFs/"
+    data_out_path = "../source/superTrimmedPDFs/"
 
-    filename = "Carlow.xml"
+    filename = argv
 
     # if user specified another file as input
+    '''
     if len(argv) > 1:
         filename = argv[1]
-
+    '''
     # read xml file as a tree
-    tree = ET.parse(data_in_path + filename, ET.XMLParser(encoding='utf-8'))
+    tree = ET.parse(data_in_path + str(filename), etree.XMLParser(recover=True))
     root = tree.getroot()
 
     # count how many total children and subchildren have information in their text field
