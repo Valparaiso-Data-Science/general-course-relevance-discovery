@@ -61,29 +61,3 @@ def recursive(xml, stack):
     for subLevel in xml:
         recursive(subLevel, stack)
 
-
-"""Let's not use this – it is a superficial test that would have us split a lot of files that don't need splitting"""
-def textNeedsToBeSplit(text):
-    '''
-    IN: a string
-    OUT: a boolean on whether word ninja thinks it'd be a good idea to split it or not
-    '''
-    str_split_words = text.split(' ')
-    wn_split_words = wordninja.split(text)
-    if len(str_split_words) != len(wn_split_words):
-        return True
-    else:
-        return False
-
-
-"""Let's not use this – it is too simple a way to split and it uses the .join method incorrectly"""
-def wnSplitText(nstext):
-    '''
-    IN: a non split text string
-    OUT: a split text string (via word ninja)
-    '''
-    wn_split_words = wordninja.split(nstext)
-    for word in wn_split_words:
-        stext = ' '.join(word)
-    return stext
-
