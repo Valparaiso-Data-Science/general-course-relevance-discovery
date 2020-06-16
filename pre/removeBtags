@@ -1,0 +1,6 @@
+#!/bin/sh
+file=$1
+#tag=$2
+sed -E "s~<(/|)b>~~g" $file
+#sed -E "s~<(/|)${tag}>~~g" $file # way to remove a given tag?
+#grep -E "^<p><b>[A-Z]{2,}(-|\ *)[0-9]{2,}"
