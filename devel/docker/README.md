@@ -7,5 +7,10 @@ Note for the windows people: you will need to have pro, enterprise, or education
 
 Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you could use either the terminal that comes with git, or the command prompt.
 
-
-In this directory,
+'cd' into this directory and run the following commands:
+```
+docker build -t gcrd .
+docker run -it --rm --name gcrd gcrd
+docer exec -it gcrd /bin/bash
+```
+After running those commands, you should be in a terminal session inside of the docker container. Think of it like 'ssh-ing' into a server.

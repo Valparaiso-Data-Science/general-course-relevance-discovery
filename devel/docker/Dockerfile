@@ -1,5 +1,5 @@
 FROM python:3.8.3-slim-buster
-WORKDIR /usr/src/
+WORKDIR /usr/src/app
 RUN apt-get update && \
 apt-get install -y enchant build-essential git \
 git clone https://github.com/Valparaiso-Data-Science/general-course-relevance-discovery && cd general-course-relevance-discovery && python getReqs.py \
