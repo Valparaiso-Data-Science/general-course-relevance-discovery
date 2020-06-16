@@ -3,7 +3,6 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 import os
 from lxml import etree
-import wordninja
 
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
@@ -53,9 +52,6 @@ def recursive(xml, stack):
     #Remove null and blank lines
     if xml.text is not None:
         if not xml.text.isspace():
- #           if textNeedsToBeSplit(xml.text):
- #               stack.append(xml)
- #           else:
             stack.append(xml)
     #Loop to bottom of a nested xml tag
     for subLevel in xml:
