@@ -17,10 +17,9 @@ This repo has a number of direcories, each with a function.
 * *fullPDFs/* - The source XML (aka the raw data)
 
 # XMLs with spacing problems
--2011Cornell <br>
 -Brown <br>
 -Carlow  <br>
 -Caldwell  <br>
 -Denison  <br>
--Pittsburgh (broken XML, we're currently working on a fix) <br>
+-Pittsburgh (broken XML, run correct_ampersands.py on it first and then pass the resulting 'ampersanded' xml to reintroduce_spaces.py) <br>
 -Youngstown <br>
