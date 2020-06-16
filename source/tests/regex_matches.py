@@ -6,8 +6,6 @@
 import sys
 import re
 import xml.etree.ElementTree as ET
-from lxml import etree
-
 
 total_matches = 0
 
