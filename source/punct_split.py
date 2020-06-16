@@ -155,9 +155,9 @@ def semantic_split(input_string):
 
     split_string = wordninja.split(input_string)
 
-    # if at least one word is gained that is not 'a'
+    # if at least one word is gained that is not 'a' or 'o'
     for string in split_string:
-        if (spell.check(string)) and (has_vowels(string) and (string != "a")):
+        if (spell.check(string)) and (has_vowels(string) and (string not in {"a", "o", "A", "O"})):
             word_gain = True
 
     # check if meaningful words gained; if not, return original
