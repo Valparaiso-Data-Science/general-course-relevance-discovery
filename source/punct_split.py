@@ -37,37 +37,17 @@ def space_parantheses(input_string):
             char_list.append(" ")
             char_list.append("(")
 
-        elif (input_string[i] == ")") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append(")")
-            char_list.append(" ")
-
         elif (input_string[i] == "[") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("[")
-
-        elif (input_string[i] == "]") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append("]")
-            char_list.append(" ")
 
         elif (input_string[i] == "{") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("{")
 
-        elif (input_string[i] == "}") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append("}")
-            char_list.append(" ")
-
         elif (input_string[i] == "<") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("<")
-
-        elif (input_string[i] == ">") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append(">")
-            char_list.append(" ")
 
         else:
             char_list.append(input_string[i])
