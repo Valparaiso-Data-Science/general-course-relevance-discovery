@@ -1,13 +1,23 @@
 # How to run this docker file
 
-First you need to make sure that you have docker installed, and you can do that by heading over to their site, they have two guides, one for [windows](https://docs.docker.com/docker-for-windows/install/) and one for [macs](https://docs.docker.com/docker-for-mac/install/).
+First you need to make sure that you have docker installed.
 
-Note for the windows people: you will need to have pro, enterprise, or education edition of windows ten, as well as have hyperv.
+macOS people:
+* Follow the guide [here](https://docs.docker.com/docker-for-mac/install/)
 
-If you are on windows home you can follow the guide [here](https://docs.docker.com/docker-for-windows/install-windows-home/) to get up and running, it will involve a bit more work on your end.
+Linux people:
+* Use your package manager or your distribution's documentation on docker.
 
+Windows pro, enterprise, or education people:
+* Follow the guide [here](https://docs.docker.com/docker-for-windows/install/)
 
-Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you could use either the terminal that comes with git, or the command prompt.
+Windows Home People:
+* Follow the guide [here](https://docs.docker.com/docker-for-windows/install-windows-home/)
+
+It is important to note that Window's home people will need to do more work, because docker on that platform is fairly new.
+
+Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you could use either the terminal that comes with git, the command prompt, or the fancy new [windows terminal](https://github.com/microsoft/terminal/releases/latest).
+
 
 'cd' into this directory and run the following commands:
 ```
