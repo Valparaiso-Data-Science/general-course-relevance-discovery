@@ -29,13 +29,14 @@ def clean_recursively(root):
 
 
 def main(argv):
-
+'''
     filename = "../fullPDFs/Carlow.xml"
 
     # if user specified another file as input
     if len(argv) > 1:
         filename = argv[1]
-
+'''
+    filename = argv
     # read xml file as a tree
     tree = ET.parse(filename, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
