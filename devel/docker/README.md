@@ -4,6 +4,8 @@ First you need to make sure that you have docker installed, and you can do that 
 
 Note for the windows people: you will need to have pro, enterprise, or education edition of windows ten, as well as have hyperv.
 
+If you are on windows home you can follow the guide [here](https://docs.docker.com/docker-for-windows/install-windows-home/) to get up and running, it will involve a bit more work on your end.
+
 
 Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you could use either the terminal that comes with git, or the command prompt.
 
