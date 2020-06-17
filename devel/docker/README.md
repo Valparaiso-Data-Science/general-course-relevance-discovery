@@ -21,3 +21,9 @@ To leave the container, just type:
 exit
 ```
 Like you would if you were leaving ssh.
+
+If you want to run the docker file again, just run:
+```
+docker run -it --rm --name gcrd gcrd /bin/bash
+```
+again, and it will start the container again (you will need to pull any updates on it though, because it does not save any changes that you make inside of the container)
