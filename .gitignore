@@ -8,6 +8,7 @@ __pycache__/
 TRIMMED/
 source/answer.csv
 courses/
+superTrimmedPDFs/
 .idea/
 *.pdf
 *.orig
