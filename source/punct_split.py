@@ -15,6 +15,16 @@ post_space_punct = {"(", "[", "{", "<"}
 pre_space_punct = {" ", ".", ",", ":", ";", "!", "?", ")", "]", "}", ">"}
 
 
+def correct_apostrophe(input_string):
+    """
+    sometimes, apostrophe is represented as UTF-8 character ’ with ordinal 8217, which is not processed correctly by
+    wordninja;
+    replace every instance of ’ (ordinal 8217) with ' (ordinal 39), which wordninja can handle
+    """
+
+    return input_string.replace(chr(8217), chr(39))
+
+
 def space_parantheses(input_string):
     """
     add spaces before and after parentheses (or square, curly, or angle brackets)
@@ -163,7 +173,9 @@ def punct_split(input_string):
     """
 
     # apply all pre-wordninja preprocessing
-    doc = nlp(space_coursecodes(space_punct(space_parantheses(input_string))))
+    pre_ninja = space_coursecodes(space_punct(space_parantheses(correct_apostrophe(input_string))))
+
+    doc = nlp(pre_ninja)
 
     doc_chunks = []
 
@@ -187,12 +199,10 @@ def punct_split(input_string):
                 (doc_chunks[i+1] not in no_space_punct):
             final_string += " "
 
+    # trick to remove extra white space
     final_string_lines = final_string.split("\n")
     for i in range(len(final_string_lines)):
         final_string_lines[i] = " ".join(final_string_lines[i].split())
-
-        # restore possesive apostrophes
-        final_string_lines[i] = final_string_lines[i].replace(" s ", "'s ")
     final_string = "\n".join(final_string_lines)
 
     return final_string
@@ -225,7 +235,8 @@ def main(argv):
         "cluding evaporation, adsorption,grain growth, and coarsening. Phase transformation kinetics, includingnucle" +
         "ation, growth, solidification, spinodal decomposition, and martensitictransformations. Analysis of systems " +
         "with multiple kinetic mechanisms(typical examples include oxidation, crystal growth, and sintering).Prerequ" +
-        "isite: background in basic thermodynamics. Recommended:ENGN 1410 or 2410 or equivalent."]
+        "isite: background in basic thermodynamics. Recommended:ENGN 1410 or 2410 or equivalent.",
+        "poststructuralistsmisusethewordduetoNewton'sthirdlaw"]
 
     for input_string in input_strings:
         processed = punct_split(input_string)

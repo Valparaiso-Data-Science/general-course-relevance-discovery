@@ -7,7 +7,6 @@ import sys
 import re
 import xml.etree.ElementTree as ET
 
-
 total_matches = 0
 
 
@@ -40,7 +39,7 @@ def traverse_node(root, pattern, match_stack):
 def main(argv):
 
     patterns = [r"[a-z][A-Z]",          # midword capitals
-                r"\b[A-Za-z'][A-Za-z']{17,}\b"]  # words that are too long (possibly wrongly concatenated during PDF->XML)
+                r"\b[A-Za-z'][A-Za-z']{17,}\b"]  # words that are too long (possibly wrongly spaced during PDF->XML)
 
     target = "../fullPDFs/Carlow.xml"
 
@@ -48,7 +47,7 @@ def main(argv):
         target = argv[1]
 
     # read xml file as a tree
-    tree = ET.parse(target, ET.XMLParser(encoding='utf-8'))
+    tree = ET.parse(target, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
     pattern = re.compile(patterns[1])

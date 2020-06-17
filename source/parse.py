@@ -114,10 +114,9 @@ def wnSplitText(nstext):
     IN: a non split text string
     OUT: a split text string (via word ninja)
     '''
-    stext=''
     wn_split_words = wordninja.split(nstext)
     for word in wn_split_words:
-        stext += ' '+word
+        stext = ' '.join(word)
     return stext
 
 def cleanXML(filename):
