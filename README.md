@@ -47,7 +47,6 @@ This repo has a number of direcories, each with a function.
 
 Current Branches:
 * master
-* superninja
 
 Historical Branches:
 * nfrankie
@@ -58,3 +57,4 @@ Historical Branches:
 * refactored-code
 * proto
 * docker
+* superninja
