@@ -35,6 +35,7 @@ This repo has a number of direcories, each with a function.
 ## Important Files
 
 * bok.txt - Edison body of knowledge words that are agreed to describe data science
+* Catalogs.csv - csv file that has line numbers where courses begin and end (for use with fileTrimmer.sh)
 * devel/known\_bugs - Known bugs are kept here, instead of ussing issues
 * requirements.txt - Contains all of the python libraries that are needed for this project (generated via 'pipreqs --force' in the project /)
 * devel/todo - current todo list for the project
