@@ -3,7 +3,7 @@ from parse import parseXML
 from parse import cleanXML
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-#from ML import decisionTree,visTree
+from ML import decisionTree,visTree
 
 #libraries
 from sklearn.model_selection import train_test_split
@@ -33,7 +33,6 @@ cleaned_df = newClean(topicModel)
 cleaned_df.to_csv('../courses/AllSchools.csv',encoding="utf-8-sig")
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
-'''
 vect_df = vectorizer(cleaned_df)
 print("\tvect")
 pruned_df = cleanVectorizer(vect_df)
@@ -62,4 +61,3 @@ mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
 
 answer_test.append(mlaoutput).to_csv("answer.csv")
 answer_test['Predicted'] = pd.Series(test_set_prediction)
-'''
