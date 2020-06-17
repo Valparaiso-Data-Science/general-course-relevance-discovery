@@ -3,6 +3,15 @@
 This repo is intended to house code that allows for data science topics discovery from university course catalogs
 
 ## Getting Started
+
+### With Docker (Recommended)
+
+This is the recommended route to take, because all of the dependencies are in the image.
+
+Go into the devel/docker folder and look at the readme and follow the steps there.
+
+### On your personal computer
+
 Make sure that you have python 3 installed and optionally a POSIX compliant shell interpreter (bash or dash will work).
 To install all of the required dependencies, run:
 ```
@@ -29,6 +38,7 @@ This repo has a number of direcories, each with a function.
 * devel/known\_bugs - Known bugs are kept here, instead of ussing issues
 * requirements.txt - Contains all of the python libraries that are needed for this project (generated via 'pipreqs --force' in the project /)
 * devel/todo - current todo list for the project
+* devel/docker/Dockerimage - the docker image for this project
 
 ## Development Guidelines
 
@@ -47,3 +57,4 @@ Historical Branches:
 * pdf\_layout\_analysis
 * refactored-code
 * proto
+* docker
