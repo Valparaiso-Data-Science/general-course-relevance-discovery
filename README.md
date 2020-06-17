@@ -48,7 +48,9 @@ This repo has a number of direcories, each with a function.
 Current Branches:
 * master
 
-Historical Branches:
+Historical Branches: (in order of most recent)
+* superninja
+* docker
 * nfrankie
 * wordninja
 * frankie
@@ -56,5 +58,3 @@ Historical Branches:
 * pdf\_layout\_analysis
 * refactored-code
 * proto
-* docker
-* superninja
