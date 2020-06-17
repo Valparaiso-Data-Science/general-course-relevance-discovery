@@ -69,7 +69,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                     len(re.findall(r'\w+', xml.text)) >= 15 and\
                     (xml.tag == courseTag) and \
                     extParse:
-                        matchID = re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text) 
+                        matchID = re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", xml.text)
                         courseID.append(xml.text[matchID.start():matchID.end()])
                         descriptions.append(xml.text[matchID.end():])
                 # list Counter
@@ -121,6 +121,7 @@ def wnSplitText(nstext):
 
 def cleanXML(filename):
     isFig = False
+    '''
     wn_colleges = ['Carlow','Caldwell']
     for college in wn_colleges:
         if re.match(college,filename) is not None:
@@ -128,6 +129,8 @@ def cleanXML(filename):
             break
         else:
             needsWN = False
+    '''
+    needsWN = False
     with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
         with open("../source/superTrimmedPDFs/"+filename.replace("TRIMMED", "SUPERTRIMMED"),
                   "w", encoding='utf-8') as newfile:
@@ -163,7 +166,7 @@ def cleanXML(filename):
                 text = text.replace("</Story>","")
                 if re.match('<P>\n', text) is not None:
                     text = text.replace('\n', '')
-                
+
                 #text = text.replace("</Figure>", "")  # fix this later!! this creates extra <P> tags in some xmls (but still works??)
                 #text = punct_split(text)
                 newfile.write(text)
@@ -171,4 +174,4 @@ def cleanXML(filename):
     if needsWN:
         main(filename.replace('TRIMMED','SUPERTRIMMED'))
         os.remove('../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED'))
-    
+
