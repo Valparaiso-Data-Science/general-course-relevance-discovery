@@ -19,8 +19,10 @@ import re
 
 
 topicModel = pd.DataFrame()
-
-os.mkdir('../source/superTrimmedPDFs')
+try:
+    os.mkdir('../source/superTrimmedPDFs')
+except:
+    print("../source/superTrimmedPDFs already exists")
 
 for filename in os.listdir('../source/TRIMMED'):
     cleanXML(filename)
