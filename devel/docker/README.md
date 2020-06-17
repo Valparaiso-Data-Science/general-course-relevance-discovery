@@ -10,7 +10,12 @@ Next you need to make sure that you are in this directory on a terminal emulator
 'cd' into this directory and run the following commands:
 ```
 docker build -t gcrd .
-docker run -it --rm --name gcrd gcrd
-docer exec -it gcrd /bin/bash
+docker run -it --name gcrd gcrd /bin/bash
 ```
 After running those commands, you should be in a terminal session inside of the docker container. Think of it like 'ssh-ing' into a server.
+
+To leave the container, just type:
+```
+exit
+```
+Like you would if you were leaving ssh.
