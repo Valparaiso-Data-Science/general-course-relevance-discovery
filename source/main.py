@@ -19,6 +19,9 @@ import re
 
 
 topicModel = pd.DataFrame()
+
+os.mkdir('../source/superTrimmedPDFs')
+
 for filename in os.listdir('../source/TRIMMED'):
     cleanXML(filename)
 
