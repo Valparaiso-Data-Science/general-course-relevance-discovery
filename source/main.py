@@ -23,6 +23,10 @@ try:
     os.mkdir('../source/superTrimmedPDFs')
 except:
     print("../source/superTrimmedPDFs already exists")
+try:
+    os.mkdir('../courses')
+except:
+    print("../courses already exists")
 
 for filename in os.listdir('../source/TRIMMED'):
     cleanXML(filename)
