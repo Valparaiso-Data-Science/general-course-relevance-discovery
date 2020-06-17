@@ -1,7 +1,11 @@
 * refactor parse.py - multiple different things that we could do, it'd be good to start with looking at the regex for courses (make the checks into a function (like 'isACourseID'))
+
 * change the directory 'fullPDFs' into something more accurate, like 'rawXML'
 	- related to above point, move all of our raw data into a folder called 'data/' with 'rawXML/' as a subdirectory. and move bok.txt to data/ aswell. there are only a few lines in total that we would need to change
+
 * consider adding courses/ to .gitignore?
+
 * fix reintroduce spaces? current version in master is an older version, we should revert back to the commit the docker branch is on.
 	- potential command to run is 'git checkout 2a82de52 -- source/reintroduce_spaces.py'
 
+* remove the wordninja stuff out of cleanXML and move it to a different file
