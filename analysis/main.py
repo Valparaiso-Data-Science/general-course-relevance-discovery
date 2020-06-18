@@ -6,22 +6,22 @@ Original file is located at
     https://colab.research.google.com/drive/1CEqUZyxPbLq-CgwS1y-jDlWpMjZrtE28
 #Import Statements"""
 
-import pandas as pd
-import numpy as np
-import nltk
-import spacy
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('averaged_perceptron_tagger')
-import string
-import re
-from re import *
-from nltk.util import ngrams
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.stem import WordNetLemmatizer
-from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+#import pandas as pd
+#import numpy as np
+#import nltk
+#import spacy
+#nltk.download('punkt')
+#nltk.download('stopwords')
+#nltk.download('wordnet')
+#nltk.download('averaged_perceptron_tagger')
+#import string
+#import re
+#from re import *
+#from nltk.util import ngrams
+#from nltk.corpus import stopwords
+#from nltk.tokenize import word_tokenize
+#from nltk.stem import WordNetLemmatizer
+#from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 # mount the drive module for importing data from Google Drive
 #from google.colab import drive
