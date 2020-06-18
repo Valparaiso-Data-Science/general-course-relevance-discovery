@@ -37,37 +37,17 @@ def space_parantheses(input_string):
             char_list.append(" ")
             char_list.append("(")
 
-        elif (input_string[i] == ")") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append(")")
-            char_list.append(" ")
-
         elif (input_string[i] == "[") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("[")
-
-        elif (input_string[i] == "]") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append("]")
-            char_list.append(" ")
 
         elif (input_string[i] == "{") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("{")
 
-        elif (input_string[i] == "}") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append("}")
-            char_list.append(" ")
-
         elif (input_string[i] == "<") and (i != 0) and (input_string[i - 1] != " "):
             char_list.append(" ")
             char_list.append("<")
-
-        elif (input_string[i] == ">") and (i != len(input_string) - 1) \
-                and (input_string[i + 1] not in pre_space_punct):
-            char_list.append(">")
-            char_list.append(" ")
 
         else:
             char_list.append(input_string[i])
@@ -155,9 +135,9 @@ def semantic_split(input_string):
 
     split_string = wordninja.split(input_string)
 
-    # if at least one word is gained that is not 'a'
+    # if at least one word is gained that is not 'a' or 'o'
     for string in split_string:
-        if (spell.check(string)) and (has_vowels(string) and (string != "a")):
+        if (spell.check(string)) and (has_vowels(string) and (string not in {"a", "o", "A", "O"})):
             word_gain = True
 
     # check if meaningful words gained; if not, return original

@@ -1,6 +1,6 @@
 """
-    Simple test that traverses an XML tree and prints text if it contains a specific pattern (e. g. capital letters
-    in the middle of the word)
+    Simple test that traverses an XML tree and prints text that contains words 17 characters and longer, as well as
+    the matches themselves)
 """
 
 import sys
@@ -38,9 +38,6 @@ def traverse_node(root, pattern, match_stack):
 
 def main(argv):
 
-    patterns = [r"[a-z][A-Z]",          # midword capitals
-                r"\b[A-Za-z'][A-Za-z']{17,}\b"]  # words that are too long (possibly wrongly spaced during PDF->XML)
-
     target = "../fullPDFs/Carlow.xml"
 
     if len(argv) > 1:
@@ -50,7 +47,7 @@ def main(argv):
     tree = ET.parse(target, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
-    pattern = re.compile(patterns[1])
+    pattern = re.compile(r"\b[A-Za-z'][A-Za-z']{17,}\b")
 
     match_stack = []
 

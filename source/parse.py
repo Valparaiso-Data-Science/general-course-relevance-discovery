@@ -86,7 +86,7 @@ def recursive(xml, stack):
     '''
     IN: the xml object?
     OUT: the stack
-    Responsible for creating the 'stack' (the thing that has all of the parsible xml text in it)
+    Responsible for creating the 'stack' (the thing that has all of the parsable xml text in it)
     '''
     #Remove null and blank lines
     if xml.text is not None:
