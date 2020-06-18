@@ -7,7 +7,6 @@ Original file is located at
     https://colab.research.google.com/drive/1CEqUZyxPbLq-CgwS1y-jDlWpMjZrtE28
 
 #Import Statements
-"""
 
 import pandas as pd
 import numpy as np
@@ -32,6 +31,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 # path to data directory on my drive
 #data_path = '/content/drive/My Drive/TRIPODS-Student Accessible Files/Sum2020/Difficulty Protocol/Difficulty Protocol Ellie and Sydney/'
+"""
 
 ##Import CSVs as Dataframes
 
