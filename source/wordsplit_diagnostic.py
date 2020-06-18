@@ -11,6 +11,8 @@ import enchant
 import xml.etree.ElementTree as ET
 import numpy as np
 
+from lxml import etree
+
 # home-made
 from punct_split import punct_split, has_vowels
 
@@ -19,14 +21,6 @@ spell = enchant.Dict("en_US")
 
 # load language model into tokenizer
 nlp = spacy.load("en")
-
-total_matches = 0
-total_unsplit = 0
-total_split = 0
-total_word_gain = []
-
-# global toggle for printouts
-verbose = False
 
 
 def split_gain(long_word, return_words=False):
@@ -42,63 +36,79 @@ def split_gain(long_word, return_words=False):
 
     split_words = punct_split(long_word).split(" ")
 
-    if len(split_words) < 2:
-        return gain if not return_words else gain, split_words
+    if len(split_words) < 2 and return_words:
+        return gain, split_words
+    elif len(split_words) < 2:
+        return gain
 
     for word in split_words:
         # a word is gained if 3 conditions passed: 1. pass spellcheck. 2. have vowels. 3. not be 'a' or 'o'
         gain += (spell.check(word) and has_vowels(word) and word not in {"a", "A", "o", "O"})
 
-    return gain if not return_words else gain, split_words
+    if return_words:
+        return gain, split_words
+    else:
+        return gain
 
 
-def traverse_node(root, pattern, match_stack):
+def traverse_node(root, pattern, match_stack, stats):
     """
     Find matches at current node, then move on to child nodes
     """
-    # printout toggle
-    global verbose
 
     if root.text is not None:
         matches = pattern.findall(root.text)
 
         if matches:
-            if verbose:
-                print("Full text:")
-                print(root.text)
-                print("Matches:")
-
-            # counter for number of matches in a given text node
-            local_counter = 1
 
             for match in matches:
                 is_word = spell.check(match)
-                word_gain = (0, None)
+                word_gain = 0
 
                 if not is_word:
-                    word_gain = split_gain(match, return_words=True)
+                    word_gain = split_gain(match)
 
-                if verbose:
-                    print(f"{local_counter}. {match} -> is_word? {is_word}. word gain: {word_gain}")
-
-                local_counter += 1
-
-                global total_matches, total_split, total_unsplit, total_word_gain
+                if type(word_gain) != int:
+                    print("ouch")
 
                 # account for whether word is splittable or unsplittable
-                if word_gain[0] != 0:
-                    total_split += 1
+                if word_gain != 0:
+                    stats["split"] += 1
                 else:
-                    total_unsplit += 1
+                    stats["unsplit"] += 1
 
-                total_word_gain.append(word_gain[0])
-                total_matches += 1
-
-            if verbose:
-                print()
+                stats["matches"] += 1
+                stats["word_gain"].append(word_gain)
 
     for child in root:
-        traverse_node(child, pattern, match_stack)
+        traverse_node(child, pattern, match_stack, stats)
+
+
+def analyze_file(file_path):
+    """
+    Package file analysis into one method that returns the results.
+
+    :param file_path: path to the analyzable file
+    :return: (tuple) catalog name, proportion of splits, average word gain
+    """
+
+    stats = {"matches": 0, "split": 0, "unsplit": 0, "word_gain": []}
+
+    # read xml file as a tree
+    tree = ET.parse(file_path, etree.XMLParser(recover=True))
+    root = tree.getroot()
+
+    pattern = re.compile(r"\b[A-Za-z'][A-Za-z']{17,}\b")
+
+    match_stack = []
+
+    # traverse all nodes recursively and collect pattern matches
+    traverse_node(root, pattern, match_stack, stats)
+
+    # replace list of word gain by match with average word gain
+    stats["word_gain"] = np.mean(stats["word_gain"])
+
+    return stats
 
 
 def main(argv):
@@ -108,25 +118,9 @@ def main(argv):
     if len(argv) > 1:
         target = argv[1]
 
-    # read xml file as a tree
-    tree = ET.parse(target, ET.XMLParser(encoding="utf-8"))
-    root = tree.getroot()
-
-    pattern = re.compile(r"\b[A-Za-z'][A-Za-z']{17,}\b")
-
-    match_stack = []
-
-    # traverse all nodes recursively and collect pattern matches
-    traverse_node(root, pattern, match_stack)
-
-    global total_matches, total_split, total_unsplit, total_word_gain, verbose
-
-    if verbose:
-        print("\nTotal matches: %d." % total_matches)
-        print("Total split: %d." % total_split)
-        print("Total unsplit: %d." % total_unsplit)
-
-        print("Average word gain: %.2f" % (np.mean(total_word_gain)))
+    stats = analyze_file(target)
+    print(f"{target[target.rfind('/')+1:target.rfind('.')]}, "
+          f"{stats['split']/stats['matches']:.3f}, {stats['word_gain']:.3f}")
 
 
 if __name__ == "__main__":
