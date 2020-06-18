@@ -11,3 +11,5 @@
 * remove the wordninja stuff out of cleanXML and move it to a different file
 
 * change the git clone command in the docker image to be 'git clone --depth 1 <url>' to improve the speed at which the docker file is made? The most time consuming process of creating the image is downloading the repo.
+
+* work on documentation and commenting our code
