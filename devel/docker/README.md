@@ -16,7 +16,7 @@ Windows Home People:
 
 It is important to note that Window's home people will need to do more work, because docker on that platform is fairly new.
 
-Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you could use either the terminal that comes with git, the command prompt, or the fancy new [windows terminal](https://github.com/microsoft/terminal/releases/latest).
+Next you need to make sure that you are in this directory on a terminal emulator of some sort, for macs that would be the terminal, and for windows people you should use the fancy new [windows terminal](https://github.com/microsoft/terminal/releases/latest).
 
 
 'cd' into this directory and run the following commands:
