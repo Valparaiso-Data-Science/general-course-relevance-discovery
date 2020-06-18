@@ -36,7 +36,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 ##Import CSVs as Dataframes
 
 #load dataset
-schools = pd.read_csv("/content/AllSchools.csv")
+schools = pandas.read_csv("/content/AllSchools.csv")
 
 """
 ##Lemmatize and Tokenize
@@ -63,7 +63,7 @@ responses, school_list = process_words(stop_words,schools)
 
 tfidf(responses,school_list)
 
-"""##CURRENTLY UNUSED Create Two Overall .csv files (one for each analysis)"""
+"""##CURRENTLY UNUSED Create Two Overall .csv files (one for each analysis)
 
 #create combined csv for roles
 old = []
@@ -78,3 +78,4 @@ old.append(pd.read_csv(data_path+"struggles.csv"))
 old.append(pd.read_csv(data_path+"questions.csv"))
 old.append(pd.read_csv(data_path+"surprises.csv"))
 combine_csv("all_questions.csv",old)
+"""
