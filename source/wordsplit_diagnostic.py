@@ -25,6 +25,9 @@ total_unsplit = 0
 total_split = 0
 total_word_gain = []
 
+# global toggle for printouts
+verbose = False
+
 
 def split_gain(long_word, return_words=False):
     """
@@ -53,13 +56,17 @@ def traverse_node(root, pattern, match_stack):
     """
     Find matches at current node, then move on to child nodes
     """
+    # printout toggle
+    global verbose
+
     if root.text is not None:
         matches = pattern.findall(root.text)
 
         if matches:
-            print("Full text:")
-            print(root.text)
-            print("Matches:")
+            if verbose:
+                print("Full text:")
+                print(root.text)
+                print("Matches:")
 
             # counter for number of matches in a given text node
             local_counter = 1
@@ -71,7 +78,8 @@ def traverse_node(root, pattern, match_stack):
                 if not is_word:
                     word_gain = split_gain(match, return_words=True)
 
-                print(f"{local_counter}. {match} -> is_word? {is_word}. word gain: {word_gain}")
+                if verbose:
+                    print(f"{local_counter}. {match} -> is_word? {is_word}. word gain: {word_gain}")
 
                 local_counter += 1
 
@@ -86,7 +94,8 @@ def traverse_node(root, pattern, match_stack):
                 total_word_gain.append(word_gain[0])
                 total_matches += 1
 
-            print()
+            if verbose:
+                print()
 
     for child in root:
         traverse_node(child, pattern, match_stack)
@@ -110,12 +119,15 @@ def main(argv):
     # traverse all nodes recursively and collect pattern matches
     traverse_node(root, pattern, match_stack)
 
-    global total_matches, total_split, total_unsplit, total_word_gain
-    print("\nTotal matches: %d." % total_matches)
-    print("Total split: %d." % total_split)
-    print("Total unsplit: %d." % total_unsplit)
+    global total_matches, total_split, total_unsplit, total_word_gain, verbose
 
-    print("Average word gain: %.2f" % (np.mean(total_word_gain)))
+    if verbose:
+        print("\nTotal matches: %d." % total_matches)
+        print("Total split: %d." % total_split)
+        print("Total unsplit: %d." % total_unsplit)
+
+        print("Average word gain: %.2f" % (np.mean(total_word_gain)))
+
 
 if __name__ == "__main__":
     main(sys.argv)
