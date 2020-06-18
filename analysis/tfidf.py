@@ -13,21 +13,21 @@ def tfidf(dictionary, schools):
     corpus=dictionary[school]
     #code from https://www.geeksforgeeks.org/tf-idf-for-bigrams-trigrams/
     #GETTING BIGRAMS
-    vectorizer = CountVectorizer(ngram_range = (1,1)) 
-    X1 = vectorizer.fit_transform(corpus)  
-    features = (vectorizer.get_feature_names()) 
-   
-    # Applying TFIDF 
-    vectorizer = TfidfVectorizer() 
-    vectors = vectorizer.fit_transform(corpus) 
-    scores = (vectors.toarray()) 
-    # Getting top ranking features 
-    sums = vectors.sum(axis = 0) 
-    data1 = [] 
-    for col, term in enumerate(features): 
-        data1.append( (term, sums[0,col] )) 
-    ranking = pd.DataFrame(data1, columns = ['term','rank']) 
-    words = (ranking.sort_values('rank', ascending = False)) 
+    vectorizer = CountVectorizer(ngram_range = (1,1))
+    X1 = vectorizer.fit_transform(corpus)
+    features = (vectorizer.get_feature_names())
+
+    # Applying TFIDF
+    vectorizer = TfidfVectorizer()
+    vectors = vectorizer.fit_transform(corpus)
+    scores = (vectors.toarray())
+    # Getting top ranking features
+    sums = vectors.sum(axis = 0)
+    data1 = []
+    for col, term in enumerate(features):
+        data1.append( (term, sums[0,col] ))
+    ranking = pd.DataFrame(data1, columns = ['term','rank'])
+    words = (ranking.sort_values('rank', ascending = False))
     words = words[:10]
 
     #Getting frequency counts
@@ -39,7 +39,7 @@ def tfidf(dictionary, schools):
       f_word = str(bigram[0])
       #s_word = str(bigram[1]) -- add if bigram
       regex = re.escape(f_word) #+ r" " + re.escape(s_word) -- add if bigram
-      count = 0 
+      count = 0
       for doc in corpus:
         iterator = finditer(regex, doc)
         for match in iterator:
@@ -57,7 +57,7 @@ def tfidf(dictionary, schools):
 
 
 
-#TF-IDF FOR ALL SCHOOLS COMBINED 
+#TF-IDF FOR ALL SCHOOLS COMBINED
 #TERMS = WORD/BIGRAM, DOCUMENT = EACH SCHOOL'S CATALOG, CORPUS = ALL CATALOGS
   print("All Schools: -----------------")
   corpus = []
@@ -67,21 +67,21 @@ def tfidf(dictionary, schools):
 
   #code from https://www.geeksforgeeks.org/tf-idf-for-bigrams-trigrams/
   #GETTING BIGRAMS
-  vectorizer = CountVectorizer(ngram_range = (1,1)) 
-  X1 = vectorizer.fit_transform(corpus)  
-  features = (vectorizer.get_feature_names()) 
-    
-  # Applying TFIDF 
-  vectorizer = TfidfVectorizer() 
-  vectors = vectorizer.fit_transform(corpus) 
-  scores = (vectors.toarray()) 
-  # Getting top ranking features 
-  sums = vectors.sum(axis = 0) 
-  data1 = [] 
-  for col, term in enumerate(features): 
-      data1.append( (term, sums[0,col] )) 
-  ranking = pd.DataFrame(data1, columns = ['term','rank']) 
-  words = (ranking.sort_values('rank', ascending = False)) 
+  vectorizer = CountVectorizer(ngram_range = (1,1))
+  X1 = vectorizer.fit_transform(corpus)
+  features = (vectorizer.get_feature_names())
+
+  # Applying TFIDF
+  vectorizer = TfidfVectorizer()
+  vectors = vectorizer.fit_transform(corpus)
+  scores = (vectors.toarray())
+  # Getting top ranking features
+  sums = vectors.sum(axis = 0)
+  data1 = []
+  for col, term in enumerate(features):
+      data1.append( (term, sums[0,col] ))
+  ranking = pd.DataFrame(data1, columns = ['term','rank'])
+  words = (ranking.sort_values('rank', ascending = False))
   words = words[:10]
 
   #Getting frequency counts
@@ -93,7 +93,7 @@ def tfidf(dictionary, schools):
     f_word = str(bigram[0])
     #s_word = str(bigram[1])
     regex = re.escape(f_word) #+ r" " + re.escape(s_word)
-    count = 0 
+    count = 0
     for doc in corpus:
       iterator = finditer(regex, doc)
       for match in iterator:
