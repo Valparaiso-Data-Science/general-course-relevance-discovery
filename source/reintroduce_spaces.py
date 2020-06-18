@@ -28,16 +28,20 @@ def clean_recursively(root):
         clean_recursively(child)
 
 
-def main(argv):
+def reintroduce_spaces(in_file_path, out_file_path=None):
+    """
+    Read XML file with spacing problems, correct its spaces, and write to a new XML file
 
-    filename = "../fullPDFs/Carlow.xml"
+    :param in_file_path: source XML with spacing problems
+    :param out_file_path: destination XML with corrected spaces
+    """
 
-    # if user specified another file as input
-    if len(argv) > 1:
-        filename = argv[1]
+    # if no name for outfile given, use source name + "_spaced"
+    if out_file_path is None:
+        out_file_path = in_file_path[:in_file_path.rfind(".")] + "_spaced" + in_file_path[in_file_path.rfind("."):]
 
     # read xml file as a tree
-    tree = ET.parse(filename, ET.XMLParser(encoding="utf-8"))
+    tree = ET.parse(in_file_path, ET.XMLParser(encoding="utf-8"))
     root = tree.getroot()
 
     # count how many total children and subchildren have information in their text field
@@ -49,7 +53,18 @@ def main(argv):
 
     if total_num_elements >= 150:
         print("\rProcessed 100.00%% of all XML nodes.")
-    tree.write(filename[:filename.rfind(".")] + "_wordninjaed" + filename[filename.rfind("."):], encoding="utf8")
+    tree.write(out_file_path, encoding="utf8")
+
+
+def main(argv):
+
+    filename = "../fullPDFs/Carlow.xml"
+
+    # if user specified another file as input
+    if len(argv) > 1:
+        filename = argv[1]
+
+    reintroduce_spaces(filename)
 
 
 if __name__ == "__main__":
