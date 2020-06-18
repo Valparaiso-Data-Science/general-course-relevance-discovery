@@ -128,6 +128,9 @@ def main(argv):
 
         print("Average word gain: %.2f" % (np.mean(total_word_gain)))
 
+    print(f"{target[target.rfind('/')+1:target.rfind('.')]}, "
+          f"{total_split/total_matches:.3f}, {np.mean(total_word_gain):.3f}")
+
 
 if __name__ == "__main__":
     main(sys.argv)
