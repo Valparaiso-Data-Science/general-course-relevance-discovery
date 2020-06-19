@@ -130,8 +130,6 @@ def tfidf(dictionary, schools):
   print('\n',words)
   print("\n---------------------------\n")
 
-'''
     #saving dataframe to csv
     path_name = 'TFIDF_' + school +'.csv'
     words.to_csv(path_name)
-'''
