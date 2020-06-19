@@ -22,13 +22,18 @@ grep -xE "^.{30,}$" 7 > 8
 # print lines that have this regex sequence (could be moved to the earlier ('all actual courses...')
 grep "Cr\. <\/P><P> <\/P><P>" 8 > 9
 # divid the credits from the description
-sed -E "s~Cr\. <\/P><P> <\/P><P>~Cr : ~" 9 > 10
+sed -E "s~Cr\. <\/P><P> <\/P><P>~Cr # ~" 9 > 10
 # divide the course id from the title
-sed -E "s~<\/P><P>~: ~" 10 > 11
+sed -E "s~<\/P><P>~# ~" 10 > 11
 # divide the title from the credits
-sed -E "s~<\/P><P>~: ~" 11 > 12
+sed -E "s~<\/P><P>~# ~" 11 > 12
 # replace all ptags with nothing (re could be "<(\/|)P>")
 sed -E "s~<\/P><P>~~g" 12 > 13
-
+# get rid of all text after the closing ptag
+sed -E "s~<\/P>.*$~~" 13 > 14
+# get rid of lines that are 'course id # credits'
+grep -vE "<P>[A-Z]{2,} [0-9]{2,} \# [0-9] Cr" 14 > 15
+# get rid of lines that have a list of course id's
+#grep -vE "^<P>([A-Z]{2,} [0-9]{2,}, ){1,}" 15 > 16
 # remove all temporary files
 rm 1 2 3 4 5 6 7 8 9 10 11 12
