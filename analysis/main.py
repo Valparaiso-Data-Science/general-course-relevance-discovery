@@ -63,19 +63,3 @@ responses, school_list = process_words(stop_words,schools)
 """##TF-IDF Calculations"""
 
 tfidf(responses,school_list)
-
-"""##CURRENTLY UNUSED Create Two Overall .csv files (one for each analysis)
-#create combined csv for roles
-old = []
-old.append(pd.read_csv(data_path+"stu.csv"))
-old.append(pd.read_csv(data_path+"ta.csv"))
-old.append(pd.read_csv(data_path+"prof.csv"))
-combine_csv("all_roles.csv",old)
-#create combined csv for questions
-old = []
-old.append(pd.read_csv(data_path+"topics.csv"))
-old.append(pd.read_csv(data_path+"struggles.csv"))
-old.append(pd.read_csv(data_path+"questions.csv"))
-old.append(pd.read_csv(data_path+"surprises.csv"))
-combine_csv("all_questions.csv",old)
-"""

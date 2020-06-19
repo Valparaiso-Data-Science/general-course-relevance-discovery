@@ -14,11 +14,6 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from csv_combine.py import combine_csv
-from process_words.py import process_words
-from rename_cols.py import rename_cols
-from tfidf.py import tfidf
-from tokenize.py import tokenize
 
 def get_df_name(df):
     name =[x for x in globals() if globals()[x] is df][0]
