@@ -33,7 +33,7 @@ Original file is located at
 ##Import CSVs as Dataframes
 
 #load dataset
-schools = pd.read_csv("/content/AllSchools.csv")
+schools = pandas.read_csv("/content/AllSchools.csv")
 
 """
 ##Lemmatize and Tokenize
