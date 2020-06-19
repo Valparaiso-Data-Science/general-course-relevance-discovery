@@ -5,11 +5,14 @@
 
 # pre-made
 import sys
+import os
 import re
 import spacy
 import enchant
 import xml.etree.ElementTree as ET
 import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
 
 from lxml import etree
 
@@ -57,10 +60,13 @@ def traverse_node(root, pattern, match_stack, stats):
     """
 
     if root.text is not None:
+        # total number of words in current node text
+        num_words = len(root.text.split())
+        stats["total_words"] += num_words
+
         matches = pattern.findall(root.text)
 
         if matches:
-
             for match in matches:
                 is_word = spell.check(match)
                 word_gain = 0
@@ -92,9 +98,9 @@ def analyze_file(file_path):
     :return: (tuple) catalog name, proportion of splits, average word gain
     """
 
-    stats = {"matches": 0, "split": 0, "unsplit": 0, "word_gain": []}
+    stats = {"total_words": 0, "matches": 0, "split": 0, "unsplit": 0, "word_gain": []}
 
-    # read xml file as a tree
+    # read xml file as a tree (with permissive parser)
     tree = ET.parse(file_path, etree.XMLParser(recover=True))
     root = tree.getroot()
 
@@ -118,9 +124,55 @@ def main(argv):
     if len(argv) > 1:
         target = argv[1]
 
-    stats = analyze_file(target)
-    print(f"{target[target.rfind('/')+1:target.rfind('.')]}, "
-          f"{stats['split']/stats['matches']:.3f}, {stats['word_gain']:.3f}")
+    ignorables = [".DS_Store", "Toy.xml"]
+    all_xmls = os.listdir("../fullPDFs")
+
+    for ignorable in ignorables:
+        all_xmls.remove(ignorable)
+
+    print(all_xmls)
+
+    schools = np.empty(len(all_xmls)).astype(object)
+    total_words = np.empty(len(all_xmls)).astype(int)
+    matches = np.empty(len(all_xmls)).astype(int)
+    splits = np.empty(len(all_xmls)).astype(int)
+    unsplits = np.empty(len(all_xmls)).astype(int)
+    avg_wordgain = np.empty(len(all_xmls)).astype(np.float64)
+
+    for i in range(len(all_xmls)):
+        print("\rProcessing: %d\\%d" % ((i+1), len(all_xmls)), end='')
+
+        target = all_xmls[i]
+
+        stats = analyze_file("../fullPDFs/" + target)
+
+        schools[i] = target[(target.rfind('/')+1):target.rfind('.')]
+        total_words[i] = stats["total_words"]
+        matches[i] = stats["matches"]
+        splits[i] = stats["split"]
+        unsplits[i] = stats["unsplit"]
+        avg_wordgain[i] = stats["word_gain"]
+
+    print("\rDone.")
+
+    bads = np.empty(len(schools)).astype(int)
+    bad_space_inds = [np.where(schools == bad_spaced)[0] for bad_spaced in ["2011Cornell", "Brown", "Caldwell",
+                                                                            "Carlow", "Denison", "Pittsburgh",
+                                                                            "Youngstown"]]
+    for ind in bad_space_inds:
+        bads[ind] = 1
+
+    df = pd.DataFrame()
+
+    df["school"] = schools
+    df["total words"] = total_words
+    df["matches"] = matches
+    df["splits"] = splits
+    df["unsplits"] = unsplits
+    df["average word gain"] = avg_wordgain
+    df["bad spacing"] = bads
+
+    df.to_csv("wordgain_analysis.csv", index=False)
 
 
 if __name__ == "__main__":
