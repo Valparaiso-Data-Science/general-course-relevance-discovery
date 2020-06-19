@@ -6,7 +6,7 @@ Original file is located at
     https://colab.research.google.com/drive/1CEqUZyxPbLq-CgwS1y-jDlWpMjZrtE28
 #Import Statements"""
 
-#import pandas as pd
+import pandas as pd
 #import numpy as np
 #import nltk
 #import spacy
@@ -33,7 +33,7 @@ Original file is located at
 ##Import CSVs as Dataframes
 
 #load dataset
-schools = pandas.read_csv("/content/AllSchools.csv")
+schools = pd.read_csv("AllSchools.csv")
 
 """
 ##Lemmatize and Tokenize
