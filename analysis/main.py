@@ -6,7 +6,7 @@
 import pandas as pd
 #import numpy as np
 import nltk
-#import spacy
+import spacy
 #nltk.download('punkt')
 #nltk.download('stopwords')
 #nltk.download('wordnet')
