@@ -1,3 +1,5 @@
+import nltk
+from nltk.tokenize import word_tokenize
 def tokenize(col):
     #creates list of lists, inside lists contains sentences tokenized by word
     list_of_lists = []

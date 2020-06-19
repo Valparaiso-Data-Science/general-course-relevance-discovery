@@ -4,7 +4,7 @@
 #Import Statements
 
 import pandas as pd
-import numpy as np
+#import numpy as np
 import nltk
 import spacy
 nltk.download('punkt')

@@ -1,3 +1,4 @@
+import pandas as pd
 def combine_csv(new_csv,old_csvs):
   all_files = old_csvs
   df_merged = pd.concat(all_files, ignore_index=True)
