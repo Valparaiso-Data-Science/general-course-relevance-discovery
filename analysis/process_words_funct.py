@@ -9,7 +9,6 @@ nltk.download('averaged_perceptron_tagger')
 import string
 import re
 from re import *
-from spacy import *
 from nltk.util import ngrams
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -17,6 +16,7 @@ from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from tokenizer import tokenize
 from get_df_name_func import get_df_name
+nlp = spacy.load("en")
 
 def process_words(stops,df):
   og_dict = {} #dictionary of full responses

@@ -15,9 +15,9 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from get_df_name_func import get_df_name
+nlp = spacy.load("en")
 
 def tfidf(dictionary, schools):
-  nlp = spacy.load("en")
   answers = dictionary
   overall_denom = 0
   #TF-IDF FOR EACH INDIVIDUAL SCHOOL
