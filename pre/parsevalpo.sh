@@ -34,6 +34,28 @@ sed -E "s~<\/P>.*$~~" 13 > 14
 # get rid of lines that are 'course id # credits'
 grep -vE "<P>[A-Z]{2,} [0-9]{2,} \# [0-9] Cr" 14 > 15
 # get rid of lines that have a list of course id's
-#grep -vE "^<P>([A-Z]{2,} [0-9]{2,}, ){1,}" 15 > 16
+grep -vE "^<P>([A-Z]{2,} [0-9]{2,}, ){1,}" 15 > 16
+# remove p tag at the beginning of the line
+sed "s~^<P>~~" 16 > 17
+# remove a tags
+sed -E "s|<\/?a[^>]*>||g" 17 > 18
+# delete all text between two i tags
+sed -E "s~<i>.*[^(<\/i>)]<\/i>~~g" 18 > 19
+# now work on making it like the other schools
+sed -e "s/#//" -e  "s/#//" 19 > 20 # get rid of the first two separators
+sed -e "s/#/,/" -e "s/ , /,/" 20  > 21 # split course id from description
+# add valpo's name
+sed -E "s~^~,Valpo,~" 21 > 22
+cp 22 "valpo.csv"
 # remove all temporary files
-rm 1 2 3 4 5 6 7 8 9 10 11 12
+
+# the only bugs that I am currently aware of is that there are a few non courses that
+# get added in, and some classes are missing the last few words (things like prereqs and
+# what not)
+
+# the script should be in a usable state now though
+
+for i in $(seq 22)
+do
+	rm $i
+done
