@@ -1,10 +1,3 @@
-"""##Process Responses Across All Columns Function
-IN:
-- stops: list of stop words
-- df: dataframe of all courses
-No OUT, creates a dictionary of dictionaries containing processed responses sorted by each school for usage in TF IDF analysis
-"""
-
 def process_words(stops,df):
   og_dict = {} #dictionary of full responses
   responses = {} #dictionary of processed responses

@@ -1,10 +1,3 @@
-"""##Word Tokenizer
-IN:
-- col: column of responses
-OUT:
-- list_of_lists: list of lists tokenized by word without any preprocessing
-"""
-
 def tokenize(col):
     #creates list of lists, inside lists contains sentences tokenized by word
     list_of_lists = []
