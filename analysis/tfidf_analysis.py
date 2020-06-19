@@ -14,7 +14,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from get_df_name.py import get_df_name
+from get_df_name_func.py import get_df_name
 
 def tfidf(dictionary, schools):
   nlp = spacy.load("en")
