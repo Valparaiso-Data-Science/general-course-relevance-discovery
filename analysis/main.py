@@ -24,7 +24,7 @@ from process_words_funct import process_words
 from rename_cols import rename_col
 from tfidf_analysis import tfidf
 from tokenizer import tokenize
-
+nlp = spacy.load("en")
 
 # mount the drive module for importing data from Google Drive
 #from google.colab import drive
