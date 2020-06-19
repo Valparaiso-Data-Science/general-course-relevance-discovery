@@ -14,8 +14,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from tokenize.py import tokenize
-from get_df_name_func.py import get_df_name
+from tokenizer import tokenize
+from get_df_name_func import get_df_name
 
 def process_words(stops,df):
   og_dict = {} #dictionary of full responses
