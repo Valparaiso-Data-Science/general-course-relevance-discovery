@@ -31,12 +31,12 @@ def tfidf(dictionary, schools):
     corpus=dictionary[school]
     #code from https://www.geeksforgeeks.org/tf-idf-for-bigrams-trigrams/
     #GETTING BIGRAMS
-    vectorizer = CountVectorizer(ngram_range = (1,1))
+    vectorizer = CountVectorizer(ngram_range = (2,2))
     X1 = vectorizer.fit_transform(corpus)
     features = (vectorizer.get_feature_names())
 
     # Applying TFIDF
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer(ngram_range = (2,2))
     vectors = vectorizer.fit_transform(corpus)
     scores = (vectors.toarray())
     # Getting top ranking features
@@ -88,12 +88,12 @@ def tfidf(dictionary, schools):
 
   #code from https://www.geeksforgeeks.org/tf-idf-for-bigrams-trigrams/
   #GETTING BIGRAMS
-  vectorizer = CountVectorizer(ngram_range = (1,1))
+  vectorizer = CountVectorizer(ngram_range = (2,2))
   X1 = vectorizer.fit_transform(corpus)
   features = (vectorizer.get_feature_names())
 
   # Applying TFIDF
-  vectorizer = TfidfVectorizer()
+  vectorizer = TfidfVectorizer(ngram_range = (2,2))
   vectors = vectorizer.fit_transform(corpus)
   scores = (vectors.toarray())
   # Getting top ranking features
