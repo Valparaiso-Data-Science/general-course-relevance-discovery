@@ -19,12 +19,11 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
-from csv_combine.py import combine_csv
-from get_df_name.py import get_df_name
+from get_df_name_func.py import get_df_name
 from process_words.py import process_words
 from rename_cols.py import rename_col
-from tfidf.py import tfidf
-from tokenize.py import tokenize
+from tfidf_analysis.py import tfidf
+from tokenizer.py import tokenize
 
 
 # mount the drive module for importing data from Google Drive
