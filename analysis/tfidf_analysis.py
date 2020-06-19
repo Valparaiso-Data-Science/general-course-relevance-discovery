@@ -72,6 +72,9 @@ def tfidf(dictionary, schools):
     words = words[['term','frequency','overall','rank']]
     print('\n',words)
     print("\n---------------------------\n")
+    #saving dataframe to csv
+    path_name = 'TFIDF_' + school +'.csv'
+    words.to_csv(path_name)
 
 
 
@@ -126,6 +129,6 @@ def tfidf(dictionary, schools):
   print('\n',words)
   print("\n---------------------------\n")
 
-    #saving dataframe to csv
-    path_name = 'TFIDF_' + school +'.csv'
-    words.to_csv(path_name)
+  #saving dataframe to csv
+  path_name = 'TFIDF_all.csv'
+  words.to_csv(path_name)
