@@ -4,7 +4,7 @@ import pandas as pd
 import os
 from lxml import etree
 import wordninja
-from reintroduce_spaces import main
+from reintroduce_spaces import reintroduce_spaces
 #from punct_split import punct_split
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
@@ -128,7 +128,7 @@ def superTrimXML(filename):
     #Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown','Carlow','Caldwell','Denison','Youngstown']
+    wn_colleges = ['Brown','Carlow','Caldwell','Denison']
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
@@ -152,10 +152,11 @@ def superTrimXML(filename):
                     isFig = False
                 if isFig:
                     text = ""
-                if len(re.findall("<Figure>", text)) == 1:
-                    text = text.replace("<Figure>","")
+                if len(re.findall("<Figure.*>", text)) == 1:
+                    text = re.sub("<Figure.*>","", text)
                     isFig = True
                 # remove Sect tags
+                #text = re.sub("^<.*Span.*>", "", text)
                 text = text.replace("</Sect>", "")
                 text = text.replace("<Sect/>", "")
                 text = text.replace("<Sect>", "")
@@ -163,15 +164,19 @@ def superTrimXML(filename):
                 text = text.replace("</Div>", "")
                 text = text.replace("<Div>", "")
                 # remove caption tags
+                text = text.replace("<Caption>","")
                 text = text.replace("</Caption>", "")
                 # rmove part tags
                 text = text.replace("<Part>","")
                 text = text.replace("</Part>","")
                 # remove Span tags
+                text = text.replace("<Span>","")
+                text = text.replace("</Span>","")
                 text = text.replace("<Span/>","")
                 # remove story tags
                 text = text.replace("<Story>","")
                 text = text.replace("</Story>","")
+                text = text.replace("<P/>","")
                 #If there is a <P> tag with a new line directly after it, delete the new line
                 if re.match('<P>\n', text) is not None:
                     text = text.replace('\n', '')
@@ -182,7 +187,13 @@ def superTrimXML(filename):
     #Checks if the college needs Word Ninja
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
-        main(filename.replace('TRIMMED','SUPERTRIMMED'))
+        try:
+            reintroduce_spaces('../source/superTrimmedPDFs/' + filename.replace('TRIMMED','SUPERTRIMMED'))
+        except:
+            filepath = '../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED')
+            os.system('python3 ignore_nonutf.py '+ filepath)
+            os.system('python3 correct_ampersand.py '+ filepath)
+            reintroduce_spaces(filepath)
         #Delete the old, not Word Ninja-ed file
         os.remove('../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED'))
 
