@@ -127,6 +127,9 @@ def createStack(xml, stack):
 def superTrimXML(filename):
     #Boolean to tell us if we are looking in a <Figure> element
     isFig = False
+    nOFigs = 0
+    #needsWN = False
+    
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown','Carlow','Caldwell','Denison']
     for college in wn_colleges:
@@ -135,6 +138,7 @@ def superTrimXML(filename):
             break
         else:
             needsWN = False
+    
     #Opens the trimmed XML
     with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
         #Makes a new XML file where the super trimming will be saved
@@ -147,9 +151,13 @@ def superTrimXML(filename):
                 # turn file into string
                 text = str(line)
                 # Remove <Figure> tags and everything in them
+                if len(re.findall("<Figure.*>", text)) == 1:
+                    nOFigs += 1
                 if len(re.findall("</Figure>", text)) == 1:
                     text = ""
-                    isFig = False
+                    nOFigs -= 1
+                    if nOFigs==0:
+                        isFig = False
                 if isFig:
                     text = ""
                 if len(re.findall("<Figure.*>", text)) == 1:
@@ -164,8 +172,8 @@ def superTrimXML(filename):
                 text = text.replace("</Div>", "")
                 text = text.replace("<Div>", "")
                 # remove caption tags
-                text = text.replace("<Caption>","")
-                text = text.replace("</Caption>", "")
+                #text = text.replace("<Caption>","")
+                #text = text.replace("</Caption>", "")
                 # rmove part tags
                 text = text.replace("<Part>","")
                 text = text.replace("</Part>","")
@@ -176,7 +184,6 @@ def superTrimXML(filename):
                 # remove story tags
                 text = text.replace("<Story>","")
                 text = text.replace("</Story>","")
-                text = text.replace("<P/>","")
                 #If there is a <P> tag with a new line directly after it, delete the new line
                 if re.match('<P>\n', text) is not None:
                     text = text.replace('\n', '')
