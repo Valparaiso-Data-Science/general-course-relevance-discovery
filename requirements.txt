@@ -5,7 +5,7 @@ lxml==4.5.1
 spacy==2.2.4
 graphviz==0.14
 wordninja==2.0.0
-pandas==1.0.3
+pandas==1.0.4
 pycm==2.7
 pydotplus==2.0.2
 seaborn==0.10.1

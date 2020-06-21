@@ -1,6 +1,5 @@
 # files in the current directory
-from parse import parseXML
-from parse import cleanXML
+from parse import parseXML, superTrimXML
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
@@ -29,7 +28,7 @@ except:
     print("../courses already exists")
 
 for filename in os.listdir('../source/TRIMMED'):
-    cleanXML(filename)
+    superTrimXML(filename)
 
 for filename in os.listdir('../source/superTrimmedPDFs'):
     print(filename)

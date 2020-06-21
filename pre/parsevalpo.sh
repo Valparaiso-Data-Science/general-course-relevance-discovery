@@ -1,32 +1,61 @@
 #!/bin/sh
 
+#valpo's catalog
 file="../fullPDFs/ucat1920.xml"
 
-
-
+# clean ptags
 bash ptagclean.sh $file > 1
-
+# p -> P
 bash ptoPtag.sh 1 > 2
-
+# remove b tags from doc
 bash removeBtags 2 > 3
-
+# run idea.sh (puts all things that look like a course ID on their own line)
 bash idea.sh 3 > 4
-
+# all actual courses have this regex sequence
 grep '</P><P> </P><P>' 4 > 5
-
+# remove the junk at the top of the xml
 grep -v "<?xml" 5 > 6
-
+# get rid of lines that have 10 or more periods in them (table of contents, etc)
 grep -vE "\.{10}" 6 > 7
-
+# print lines that are only 30 or more characters
 grep -xE "^.{30,}$" 7 > 8
-
+# print lines that have this regex sequence (could be moved to the earlier ('all actual courses...')
 grep "Cr\. <\/P><P> <\/P><P>" 8 > 9
-
-sed -E "s~Cr\. <\/P><P> <\/P><P>~Cr : ~" 9 > 10
-
-sed -E "s~<\/P><P>~: ~" 10 > 11
-sed -E "s~<\/P><P>~: ~" 11 > 12
+# divid the credits from the description
+sed -E "s~Cr\. <\/P><P> <\/P><P>~Cr # ~" 9 > 10
+# divide the course id from the title
+sed -E "s~<\/P><P>~# ~" 10 > 11
+# divide the title from the credits
+sed -E "s~<\/P><P>~# ~" 11 > 12
+# replace all ptags with nothing (re could be "<(\/|)P>")
 sed -E "s~<\/P><P>~~g" 12 > 13
+# get rid of all text after the closing ptag
+sed -E "s~<\/P>.*$~~" 13 > 14
+# get rid of lines that are 'course id # credits'
+grep -vE "<P>[A-Z]{2,} [0-9]{2,} \# [0-9] Cr" 14 > 15
+# get rid of lines that have a list of course id's
+grep -vE "^<P>([A-Z]{2,} [0-9]{2,}, ){1,}" 15 > 16
+# remove p tag at the beginning of the line
+sed "s~^<P>~~" 16 > 17
+# remove a tags
+sed -E "s|<\/?a[^>]*>||g" 17 > 18
+# delete all text between two i tags
+sed -E "s~<i>.*[^(<\/i>)]<\/i>~~g" 18 > 19
+# now work on making it like the other schools
+sed -e "s/#//" -e  "s/#//" 19 > 20 # get rid of the first two separators
+sed -e "s/#/,/" -e "s/ , /,/" 20  > 21 # split course id from description
+# add valpo's name
+sed -E "s~^~,Valpo,~" 21 > 22
+cp 22 "valpo.csv"
+# remove all temporary files
 
+# the only bugs that I am currently aware of is that there are a few non courses that
+# get added in, and some classes are missing the last few words (things like prereqs and
+# what not)
 
-rm 1 2 3 4 5 6 7 8 9 10 11 12
+# the script should be in a usable state now though
+
+for i in $(seq 22)
+do
+	rm $i
+done

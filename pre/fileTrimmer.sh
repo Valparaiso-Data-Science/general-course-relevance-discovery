@@ -11,10 +11,6 @@
 #
 #Not tested with non-GNU tools
 
-#Optargs: #neither of these have been implemented yet, they will not work
-# -c <catalog>.csv
-# -d <source_xml_directory>/
-
 #Takes in a csv file and a directory as input
 #The directory is where all of your XML files are (ie, orig/, sourceXMLs/, etc)
 #The CSV file should be set up like below
@@ -25,7 +21,7 @@
 #Anything before the start line is removed
 #And Anything after the end line is removed
 
-#WILL REMOVE ANY EMPTY CSV FILES THAT ARE CREATED (ie in the $OUTPUT_DIR)
+#WILL REMOVE ANY EMPTY XML FILES THAT ARE CREATED (ie in the $OUTPUT_DIR)
 #
 #Don't worry about any sed command errors, the script will still function just
 #fine (Command errors are caused by cut not seeing any numbers in field 1 & 2
