@@ -46,6 +46,7 @@ def process_words(stops,df):
       new_sent = " ".join([token.lemma_ for token in doc])
       new_sent = new_sent.split()
       new_sent = [word for word in new_sent if word not in stops]
+      new_sent = [re.sub('\d+', '', word) for word in new_sent] #remove all numbers
       new_sent = ' '.join(new_sent) #completely processed sentence as string
       responses[s].append(new_sent)
   return responses, list(og_dict.keys()) #returns processeed response dictionary & school names

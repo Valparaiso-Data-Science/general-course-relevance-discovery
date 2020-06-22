@@ -57,6 +57,22 @@ new_schools.to_csv('bok_courses.csv') #save all pertinent courses to csv
 stop_words = list(stopwords.words('english'))
 nlp = spacy.load('en', disable=['parser', 'ner'])
 stop_words.append('-PRON-')
+first_stops = ['cr','ul','ns3','topic','include','enrollment','prerequisite',
+               'none','corequisite','fee','departmental','hoursprereq','cover',
+               'require','may','minimum','consent','instructor','receive',
+               'take','concurrently','student','prereq','per','assess','three',
+               'academic','summer','permission','skill','winter','autumn','spring',
+               'grade','letter','gen', 'ed','one','week','semester','year',
+               'lettergrade']
+second_stops = ['twosemester','majorminor','liberal','apply','term','principle',
+                'meet','use','well','preq','requirement','necessary',
+                'department','chair']
+third_stops = ['human','ii','csci','cs','biol','econ','nu','ch','ent','csi',
+               'swanson','two','mth','eco','offer','nur','senior','major',
+               'cosc','course','sw','py','dd','andor']
+stop_words.extend(first_stops)
+stop_words.extend(second_stops)
+stop_words.extend(third_stops)
 
 
 #process words, create dictionaries for future function calls
