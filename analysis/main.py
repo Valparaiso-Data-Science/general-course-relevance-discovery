@@ -51,8 +51,7 @@ for i in range(len(schools)):
       break
 new_schools = pd.DataFrame(fake_df)
 new_schools.columns = ['School','CourseID','Descriptions']
-path_name = 'TFIDF_all' +'.csv'
-new_schools.to_csv(data_path + 'Analysis Data/bok_courses.csv') #save all pertinent courses to csv
+new_schools.to_csv('bok_courses.csv') #save all pertinent courses to csv
 
 #stop words definition
 stop_words = list(stopwords.words('english'))
