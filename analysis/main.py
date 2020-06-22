@@ -30,6 +30,14 @@ nlp = spacy.load("en")
 schools = pd.read_csv("AllSchools.csv")
 del(schools['Unnamed: 0'])
 
+#read in body of knowledge txt file, convert to list
+text_file = open("edison.txt", "r")
+bok = text_file.read().split('\n')
+for i in range(len(bok)):
+  bok[i] = bok[i].lower()
+
+
+
 #retain only courses pertinent to Data Science
 fake_df = []
 for i in range(len(schools)):
