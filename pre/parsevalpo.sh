@@ -51,6 +51,9 @@ sed -E "s~^~,Valpo,~" 22 > 23
 cp 23 "valpo.csv"
 # remove all temporary files
 
+# if you want to remove double spaces '  '
+# you can run this sed command: sed -E "s~(\ ){1,}~ ~g"
+
 # the only bugs that I am currently aware of is that there are a few non courses that
 # get added in, and some classes are missing the last few words (things like prereqs and
 # what not)
