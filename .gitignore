@@ -9,3 +9,5 @@ source/answer.csv
 .idea/
 *.pdf
 .DS_Store
+wordgain_analysis.csv
+_spaced.xml
