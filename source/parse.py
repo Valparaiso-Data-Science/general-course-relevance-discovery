@@ -4,7 +4,6 @@ import pandas as pd
 import os
 from lxml import etree
 import wordninja
-from reintroduce_spaces import reintroduce_spaces
 #from punct_split import punct_split
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
@@ -129,16 +128,6 @@ def superTrimXML(filename):
     isFig = False
     nOFigs = 0
     #needsWN = False
-    
-    #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown','Carlow','Caldwell','Denison']
-    for college in wn_colleges:
-        if re.match(college,filename) is not None:
-            needsWN = True
-            break
-        else:
-            needsWN = False
-    
     #Opens the trimmed XML
     with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
         #Makes a new XML file where the super trimming will be saved
@@ -191,16 +180,6 @@ def superTrimXML(filename):
                 newfile.write(text)
             #Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
-    #Checks if the college needs Word Ninja
-    if needsWN:
-        #Pass the super trimmed XML into Word Ninja
-        try:
-            reintroduce_spaces('../source/superTrimmedPDFs/' + filename.replace('TRIMMED','SUPERTRIMMED'))
-        except:
-            filepath = '../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED')
-            os.system('python3 ignore_nonutf.py '+ filepath)
-            os.system('python3 correct_ampersand.py '+ filepath)
-            reintroduce_spaces(filepath)
-        #Delete the old, not Word Ninja-ed file
-        os.remove('../source/superTrimmedPDFs/'+filename.replace('TRIMMED','SUPERTRIMMED'))
+    
+    
 
