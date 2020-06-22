@@ -41,12 +41,14 @@ sed "s~^<P>~~" 16 > 17
 sed -E "s|<\/?a[^>]*>||g" 17 > 18
 # delete all text between two i tags
 sed -E "s~<i>.*[^(<\/i>)]<\/i>~~g" 18 > 19
+# remove honors work courses (they all reference page 62)
+grep -v "page 62" 19 > 20
 # now work on making it like the other schools
-sed -e "s/#//" -e  "s/#//" 19 > 20 # get rid of the first two separators
-sed -e "s/#/,/" -e "s/ , /,/" 20  > 21 # split course id from description
+sed -e "s/#//" -e  "s/#//" 20 > 21 # get rid of the first two separators
+sed -e "s/#/,/" -e "s/ , /,/" 21  > 22 # split course id from description
 # add valpo's name
-sed -E "s~^~,Valpo,~" 21 > 22
-cp 22 "valpo.csv"
+sed -E "s~^~,Valpo,~" 22 > 23
+cp 23 "valpo.csv"
 # remove all temporary files
 
 # the only bugs that I am currently aware of is that there are a few non courses that
@@ -55,7 +57,7 @@ cp 22 "valpo.csv"
 
 # the script should be in a usable state now though
 
-for i in $(seq 22)
+for i in $(seq 23)
 do
 	rm $i
 done
