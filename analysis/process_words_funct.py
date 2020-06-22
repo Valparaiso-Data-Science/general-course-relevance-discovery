@@ -7,8 +7,8 @@ import spacy
 #nltk.download('wordnet')
 #nltk.download('averaged_perceptron_tagger')
 import string
-#import re
-#from re import *
+import re
+from re import *
 from nltk.util import ngrams
 from nltk.corpus import stopwords
 #from nltk.tokenize import word_tokenize
