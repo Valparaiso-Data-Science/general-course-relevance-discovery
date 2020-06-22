@@ -29,7 +29,23 @@ nlp = spacy.load("en")
 
 ##Import CSV as Dataframes
 schools = pd.read_csv("AllSchools.csv")
+del(schools['Unnamed: 0'])
 
+#retain only courses pertinent to Data Science
+fake_df = []
+for i in range(len(schools)):
+  des = schools['Descriptions'][i]
+  des = des.lower()
+  fake_list = []
+  for w in bok:
+    if w in des:
+      fake_list = [schools['School'][i], schools['CourseID'][i], schools['Descriptions'][i]]
+      fake_df.append(fake_list)
+      break
+new_schools = pd.DataFrame(fake_df)
+new_schools.columns = ['School','CourseID','Descriptions']
+path_name = 'TFIDF_all' +'.csv'
+new_schools.to_csv(data_path + 'Analysis Data/bok_courses.csv') #save all pertinent courses to csv
 
 #stop words definition
 stop_words = list(stopwords.words('english'))
@@ -38,7 +54,7 @@ stop_words.append('-PRON-')
 
 
 #process words, create dictionaries for future function calls
-responses, school_list = process_words(stop_words,schools)
+responses, school_list = process_words(stop_words,new_schools)
 
 #tfidf analysis
 tfidf(responses,school_list)
