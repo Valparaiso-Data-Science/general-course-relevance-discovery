@@ -21,7 +21,6 @@ from nltk.corpus import stopwords
 #from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from get_df_name_func import get_df_name
 from process_words_funct import process_words
-from rename_cols import rename_col
 from tfidf_analysis import tfidf
 from tokenizer import tokenize
 
