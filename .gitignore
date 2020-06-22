@@ -5,9 +5,14 @@ bok/bokClean.txt
 bok/BoKCleaning.py
 bok/~$bok.xlsx
 __pycache__/
+TRIMMED/
+source/answer.csv
+courses/
+superTrimmedPDFs/
 source/answer.csv
 .idea/
 *.pdf
+*.orig
 .DS_Store
 wordgain_analysis.csv
 _spaced.xml

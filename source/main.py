@@ -1,9 +1,9 @@
 # files in the current directory
-from parse import parseXML
-from topicModel import plot_10_most_common_words, listofDSCourse
+from parse import parseXML, superTrimXML
+#from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
-
+from reintroduce_spaces import reintroduce_spaces
 #libraries
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -14,15 +14,63 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+import re
+
 
 topicModel = pd.DataFrame()
-for filename in os.listdir('../fullPDFs/'):
-    print(filename)
-    CSV = parseXML("../fullPDFs/"+filename, 'P', 'P', 1)
-    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+
+try:
+    os.mkdir('../source/superTrimmedPDFs')
+except:
+    print("../source/superTrimmedPDFs already exists")
+try:
+    os.mkdir('../courses')
+except:
+    print("../courses already exists")
+
+for filename in os.listdir('../source/TRIMMED'):
+    superTrimXML(filename)
+
+for filename in os.listdir('../source/superTrimmedPDFs'):
+    print('filename at the start: ' + filename)
+    #Checks if we are looking at a college we know needs WordNinja
+    wn_colleges = ['Brown','Carlow','Caldwell','Denison']
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
+    #Checks if the college needs Word Ninja
+    if needsWN:
+        #Pass the super trimmed XML into Word Ninja
+        try:
+            print('Just passed into word ninja easy: '+ filename)
+            reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
+        except:
+            print('Had a tuff time but we are still BOOLin: ' + filename)
+            filepath = '../source/superTrimmedPDFs/'+filename
+            os.system('python3 ignore_nonutf.py '+ filepath)
+            os.system('python3 correct_ampersand.py '+ filepath)
+            reintroduce_spaces(filepath)
+        #Delete the old, not Word Ninja-ed file
+        print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
+        os.remove('../source/superTrimmedPDFs/'+filename)
+    if needsWN:
+        filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
+        print('Making Word Ninja-ed CSV for: '+ filename)
+        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    else:
+        print('Making a CSV for: ' + filename)
+        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     topicModel= pd.concat([topicModel,CSV])
 
+
 cleaned_df = newClean(topicModel)
+cleaned_df.to_csv('../courses/AllSchools.csv',encoding="utf-8-sig")
+'''
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
@@ -53,4 +101,4 @@ mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
 
 answer_test.append(mlaoutput).to_csv("answer.csv")
 answer_test['Predicted'] = pd.Series(test_set_prediction)
-
+'''
