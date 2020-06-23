@@ -34,6 +34,12 @@ def tfidf(dictionary, schools):
     vectorizer = CountVectorizer(ngram_range = (2,2))
     X1 = vectorizer.fit_transform(corpus)
     features = (vectorizer.get_feature_names())
+    i = len(features) - 1
+    while i >= 0:
+      bi = features[i].split()
+      if bi[0] == bi[1]:
+        del(features[i])
+      i -= 1
 
     # Applying TFIDF
     vectorizer = TfidfVectorizer(ngram_range = (2,2))
@@ -55,8 +61,8 @@ def tfidf(dictionary, schools):
     while i < 10:
       bigram = str(list_bigram[i]).split()
       f_word = str(bigram[0])
-      #s_word = str(bigram[1]) -- add if bigram
-      regex = re.escape(f_word) #+ r" " + re.escape(s_word) -- add if bigram
+      s_word = str(bigram[1])
+      regex = re.escape(f_word) + r"\w*\s+" + re.escape(s_word)
       count = 0
       for doc in corpus:
         iterator = finditer(regex, doc)
@@ -72,11 +78,10 @@ def tfidf(dictionary, schools):
     words = words[['term','frequency','overall','rank']]
     print('\n',words)
     print("\n---------------------------\n")
+
     #saving dataframe to csv
     path_name = 'TFIDF_' + school +'.csv'
-    words.to_csv(path_name)
-
-
+    words.to_csv(data_path + 'Analysis Data/' + path_name)
 
 #TF-IDF FOR ALL SCHOOLS COMBINED
 #TERMS = WORD/BIGRAM, DOCUMENT = EACH SCHOOL'S CATALOG, CORPUS = ALL CATALOGS
@@ -91,6 +96,12 @@ def tfidf(dictionary, schools):
   vectorizer = CountVectorizer(ngram_range = (2,2))
   X1 = vectorizer.fit_transform(corpus)
   features = (vectorizer.get_feature_names())
+  i = len(features) - 1
+  while i >= 0:
+    bi = features[i].split()
+    if bi[0] == bi[1]:
+      del(features[i])
+    i -= 1
 
   # Applying TFIDF
   vectorizer = TfidfVectorizer(ngram_range = (2,2))
@@ -112,8 +123,8 @@ def tfidf(dictionary, schools):
   while i < 10:
     bigram = str(list_bigram[i]).split()
     f_word = str(bigram[0])
-    #s_word = str(bigram[1])
-    regex = re.escape(f_word) #+ r" " + re.escape(s_word)
+    s_word = str(bigram[1])
+    regex = re.escape(f_word) + r" " + re.escape(s_word)
     count = 0
     for doc in corpus:
       iterator = finditer(regex, doc)
@@ -130,5 +141,5 @@ def tfidf(dictionary, schools):
   print("\n---------------------------\n")
 
   #saving dataframe to csv
-  path_name = 'TFIDF_all.csv'
-  words.to_csv(path_name)
+  path_name = 'TFIDF_all' +'.csv'
+  words.to_csv(data_path + 'Analysis Data/' + path_name)

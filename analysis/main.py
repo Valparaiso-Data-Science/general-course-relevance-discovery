@@ -29,9 +29,13 @@ nlp = spacy.load("en")
 ##Import CSV as Dataframes
 schools = pd.read_csv("AllSchools.csv")
 del(schools['Unnamed: 0'])
+valpo = pd.read_csv("valpo-6-23-2020-spacing-fixed.csv",header=None)
+del(valpo[0])
+valpo.columns = ['School', 'CourseID', 'Descriptions']
+schools = schools.append(valpo,ignore_index=True)
 
 #read in body of knowledge txt file, convert to list
-text_file = open("edison.txt", "r")
+text_file = open(data_path + "edison.txt", "r")
 bok = text_file.read().split('\n')
 for i in range(len(bok)):
   bok[i] = bok[i].lower()
@@ -41,39 +45,32 @@ for i in range(len(bok)):
 #retain only courses pertinent to Data Science
 fake_df = []
 for i in range(len(schools)):
-  des = schools['Descriptions'][i]
+  des = str(schools['Descriptions'][i])
   des = des.lower()
   fake_list = []
+  terms = []
+  print(i)
   for w in bok:
-    if w in des:
-      fake_list = [schools['School'][i], schools['CourseID'][i], schools['Descriptions'][i]]
-      fake_df.append(fake_list)
-      break
+    pattern = r'\s'
+    if re.search(pattern+w+pattern,des):
+      if w not in terms:
+        terms.append(w)
+  if len(terms) != 0:
+    fake_list = [schools['School'][i], schools['CourseID'][i], schools['Descriptions'][i],', '.join(terms)]
+    fake_df.append(fake_list)
 new_schools = pd.DataFrame(fake_df)
-new_schools.columns = ['School','CourseID','Descriptions']
-new_schools.to_csv('bok_courses.csv') #save all pertinent courses to csv
+new_schools.columns = ['School','CourseID','Descriptions','Data Science Term']
+path_name = 'TFIDF_all' +'.csv'
+new_schools.to_csv(data_path + 'Analysis Data/bok_courses.csv')
 
 #stop words definition
 stop_words = list(stopwords.words('english'))
 nlp = spacy.load('en', disable=['parser', 'ner'])
 stop_words.append('-PRON-')
-first_stops = ['cr','ul','ns3','topic','include','enrollment','prerequisite',
-               'none','corequisite','fee','departmental','hoursprereq','cover',
-               'require','may','minimum','consent','instructor','receive',
-               'take','concurrently','student','prereq','per','assess','three',
-               'academic','summer','permission','skill','winter','autumn','spring',
-               'grade','letter','gen', 'ed','one','week','semester','year',
-               'lettergrade']
-second_stops = ['twosemester','majorminor','liberal','apply','term','principle',
-                'meet','use','well','preq','requirement','necessary',
-                'department','chair']
-third_stops = ['human','ii','csci','cs','biol','econ','nu','ch','ent','csi',
-               'swanson','two','mth','eco','offer','nur','senior','major',
-               'cosc','course','sw','py','dd','andor']
-stop_words.extend(first_stops)
-stop_words.extend(second_stops)
-stop_words.extend(third_stops)
+#find way to remove all numbers
+first_stops = ['cr','ul']
 
+stop_words.extend(first_stops)
 
 #process words, create dictionaries for future function calls
 responses, school_list = process_words(stop_words,new_schools)
