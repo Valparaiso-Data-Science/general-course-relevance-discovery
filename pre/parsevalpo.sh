@@ -49,7 +49,7 @@ sed -E -e "s/^/\"/" -e "s~#~\"#\"~g" -e "s/$/\"/" 20 > 21
 sed -e "s/#//" -e  "s/#//" -e "s/\"\"//g" 21 > 22 # get rid of the first two separators
 sed -e "s/#/,/" -e "s/ , /,/" 22  > 23 # split course id from description
 # add valpo's name; also final cleanup of 'weird' quotation marks
-sed -E -e "s~^~,Valpo,~" -e "s~&\"#\"34;~'~g" 23 > 24
+sed -E -e "s~^~,Valpo,~" -e "s~&\"#\"34;~'~g" -e "s~(\ ){1,}~ ~g" 23 > 24
 cp 24 "valpo.csv"
 # remove all temporary files
 
