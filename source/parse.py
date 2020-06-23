@@ -140,39 +140,39 @@ def superTrimXML(filename):
                 # turn file into string
                 text = str(line)
                 # Remove <Figure> tags and everything in them
-                if len(re.findall("<Figure.*>", text)) == 1:
+                if len(re.findall(r"<Figure\b.*>", text)) == 1:
                     nOFigs += 1
-                if len(re.findall("</Figure>", text)) == 1:
+                if len(re.findall(r"</Figure>", text)) == 1:
                     text = ""
                     nOFigs -= 1
-                    if nOFigs==0:
+                    if nOFigs == 0:
                         isFig = False
                 if isFig:
                     text = ""
-                if len(re.findall("<Figure.*>", text)) == 1:
-                    text = re.sub("<Figure.*>","", text)
+                if len(re.findall(r"<Figure\b.*>", text)) == 1:
+                    text = re.sub(r"<Figure\b.*>", "", text)
                     isFig = True
                 # remove Sect tags
-                #text = re.sub("^<.*Span.*>", "", text)
+                # text = re.sub("^<.*Span.*>", "", text)
                 text = text.replace("</Sect>", "")
                 text = text.replace("<Sect/>", "")
-                text = text.replace("<Sect>", "")
+                text = re.sub(r"<Sect\b.*>", "", text)
                 # remove Div tags
                 text = text.replace("</Div>", "")
-                text = text.replace("<Div>", "")
+                text = re.sub(r"<Div\b.*>", "", text)
                 # remove caption tags
-                #text = text.replace("<Caption>","")
-                #text = text.replace("</Caption>", "")
+                # text = text.replace("<Caption>","")
+                # text = text.replace("</Caption>", "")
                 # rmove part tags
-                text = text.replace("<Part>","")
-                text = text.replace("</Part>","")
+                text = re.sub(r"<Part\b.*>", "", text)
+                text = text.replace("</Part>", "")
                 # remove Span tags
-                text = text.replace("<Span>","")
-                text = text.replace("</Span>","")
-                text = text.replace("<Span/>","")
+                text = re.sub(r"<Span\b.*>", "", text)
+                text = text.replace("</Span>", "")
+                text = text.replace("<Span/>", "")
                 # remove story tags
-                text = text.replace("<Story>","")
-                text = text.replace("</Story>","")
+                text = re.sub(r"<Story\b.*>", "", text)
+                text = text.replace("</Story>", "")
                 #If there is a <P> tag with a new line directly after it, delete the new line
                 if re.match('<P>\n', text) is not None:
                     text = text.replace('\n', '')
