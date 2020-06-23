@@ -123,7 +123,7 @@ def createStack(xml, stack):
     for subLevel in xml:
         createStack(subLevel, stack)
 
-def superTrimXML(filename):
+def fixTags(filename):
     #Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     nOFigs = 0

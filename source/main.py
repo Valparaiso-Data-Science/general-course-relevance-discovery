@@ -1,5 +1,5 @@
 # files in the current directory
-from parse import parseXML, superTrimXML
+from parse import parseXML, fixTags
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
@@ -18,6 +18,9 @@ import re
 
 
 topicModel = pd.DataFrame()
+dirty = False
+if len(sys.argv) > 1 and sys.argv[1]=='dirty':
+    dirty = True
 
 try:
     os.mkdir('../source/superTrimmedPDFs')
@@ -29,10 +32,9 @@ except:
     print("../courses already exists")
 
 for filename in os.listdir('../source/TRIMMED'):
-    superTrimXML(filename)
+    fixTags(filename)
 
 for filename in os.listdir('../source/superTrimmedPDFs'):
-    print('filename at the start: ' + filename)
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown','Carlow','Caldwell','Denison']
     for college in wn_colleges:
@@ -45,24 +47,21 @@ for filename in os.listdir('../source/superTrimmedPDFs'):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            print('Just passed into word ninja easy: '+ filename)
             reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
         except:
-            print('Had a tuff time but we are still BOOLin: ' + filename)
             filepath = '../source/superTrimmedPDFs/'+filename
             os.system('python3 ignore_nonutf.py '+ filepath)
             os.system('python3 correct_ampersand.py '+ filepath)
             reintroduce_spaces(filepath)
         #Delete the old, not Word Ninja-ed file
-        print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
-        os.remove('../source/superTrimmedPDFs/'+filename)
+        if not dirty:
+            print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
+            os.remove('../source/superTrimmedPDFs/'+filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        print('Making Word Ninja-ed CSV for: '+ filename)
         CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     else:
-        print('Making a CSV for: ' + filename)
         CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     topicModel= pd.concat([topicModel,CSV])
