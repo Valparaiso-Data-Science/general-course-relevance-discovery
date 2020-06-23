@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 import sys
 import re
 
+from progress.bar import Bar
 
 topicModel = pd.DataFrame()
 dirty = False
@@ -31,10 +32,10 @@ try:
 except:
     print("../courses already exists")
 
-for filename in os.listdir('../source/TRIMMED'):
+for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
     fixTags(filename)
 
-for filename in os.listdir('../source/superTrimmedPDFs'):
+for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')):
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown','Carlow','Caldwell','Denison']
     for college in wn_colleges:
