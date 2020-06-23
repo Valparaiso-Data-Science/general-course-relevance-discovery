@@ -4,3 +4,4 @@
 	~ only seemed to happen on windows, but it also happened on ubuntu 18.04
 	$ fixed when we switch the load command to be 'spacy.load("en_core_web_sm")'
 * the previous reintroduce spaces implementation did not work, so I have cleanXML do nothing related to reintroduce_spaces until we can get this fixed
+	$ frankie & marius worked together, and now the wordninja implementation is fixed
