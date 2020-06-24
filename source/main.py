@@ -18,6 +18,7 @@ import matplotlib.pyplot as plt
 import sys
 import re
 import xml.etree
+from joblib import Parallel, delayed
 
 from progress.bar import Bar
 
@@ -39,10 +40,48 @@ try:
 except FileExistsError:
     print("../courses already exists")
 
+Parallel(n_jobs=-1)(delayed(fixTags)(filename) for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')))
+'''
 for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
     fixTags(filename)
+'''
+def makeCSV(filename):
+    #Checks if we are looking at a college we know needs WordNinja
+    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
+    #Checks if the college needs Word Ninja
+    if needsWN:
+        #Pass the super trimmed XML into Word Ninja
+        try:
+            reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
+        except xml.etree.ElementTree.ParseError:
+            filepath = '../source/superTrimmedPDFs/'+filename
+            ampersanded_file = correct_ampersands(filepath)
+            reintroduce_spaces(ampersanded_file)
+        #Delete the old, not Word Ninja-ed file
+        if not dirty:
+            print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
+            os.remove('../source/superTrimmedPDFs/'+filename)
+    if needsWN:
+        filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
+        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    else:
+        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
 for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')):
+    makeCSV(filename)
+
+for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
+    topicModel = pd.concat([topicModel,CSV])
+
+    '''
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
     for college in wn_colleges:
@@ -72,7 +111,7 @@ for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs'))
         CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     topicModel= pd.concat([topicModel,CSV])
-
+    '''
 
 cleaned_df = newClean(topicModel)
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
