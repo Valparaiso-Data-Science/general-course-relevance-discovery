@@ -4,6 +4,8 @@ from parse import parseXML, fixTags
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
 from reintroduce_spaces import reintroduce_spaces
+from xml_fix_utils import correct_ampersands, ignore_bad_chars
+
 #libraries
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
@@ -15,21 +17,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sys
 import re
+import xml.etree
 
 from progress.bar import Bar
 
 topicModel = pd.DataFrame()
+
 dirty = False
-if len(sys.argv) > 1 and sys.argv[1]=='dirty':
+if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
 try:
     os.mkdir('../source/superTrimmedPDFs')
-except:
+except FileExistsError:
     print("../source/superTrimmedPDFs already exists")
 try:
     os.mkdir('../courses')
-except:
+except FileExistsError:
     print("../courses already exists")
 
 for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
@@ -37,7 +41,7 @@ for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
 
 for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')):
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown','Carlow','Caldwell','Denison']
+    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
@@ -49,11 +53,10 @@ for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs'))
         #Pass the super trimmed XML into Word Ninja
         try:
             reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
-        except:
+        except xml.etree.ElementTree.ParseError:
             filepath = '../source/superTrimmedPDFs/'+filename
-            os.system('python3 ignore_nonutf.py '+ filepath)
-            os.system('python3 correct_ampersand.py '+ filepath)
-            reintroduce_spaces(filepath)
+            ampersanded_file = correct_ampersands(filepath)
+            reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
         if not dirty:
             print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
@@ -69,7 +72,7 @@ for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs'))
 
 
 cleaned_df = newClean(topicModel)
-cleaned_df.to_csv('../courses/AllSchools.csv',encoding="utf-8-sig")
+cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
 '''
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
