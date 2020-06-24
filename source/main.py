@@ -75,8 +75,7 @@ def makeCSV(filename):
         CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
-for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')):
-    makeCSV(filename)
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
     topicModel = pd.concat([topicModel,CSV])
