@@ -2,7 +2,7 @@
 
 #USAGE:
 #
-# sh fileTrimmer.sh <catalog>.csv <source_xml_directory>/
+# sh fileTrimmer.sh <catalog>.csv <source_xml_directory>/ <output_directory>/
 #
 
 #DEPENDS:
@@ -34,11 +34,15 @@ OUTPUT_DIR='TRIMMED'
 #CLI args (optargs would be better; need to refactor)
 inputFile=$1
 inputDir=$2
+outputDir=$3
 
 #Test the inputs, however this is not idiot proof, as the directory and the
 #csv need to be in the right order for the script to function properly
-[ -z $inputFile ] && echo "Need a CSV file to read!" && exit
-[ -z $inputDir ] && echo "Need a directory path to where the XMLs are stored" && exit
+[ -z $inputFile ] && echo "Need a CSV file to read!" && exit 1
+[ -z $inputDir ] && echo "Need a directory path to where the XMLs are stored" && exit 1
+[ -z $outputDir ] && echo "Need an output directory" && exit 1
+
+OUTPUT_DIR="$outputDir"
 
 mkdir -p "$OUTPUT_DIR"
 
