@@ -80,7 +80,7 @@ def makeCSV(filename):
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../source/superTrimmedPDFs')))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    csv = pd.read_csv(filename)
+    csv = pd.read_csv('../courses/' + filename)
     topicModel = pd.concat([topicModel,csv])
 
     '''
