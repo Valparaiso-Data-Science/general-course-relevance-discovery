@@ -80,7 +80,8 @@ def makeCSV(filename):
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../source/superTrimmedPDFs')))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    topicModel = pd.concat([topicModel,filename])
+    csv = pd.read_csv(filename)
+    topicModel = pd.concat([topicModel,csv])
 
     '''
     #Checks if we are looking at a college we know needs WordNinja
