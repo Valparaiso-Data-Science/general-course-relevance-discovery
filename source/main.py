@@ -47,7 +47,7 @@ for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
 '''
 def makeCSV(filename):
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Youngstown'] #'Pittsburgh', - causing an error when ran
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
