@@ -21,12 +21,15 @@ import xml.etree
 
 from progress.bar import Bar
 
+# container for processed catalogs
 topicModel = pd.DataFrame()
 
+# toggle for keeping data from intermediary stages
 dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
+# make directories for intermediary and final data
 try:
     os.mkdir('../source/superTrimmedPDFs')
 except FileExistsError:
