@@ -30,7 +30,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     special_colleges = ['Alma', 'Northwestern','Sagu']
     for college in special_colleges:
         if re.match(college,filename) is not None:
-            extParse = True 
+            extParse = True
             break
         else:
             extParse = False
@@ -38,7 +38,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     for subLevel in text:
         createStack(subLevel, stack)
     #Allows us to keep track of a numeric index in the stack
-    counter = 0 
+    counter = 0
     #For each element in the stack:
     for elm in stack:
         if elm.text is not None:
@@ -73,7 +73,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                             re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", stack[counter + descTagsFromID + extTags].text) is None:
                                 #Append the tag to the already existing description
                                 description += stack[counter + descTagsFromID + extTags].text
-                                #If we reach the end of our loop, just set the description to what it was before this loop started 
+                                #If we reach the end of our loop, just set the description to what it was before this loop started
                                 if extTags == 6:
                                     description = stack[counter + descTagsFromID].text
                                     #IF the final course has a multiple <P> tag description we will not catch it. This is due to the fact that we will never reach a stop case
@@ -85,7 +85,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                     #Append Course ID and Description to their respective lists
                     courseID.append(elm.text)
                     descriptions.append(description)
-                #This checks for Course ID and Description in one <P> 
+                #This checks for Course ID and Description in one <P>
                 #Checks if it starts with a Course ID
                 #Checks that there is only one Course ID in the element, unless there is a mention of prerequisites
                 #Checks if there is at least 15 words
@@ -180,6 +180,6 @@ def fixTags(filename):
                 newfile.write(text)
             #Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
-    
-    
+
+    return None # makes it so the progress bar works in main
 
