@@ -47,7 +47,9 @@ for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
 '''
 def makeCSV(filename):
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Youngstown'] #'Pittsburgh', - causing an error when ran
+    wn_colleges = ['2011Cornell', 'Carlow', 'Caldwell', 'Denison'] #'Pittsburgh', - causing an error when ran
+    #'Brown', - really slow
+    #'Youngstown' - also really slow
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
@@ -75,10 +77,10 @@ def makeCSV(filename):
         CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSV').iter(os.listdir('../source/superTrimmedPDFs')))
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../source/superTrimmedPDFs')))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    topicModel = pd.concat([topicModel,CSV])
+    topicModel = pd.concat([topicModel,filename])
 
     '''
     #Checks if we are looking at a college we know needs WordNinja
