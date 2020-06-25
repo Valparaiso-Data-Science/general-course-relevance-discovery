@@ -81,7 +81,7 @@ def makeCSV(filename):
         try:
             reintroduce_spaces(supertrimmed_dir + "/" + filename)
         except xml.etree.ElementTree.ParseError:
-            filepath = supertrimmed_dir + filename
+            filepath = supertrimmed_dir + "/" + filename
             ampersanded_file = correct_ampersands(filepath)
             reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
