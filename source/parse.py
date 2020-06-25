@@ -128,15 +128,14 @@ def fixTags(in_path, out_path, filename):
     Removes unnecessary tags, as well as the contents of Figure tags.
     (do we need a more precise/elaborate description here?)
 
-    :param in_path: source directory path
-    :param out_path: destination directory path
+    :param in_path: source directory path (trimmed)
+    :param out_path: destination directory path (supertrimmed)
     :param filename: name of the particular file in the directory
     """
 
     #Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     nOFigs = 0
-    #needsWN = False
     #Opens the trimmed XML
     with open(in_path + "/" + filename, "r",encoding='utf-8') as file:
         #Makes a new XML file where the super trimming will be saved
