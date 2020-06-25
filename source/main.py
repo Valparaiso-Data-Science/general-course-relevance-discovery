@@ -44,7 +44,7 @@ trimmed_dir = "../temp_data/TRIMMED"
 supertrimmed_dir = "../temp_data/superTrimmedPDFs"
 
 Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir, supertrimmed_dir, filename)
-                    for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')))
+                    for filename in Bar('Fixing Tags').iter(os.listdir('../temp_data/TRIMMED')))
 
 '''
 for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
@@ -67,25 +67,25 @@ def makeCSV(filename):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
+            reintroduce_spaces('../temp_data/superTrimmedPDFs/' + filename)
         except xml.etree.ElementTree.ParseError:
-            filepath = '../source/superTrimmedPDFs/'+filename
+            filepath = '../temp_data/superTrimmedPDFs/'+filename
             ampersanded_file = correct_ampersands(filepath)
             reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
         if not dirty:
-            print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
-            os.remove('../source/superTrimmedPDFs/'+filename)
+            print('Now deleting: ../temp_data/superTrimmedPDFs/'+ filename)
+            os.remove('../temp_data/superTrimmedPDFs/'+filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
-        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+        CSV = parseXML("../temp_data/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV.to_csv("../temp_data/superTrimmedPDFs/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     else:
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV = parseXML("../temp_data/superTrimmedPDFs/"+filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     return None
 
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../source/superTrimmedPDFs')))
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../temp_data/superTrimmedPDFs')))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
     csv = pd.read_csv('../courses/' + filename)
