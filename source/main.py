@@ -87,13 +87,13 @@ def makeCSV(filename):
         #Delete the old, not Word Ninja-ed file
         if not dirty:
             print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
-            os.remove(supertrimmed_dir + filename)
+            os.remove(supertrimmed_dir + "/" + filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML(supertrimmed_dir + filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     else:
-        CSV = parseXML(supertrimmed_dir + filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     return None
 
