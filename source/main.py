@@ -75,25 +75,25 @@ def makeCSV(filename):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
+            reintroduce_spaces(supertrimmed_dir + filename)
         except xml.etree.ElementTree.ParseError:
-            filepath = '../source/superTrimmedPDFs/'+filename
+            filepath = supertrimmed_dir + filename
             ampersanded_file = correct_ampersands(filepath)
             reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
         if not dirty:
             print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
-            os.remove('../source/superTrimmedPDFs/'+filename)
+            os.remove(supertrimmed_dir + filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     else:
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     return None
 
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../source/superTrimmedPDFs')))
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
 
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
     csv = pd.read_csv('../courses/' + filename)
