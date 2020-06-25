@@ -29,7 +29,7 @@
 
 
 ORIG_DIR=$(pwd) #reference point for 'removeEmptyFiles'
-OUTPUT_DIR='TRIMMED'
+#OUTPUT_DIR='TRIMMED'
 
 #CLI args (optargs would be better; need to refactor)
 inputFile=$1
@@ -40,7 +40,7 @@ outputDir=$3
 #csv need to be in the right order for the script to function properly
 [ -z $inputFile ] && echo "Need a CSV file to read!" && exit 1
 [ -z $inputDir ] && echo "Need a directory path to where the XMLs are stored" && exit 1
-[ -z $outputDir ] && echo "Need an output directory" && exit 1
+[ -z $outputDir ] && echo "Using default directory '../temp_data/TRIMMED'!" && outputDir="../temp_data/TRIMMED"
 
 OUTPUT_DIR="$outputDir"
 
