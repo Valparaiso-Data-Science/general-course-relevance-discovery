@@ -75,7 +75,7 @@ def makeCSV(filename):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces(supertrimmed_dir + filename)
+            reintroduce_spaces(supertrimmed_dir + "/" + filename)
         except xml.etree.ElementTree.ParseError:
             filepath = supertrimmed_dir + filename
             ampersanded_file = correct_ampersands(filepath)
