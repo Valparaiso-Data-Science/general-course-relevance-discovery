@@ -13,3 +13,4 @@ source/superTrimmedPDFs
 .idea/
 *.pdf
 *.orig
+source/temp_data
