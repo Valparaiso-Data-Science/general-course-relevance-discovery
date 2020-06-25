@@ -25,6 +25,10 @@ from progress.bar import Bar
 # container for processed catalogs
 topicModel = pd.DataFrame()
 
+# directory variables
+trimmed_dir = "../temp_data/TRIMMED"
+supertrimmed_dir = "../temp_data/superTrimmedPDFs"
+
 # toggle for keeping data from intermediary stages
 dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
@@ -52,8 +56,6 @@ except:
     print("Filetrimming step failed, we'll get em next time.")
     quit()
 
-trimmed_dir = "../temp_data/TRIMMED"
-supertrimmed_dir = "../temp_data/superTrimmedPDFs"
 
 Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
