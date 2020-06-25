@@ -105,6 +105,7 @@ for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
 
 
 cleaned_df = newClean(topicModel)
+print("Creating '../courses/AllSchools.csv'...")
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
 '''
 #Previously untouched last semester Spring2020 from here down
