@@ -51,7 +51,7 @@ except FileExistsError:
 trimmed_dir = "../temp_data/TRIMMED"
 supertrimmed_dir = "../temp_data/superTrimmedPDFs"
 
-Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir + "/", supertrimmed_dir + "/", filename)
+Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
 '''
@@ -75,7 +75,7 @@ def makeCSV(filename):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces(supertrimmed_dir + filename)
+            reintroduce_spaces(supertrimmed_dir + "/" + filename)
         except xml.etree.ElementTree.ParseError:
             filepath = supertrimmed_dir + filename
             ampersanded_file = correct_ampersands(filepath)
