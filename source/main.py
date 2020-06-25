@@ -32,19 +32,26 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 
 # make directories for intermediary and final data
 try:
-    os.mkdir('../source/superTrimmedPDFs')
+    os.mkdir('../temp_data/superTrimmedPDFs')
 except FileExistsError:
-    print("../source/superTrimmedPDFs already exists")
+    print("../temp_data/superTrimmedPDFs already exists")
 try:
     os.mkdir('../courses')
 except FileExistsError:
     print("../courses already exists")
 
-Parallel(n_jobs=-1)(delayed(fixTags)(filename) for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')))
+trimmed_dir = "../temp_data/TRIMMED"
+supertrimmed_dir = "../temp_data/superTrimmedPDFs"
+
+Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir, supertrimmed_dir, filename)
+                    for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')))
+
 '''
 for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
     fixTags(filename)
 '''
+
+
 def makeCSV(filename):
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['2011Cornell', 'Carlow', 'Caldwell', 'Denison'] #'Pittsburgh', - causing an error when ran

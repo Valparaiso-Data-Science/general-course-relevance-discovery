@@ -123,15 +123,24 @@ def createStack(xml, stack):
     for subLevel in xml:
         createStack(subLevel, stack)
 
-def fixTags(filename):
+def fixTags(in_path, out_path, filename):
+    """
+    Removes unnecessary tags, as well as the contents of Figure tags.
+    (do we need a more precise/elaborate description here?)
+
+    :param in_path: source directory path
+    :param out_path: destination directory path
+    :param filename: name of the particular file in the directory
+    """
+
     #Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     nOFigs = 0
     #needsWN = False
     #Opens the trimmed XML
-    with open("../source/TRIMMED/"+filename, "r",encoding='utf-8') as file:
+    with open(in_path + "/" + filename, "r",encoding='utf-8') as file:
         #Makes a new XML file where the super trimming will be saved
-        with open("../source/superTrimmedPDFs/"+filename.replace("TRIMMED", "SUPERTRIMMED"),
+        with open(out_path + "/" + filename.replace("TRIMMED", "SUPERTRIMMED"),
                   "w", encoding='utf-8') as newfile:
             #Writes an open <Part> tag. This allows us to parse the file as an XML later
             newfile.write("<Part>\n")
