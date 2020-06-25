@@ -60,11 +60,6 @@ except:
 Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
-'''
-for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
-    fixTags(filename)
-'''
-
 
 def makeCSV(filename):
     #Checks if we are looking at a college we know needs WordNinja
