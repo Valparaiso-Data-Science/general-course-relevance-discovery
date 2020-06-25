@@ -30,6 +30,13 @@ dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
+# make trimmed files
+try:
+    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs ../temp_data/TRIMMED")
+except:
+    print("Filetrimming step failed, we'll get em next time.")
+    quit()
+
 # make directories for intermediary and final data
 try:
     os.mkdir('../temp_data')
