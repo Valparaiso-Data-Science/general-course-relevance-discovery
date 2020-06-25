@@ -32,6 +32,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 
 # make directories for intermediary and final data
 try:
+    os.mkdir('../temp_data')
     os.mkdir('../temp_data/superTrimmedPDFs')
 except FileExistsError:
     print("../temp_data/superTrimmedPDFs already exists")
