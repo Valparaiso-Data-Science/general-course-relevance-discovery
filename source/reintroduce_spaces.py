@@ -11,6 +11,8 @@ from punct_split import punct_split
 current_element_num = 0
 total_num_elements = 0
 
+verbose = False
+
 
 def clean_recursively(root):
     """
@@ -21,7 +23,7 @@ def clean_recursively(root):
 
         global current_element_num
         current_element_num += 1
-        if current_element_num % 150 == 0:
+        if verbose and current_element_num % 150 == 0:
             print("\rProcessed %.2f%% of all XML nodes." % (current_element_num * 100 / total_num_elements), end='')
 
     for child in root:
@@ -51,7 +53,7 @@ def reintroduce_spaces(in_file_path, out_file_path=None):
     # reintroduce spaces at every node
     clean_recursively(root)
 
-    if total_num_elements >= 150:
+    if verbose and total_num_elements >= 150:
         print("\rProcessed 100.00%% of all XML nodes.")
     tree.write(out_file_path, encoding="utf8")
 
