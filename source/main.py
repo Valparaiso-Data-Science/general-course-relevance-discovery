@@ -96,7 +96,6 @@ def makeCSV(filename):
         try:
             # save current name for potential deletion later
             deletable = filename
-            print("\nsaving for deletion (rs) %s" % deletable)
 
             # reintroduce spaces and reassign `filename` to cleaned file
             filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
@@ -107,7 +106,6 @@ def makeCSV(filename):
         except xml.etree.ElementTree.ParseError:
             # save current name for potential deletion later
             deletable = filename
-            print("\nsaving for deletion (ibc) %s" % deletable)
 
             # clean bad characters (so far only utf 65535) and reassign `filename` to cleaned file
             filename = ignore_bad_chars(supertrimmed_dir + "/" + filename)
@@ -117,7 +115,6 @@ def makeCSV(filename):
 
             # save current name for potential deletion later
             deletable = filename
-            print("\nsaving for deletion (ca) %s" % deletable)
 
             # correct bad apersands if any (replace `&` with `&amp;`) and reassign `filename` to cleaned file
             filename = correct_ampersands(supertrimmed_dir + "/" + filename)
@@ -126,7 +123,6 @@ def makeCSV(filename):
 
             # save current name for potential deletion later
             deletable = filename
-            print("\nsaving for deletion (rs) %s" % deletable)
 
             # correct spaces and reassign `filename` to cleaned file
             filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
@@ -141,7 +137,6 @@ def makeCSV(filename):
             for item in deletable_filenames:
                 os.remove(supertrimmed_dir + "/" + item)
 
-    print("\n", filename)
     # use parseXML to find course headers and descriptions
     CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
     CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
