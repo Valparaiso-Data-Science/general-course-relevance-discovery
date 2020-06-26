@@ -86,7 +86,7 @@ def makeCSV(filename):
             reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
         if not dirty:
-            print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
+            print('Now deleting:' + supertrimmed_dir + "/" + filename)
             os.remove(supertrimmed_dir + "/" + filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
