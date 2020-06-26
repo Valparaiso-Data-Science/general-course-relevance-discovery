@@ -1,7 +1,7 @@
 import sys
 
 
-def ignore_bad_chars(filepath, out_filepath=None, write_exclusions=True, excludable_ords={65535}):
+def ignore_bad_chars(filepath, out_filepath=None, write_exclusions=False, excludable_ords={65535}):
     """
     Utility function for reading XML file and writing new version of it with any characters in excludable_ords removed.
 
@@ -14,7 +14,7 @@ def ignore_bad_chars(filepath, out_filepath=None, write_exclusions=True, excluda
     """
 
     if out_filepath is None:
-        out_filepath = filepath[:filepath.rfind(".")] + "_clean_encoded" + filepath[filepath.rfind("."):]
+        out_filepath = filepath[:filepath.rfind(".")] + "_cleanencoded" + filepath[filepath.rfind("."):]
 
     # path for file with the omitted garbage
     exclusion_path = filepath[:filepath.rfind(".")] + "_exclusions" + filepath[filepath.rfind("."):]

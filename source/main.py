@@ -129,7 +129,7 @@ def makeCSV(filename):
             filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
             deletable_filenames.append(deletable)
 
-        #Delete the old, not Word Ninja-ed file
+        #Delete the old, not Word Ninja-ed file(s)
         if not dirty:
             # print the whole list of deletable filenames
             print(f'\nNow deleting: {*deletable_filenames,}')
