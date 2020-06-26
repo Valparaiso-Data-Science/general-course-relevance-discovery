@@ -6,6 +6,10 @@ from lxml import etree
 import wordninja
 #from punct_split import punct_split
 
+#course id regex string
+c_id_re_s = "[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
+c_id_re = re.compile(c_id_re_s)
+
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
     '''
     IN: the file path, the tag for courses, the tag for descriptions, and the number of tags down the description will be
@@ -24,7 +28,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     #Boolean to keep us from getting an index out of bounds (O.O.B) error
     oob = False
     #Gets us the filename (ex:  Alma.xml)
-    match = re.search('superTrimmedPDFs/',filepath)
+    match = re.search('superTrimmedPDFs/',filepath) # < potential for a bug here!!!!!
     filename = filepath[match.end():]
     #Check if the college we are parsing is known to have Course ID's and Descriptions in one <P> tag
     special_colleges = ['Alma', 'Northwestern','Sagu']

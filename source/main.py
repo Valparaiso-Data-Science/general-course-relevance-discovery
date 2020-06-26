@@ -25,31 +25,43 @@ from progress.bar import Bar
 # container for processed catalogs
 topicModel = pd.DataFrame()
 
+# directory variables
+trimmed_dir = "../temp_data/TRIMMED"
+supertrimmed_dir = "../temp_data/superTrimmedPDFs"
+
 # toggle for keeping data from intermediary stages
 dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
-# make directories for intermediary and final data
+def prepare():
+    # make directories for intermediary and final data
+    print("Preparing Everything...")
+    try:
+        os.mkdir('../temp_data')
+    except FileExistsError:
+        print("../temp_data already exists")
+    try:
+        os.mkdir('../temp_data/superTrimmedPDFs')
+    except FileExistsError:
+        print("../temp_data/superTrimmedPDFs already exists")
+    try:
+        os.mkdir('../courses')
+    except FileExistsError:
+        print("../courses already exists")
+
+prepare()
+
+# make trimmed files
 try:
-    os.mkdir('../temp_data/superTrimmedPDFs')
-except FileExistsError:
-    print("../temp_data/superTrimmedPDFs already exists")
-try:
-    os.mkdir('../courses')
-except FileExistsError:
-    print("../courses already exists")
+    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs ../temp_data/TRIMMED")
+except:
+    print("Filetrimming step failed, we'll get em next time.")
+    quit()
 
-trimmed_dir = "../temp_data/TRIMMED"
-supertrimmed_dir = "../temp_data/superTrimmedPDFs"
 
-Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir, supertrimmed_dir, filename)
-                    for filename in Bar('Fixing Tags').iter(os.listdir('../temp_data/TRIMMED')))
-
-'''
-for filename in Bar('Fixing Tags').iter(os.listdir('../source/TRIMMED')):
-    fixTags(filename)
-'''
+Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
+                    for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
 
 def makeCSV(filename):
@@ -67,63 +79,33 @@ def makeCSV(filename):
     if needsWN:
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces('../temp_data/superTrimmedPDFs/' + filename)
+            reintroduce_spaces(supertrimmed_dir + "/" + filename)
         except xml.etree.ElementTree.ParseError:
-            filepath = '../temp_data/superTrimmedPDFs/'+filename
-            ampersanded_file = correct_ampersands(filepath)
-            reintroduce_spaces(ampersanded_file)
-        #Delete the old, not Word Ninja-ed file
-        if not dirty:
-            print('Now deleting: ../temp_data/superTrimmedPDFs/'+ filename)
-            os.remove('../temp_data/superTrimmedPDFs/'+filename)
-    if needsWN:
-        filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML("../temp_data/superTrimmedPDFs/"+filename, 'P', 'P', 1)
-        CSV.to_csv("../temp_data/superTrimmedPDFs/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    else:
-        CSV = parseXML("../temp_data/superTrimmedPDFs/"+filename, 'P', 'P', 1)
-        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    return None
-
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir('../temp_data/superTrimmedPDFs')))
-
-for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    csv = pd.read_csv('../courses/' + filename)
-    topicModel = pd.concat([topicModel,csv])
-
-    '''
-    #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['2011Cornell', 'Brown', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
-    for college in wn_colleges:
-        if re.match(college,filename) is not None:
-            needsWN = True
-            break
-        else:
-            needsWN = False
-    #Checks if the college needs Word Ninja
-    if needsWN:
-        #Pass the super trimmed XML into Word Ninja
-        try:
-            reintroduce_spaces('../source/superTrimmedPDFs/' + filename)
-        except xml.etree.ElementTree.ParseError:
-            filepath = '../source/superTrimmedPDFs/'+filename
+            filepath = supertrimmed_dir + "/" + filename
             ampersanded_file = correct_ampersands(filepath)
             reintroduce_spaces(ampersanded_file)
         #Delete the old, not Word Ninja-ed file
         if not dirty:
             print('Now deleting: ../source/superTrimmedPDFs/'+ filename)
-            os.remove('../source/superTrimmedPDFs/'+filename)
+            os.remove(supertrimmed_dir + "/" + filename)
     if needsWN:
         filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
     else:
-        CSV = parseXML("../source/superTrimmedPDFs/"+filename, 'P', 'P', 1)
+        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
         CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    topicModel= pd.concat([topicModel,CSV])
-    '''
+    return None
+
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
+
+for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
+    csv = pd.read_csv('../courses/' + filename)
+    topicModel = pd.concat([topicModel,csv])
+
 
 cleaned_df = newClean(topicModel)
+print("Creating '../courses/AllSchools.csv'...")
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
 '''
 #Previously untouched last semester Spring2020 from here down
