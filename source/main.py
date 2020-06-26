@@ -45,11 +45,19 @@ def prepare():
     try:
         os.mkdir('../temp_data/superTrimmedPDFs')
     except FileExistsError:
-        print("../temp_data/superTrimmedPDFs already exists")
+        print("../temp_data/superTrimmedPDFs already exists. Clearing all files in it.")
+
+        # clear folder of previous files
+        for file in os.listdir('../temp_data/superTrimmedPDFs'):
+            os.unlink('../temp_data/superTrimmedPDFs/' + file)
     try:
         os.mkdir('../courses')
     except FileExistsError:
-        print("../courses already exists")
+        print("../courses already exists. Clearing all files in it.")
+
+        # clear folder of previous files
+        for file in os.listdir('../courses'):
+            os.unlink('../courses/' + file)
 prepare()
 
 # make trimmed files
@@ -65,6 +73,10 @@ Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
 
 
 def makeCSV(filename):
+
+    # indicate that we used `supertrimmed_dir` variable as defined at the top of the file
+    global supertrimmed_dir
+
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['2011Cornell', 'Carlow', 'Caldwell', 'Denison'] #'Pittsburgh', - causing an error when ran
     #'Brown', - really slow
@@ -77,25 +89,62 @@ def makeCSV(filename):
             needsWN = False
     #Checks if the college needs Word Ninja
     if needsWN:
+        # container of intermediary data files for potential deletion
+        deletable_filenames = []
+
         #Pass the super trimmed XML into Word Ninja
         try:
-            reintroduce_spaces(supertrimmed_dir + "/" + filename)
+            # save current name for potential deletion later
+            deletable = filename
+            print("\nsaving for deletion (rs) %s" % deletable)
+
+            # reintroduce spaces and reassign `filename` to cleaned file
+            filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
+            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+
+            deletable_filenames.append(deletable)
+
         except xml.etree.ElementTree.ParseError:
-            filepath = supertrimmed_dir + "/" + filename
-            ampersanded_file = correct_ampersands(filepath)
-            reintroduce_spaces(ampersanded_file)
+            # save current name for potential deletion later
+            deletable = filename
+            print("\nsaving for deletion (ibc) %s" % deletable)
+
+            # clean bad characters (so far only utf 65535) and reassign `filename` to cleaned file
+            filename = ignore_bad_chars(supertrimmed_dir + "/" + filename)
+            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            deletable_filenames.append(deletable)
+
+
+            # save current name for potential deletion later
+            deletable = filename
+            print("\nsaving for deletion (ca) %s" % deletable)
+
+            # correct bad apersands if any (replace `&` with `&amp;`) and reassign `filename` to cleaned file
+            filename = correct_ampersands(supertrimmed_dir + "/" + filename)
+            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            deletable_filenames.append(deletable)
+
+            # save current name for potential deletion later
+            deletable = filename
+            print("\nsaving for deletion (rs) %s" % deletable)
+
+            # correct spaces and reassign `filename` to cleaned file
+            filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
+            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            deletable_filenames.append(deletable)
+
         #Delete the old, not Word Ninja-ed file
         if not dirty:
-            print('Now deleting:' + supertrimmed_dir + "/" + filename)
-            os.remove(supertrimmed_dir + "/" + filename)
-    if needsWN:
-        filename = filename.replace('SUPERTRIMMED','SUPERTRIMMED_spaced')
-        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
-        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    else:
-        CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
-        CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-    return None
+            # print the whole list of deletable filenames
+            print(f'\nNow deleting: {*deletable_filenames,}')
+
+            for item in deletable_filenames:
+                os.remove(supertrimmed_dir + "/" + item)
+
+    print("\n", filename)
+    # use parseXML to find course headers and descriptions
+    CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
 
