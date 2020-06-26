@@ -57,8 +57,6 @@ def reintroduce_spaces(in_file_path, out_file_path=None):
         print("\rProcessed 100.00%% of all XML nodes.")
     tree.write(out_file_path, encoding="utf8")
 
-    return None # here for the progress bar
-
 
 def main(argv):
 

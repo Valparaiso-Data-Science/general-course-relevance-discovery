@@ -193,5 +193,3 @@ def fixTags(in_path, out_path, filename):
             #Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
 
-    return None # makes it so the progress bar works in main
-
