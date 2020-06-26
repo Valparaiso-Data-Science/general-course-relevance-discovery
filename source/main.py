@@ -19,6 +19,7 @@ import sys
 import re
 import xml.etree
 from joblib import Parallel, delayed
+from xml.etree.ElementTree import ParseError
 
 from progress.bar import Bar
 
@@ -36,7 +37,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 
 def prepare():
     # make directories for intermediary and final data
-    print("Preparing Everything...")
+    print("Preparing temporary data directory...")
     try:
         os.mkdir('../temp_data')
     except FileExistsError:
@@ -49,7 +50,6 @@ def prepare():
         os.mkdir('../courses')
     except FileExistsError:
         print("../courses already exists")
-
 prepare()
 
 # make trimmed files
@@ -99,9 +99,12 @@ def makeCSV(filename):
 
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
 
+# collect all data frames in one list
+df_container = []
 for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    csv = pd.read_csv('../courses/' + filename)
-    topicModel = pd.concat([topicModel,csv])
+    df_container.append(pd.read_csv('../courses/' + filename))
+# concatenate list into one joint data frame
+topicModel = pd.concat(df_container)
 
 
 cleaned_df = newClean(topicModel)
