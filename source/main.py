@@ -7,6 +7,7 @@ from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 #libraries
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.tree import export_text
@@ -153,7 +154,7 @@ topicModel = pd.concat(df_container)
 cleaned_df = newClean(topicModel)
 print("Creating '../courses/AllSchools.csv'...")
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
-'''
+
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
@@ -169,6 +170,17 @@ labels = labeled_df["curricula relevance"]
 print("Splitting Data")
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
 
+rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+
+rf.fit(feature_train, answer_train)
+
+preds = rf.predict(feature_test)
+
+errors = abs(preds - answer_test)
+
+print("Mean Absolute Error: ", round(np.mean(errors), 2), 'degrees.')
+
+'''
 print("training tree")
 dTree = decisionTree(feature_train,answer_train,20)
 test_set_prediction = dTree.predict(feature_test)
