@@ -1,3 +1,4 @@
+Catalog Name,Line of first course,Line of last course,XML Format (<p> course ID / Name / Credits </p><p>desc</p><p></p>,XML Style ,Who Checked,Special Notes
 Alma,2058,14530, <p>course ID Title </p>blankline <p>credits desc Prereq</P>,alma,Gabe,Some descs have <figure></figure> right before in the same <p>
 ArizonaCollege,1271,3318,<Course_Description_h>course ID</Course_Description_h>blank line<Course_Description_h> Title </Course_Description_h> blank line<Credits> credits </Credits> blank line<Course_Description_C> desc </Course_Description_C> blank line <FOOTNOTE> prereq </FOOTNOTE> blank line,arizona,Gabe,1st course has dif. format (See notes 2)    Replace <BODY_COPY> in nursing section
 Ball State,4043,54653,<p>Course ID Title (credits) desc </p> blank line <p> prereq </p> blank line,ballstate,Gabe,
@@ -39,7 +40,6 @@ UniOfChicago,2079,35752,<p>Course ID title credits</p> blank line <p>desc </p>,u
 VirginiaTech,12140,31439,<P> Course Id Title desc prereqs credits </p>,virginia / clemonU?,Gabe,
 WilliamJewell,4313,15838,<NormalParagraphStyle>Course ID Title credits </NormalParagraphStyle> blank line <NormalParagraphStyle> desc prereq </NormalParagraphStyle> blank line <NormalParagraphStyle/>,william,Gabe,Break Line between courses
 Williamwoods,59049,71509,<p>course ID Title</p> blank line <p>desc prereq</p> blank line <p>credits</p> blank line,woods,James,Theres a break inbetween undergraduate and graduate courses
-Catalog Name,Line of first course,Line of last course,XML Format (<p> course ID / Name / Credits </p><p>desc</p><p></p>,XML Style ,Who Checked,Special Notes
 Youngstown,33004,425699,<p> <p>course Id Title Credits </p>blankline<p>desc<p/>pre-req<p/></p></p>blankline,young,Group,
 Fontbonne,,,Xml File has almost nothing,,Gabe,Reconvert XML
 Kalamazoo,,,,,,Not easlily parsed
