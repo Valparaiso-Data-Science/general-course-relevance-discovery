@@ -186,7 +186,7 @@ dTree = decisionTree(feature_train,answer_train,20)
 test_set_prediction = dTree.predict(feature_test)
 '''
 dTree = rf.estimators_[5]
-print("Accuracy:",accuracy_score(answer_test, preds))
+#print("Accuracy:",accuracy_score(answer_test, preds))
 
 graph = export_text(dTree,feature_names=list(features.columns))
 print(graph)
