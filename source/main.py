@@ -184,16 +184,17 @@ print("Mean Absolute Error: ", round(np.mean(errors), 2), 'degrees.')
 print("training tree")
 dTree = decisionTree(feature_train,answer_train,20)
 test_set_prediction = dTree.predict(feature_test)
-
-print("Accuracy:",accuracy_score(answer_test, test_set_prediction))
+'''
+dTree = rf.estimators_[5]
+print("Accuracy:",accuracy_score(answer_test, preds))
 
 graph = export_text(dTree,feature_names=list(features.columns))
 print(graph)
 print(export_graphviz(dTree,feature_names=list(features.columns),filled=True,impurity=False,label='root'))
 
 
-mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
+mlaoutput = pd.DataFrame(preds,columns=["machineAlg"])
 
 answer_test.append(mlaoutput).to_csv("answer.csv")
-answer_test['Predicted'] = pd.Series(test_set_prediction)
-'''
+answer_test['Predicted'] = pd.Series(preds)
+
