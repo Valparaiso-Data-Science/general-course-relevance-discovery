@@ -49,3 +49,12 @@ docker build -t gcrd .
 ```
 
 Also note that you should **ONLY** do this if there is a known problem with the upstream repo where 'git pull' doesn't work.
+
+## Getting files from inside the docker container
+
+In the circumstance that you need to get files that are generated inside of the docker container, here is the command:
+```
+docker cp gcrd:/usr/src/app/general-course-relevency-discovery/path/to/file /path/on/host/
+```
+
+
