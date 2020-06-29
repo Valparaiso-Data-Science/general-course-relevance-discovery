@@ -62,7 +62,7 @@ prepare()
 
 # make trimmed files
 try:
-    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs ../temp_data/TRIMMED")
+    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs " + trimmed_dir)
 except:
     print("Filetrimming step failed, we'll get em next time.")
     quit()
@@ -79,7 +79,7 @@ def makeCSV(filename):
 
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
-    
+
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
