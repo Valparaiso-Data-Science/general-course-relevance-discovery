@@ -49,6 +49,7 @@ This repo has a number of direcories, each with a function.
 Current Branches:
 * master
 * syd-test-analysis
+* machine-learning
 
 Historical Branches: (in order of most recent)
 * tfix
