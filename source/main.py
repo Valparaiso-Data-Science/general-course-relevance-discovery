@@ -48,7 +48,7 @@ def prepare():
         print("../temp_data/superTrimmedPDFs already exists. Clearing all files in it.")
 
         # clear folder of previous files
-        for file in os.listdir('../temp_data/superTrimmedPDFs'):
+        for file in Bar("Cleaning supertrimmmed...").iter(os.listdir('../temp_data/superTrimmedPDFs')):
             os.unlink('../temp_data/superTrimmedPDFs/' + file)
     try:
         os.mkdir('../courses')
@@ -56,7 +56,7 @@ def prepare():
         print("../courses already exists. Clearing all files in it.")
 
         # clear folder of previous files
-        for file in os.listdir('../courses'):
+        for file in Bar("Cleaning courses...").iter(os.listdir('../courses')):
             os.unlink('../courses/' + file)
 prepare()
 
