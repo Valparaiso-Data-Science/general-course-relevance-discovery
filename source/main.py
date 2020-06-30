@@ -173,7 +173,6 @@ skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
 # skf.split(features,labels)
 errors = []
 accs = []
-count = 0
 for train_index, test_index in skf.split(features, labels):
     print("TRAIN:", train_index, "TEST:", test_index)
     # X_train = [features.iloc[i] for i in train_index]
@@ -185,12 +184,18 @@ for train_index, test_index in skf.split(features, labels):
     rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
     rf.fit(X_train, y_train)
     preds = rf.predict(X_test)
-    errors.append(round(np.mean(abs(preds - y_test)),2))
-    #accs.append(accuracy_score(y_test,preds))
-
+    #errors.append(round(np.mean(abs(preds - y_test)),2))
+    for pred in preds:
+        i=0
+        if pred == y_test[i]:
+            accs.append(1)
+        else:
+            accs.append(0)
+        i +=1
+count = 0
 for error in errors:
-    print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-    #print("Accuracy for Forest #"+ str(count)+ ": " + str(accs[count]))
+    #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
+    print("Accuracy for Forest #"+ str(count)+ ": " + str((sum(accs)/len(accs))*100))
     count += 1
     
 
