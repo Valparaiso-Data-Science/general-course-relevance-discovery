@@ -1,11 +1,10 @@
 TYPE (g - grad/u - undergrad),school,years,url
 u,purdue,,http://catalog.purdue.edu/mime/media/8/3232/2017-18+Courses.pdf
 u,northcentralmissouri,18-19,https://www.ncmissouri.edu/academics/wp-content/uploads/sites/2/2018/06/2018-19-Final-Version-ADA-Compliant.pdf
-u,notredame,18-19,
-u,notredame,19-20,https://www.notredamecollege.edu/wp-content/uploads/2020/05/2019-2020-Undergraduate-Catalog-5.4.2020.pdf
-u,notredame,20-21,https://www.notredamecollege.edu/wp-content/uploads/2020/06/2020-2021-Undergraduate-Catalog-6.18.2020.pdf
-g,notredame,19-20,https://www.notredamecollege.edu/wp-content/uploads/2020/05/Graduate_Catalog_-2019-2020-as-of-3.26.19.pdf
-g,notredame,20-21,https://www.notredamecollege.edu/wp-content/uploads/2020/05/Graduate-Catalog-2020-2021.pdf
+u,notredamecollege,19-20,https://www.notredamecollege.edu/wp-content/uploads/2020/05/2019-2020-Undergraduate-Catalog-5.4.2020.pdf
+u,notredamecollege,20-21,https://www.notredamecollege.edu/wp-content/uploads/2020/06/2020-2021-Undergraduate-Catalog-6.18.2020.pdf
+g,notredamecollege,19-20,https://www.notredamecollege.edu/wp-content/uploads/2020/05/Graduate_Catalog_-2019-2020-as-of-3.26.19.pdf
+g,notredamecollege,20-21,https://www.notredamecollege.edu/wp-content/uploads/2020/05/Graduate-Catalog-2020-2021.pdf
 u,northwestern,17-18,https://nc.edu/wp-content/uploads/2018/05/2017-18-College-Catalog_Updated-041718.pdf
 u,northwestern,18-19,https://nc.edu/college-catalog/2018-college-catalog-070219_v6/
 u,northwestern,19-20,https://nc.edu/wp-content/uploads/2020/04/2019-College-Catalog_v4.pdf
