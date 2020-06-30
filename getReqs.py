@@ -4,9 +4,12 @@ from sys import platform
 os.system("pip install -r requirements.txt")
 os.system("python -m spacy download en")
 if platform == "linux":
-    print("--------------------------------------------------------------------------")
-    print("Use your package manager to install 'enchant'")
-    print("--------------------------------------------------------------------------")
+    try:
+        os.system("apt install enchant")
+    except:
+        print("--------------------------------------------------------------------------")
+        print("Use your package manager to install 'enchant'")
+        print("--------------------------------------------------------------------------")
 elif platform == "darwin":
     os.system("brew install enchant")
 elif platform == "win32":
