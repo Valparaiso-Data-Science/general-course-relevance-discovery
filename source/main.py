@@ -184,12 +184,11 @@ for train_index, test_index in skf.split(features, labels):
     rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
     rf.fit(X_train, y_train)
     preds = rf.predict(X_test)
-    errors[count] = abs(preds - y_test)
-    count+=1
+    errors.append(abs(preds - y_test))
 
 for error in errors:
     print("Mean Absolute Error for Forest #" + count + ": ", round(np.mean(errors), 2), 'degrees.')
-    count -= 1
+    count += 1
     
 
 '''
