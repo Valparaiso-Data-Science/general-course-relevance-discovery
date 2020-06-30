@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-csv_f=$1
-out_d="${2:-out}"
+csv_f=$1 #csv file
+out_d="${2:-pdfs}" #output directory
 
 [ -z $csv_f ] && echo "Missing CSV file. Exiting..." && exit 1
 
