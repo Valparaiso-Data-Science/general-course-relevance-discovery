@@ -176,7 +176,10 @@ for train_index, test_index in skf.split(features, labels):
     X_train = [features.iloc[i] for i in train_index]
     X_test=[features.iloc[i] for i in test_index]
     # y_train, y_test = [labels[index] for index in train_index], [labels[index] for index in test_index]
-    print('X TRAIN: ' + X_train + ' X TEST: '+ X_test)
+    print('X TRAIN: ', end = '')
+    print(X_train)
+    print('X TEST: ', end = '')
+    print(X_test)
     # print('Y TRAIN: ' + y_train + '\n Y TEST: '+ y_test)
 
 '''
