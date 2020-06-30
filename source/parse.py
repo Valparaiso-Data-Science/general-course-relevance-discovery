@@ -127,6 +127,33 @@ def createStack(xml, stack):
     for subLevel in xml:
         createStack(subLevel, stack)
 
+
+def trimFile(in_path, out_path, filename, line_num_dict):
+    """
+    Write out a new file with content from source file that is only between the lines specified in line_num_dict
+
+    :param in_path: source directory
+    :param out_path: destination directory
+    :param filename: the particular file
+    :param line_num_dict: dictionary with keys represented by lowercase versions of filenames (no extension) and values
+                        tuples of two numbers (start line and end line)
+    """
+
+    if filename.endswith(".xml") and filename[:filename.rfind(".")].lower() in line_num_dict:
+        start, end = line_num_dict[filename[:filename.rfind(".")].lower()]
+
+        new_file_lines = []
+
+        with open(in_path + "/" + filename, "r") as f:
+            lines = f.readlines()
+
+            new_file_lines = lines[start - 1:end]
+
+        new_filename = filename[:filename.rfind(".")] + "TRIMMED" + filename[filename.rfind("."):]
+        with open(out_path + "/" + new_filename, "w") as f:
+            f.writelines(new_file_lines)
+
+
 def fixTags(in_path, out_path, filename):
     """
     Removes unnecessary tags, as well as the contents of Figure tags.

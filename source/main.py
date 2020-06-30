@@ -1,5 +1,5 @@
 # files in the current directory
-from parse import parseXML, fixTags
+from parse import parseXML, fixTags, trimFile
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
@@ -46,7 +46,6 @@ def prepare():
         os.mkdir('../temp_data/superTrimmedPDFs')
     except FileExistsError:
         print("../temp_data/superTrimmedPDFs already exists. Clearing all files in it.")
-
         # clear folder of previous files
         for file in os.listdir('../temp_data/superTrimmedPDFs'):
             os.unlink('../temp_data/superTrimmedPDFs/' + file)
