@@ -212,9 +212,15 @@ def fixTags(in_path, out_path, filename):
                 # remove story tags
                 text = re.sub(r"<Story\b.*>", "", text)
                 text = text.replace("</Story>", "")
-                #If there is a <P> tag with a new line directly after it, delete the new line
-                if re.match('<P>\n', text) is not None:
-                    text = text.replace('\n', '')
+
+                text = text.replace("<P>\n", "<P>")
+
+                # remove bad utf-8 character
+                text = text.replace(str(chr(65535)), "")
+
+                # some files have improperly rendered ampersand; replace with XML-acceptable version
+                text = text.replace("& ", "&amp; ")
+
                 #Writes the processed line to the super trimmed XML
                 newfile.write(text)
             #Closing our open <Part> tag so we don't get any errors

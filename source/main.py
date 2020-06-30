@@ -77,7 +77,7 @@ def makeCSV(filename):
     global supertrimmed_dir
 
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh']
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
 
     for college in wn_colleges:
         if re.match(college,filename) is not None:
@@ -85,55 +85,18 @@ def makeCSV(filename):
             break
         else:
             needsWN = False
+
     #Checks if the college needs Word Ninja
     if needsWN:
-        # container of intermediary data files for potential deletion
-        deletable_filenames = []
+        deletable = filename
 
-        #Pass the super trimmed XML into Word Ninja
-        try:
-            # save current name for potential deletion later
-            deletable = filename
+        # reintroduce spaces and reassign `filename` to cleaned file
+        filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
+        filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
 
-            # reintroduce spaces and reassign `filename` to cleaned file
-            filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
-
-            deletable_filenames.append(deletable)
-
-        except xml.etree.ElementTree.ParseError:
-            # save current name for potential deletion later
-            deletable = filename
-
-            # clean bad characters (so far only utf 65535) and reassign `filename` to cleaned file
-            filename = ignore_bad_chars(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
-            deletable_filenames.append(deletable)
-
-
-            # save current name for potential deletion later
-            deletable = filename
-
-            # correct bad apersands if any (replace `&` with `&amp;`) and reassign `filename` to cleaned file
-            filename = correct_ampersands(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
-            deletable_filenames.append(deletable)
-
-            # save current name for potential deletion later
-            deletable = filename
-
-            # correct spaces and reassign `filename` to cleaned file
-            filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
-            deletable_filenames.append(deletable)
-
-        #Delete the old, not Word Ninja-ed file(s)
         if not dirty:
-            # print the whole list of deletable filenames
-            print(f'\nNow deleting: {*deletable_filenames,}')
-
-            for item in deletable_filenames:
-                os.remove(supertrimmed_dir + "/" + item)
+            print("\nNow deleting:", deletable)
+            os.unlink(supertrimmed_dir + "/" + deletable)
 
     # use parseXML to find course headers and descriptions
     CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
