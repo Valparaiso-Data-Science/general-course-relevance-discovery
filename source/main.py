@@ -47,16 +47,18 @@ def prepare():
     except FileExistsError:
         print("../temp_data/superTrimmedPDFs already exists. Clearing all files in it.")
         # clear folder of previous files
-        for file in Bar("Cleaning supertrimmmed...").iter(os.listdir('../temp_data/superTrimmedPDFs')):
-            os.unlink('../temp_data/superTrimmedPDFs/' + file)
+        if len(os.listdir('../temp_data/superTrimmedPDFs')) > 0:
+            for file in Bar("Cleaning supertrimmmed...").iter(os.listdir('../temp_data/superTrimmedPDFs')):
+                os.unlink('../temp_data/superTrimmedPDFs/' + file)
     try:
         os.mkdir('../courses')
     except FileExistsError:
         print("../courses already exists. Clearing all files in it.")
 
         # clear folder of previous files
-        for file in Bar("Cleaning courses...").iter(os.listdir('../courses')):
-            os.unlink('../courses/' + file)
+        if len(os.listdir('../courses')) > 0:
+            for file in Bar("Cleaning courses...").iter(os.listdir('../courses')):
+                os.unlink('../courses/' + file)
 prepare()
 
 # make trimmed files
