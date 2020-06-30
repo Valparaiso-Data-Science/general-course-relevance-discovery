@@ -8,7 +8,7 @@ from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 #libraries
 from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import export_text
 from sklearn.tree import export_graphviz
@@ -168,6 +168,17 @@ features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
 labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
+
+skf = StratifiedKFold(n_splits=10, random_state = 19)
+# skf.split(features,labels)
+for train_index, test_index in skf.split(features, labels):
+    print("TRAIN:", train_index, "TEST:", test_index)
+    X_train, X_test = features[train_index], features[test_index]
+    y_train, y_test = labels[train_index], labels[test_index]
+    print('X TRAIN: ' + X_train + '\n X TEST: '+ X_test)
+    print('Y TRAIN: ' + y_train + '\n Y TEST: '+ y_test)
+
+'''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
 
 rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
@@ -180,11 +191,13 @@ errors = abs(preds - answer_test)
 
 print("Mean Absolute Error: ", round(np.mean(errors), 2), 'degrees.')
 
-'''
+
 print("training tree")
 dTree = decisionTree(feature_train,answer_train,20)
 test_set_prediction = dTree.predict(feature_test)
-'''
+
+
+#ADD IN CODE TO GET AND PRINT THE GOOD GOOD TREE
 dTree = rf.estimators_[5]
 #print("Accuracy:",accuracy_score(answer_test, preds))
 
@@ -197,4 +210,4 @@ mlaoutput = pd.DataFrame(preds,columns=["machineAlg"])
 
 answer_test.append(mlaoutput).to_csv("answer.csv")
 answer_test['Predicted'] = pd.Series(preds)
-
+'''
