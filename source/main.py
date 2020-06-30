@@ -172,7 +172,8 @@ print("Splitting Data")
 skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
 # skf.split(features,labels)
 errors = []
-accs = []
+accs = [0]*10
+count=0
 for train_index, test_index in skf.split(features, labels):
     print("TRAIN:", train_index, "TEST:", test_index)
     # X_train = [features.iloc[i] for i in train_index]
@@ -188,14 +189,14 @@ for train_index, test_index in skf.split(features, labels):
     i=0
     for pred in preds:
         if pred == y_test[i]:
-            accs.append(1)
-        else:
-            accs.append(0)
+            accs[count]+=1
         i +=1
+    accs[count] = (accs[count]/len(preds))*100
+    count += 1
 count = 0
-for error in errors:
+for acc in accs:
     #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-    print("Accuracy for Forest #"+ str(count)+ ": " + str((sum(accs)/len(accs))*100) + " percent")
+    print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
     count += 1
     
 
