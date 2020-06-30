@@ -186,11 +186,11 @@ for train_index, test_index in skf.split(features, labels):
     rf.fit(X_train, y_train)
     preds = rf.predict(X_test)
     errors.append(round(np.mean(abs(preds - y_test)),2))
-    accs.append(accuracy_score(y_test,preds))
+    #accs.append(accuracy_score(y_test,preds))
 
 for error in errors:
     print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-    print("Accuracy for Forest #"+ str(count)+ ": " + str(accs[count]))
+    #print("Accuracy for Forest #"+ str(count)+ ": " + str(accs[count]))
     count += 1
     
 
