@@ -173,8 +173,8 @@ skf = StratifiedKFold(n_splits=10, random_state = 19)
 # skf.split(features,labels)
 for train_index, test_index in skf.split(features, labels):
     print("TRAIN:", train_index, "TEST:", test_index)
-    X_train, X_test = features[train_index], features[test_index]
-    y_train, y_test = labels[train_index], labels[test_index]
+    X_train, X_test = [features[index] for index in train_index], [features[index] for index in test_index]
+    y_train, y_test = [labels[index] for index in train_index], [labels[index] for index in test_index]
     print('X TRAIN: ' + X_train + '\n X TEST: '+ X_test)
     print('Y TRAIN: ' + y_train + '\n Y TEST: '+ y_test)
 
