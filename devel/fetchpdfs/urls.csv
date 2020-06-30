@@ -1,5 +1,7 @@
 TYPE (g - grad/u - undergrad),school,years,url
-u,purdue,,http://catalog.purdue.edu/mime/media/8/3232/2017-18+Courses.pdf
+u,purdue,17-18,http://catalog.purdue.edu/mime/media/8/3232/2017-18+Courses.pdf
+u,purdue,18-19,
+u,purdue,19-20,https://catalog.purdue.edu/mime/media/10/4069/Courses.pdf
 u,northcentralmissouri,18-19,https://www.ncmissouri.edu/academics/wp-content/uploads/sites/2/2018/06/2018-19-Final-Version-ADA-Compliant.pdf
 u,notredamecollege,19-20,https://www.notredamecollege.edu/wp-content/uploads/2020/05/2019-2020-Undergraduate-Catalog-5.4.2020.pdf
 u,notredamecollege,20-21,https://www.notredamecollege.edu/wp-content/uploads/2020/06/2020-2021-Undergraduate-Catalog-6.18.2020.pdf
