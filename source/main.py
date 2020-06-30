@@ -47,7 +47,7 @@ def prepare():
     except FileExistsError:
         print("../temp_data/superTrimmedPDFs already exists. Clearing all files in it.")
         # clear folder of previous files
-        for file in os.listdir('../temp_data/superTrimmedPDFs'):
+        for file in Bar("Cleaning supertrimmmed...").iter(os.listdir('../temp_data/superTrimmedPDFs')):
             os.unlink('../temp_data/superTrimmedPDFs/' + file)
     try:
         os.mkdir('../courses')
@@ -55,13 +55,13 @@ def prepare():
         print("../courses already exists. Clearing all files in it.")
 
         # clear folder of previous files
-        for file in os.listdir('../courses'):
+        for file in Bar("Cleaning courses...").iter(os.listdir('../courses')):
             os.unlink('../courses/' + file)
 prepare()
 
 # make trimmed files
 try:
-    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs ../temp_data/TRIMMED")
+    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs " + trimmed_dir)
 except:
     print("Filetrimming step failed, we'll get em next time.")
     quit()
@@ -78,7 +78,7 @@ def makeCSV(filename):
 
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
-    
+
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
