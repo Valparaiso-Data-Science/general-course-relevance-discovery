@@ -171,19 +171,26 @@ print("Splitting Data")
 
 skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
 # skf.split(features,labels)
+errors = []
+count = 0
 for train_index, test_index in skf.split(features, labels):
     print("TRAIN:", train_index, "TEST:", test_index)
     # X_train = [features.iloc[i] for i in train_index]
     # X_test=[features.iloc[i] for i in test_index]
     X_train = features.iloc[train_index]
     X_test = features.iloc[test_index]
-    # y_train, y_test = [labels[index] for index in train_index], [labels[index] for index in test_index]
-    print('X TRAIN: ', end = '')
-    print(X_train)
-    print('X TEST: ', end = '')
-    print(X_test)
+    y_train = labels.iloc[train_index]
+    y_test = labels.iloc[test_index]
+    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+    rf.fit(X_train, y_train)
+    preds = rf.predict(X_test)
+    errors[count] = abs(preds - y_test)
+    count+=1
+
+for error in errors:
+    print("Mean Absolute Error for Forest #" + count + ": ", round(np.mean(errors), 2), 'degrees.')
+    count -= 1
     
-    # print('Y TRAIN: ' + y_train + '\n Y TEST: '+ y_test)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
