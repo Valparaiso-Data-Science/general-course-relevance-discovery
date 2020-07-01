@@ -15,7 +15,7 @@ import pydotplus
 import graphviz
 
 def randForest(features,labels):
-    skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
+    skf = StratifiedKFold(n_splits=5,shuffle=True, random_state = 19)
     # skf.split(features,labels)
     # errors = []
     accs = [0]*10
