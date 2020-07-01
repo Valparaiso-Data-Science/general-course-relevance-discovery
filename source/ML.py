@@ -46,7 +46,7 @@ def randForest(features,labels,splits):
         X_test = features.iloc[test_index]
         y_train = labels.iloc[train_index]
         y_test = labels.iloc[test_index]
-        rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)
+        rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
         rf.fit(X_train, y_train)
         preds = rf.predict(X_test)
         #errors.append(round(np.mean(abs(preds - y_test)),2))
