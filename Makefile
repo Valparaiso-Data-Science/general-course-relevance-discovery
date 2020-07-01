@@ -4,6 +4,10 @@ all:
 
 
 
+setup:
+	python3 devel/grobid/getgrobidpythonclient.py
+	python3 getReqs.py
+
 db:
 	python3 source/main.py
 
