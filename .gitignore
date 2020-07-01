@@ -14,3 +14,4 @@ source/superTrimmedPDFs
 *.pdf
 *.orig
 source/temp_data
+grobid-client-python/
