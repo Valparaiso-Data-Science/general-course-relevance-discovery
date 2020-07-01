@@ -93,7 +93,7 @@ def svm(features,labels,splits):
     count = 0
     for acc in accs:
         #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-        print("Manual Accuracy for SVM #"+ str(count)+ ": " + str(acc) + " percent")
+        print("Accuracy for SVM #"+ str(count)+ ": " + str(acc) + " percent")
         count += 1
         
 def decisionTree(feature_train,answer_train,depth):
