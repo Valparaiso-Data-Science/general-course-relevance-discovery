@@ -88,6 +88,7 @@ u,kalamazoo,19-20,http://www.kzoo.edu/catalog/KalamazooCollegeAcademicCatalog201
 u,northwestern,16-17,https://www.registrar.northwestern.edu/documents/registration/catalog-archive/2016-17_NU_Undergraduate_Catalog.pdf
 u,northwestern,17-18,https://www.registrar.northwestern.edu/documents/registration/catalog-archive/2017-18_NU_Undergraduate_Catalog.pdf
 u,northwestern,18-19,https://www.registrar.northwestern.edu/documents/registration/catalog-archive/2018-2019_undergraduate_catalog.pdf
+u,northwestern,19-20,https://catalogs.northwestern.edu/pdf/2019-2020-undergraduate.pdf
 u,rosemont,17-18,https://www.rosemont.edu/_resources/site-pdfs/registrar/academic_catalogs/2017-2018_academic_catalog.pdf
 u,rosemont,18-19,https://www.rosemont.edu/_resources/site-pdfs/registrar/2018-2019/2018-2019-academic.catalog.pdf
 u,rosemont,19-20,https://www.rosemont.edu/academics/registrar/2019-2020-academic-catalog.pdf
@@ -104,3 +105,8 @@ u,mit,16-17,http://catalog.mit.edu/archive/mit-subjects-16-17-aug2016.pdf
 u,mit,17-18,http://catalog.mit.edu/archive/mit-subjects-17-18.pdf
 u,mit,18-19,http://catalog.mit.edu/archive/mit-subjects-18-19.pdf
 u,mit,19-20,http://catalog.mit.edu/archive/mit-subjects-19-20.pdf
+u,mckendree,16-17,https://www.mckendree.edu/academics/info/course-catalogs/undergraduate-catalog-2016-2017.pdf
+u,mckendree,17-18,https://www.mckendree.edu/academics/info/course-catalogs/undergraduate-catalog-2017-2018.pdf
+u,mckendree,18-19,https://www.mckendree.edu/academics/info/course-catalogs/undergraduate-catalog-2018-2019.pdf
+u,mckendree,19-20,https://www.mckendree.edu/academics/info/course-catalogs/undergraduate-catalog-2019-2020.pdf
+u,mckendree,20-21,https://www.mckendree.edu/academics/info/course-catalogs/undergraduate-catalog-2020-2021.pdf
