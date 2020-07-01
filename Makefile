@@ -17,4 +17,4 @@ clean:
 	rm -rf courses/
 	rm -rf temp_data/
 
-.PHONY: db clean
+.PHONY: db clean setup
