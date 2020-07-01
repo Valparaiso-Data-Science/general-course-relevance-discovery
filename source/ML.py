@@ -88,7 +88,7 @@ def svm(features,labels,splits):
             i +=1
         accs[count] = (accs[count]/len(preds))*100
         count += 1
-        print('Accuracy: ' + str(accuracy_score(X_test,y_test)))
+        #print('Accuracy: ' + str(accuracy_score(X_test,y_test)))
         print(confusion_matrix(y_test, preds))
     count = 0
     for acc in accs:
