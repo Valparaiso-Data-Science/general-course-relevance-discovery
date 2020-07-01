@@ -7,10 +7,6 @@ from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 #libraries
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.tree import export_text
-from sklearn.tree import export_graphviz
 import os
 import pandas as pd
 import numpy as np
@@ -77,7 +73,7 @@ def makeCSV(filename):
     global supertrimmed_dir
 
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
 
     for college in wn_colleges:
         if re.match(college,filename) is not None:
@@ -115,35 +111,3 @@ topicModel = pd.concat(df_container)
 cleaned_df = newClean(topicModel)
 print("Creating '../courses/AllSchools.csv'...")
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
-'''
-#Previously untouched last semester Spring2020 from here down
-print("\tcleaned")
-vect_df = vectorizer(cleaned_df)
-print("\tvect")
-pruned_df = cleanVectorizer(vect_df)
-print("\tpruned")
-labeled_df = labelTargetsdf(pruned_df)
-print("\tfound targets")
-#%%
-features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
-labels = labeled_df["curricula relevance"]
-
-print("Splitting Data")
-feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
-
-print("training tree")
-dTree = decisionTree(feature_train,answer_train,20)
-test_set_prediction = dTree.predict(feature_test)
-
-print("Accuracy:",accuracy_score(answer_test, test_set_prediction))
-
-graph = export_text(dTree,feature_names=list(features.columns))
-print(graph)
-print(export_graphviz(dTree,feature_names=list(features.columns),filled=True,impurity=False,label='root'))
-
-
-mlaoutput = pd.DataFrame(test_set_prediction,columns=["machineAlg"])
-
-answer_test.append(mlaoutput).to_csv("answer.csv")
-answer_test['Predicted'] = pd.Series(test_set_prediction)
-'''
