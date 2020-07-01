@@ -193,6 +193,7 @@ for train_index, test_index in skf.split(features, labels):
         i +=1
     accs[count] = (accs[count]/len(preds))*100
     count += 1
+    print('R^2: ' + str(rf.score(X_test,y_test)))
 count = 0
 for acc in accs:
     #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
