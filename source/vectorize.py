@@ -89,7 +89,7 @@ def noNumbers(inputString):
 
 def vectorizer(courseDesc_df):
     vectorizer=CountVectorizer(ngram_range=(1, 1))
-    courseDesc_df = courseDesc_df.sample(n=5000,random_state=14)
+    # courseDesc_df = courseDesc_df.sample(n=5000,random_state=14)
     print(type(courseDesc_df))
     vectors = vectorizer.fit_transform(courseDesc_df['Descriptions']).toarray()
 
