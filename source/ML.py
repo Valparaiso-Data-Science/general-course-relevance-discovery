@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jul 22 13:50:39 2019
-
 @author: nrandle
 """
 from sklearn.model_selection import train_test_split, StratifiedKFold
@@ -59,4 +58,3 @@ def visTree(dTree):
     dot_data = tree.export_graphviz(dTree, out_file=None)
     graph = graphviz.Source(dot_data)
     return graph
-

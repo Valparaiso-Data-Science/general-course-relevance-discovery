@@ -1,12 +1,12 @@
 # files in the current directory
 from parse import parseXML, fixTags
-#from topicModel import plot_10_most_common_words, listofDSCourse
+# from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree
+from ML import decisionTree, visTree, randForest
 from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
-#libraries
+# libraries
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn.metrics import accuracy_score
@@ -36,6 +36,7 @@ dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
+
 def prepare():
     # make directories for intermediary and final data
     print("Preparing temporary data directory...")
@@ -59,6 +60,8 @@ def prepare():
         # clear folder of previous files
         for file in os.listdir('../courses'):
             os.unlink('../courses/' + file)
+
+
 prepare()
 
 # make trimmed files
@@ -68,38 +71,36 @@ except:
     print("Filetrimming step failed, we'll get em next time.")
     quit()
 
-
-Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
+Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir, supertrimmed_dir, filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
 
 def makeCSV(filename):
-
     # indicate that we used `supertrimmed_dir` variable as defined at the top of the file
     global supertrimmed_dir
 
-    #Checks if we are looking at a college we know needs WordNinja
+    # Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh']
-    
+
     for college in wn_colleges:
-        if re.match(college,filename) is not None:
+        if re.match(college, filename) is not None:
             needsWN = True
             break
         else:
             needsWN = False
-    #Checks if the college needs Word Ninja
+    # Checks if the college needs Word Ninja
     if needsWN:
         # container of intermediary data files for potential deletion
         deletable_filenames = []
 
-        #Pass the super trimmed XML into Word Ninja
+        # Pass the super trimmed XML into Word Ninja
         try:
             # save current name for potential deletion later
             deletable = filename
 
             # reintroduce spaces and reassign `filename` to cleaned file
             filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
 
             deletable_filenames.append(deletable)
 
@@ -109,16 +110,15 @@ def makeCSV(filename):
 
             # clean bad characters (so far only utf 65535) and reassign `filename` to cleaned file
             filename = ignore_bad_chars(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
             deletable_filenames.append(deletable)
-
 
             # save current name for potential deletion later
             deletable = filename
 
             # correct bad apersands if any (replace `&` with `&amp;`) and reassign `filename` to cleaned file
             filename = correct_ampersands(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
             deletable_filenames.append(deletable)
 
             # save current name for potential deletion later
@@ -126,10 +126,10 @@ def makeCSV(filename):
 
             # correct spaces and reassign `filename` to cleaned file
             filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
-            filename = filename[filename.rfind("/")+1:]  # chop off the directory path, only leave name filename
+            filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
             deletable_filenames.append(deletable)
 
-        #Delete the old, not Word Ninja-ed file(s)
+        # Delete the old, not Word Ninja-ed file(s)
         if not dirty:
             # print the whole list of deletable filenames
             print(f'\nNow deleting: {*deletable_filenames,}')
@@ -139,7 +139,8 @@ def makeCSV(filename):
 
     # use parseXML to find course headers and descriptions
     CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
-    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
+    CSV.to_csv("../courses/" + filename.replace("xml", "csv"), encoding="utf-8-sig")
+
 
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
 
@@ -150,12 +151,11 @@ for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
 # concatenate list into one joint data frame
 topicModel = pd.concat(df_container)
 
-
 cleaned_df = newClean(topicModel)
 print("Creating '../courses/AllSchools.csv'...")
 cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
 
-#Previously untouched last semester Spring2020 from here down
+# Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
 print("\tvect")
@@ -163,57 +163,28 @@ pruned_df = cleanVectorizer(vect_df)
 print("\tpruned")
 labeled_df = labelTargetsdf(pruned_df)
 print("\tfound targets")
-#%%
-features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
+# %%
+features = labeled_df.drop("curricula relevance", axis=1).astype("bool")
 labels = labeled_df["curricula relevance"]
 
-# testing imbalanced learn
-from imblearn.under_sampling import RandomUnderSampler
-from collections import Counter
+print("Splitting Data")
 
-rus = RandomUnderSampler(sampling_strategy=0.75, random_state=42)
+# testing out undersampling
+from collections import Counter
+from imblearn.under_sampling import RandomUnderSampler # doctest: +NORMALIZE_WHITESPACE
+
+num_dsci = sum(labels)
+num_nodsci = len(labels) - num_dsci
+strat_dict = {0: num_nodsci/10, 1: num_dsci/5}
+rus = RandomUnderSampler(sampling_strategy=strat_dict, random_state=42)
 X_res, y_res = rus.fit_resample(features, labels)
 
 print('Original dataset shape %s' % Counter(labels))
 print('Resampled dataset shape %s' % Counter(y_res))
-
-print('Sample indices:')
+print('Resampled indices (?):')
 print(rus.sample_indices_)
 
-'''
-print("Splitting Data")
-
-skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
-# skf.split(features,labels)
-errors = []
-accs = [0]*10
-count=0
-for train_index, test_index in skf.split(features, labels):
-    print("TRAIN:", train_index, "TEST:", test_index)
-    # X_train = [features.iloc[i] for i in train_index]
-    # X_test=[features.iloc[i] for i in test_index]
-    X_train = features.iloc[train_index]
-    X_test = features.iloc[test_index]
-    y_train = labels.iloc[train_index]
-    y_test = labels.iloc[test_index]
-    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
-    rf.fit(X_train, y_train)
-    preds = rf.predict(X_test)
-    #errors.append(round(np.mean(abs(preds - y_test)),2))
-    i=0
-    for pred in preds:
-        if pred == y_test[i]:
-            accs[count]+=1
-        i +=1
-    accs[count] = (accs[count]/len(preds))*100
-    count += 1
-    print('R^2: ' + str(rf.score(X_test,y_test)))
-count = 0
-for acc in accs:
-    #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-    print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
-    count += 1
-'''
+#randForest(features, labels)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
@@ -248,3 +219,4 @@ mlaoutput = pd.DataFrame(preds,columns=["machineAlg"])
 answer_test.append(mlaoutput).to_csv("answer.csv")
 answer_test['Predicted'] = pd.Series(preds)
 '''
+
