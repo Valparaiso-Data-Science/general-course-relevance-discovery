@@ -2,7 +2,7 @@
 from parse import parseXML, fixTags
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree
+from ML import decisionTree,visTree,randForest
 from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
@@ -169,36 +169,7 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-skf = StratifiedKFold(n_splits=10,shuffle=True, random_state = 19)
-# skf.split(features,labels)
-errors = []
-accs = [0]*10
-count=0
-for train_index, test_index in skf.split(features, labels):
-    print("TRAIN:", train_index, "TEST:", test_index)
-    # X_train = [features.iloc[i] for i in train_index]
-    # X_test=[features.iloc[i] for i in test_index]
-    X_train = features.iloc[train_index]
-    X_test = features.iloc[test_index]
-    y_train = labels.iloc[train_index]
-    y_test = labels.iloc[test_index]
-    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
-    rf.fit(X_train, y_train)
-    preds = rf.predict(X_test)
-    #errors.append(round(np.mean(abs(preds - y_test)),2))
-    i=0
-    for pred in preds:
-        if pred == y_test[i]:
-            accs[count]+=1
-        i +=1
-    accs[count] = (accs[count]/len(preds))*100
-    count += 1
-    print('R^2: ' + str(rf.score(X_test,y_test)))
-count = 0
-for acc in accs:
-    #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-    print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
-    count += 1
+randForest(features, labels)
     
 
 '''

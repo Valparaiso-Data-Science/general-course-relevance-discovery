@@ -6,6 +6,7 @@ Created on Mon Jul 22 13:50:39 2019
 """
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn import tree,metrics
+from sklearn.metrics import confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import export_graphviz
 from io import StringIO
@@ -39,6 +40,7 @@ def randForest(features,labels):
         accs[count] = (accs[count]/len(preds))*100
         count += 1
         print('R^2: ' + str(rf.score(X_test,y_test)))
+        print(confusion_matrix(y_test, preds))
     count = 0
     for acc in accs:
         #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
