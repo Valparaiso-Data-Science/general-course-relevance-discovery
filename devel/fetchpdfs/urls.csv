@@ -1,4 +1,6 @@
 TYPE (g - grad/u - undergrad/b - both),school,years,url
+u,alma,16-17,https://www.alma.edu/live/files/1580-2016-17-academic-catalog
+u,alma,17-18,https://www.alma.edu/live/files/2266-2017-18-academic-catalog
 u,alma,18-19,https://www.alma.edu/live/files/2859-2018-19-academic-catalog
 u,alma,19-20,https://www.alma.edu/live/files/3555-2019-20-academic-catalog
 u,ballstate,19-20,https://www.bsu.edu/-/media/www/departmentalcontent/academicsystems/smartcatalog%20pdfs/19-20%20undergraduate%20catalog%20pdf.pdf?la=en&hash=950D0FCE12C3BF8D530AE2FE84F2ECA168878D90
