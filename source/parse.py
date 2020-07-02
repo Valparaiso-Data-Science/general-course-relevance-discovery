@@ -163,7 +163,7 @@ def trimFile(in_path, out_path, filename, line_num_dict):
             f.writelines(new_file_lines)
 
 
-def fixTags(in_path, out_path, filename):
+def cleanXML(in_path, out_path, filename):
     """
     Removes unnecessary tags, as well as the contents of Figure tags.
     (do we need a more precise/elaborate description here?)
