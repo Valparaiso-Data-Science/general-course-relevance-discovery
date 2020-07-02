@@ -5,7 +5,7 @@ all:
 
 
 db:
-	python3 source/main.py
+	python3 source/CreateDB.py
 
 clean:
 	rm -rf courses/
