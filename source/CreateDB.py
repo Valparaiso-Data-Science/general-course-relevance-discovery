@@ -1,5 +1,5 @@
 # files in the current directory
-from parse import parseXML, fixTags, trimFile
+from parse import parseXML, cleanXML, trimFile
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
@@ -63,7 +63,7 @@ except:
     quit()
 
 
-Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
+Parallel(n_jobs=-1)(delayed(cleanXML)(trimmed_dir , supertrimmed_dir , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
 
@@ -73,7 +73,7 @@ def makeCSV(filename):
     global supertrimmed_dir
 
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] #, 'Youngstown']
 
     for college in wn_colleges:
         if re.match(college,filename) is not None:
