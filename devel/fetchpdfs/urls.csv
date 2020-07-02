@@ -1,5 +1,6 @@
 TYPE (g - grad/u - undergrad/b - both),school,years,url
 u,alma,18-19,https://www.alma.edu/live/files/2859-2018-19-academic-catalog
+u,alma,19-20,https://www.alma.edu/live/files/3555-2019-20-academic-catalog
 u,ballstate,19-20,https://www.bsu.edu/-/media/www/departmentalcontent/academicsystems/smartcatalog%20pdfs/19-20%20undergraduate%20catalog%20pdf.pdf?la=en&hash=950D0FCE12C3BF8D530AE2FE84F2ECA168878D90
 g,ballstate,19-20,https://www.bsu.edu/-/media/www/departmentalcontent/academicsystems/smartcatalog%20pdfs/19-20%20graduate%20catalog%20pdf.pdf?la=en&hash=8A8E1A2B28EFFDAB5B12030F9BA30A676779129D
 u,brown,20-21,https://bulletin.brown.edu/pdf/2020-21-cab.pdf
