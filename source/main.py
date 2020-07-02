@@ -27,6 +27,7 @@ from progress.bar import Bar
 topicModel = pd.DataFrame()
 
 # directory variables
+source_dir = "../fullPDFs"
 trimmed_dir = "../temp_data/TRIMMED"
 supertrimmed_dir = "../temp_data/superTrimmedPDFs"
 
@@ -61,12 +62,24 @@ def prepare():
                 os.unlink('../courses/' + file)
 prepare()
 
-# make trimmed files
+
+# look for a csv file containing line number information (from which line to which line to trim) and gather the relevant
+#   information (filename, start line, end line) in a dictionary
+line_num_dict = {}
 try:
-    os.system("bash ../pre/fileTrimmer.sh ../Catalogs.csv ../fullPDFs " + trimmed_dir)
-except:
-    print("Filetrimming step failed, we'll get em next time.")
-    quit()
+    cat_df = pd.read_csv("../Catalogs.csv")
+
+    for index, row in cat_df.iterrows():
+        if (not np.isnan(row[1])) and (not np.isnan(row[2])):
+            line_num_dict[row[0].lower()] = int(row[1]), int(row[2])
+
+except FileNotFoundError:
+    print("CSV file with trimming line numbers not found.")
+
+# trim file (whenever line number information available, otherwise keep whole file)
+Parallel(n_jobs=-1)(delayed(trimFile)(source_dir, trimmed_dir, filename, line_num_dict)
+                    for filename in Bar('Trimming Files').iter(os.listdir(source_dir)))
+
 
 
 Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)

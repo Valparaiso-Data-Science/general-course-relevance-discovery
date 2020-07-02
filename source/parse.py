@@ -139,15 +139,24 @@ def trimFile(in_path, out_path, filename, line_num_dict):
                         tuples of two numbers (start line and end line)
     """
 
-    if filename.endswith(".xml") and filename[:filename.rfind(".")].lower() in line_num_dict:
-        start, end = line_num_dict[filename[:filename.rfind(".")].lower()]
+    # if xml file
+    if filename.endswith(".xml"):
+
+        # if information about at which lines to trim file, assign line numbers to `start` and `end`
+        if filename[:filename.rfind(".")].lower() in line_num_dict:
+            start, end = line_num_dict[filename[:filename.rfind(".")].lower()]
 
         new_file_lines = []
 
         with open(in_path + "/" + filename, "r") as f:
             lines = f.readlines()
 
-            new_file_lines = lines[start - 1:end]
+            # if found information about line numbers, use it to trim out the lines
+            if filename[:filename.rfind(".")].lower() in line_num_dict:
+                new_file_lines = lines[start - 1:end]
+            # otherwise just save the whole file
+            else:
+                new_file_lines = lines
 
         new_filename = filename[:filename.rfind(".")] + "TRIMMED" + filename[filename.rfind("."):]
         with open(out_path + "/" + new_filename, "w") as f:
@@ -228,6 +237,9 @@ def fixTags(in_path, out_path, filename):
                 # some files have improperly rendered ampersand; replace with XML-acceptable version
                 text = text.replace("& ", "&amp; ")
 
+                # get rid of tags like `<?xml version="1.0" encoding="UTF-8" ?>`
+                text = re.sub(r"<[?!].*>", "", text)
+
                 # num of p in tags in processed line
                 ps_in_processed = [i.start() for i in re.finditer('<P>', text)]
 
@@ -251,6 +263,8 @@ def fixTags(in_path, out_path, filename):
 
 def alternativeFixTags(in_path, out_path, filename):
     """
+    --IN DEVELOPMENT--
+
     Identical functionality as fixTags above, but hopefully without a bug that makes a P tag disappear.
     (do we need a more precise/elaborate description here?)
 
