@@ -1,5 +1,5 @@
 # files in the current directory
-from parse import parseXML, fixTags, trimFile
+from parse import parseXML, cleanXML, trimFile
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
@@ -63,7 +63,7 @@ except:
     quit()
 
 
-Parallel(n_jobs=-1)(delayed(fixTags)(trimmed_dir , supertrimmed_dir , filename)
+Parallel(n_jobs=-1)(delayed(cleanXML)(trimmed_dir , supertrimmed_dir , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
 
 
