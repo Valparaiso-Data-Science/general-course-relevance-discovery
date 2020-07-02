@@ -30,9 +30,9 @@ from progress.bar import Bar
 topicModel = pd.DataFrame()
 
 # directory variables
-source_dir = "../fullPDFs"
-trimmed_dir = "../temp_data/TRIMMED"
-supertrimmed_dir = "../temp_data/superTrimmedPDFs"
+SOURCE_DIR = "../fullPDFs"
+TRIMMED_DIR = "../temp_data/TRIMMED"
+SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
 
 # toggle for keeping data from intermediary stages
 dirty = False
@@ -42,7 +42,8 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 prepare()
 
 
-# look for a csv file containing line number information (from which line to which line to trim) and gather the relevant
+# look for a csv file containing line number information
+#(from which line to which line to trim) and gather the relevant
 #   information (filename, start line, end line) in a dictionary
 line_num_dict = {}
 try:
@@ -56,19 +57,19 @@ except FileNotFoundError:
     print("CSV file with trimming line numbers not found.")
 
 # trim file (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(trimFile)(source_dir, trimmed_dir, filename, line_num_dict)
-                    for filename in Bar('Trimming Files').iter(os.listdir(source_dir)))
+Parallel(n_jobs=-1)(delayed(trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, line_num_dict)
+                    for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
 
-Parallel(n_jobs=-1)(delayed(cleanXML)(trimmed_dir , supertrimmed_dir , filename)
-                    for filename in Bar('Fixing Tags').iter(os.listdir(trimmed_dir)))
+Parallel(n_jobs=-1)(delayed(cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
+                    for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
 def makeCSV(filename):
 
-    # indicate that we used `supertrimmed_dir` variable as defined at the top of the file
-    global supertrimmed_dir
+    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
+    global SUPERTRIMMED_DIR
 
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
@@ -85,18 +86,18 @@ def makeCSV(filename):
         deletable = filename
 
         # reintroduce spaces and reassign `filename` to cleaned file
-        filename = reintroduce_spaces(supertrimmed_dir + "/" + filename)
+        filename = reintroduce_spaces(SUPERTRIMMED_DIR + "/" + filename)
         filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
 
         if not dirty:
             print("\nNow deleting:", deletable)
-            os.unlink(supertrimmed_dir + "/" + deletable)
+            os.unlink(SUPERTRIMMED_DIR + "/" + deletable)
 
     # use parseXML to find course headers and descriptions
-    CSV = parseXML(supertrimmed_dir + "/" + filename, 'P', 'P', 1)
+    CSV = parseXML(SUPERTRIMMED_DIR + "/" + filename, 'P', 'P', 1)
     CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(supertrimmed_dir)))
+Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list
 df_container = []
