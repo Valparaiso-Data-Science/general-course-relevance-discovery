@@ -2,7 +2,7 @@ import os
 from progress.bar import Bar
 import pandas as pd
 import numpy as np
-
+import re
 
 def prepare():
     # make directories for intermediary and final data
