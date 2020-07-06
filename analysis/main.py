@@ -102,7 +102,6 @@ bodies.append(busana)
 i=0
 for i in range(len(body)):
   bok_cats[body[i]] = bodies[i]
-print(bok_cats)
 
 
 ellie = ['Website','Data Visualization','Statistics','Experimental Design','Programming','Algorithms/Modeling/AI','Data Collection','Data Sources','Data Types','Data Analysis','Application','Simulation','Software','Lab']
@@ -155,7 +154,6 @@ ellies.append(lab)
 i=0
 for i in range(len(ellie)):
   ellie_cats[ellie[i]] = ellies[i]
-print(ellie_cats)
 
 #adding keywords to columns
 for b in body:
