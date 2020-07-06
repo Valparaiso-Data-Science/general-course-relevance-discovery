@@ -5,6 +5,7 @@ import os
 from lxml import etree
 import wordninja
 #from punct_split import punct_split
+from reintroduce_spaces import reintroduce_spaces
 
 #course id regex string
 c_id_re_s = "[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
@@ -173,8 +174,6 @@ def cleanXML(in_path, out_path, filename):
     :param filename: name of the particular file in the directory
     """
 
-    writeable_errors = []
-
     # Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     nOFigs = 0
@@ -186,11 +185,8 @@ def cleanXML(in_path, out_path, filename):
             # Writes an open <Part> tag. This allows us to parse the file as an XML later
             newfile.write("<Part>\n")
 
-            lcounter = 0
-
             # Loop through each line in the Trimmed XML
             for line in file:
-                lcounter += 1
 
                 # turn file into string
                 text = str(line)
@@ -240,25 +236,11 @@ def cleanXML(in_path, out_path, filename):
                 # get rid of tags like `<?xml version="1.0" encoding="UTF-8" ?>`
                 text = re.sub(r"<[?!].*>", "", text)
 
-                # num of p in tags in processed line
-                ps_in_processed = [i.start() for i in re.finditer('<P>', text)]
-
-                # num of p in tags in raw line
-                ps_in_raw = [i.start() for i in re.finditer('<P>', line)]
-
-                if len(ps_in_processed) != len(ps_in_raw):
-                    writeable_errors.append("{line %d. In:\n%s\nOut:\n%s\n}\n" % (lcounter, line, text))
-
                 # Writes the processed line to the super trimmed XML
                 newfile.write(text)
             # Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
 
-    if len(writeable_errors) != 0:
-        f = open("errors/" + filename.replace(".xml", ".txt"), "w")
-
-        f.writelines(writeable_errors)
-        f.close()
 
 
 def alternativeFixTags(in_path, out_path, filename):
@@ -335,3 +317,33 @@ def alternativeFixTags(in_path, out_path, filename):
                 newfile.write(text)
             # Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
+
+
+def makeCSV(filename, superTrimmedDir):
+
+    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
+    #Checks if we are looking at a college we know needs WordNinja
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
+
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
+
+    #Checks if the college needs Word Ninja
+    if needsWN:
+        deletable = filename
+
+        # reintroduce spaces and reassign `filename` to cleaned file
+        filename = reintroduce_spaces(superTrimmedDir+ "/" + filename)
+        filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
+
+        if not dirty:
+            print("\nNow deleting:", deletable)
+            os.unlink(superTrimmedDir+ "/" + deletable)
+
+    # use parseXML to find course headers and descriptions
+    CSV = parseXML(superTrimmedDir+ "/" + filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")

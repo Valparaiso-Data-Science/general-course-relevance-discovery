@@ -1,12 +1,11 @@
 # files in the current directory
-from parse import parseXML, cleanXML, trimFile
+import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
-from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
-from Prep import prepare
+import Prep
 
 
 #libraries
@@ -33,71 +32,29 @@ topicModel = pd.DataFrame()
 SOURCE_DIR = "../fullPDFs"
 TRIMMED_DIR = "../temp_data/TRIMMED"
 SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
+CSV_DIR = "../courses" # work on implementing this variable throughout the code
 
 # toggle for keeping data from intermediary stages
 dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
-prepare()
+Prep.prepare()
 
-
-# look for a csv file containing line number information
-#(from which line to which line to trim) and gather the relevant
-#   information (filename, start line, end line) in a dictionary
-line_num_dict = {}
-try:
-    cat_df = pd.read_csv("../Catalogs.csv")
-
-    for index, row in cat_df.iterrows():
-        if (not np.isnan(row[1])) and (not np.isnan(row[2])):
-            line_num_dict[row[0].lower()] = int(row[1]), int(row[2])
-
-except FileNotFoundError:
-    print("CSV file with trimming line numbers not found.")
 
 # trim file (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, line_num_dict)
+Parallel(n_jobs=-1)(delayed(parse.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
-
-Parallel(n_jobs=-1)(delayed(cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
+# clean the xml file (supertrim)
+Parallel(n_jobs=-1)(delayed(parse.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
-def makeCSV(filename):
-
-    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
-    global SUPERTRIMMED_DIR
-
-    #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
-
-    for college in wn_colleges:
-        if re.match(college,filename) is not None:
-            needsWN = True
-            break
-        else:
-            needsWN = False
-
-    #Checks if the college needs Word Ninja
-    if needsWN:
-        deletable = filename
-
-        # reintroduce spaces and reassign `filename` to cleaned file
-        filename = reintroduce_spaces(SUPERTRIMMED_DIR + "/" + filename)
-        filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
-
-        if not dirty:
-            print("\nNow deleting:", deletable)
-            os.unlink(SUPERTRIMMED_DIR + "/" + deletable)
-
-    # use parseXML to find course headers and descriptions
-    CSV = parseXML(SUPERTRIMMED_DIR + "/" + filename, 'P', 'P', 1)
-    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
-
-Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
+# make a csv from the files in temp_data/superTrimmedPDFs
+Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
+                    for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list
 df_container = []
