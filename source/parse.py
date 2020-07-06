@@ -316,3 +316,33 @@ def alternativeFixTags(in_path, out_path, filename):
                 newfile.write(text)
             # Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
+
+
+def makeCSV(filename, superTrimmedDir):
+
+    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
+    #Checks if we are looking at a college we know needs WordNinja
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
+
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
+
+    #Checks if the college needs Word Ninja
+    if needsWN:
+        deletable = filename
+
+        # reintroduce spaces and reassign `filename` to cleaned file
+        filename = reintroduce_spaces(superTrimmedDir+ "/" + filename)
+        filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
+
+        if not dirty:
+            print("\nNow deleting:", deletable)
+            os.unlink(superTrimmedDir+ "/" + deletable)
+
+    # use parseXML to find course headers and descriptions
+    CSV = parseXML(superTrimmedDir+ "/" + filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
