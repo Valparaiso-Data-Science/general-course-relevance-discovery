@@ -8,7 +8,7 @@ import wordninja
 from reintroduce_spaces import reintroduce_spaces
 
 #course id regex string
-c_id_re_s = "[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
+c_id_re_s = r"[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
 c_id_re = re.compile(c_id_re_s)
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
