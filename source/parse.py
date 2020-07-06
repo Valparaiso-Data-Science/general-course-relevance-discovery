@@ -133,7 +133,7 @@ def createStack(xml, stack):
 
 
 
-def makeCSV(filename, superTrimmedDir):
+def makeCSV(filename, superTrimmedDir, dirty):
 
     # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
     #Checks if we are looking at a college we know needs WordNinja

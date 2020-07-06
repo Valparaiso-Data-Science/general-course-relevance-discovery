@@ -53,7 +53,7 @@ Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , file
 
 
 # make a csv from the files in temp_data/superTrimmedPDFs
-Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
+Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
                     for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list
