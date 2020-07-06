@@ -2,7 +2,7 @@
 from parse import parseXML, fixTags
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree,randForest,svm
+from ML import decisionTree,visTree,randForest,svm, undersample
 from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
@@ -169,8 +169,9 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-randForest(features, labels,10)
+#randForest(features, labels,10)
 #svm(features,labels,5)
+undersample(features, labels, 0.5)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)

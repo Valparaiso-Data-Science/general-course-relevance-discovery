@@ -14,6 +14,7 @@ from io import StringIO
 from IPython.display import Image
 import pydotplus
 import graphviz
+from imblearn.under_sampling import RandomUnderSampler
 
 def randForest(features,labels,splits):
     '''
@@ -92,7 +93,16 @@ def svm(features,labels,splits):
         #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
         print("Accuracy for SVM #"+ str(count)+ ": " + str(acc) + " percent")
         count += 1
-        
+
+
+def undersample(features, labels, split=0.5):
+    rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
+    newFeatures, newLabels = rus.fit_resample(features, labels)
+    print(len(newLabels))
+    print(sum(newLabels))
+    print(newFeatures)
+
+
 def decisionTree(feature_train,answer_train,depth):
 
     #forestClassifier = RandomForestClassifier(n_estimators=depth)
