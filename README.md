@@ -49,11 +49,11 @@ This repo has a number of direcories, each with a function.
 
 Current Branches:
 * master
-* syd-test-analysis
 * machine-learning
 * sasha
 
 Historical Branches: (in order of most recent)
+* syd-test-analysis
 * tfix
 * superninja
 * docker
