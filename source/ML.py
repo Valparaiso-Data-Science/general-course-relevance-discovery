@@ -17,8 +17,6 @@ import graphviz
 
 def randForest(features,labels,splits):
     '''
-    
-
     Parameters
     ----------
     features : list
@@ -31,7 +29,6 @@ def randForest(features,labels,splits):
     Returns
     -------
     None.
-
     '''
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
@@ -57,7 +54,7 @@ def randForest(features,labels,splits):
             i +=1
         accs[count] = (accs[count]/len(preds))*100
         count += 1
-        print('R^2: ' + str(rf.score(X_test,y_test)))
+        print('Mean Accuracy: ' + str(rf.score(X_test,y_test)))
         print(confusion_matrix(y_test, preds))
     count = 0
     for acc in accs:
@@ -78,7 +75,7 @@ def svm(features,labels,splits):
         X_test = features.iloc[test_index]
         y_train = labels.iloc[train_index]
         y_test = labels.iloc[test_index]
-        svm = SVC(kernel='linear')
+        svm = SVC(kernel='poly')
         svm.fit(X_train,y_train)
         preds = svm.predict(X_test)
         i=0
