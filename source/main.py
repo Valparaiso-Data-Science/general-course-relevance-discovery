@@ -1,12 +1,12 @@
 # files in the current directory
-from parse import parseXML, cleanXML, trimFile
+import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
 from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
-from Prep import prepare
+import Prep
 
 
 #libraries
@@ -39,7 +39,7 @@ dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
-prepare()
+Prep.prepare()
 
 
 # look for a csv file containing line number information
@@ -57,12 +57,12 @@ except FileNotFoundError:
     print("CSV file with trimming line numbers not found.")
 
 # trim file (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, line_num_dict)
+Parallel(n_jobs=-1)(delayed(parse.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, line_num_dict)
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
 
-Parallel(n_jobs=-1)(delayed(cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
+Parallel(n_jobs=-1)(delayed(parse.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
@@ -94,7 +94,7 @@ def makeCSV(filename):
             os.unlink(SUPERTRIMMED_DIR + "/" + deletable)
 
     # use parseXML to find course headers and descriptions
-    CSV = parseXML(SUPERTRIMMED_DIR + "/" + filename, 'P', 'P', 1)
+    CSV = parse.parseXML(SUPERTRIMMED_DIR + "/" + filename, 'P', 'P', 1)
     CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")
 
 Parallel(n_jobs=-1)(delayed(makeCSV)(filename) for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
