@@ -35,7 +35,7 @@ valpo.columns = ['School', 'CourseID', 'Descriptions']
 schools = schools.append(valpo,ignore_index=True)
 
 #read in body of knowledge txt file, convert to list
-text_file = open(data_path + "edison.txt", "r")
+text_file = open("edison.txt", "r")
 bok = text_file.read().split('\n')
 for i in range(len(bok)):
   bok[i] = bok[i].lower()
