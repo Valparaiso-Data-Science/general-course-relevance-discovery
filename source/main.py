@@ -43,12 +43,12 @@ Prep.prepare()
 
 
 # trim file (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(parse.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
+Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
 # clean the xml file (supertrim)
-Parallel(n_jobs=-1)(delayed(parse.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
+Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
