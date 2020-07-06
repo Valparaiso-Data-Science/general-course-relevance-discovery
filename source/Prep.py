@@ -79,6 +79,8 @@ def cleanXML(in_path, out_path, filename):
             # Writes an open <Part> tag. This allows us to parse the file as an XML later
             newfile.write("<Part>\n")
 
+            if len(re.findall(r"Youngstown", filename)) == 1:
+                newfile.write("<P>")
             # Loop through each line in the Trimmed XML
             for line in file:
 
