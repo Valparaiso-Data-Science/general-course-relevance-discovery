@@ -3,7 +3,6 @@ import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
-from reintroduce_spaces import reintroduce_spaces
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 import Prep
@@ -33,6 +32,7 @@ topicModel = pd.DataFrame()
 SOURCE_DIR = "../fullPDFs"
 TRIMMED_DIR = "../temp_data/TRIMMED"
 SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
+CSV_DIR = "../courses" # work on implementing this variable throughout the code
 
 # toggle for keeping data from intermediary stages
 dirty = False
@@ -47,12 +47,13 @@ Parallel(n_jobs=-1)(delayed(parse.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, P
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
-
+# clean the xml file (supertrim)
 Parallel(n_jobs=-1)(delayed(parse.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
-Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR)
+# make a csv from the files in temp_data/superTrimmedPDFs
+Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
                     for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list
