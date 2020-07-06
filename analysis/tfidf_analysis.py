@@ -82,7 +82,7 @@ def tfidf(dictionary, schools):
     #saving dataframe to csv
     print("Creating '../TFIDF_"+school+".csv'...")
     path_name = '../TFIDF_' + school +'.csv'
-    words.to_csv(path_name,econding="utf-8-sig")
+    words.to_csv(path_name,encoding="utf-8-sig")
 
 #TF-IDF FOR ALL SCHOOLS COMBINED
 #TERMS = WORD/BIGRAM, DOCUMENT = EACH SCHOOL'S CATALOG, CORPUS = ALL CATALOGS
