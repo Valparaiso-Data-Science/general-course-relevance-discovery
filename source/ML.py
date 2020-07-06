@@ -14,7 +14,7 @@ from io import StringIO
 from IPython.display import Image
 import pydotplus
 import graphviz
-from imblearn.under_sampling import RandomUnderSampler
+from imblearn.under_sampling import RandomUnderSampler, NearMiss
 
 def randForest(features,labels,splits):
     '''
@@ -96,8 +96,9 @@ def svm(features,labels,splits):
 
 
 def undersample(features, labels, split=0.5):
-    rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
-    newFeatures, newLabels = rus.fit_resample(features, labels)
+    #rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
+    nmus = NearMiss(sampling_strategy=split, random_state=19, version=3)
+    newFeatures, newLabels = nmus.fit_resample(features, labels)
     print(len(newLabels))
     print(sum(newLabels))
     print(newFeatures)
