@@ -60,8 +60,8 @@ for i in range(len(schools)):
     fake_df.append(fake_list)
 new_schools = pd.DataFrame(fake_df)
 new_schools.columns = ['School','CourseID','Descriptions','Data Science Term']
-print("Creating '../csvs/bok_courses.csv'...")
-new_schools.to_csv('../csvs/bok_courses.csv',encoding="utf-8-sig")
+print("Creating 'csvs/bok_courses.csv'...")
+new_schools.to_csv('csvs/bok_courses.csv',encoding="utf-8-sig")
 
 #creating new columns with key words
 body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics']
@@ -178,8 +178,8 @@ for j in range(len(new_schools)):
       comp = str(new_schools['Descriptions'][j]).lower()
       if re.search('\s'+re.escape(ellie_cats[e][i])+'\s',comp):
         new_schools[e][j] = 1
-print("Creating '../csvs/bok_courses_cat_ellie.csv'...")
-new_schools.to_csv('../csvs/bok_courses_cat_ellie.csv',index=False)
+print("Creating 'csvs/bok_courses_cat_ellie.csv'...")
+new_schools.to_csv('csvs/bok_courses_cat_ellie.csv',index=False)
 
 
 #stop words definition
