@@ -173,8 +173,6 @@ def cleanXML(in_path, out_path, filename):
     :param filename: name of the particular file in the directory
     """
 
-    writeable_errors = []
-
     # Boolean to tell us if we are looking in a <Figure> element
     isFig = False
     nOFigs = 0
@@ -186,11 +184,8 @@ def cleanXML(in_path, out_path, filename):
             # Writes an open <Part> tag. This allows us to parse the file as an XML later
             newfile.write("<Part>\n")
 
-            lcounter = 0
-
             # Loop through each line in the Trimmed XML
             for line in file:
-                lcounter += 1
 
                 # turn file into string
                 text = str(line)
@@ -240,25 +235,11 @@ def cleanXML(in_path, out_path, filename):
                 # get rid of tags like `<?xml version="1.0" encoding="UTF-8" ?>`
                 text = re.sub(r"<[?!].*>", "", text)
 
-                # num of p in tags in processed line
-                ps_in_processed = [i.start() for i in re.finditer('<P>', text)]
-
-                # num of p in tags in raw line
-                ps_in_raw = [i.start() for i in re.finditer('<P>', line)]
-
-                if len(ps_in_processed) != len(ps_in_raw):
-                    writeable_errors.append("{line %d. In:\n%s\nOut:\n%s\n}\n" % (lcounter, line, text))
-
                 # Writes the processed line to the super trimmed XML
                 newfile.write(text)
             # Closing our open <Part> tag so we don't get any errors
             newfile.write("</Part>\n")
 
-    if len(writeable_errors) != 0:
-        f = open("errors/" + filename.replace(".xml", ".txt"), "w")
-
-        f.writelines(writeable_errors)
-        f.close()
 
 
 def alternativeFixTags(in_path, out_path, filename):
