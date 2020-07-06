@@ -137,7 +137,7 @@ def makeCSV(filename, superTrimmedDir, dirty):
 
     # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
 
     for college in wn_colleges:
         if re.match(college,filename) is not None:
