@@ -35,3 +35,21 @@ def prepare():
         if len(os.listdir('../courses')) > 0:
             for file in Bar("Cleaning courses...").iter(os.listdir('../courses')):
                 os.unlink('../courses/' + file)
+
+
+def makeLineNumDict(): # maybe add a 'csv_file' as our input?
+    # look for a csv file containing line number information
+    #(from which line to which line to trim) and gather the relevant
+    #   information (filename, start line, end line) in a dictionary
+    line_num_dict = {}
+    try:
+        cat_df = pd.read_csv("../Catalogs.csv")
+
+        for index, row in cat_df.iterrows():
+            if (not np.isnan(row[1])) and (not np.isnan(row[2])):
+                line_num_dict[row[0].lower()] = int(row[1]), int(row[2])
+
+    except FileNotFoundError:
+        print("CSV file with trimming line numbers not found.")
+
+    return line_num_dict
