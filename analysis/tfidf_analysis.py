@@ -80,8 +80,9 @@ def tfidf(dictionary, schools):
     print("\n---------------------------\n")
 
     #saving dataframe to csv
-    path_name = 'TFIDF_' + school +'.csv'
-    words.to_csv(path_name)
+    print("Creating '../TFIDF_"+school+".csv'...")
+    path_name = '../TFIDF_' + school +'.csv'
+    words.to_csv(path_name,econding="utf-8-sig")
 
 #TF-IDF FOR ALL SCHOOLS COMBINED
 #TERMS = WORD/BIGRAM, DOCUMENT = EACH SCHOOL'S CATALOG, CORPUS = ALL CATALOGS
@@ -141,4 +142,5 @@ def tfidf(dictionary, schools):
   print("\n---------------------------\n")
 
   #saving dataframe to csv
-  words.to_csv('TFIDF_all.csv')
+  print("Creating '../TFIDF_all.csv'...")
+  words.to_csv('../TFIDF_all.csv',encoding="utf-8-sig")
