@@ -1,6 +1,6 @@
 import os
 from progress.bar import Bar
-
+import pandas as pd
 def prepare():
     # make directories for intermediary and final data
     print("Preparing temporary data directory...")
