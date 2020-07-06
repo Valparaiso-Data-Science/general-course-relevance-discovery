@@ -169,9 +169,9 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-#randForest(features, labels,10)
+randForest(features, labels)
 #svm(features,labels,5)
-undersample(features, labels, 0.5)
+#undersample(features, labels, 0.5)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)

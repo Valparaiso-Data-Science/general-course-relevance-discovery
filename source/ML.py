@@ -16,7 +16,7 @@ import pydotplus
 import graphviz
 from imblearn.under_sampling import RandomUnderSampler
 
-def randForest(features,labels,splits):
+def randForest(features,labels,splits=10,us=True):
     '''
     Parameters
     ----------
@@ -31,37 +31,48 @@ def randForest(features,labels,splits):
     -------
     None.
     '''
-    skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
-    # skf.split(features,labels)
-    # errors = []
-    accs = [0]*splits
-    count=0
-    for train_index, test_index in skf.split(features, labels):
-        print("TRAIN:", train_index, "TEST:", test_index)
-        # X_train = [features.iloc[i] for i in train_index]
-        # X_test=[features.iloc[i] for i in test_index]
-        X_train = features.iloc[train_index]
-        X_test = features.iloc[test_index]
-        y_train = labels.iloc[train_index]
-        y_test = labels.iloc[test_index]
-        rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
+
+    if not us:
+        skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
+        # skf.split(features,labels)
+        # errors = []
+        accs = [0]*splits
+        count=0
+        for train_index, test_index in skf.split(features, labels):
+            print("TRAIN:", train_index, "TEST:", test_index)
+            # X_train = [features.iloc[i] for i in train_index]
+            # X_test=[features.iloc[i] for i in test_index]
+            X_train = features.iloc[train_index]
+            X_test = features.iloc[test_index]
+            y_train = labels.iloc[train_index]
+            y_test = labels.iloc[test_index]
+            rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
+            rf.fit(X_train, y_train)
+            preds = rf.predict(X_test)
+            #errors.append(round(np.mean(abs(preds - y_test)),2))
+            i=0
+            for pred in preds:
+                if pred == y_test[i]:
+                    accs[count]+=1
+                i +=1
+            accs[count] = (accs[count]/len(preds))*100
+            count += 1
+            print('Mean Accuracy: ' + str(rf.score(X_test,y_test)))
+            print(confusion_matrix(y_test, preds))
+        count = 0
+        for acc in accs:
+            #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
+            print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
+            count += 1
+    else:
+        newFeatures, newLabels = undersample(features, labels)
+        X_train, X_test, y_train, y_test = train_test_split(newFeatures, newLabels, test_size=0.3, random_state=69)
+        rf = RandomForestClassifier(n_estimators=100, random_state=42)
         rf.fit(X_train, y_train)
-        preds = rf.predict(X_test)
-        #errors.append(round(np.mean(abs(preds - y_test)),2))
-        i=0
-        for pred in preds:
-            if pred == y_test[i]:
-                accs[count]+=1
-            i +=1
-        accs[count] = (accs[count]/len(preds))*100
-        count += 1
-        print('Mean Accuracy: ' + str(rf.score(X_test,y_test)))
-        print(confusion_matrix(y_test, preds))
-    count = 0
-    for acc in accs:
-        #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-        print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
-        count += 1
+        pred = rf.predict(X_test)
+        print('Mean Accuracy: ' + str(rf.score(X_test, y_test)))
+        print(confusion_matrix(y_test, pred))
+
 def svm(features,labels,splits):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
@@ -101,6 +112,7 @@ def undersample(features, labels, split=0.5):
     print(len(newLabels))
     print(sum(newLabels))
     print(newFeatures)
+    return newFeatures, newLabels
 
 
 def decisionTree(feature_train,answer_train,depth):
