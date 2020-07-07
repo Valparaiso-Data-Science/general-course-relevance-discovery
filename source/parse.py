@@ -139,6 +139,9 @@ def makeCSV(filename, superTrimmedDir, dirty):
     #Checks if we are looking at a college we know needs WordNinja
     wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
 
+    o_wn_colleges = ['Carlow', 'Caldwell'] # Carlow could be moved to n_wn; same with Caldwell
+    n_wn_colleges = ['Brown', '2011Cornell', 'Pittsburgh', 'Youngstown', 'Denison']
+
     for college in wn_colleges:
         if re.match(college,filename) is not None:
             needsWN = True
