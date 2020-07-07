@@ -33,6 +33,7 @@ SOURCE_DIR = "../fullPDFs"
 TRIMMED_DIR = "../temp_data/TRIMMED"
 SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
 CSV_DIR = "../courses" # work on implementing this variable throughout the code
+TRIM_CSV = "../Catalogs.csv"
 ALL_CSV = "AllSchools.csv"
 
 # toggle for keeping data from intermediary stages
@@ -45,7 +46,7 @@ Prep.prepare()
 
 
 # trim the xml files (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
+Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict(TRIM_CSV))
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
