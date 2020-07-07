@@ -46,7 +46,8 @@ def reintroduce_spaces(fp, nfp=None):
     nf = open(nfp, 'w') # this command will need to be changed to fit with the rest of the pipeline
     nf.write(n_data)
     nf.close()
-        #re.sub(i, d[i], f_data)
+    #re.sub(i, d[i], f_data)
+    return nfp
 
 #make_split_file(fp)
 
