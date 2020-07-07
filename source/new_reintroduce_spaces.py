@@ -28,8 +28,18 @@ def pad_characters(input_string):
 def get_dict_of_bad_words(fp):
     f = open(fp)
     lines = f.readlines()
+    # change to 'data = f.read()'
 
     bad_strings_dict = {} # dictionary has all of the strings and what they should be changed into
+    # then we can run 'matches = list(set(re.findall(long_str_re, data)))'
+
+    # rest of the code would be like this
+    #for w in matches:
+    #   s_s = semantic_split(w)
+    #   if not w == s_s:
+    #       bad_strings_dict.update({w: s_s})
+
+    # currently the only issue is that there are no padded characters with this method
 
     for l in lines:
         pl = pad_characters(l)
