@@ -4,7 +4,16 @@ import punct_split
 
 #fp = "Youngstown.xml"
 
+#This regex matches any string that is made up of
+#at least 17 capital or lowercase letters
 long_str_re = r"[a-zA-Z]{17,}"
+
+#potential new re
+# does a look a head (?=[a-zA-Z]) for a lowercase
+# or capital letter, if there is one, then look
+# then match a 17 character long string that can
+# contain capital/lowercase letters and digits
+p_long_string_re = r"(?=[a-zA-Z])[a-zA-Z0-9]{17,}"
 
 def pad_characters(input_string):
     return punct_split.space_coursecodes(punct_split.space_punct(punct_split.space_parantheses(input_string)))
