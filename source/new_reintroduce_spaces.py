@@ -26,7 +26,7 @@ def get_dict_of_bad_words(fp):
 
     return bad_strings_dict
 
-def make_split_file(fp):
+def reintroduce_spaces(fp, nfp=None):
     d = get_dict_of_bad_words(fp)
 
     # get the data out of the file
@@ -38,7 +38,12 @@ def make_split_file(fp):
     for i in d: # this is where the big speed improvement is, it runs through 3500 entries instead of all of the tags in the xml
         n_data = n_data.replace(i, d[i])
 
-    nf = open("WN_" + fp, 'w') # this command will need to be changed to fit with the rest of the pipeline
+    # if no name for outfile given, use source name + "_spaced"
+    if nfp is None:
+        nfp = fp[:fp.rfind(".")] + "_spaced" + fp[fp.rfind("."):]
+
+    #"WN_" + fp < old way
+    nf = open(nfp, 'w') # this command will need to be changed to fit with the rest of the pipeline
     nf.write(n_data)
     nf.close()
         #re.sub(i, d[i], f_data)
