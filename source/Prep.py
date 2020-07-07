@@ -40,13 +40,13 @@ def prepare():
                 os.unlink('../courses/' + file)
 
 
-def makeLineNumDict(): # maybe add a 'csv_file' as our input?
+def makeLineNumDict(csv_file_path): # maybe add a 'csv_file' as our input?
     # look for a csv file containing line number information
     #(from which line to which line to trim) and gather the relevant
     #   information (filename, start line, end line) in a dictionary
     line_num_dict = {}
     try:
-        cat_df = pd.read_csv("../Catalogs.csv")
+        cat_df = pd.read_csv(csv_file_path)
 
         for index, row in cat_df.iterrows():
             if (not np.isnan(row[1])) and (not np.isnan(row[2])):
