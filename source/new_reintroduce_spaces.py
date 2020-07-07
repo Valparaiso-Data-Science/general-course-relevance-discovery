@@ -50,3 +50,16 @@ def reintroduce_spaces(fp, nfp=None):
 
 #make_split_file(fp)
 
+def main(argv):
+
+    filename = "../fullPDFs/Youngstown.xml"
+
+    # if user specified another file as input
+    if len(argv) > 1:
+        filename = argv[1]
+
+    reintroduce_spaces(filename)
+
+
+if __name__ == "__main__":
+    main(sys.argv)
