@@ -13,10 +13,17 @@ long_str_re = r"[a-zA-Z]{17,}"
 # or capital letter, if there is one, then look
 # then match a 17 character long string that can
 # contain capital/lowercase letters and digits
+
+# i am a little unsure if this re does exactly what
+# i want it to do, it needs a lot more testing
+# i think that it needs a '.*' after the equal sign
 p_long_string_re = r"(?=[a-zA-Z])[a-zA-Z0-9]{17,}"
 
 def pad_characters(input_string):
-    return punct_split.space_coursecodes(punct_split.space_punct(punct_split.space_parantheses(input_string)))
+    # do basically all of the methods in punct_split
+    # however it does not use the spacy package at all
+    # (the nlp model) or do any splitting here
+    return punct_split.space_coursecodes(punct_split.space_punct(punct_split.space_parantheses(punct_split.correct_apostrophe(input_string))))
 
 def get_dict_of_bad_words(fp):
     f = open(fp)
@@ -70,6 +77,6 @@ def main(argv):
 
     reintroduce_spaces(filename)
 
-
+# if ran as a standalone file
 if __name__ == "__main__":
     main(sys.argv)
