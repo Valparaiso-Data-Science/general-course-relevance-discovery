@@ -28,11 +28,12 @@ from progress.bar import Bar
 # container for processed catalogs
 topicModel = pd.DataFrame()
 
-# directory variables
+# constants (may move to a separate file)
 SOURCE_DIR = "../fullPDFs"
 TRIMMED_DIR = "../temp_data/TRIMMED"
 SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
 CSV_DIR = "../courses" # work on implementing this variable throughout the code
+ALL_CSV = "AllSchools.csv"
 
 # toggle for keeping data from intermediary stages
 dirty = False
