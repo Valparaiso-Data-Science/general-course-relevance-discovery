@@ -14,6 +14,7 @@ from io import StringIO
 from IPython.display import Image
 import pydotplus
 import graphviz
+from subprocess import call
 from imblearn.under_sampling import RandomUnderSampler, NearMiss
 
 def randForest(features,labels,splits=10,us=True):
@@ -59,6 +60,7 @@ def randForest(features,labels,splits=10,us=True):
             count += 1
             print('Mean Accuracy: ' + str(rf.score(X_test,y_test)))
             print(confusion_matrix(y_test, preds))
+            vizRFTrees(rf, 5, features)
         count = 0
         for acc in accs:
             #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
@@ -72,6 +74,7 @@ def randForest(features,labels,splits=10,us=True):
         pred = rf.predict(X_test)
         print('Mean Accuracy: ' + str(rf.score(X_test, y_test)))
         print(confusion_matrix(y_test, pred))
+        vizRFTrees(rf, 5, features)
 
 def svm(features,labels,splits):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -115,6 +118,12 @@ def undersample(features, labels, split=0.5):
     print(newFeatures)
     return newFeatures, newLabels
 
+def vizRFTrees(rf, ntree,features):
+    outfile='randFor_Tree'+ntree+'.dot'
+    export_graphviz(rf.estimators_[ntree],outfile = outfile,feature_names=list(features.columns),
+                    filled=True)
+    call(['dot', '-Tpng', outfile, '-o', 'tree.png', '-Gdpi=600'])
+    Image(filename='tree.png')
 
 def decisionTree(feature_train,answer_train,depth):
 
