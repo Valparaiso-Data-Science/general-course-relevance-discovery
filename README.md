@@ -31,6 +31,7 @@ This repo has a number of direcories, each with a function.
 * *source/tests/* - Contains all of the pytest tests for the repo
 * *courses/* - The output csvs that we run machine learning on
 * *fullPDFs/* - The source XML (aka the raw data)
+* *devel/* - Contains things related to development and running the code.
 
 ## Important Files
 
@@ -48,9 +49,12 @@ This repo has a number of direcories, each with a function.
 
 Current Branches:
 * master
-* syd-test-analysis
+* machine-learning
+* sasha
 
 Historical Branches: (in order of most recent)
+* grobid_testing
+* syd-test-analysis
 * tfix
 * superninja
 * docker

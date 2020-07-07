@@ -5,9 +5,10 @@ import os
 from lxml import etree
 import wordninja
 #from punct_split import punct_split
+from reintroduce_spaces import reintroduce_spaces
 
 #course id regex string
-c_id_re_s = "[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
+c_id_re_s = r"[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
 c_id_re = re.compile(c_id_re_s)
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
@@ -127,69 +128,39 @@ def createStack(xml, stack):
     for subLevel in xml:
         createStack(subLevel, stack)
 
-def fixTags(in_path, out_path, filename):
-    """
-    Removes unnecessary tags, as well as the contents of Figure tags.
-    (do we need a more precise/elaborate description here?)
 
-    :param in_path: source directory path (trimmed)
-    :param out_path: destination directory path (supertrimmed)
-    :param filename: name of the particular file in the directory
-    """
 
-    #Boolean to tell us if we are looking in a <Figure> element
-    isFig = False
-    nOFigs = 0
-    #Opens the trimmed XML
-    with open(in_path + "/" + filename, "r",encoding='utf-8') as file:
-        #Makes a new XML file where the super trimming will be saved
-        with open(out_path + "/" + filename.replace("TRIMMED", "SUPERTRIMMED"),
-                  "w", encoding='utf-8') as newfile:
-            #Writes an open <Part> tag. This allows us to parse the file as an XML later
-            newfile.write("<Part>\n")
-            #Loop through each line in the Trimmed XML
-            for line in file:
-                # turn file into string
-                text = str(line)
-                # Remove <Figure> tags and everything in them
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    nOFigs += 1
-                if len(re.findall(r"</Figure>", text)) == 1:
-                    text = ""
-                    nOFigs -= 1
-                    if nOFigs == 0:
-                        isFig = False
-                if isFig:
-                    text = ""
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    text = re.sub(r"<Figure\b.*>", "", text)
-                    isFig = True
-                # remove Sect tags
-                # text = re.sub("^<.*Span.*>", "", text)
-                text = text.replace("</Sect>", "")
-                text = text.replace("<Sect/>", "")
-                text = re.sub(r"<Sect\b.*>", "", text)
-                # remove Div tags
-                text = text.replace("</Div>", "")
-                text = re.sub(r"<Div\b.*>", "", text)
-                # remove caption tags
-                # text = text.replace("<Caption>","")
-                # text = text.replace("</Caption>", "")
-                # rmove part tags
-                text = re.sub(r"<Part\b.*>", "", text)
-                text = text.replace("</Part>", "")
-                # remove Span tags
-                text = re.sub(r"<Span\b.*>", "", text)
-                text = text.replace("</Span>", "")
-                text = text.replace("<Span/>", "")
-                # remove story tags
-                text = re.sub(r"<Story\b.*>", "", text)
-                text = text.replace("</Story>", "")
-                #If there is a <P> tag with a new line directly after it, delete the new line
-                if re.match('<P>\n', text) is not None:
-                    text = text.replace('\n', '')
-                #Writes the processed line to the super trimmed XML
-                newfile.write(text)
-            #Closing our open <Part> tag so we don't get any errors
-            newfile.write("</Part>\n")
 
+
+
+def makeCSV(filename, superTrimmedDir, dirty):
+
+    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
+    #Checks if we are looking at a college we know needs WordNinja
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+
+    o_wn_colleges = ['Carlow', 'Caldwell'] # Carlow could be moved to n_wn; same with Caldwell
+    n_wn_colleges = ['Brown', '2011Cornell', 'Pittsburgh', 'Youngstown', 'Denison']
+
+    for college in wn_colleges:
+        if re.match(college,filename) is not None:
+            needsWN = True
+            break
+        else:
+            needsWN = False
+
+    #Checks if the college needs Word Ninja
+    if needsWN:
+        deletable = filename
+
+        # reintroduce spaces and reassign `filename` to cleaned file
+        filename = reintroduce_spaces(superTrimmedDir+ "/" + filename)
+        filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
+
+        if not dirty:
+            print("\nNow deleting:", deletable)
+            os.unlink(superTrimmedDir+ "/" + deletable)
+
+    # use parseXML to find course headers and descriptions
+    CSV = parseXML(superTrimmedDir+ "/" + filename, 'P', 'P', 1)
+    CSV.to_csv("../courses/"+filename.replace("xml","csv"), encoding="utf-8-sig")

@@ -11,6 +11,11 @@ import pandas as pd
 n_colleges=0
 n_courses = 0
 for filename in os.listdir('../courses'):
+
+    # if current file is the one for all schools, skip it
+    if filename == "AllSchools.csv":
+        continue
+
     csv = pd.read_csv('../courses/'+filename,encoding = 'utf-8')
     n_colleges +=1
     n_courses += len(csv['CourseID'])
