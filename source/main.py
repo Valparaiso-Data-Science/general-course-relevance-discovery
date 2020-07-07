@@ -40,17 +40,18 @@ dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
+# Make all of the required directories; prep the work area
 Prep.prepare()
 
 
-# trim file (whenever line number information available, otherwise keep whole file)
+# trim the xml files (whenever line number information available, otherwise keep whole file)
 Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
-# clean the xml file (supertrim)
+# clean the xml files (fix problems and make it parseable)
 Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
-                    for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
+                    for filename in Bar('Fixing Files').iter(os.listdir(TRIMMED_DIR)))
 
 
 # make a csv from the files in temp_data/superTrimmedPDFs
