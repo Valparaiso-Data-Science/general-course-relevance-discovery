@@ -28,18 +28,8 @@ def pad_characters(input_string):
 def get_dict_of_bad_words(fp):
     f = open(fp)
     lines = f.readlines()
-    # change to 'data = f.read()'
 
     bad_strings_dict = {} # dictionary has all of the strings and what they should be changed into
-    # then we can run 'matches = list(set(re.findall(long_str_re, data)))'
-
-    # rest of the code would be like this
-    #for w in matches:
-    #   s_s = semantic_split(w)
-    #   if not w == s_s:
-    #       bad_strings_dict.update({w: s_s})
-
-    # currently the only issue is that there are no padded characters with this method
 
     for l in lines:
         pl = pad_characters(l)
@@ -52,8 +42,30 @@ def get_dict_of_bad_words(fp):
 
     return bad_strings_dict
 
+# alternate implementation (is faster)
+def a_get_dict_of_bad_words(fp):
+    f = open(fp)
+    data = f.read()
+
+    bad_strings_dict = {} # dictionary has all of the strings and what they should be changed into
+    matches = list(set(re.findall(long_str_re, data)))
+
+    # rest of the code would be like this
+    for w in matches:
+        s_s = semantic_split(w)
+        if not w == s_s:
+            # we don't have to lookup if w is in the dictionary because of the set above
+            bad_strings_dict.update({w: s_s})
+
+    # currently the only issue is that there are no padded characters with this method
+    # however, based off of some testing on my local machine, it doesn't seem to be that
+    # big of an issue
+
+    return bad_strings_dict
+
 def reintroduce_spaces(fp, nfp=None):
     d = get_dict_of_bad_words(fp)
+    #d = a_get_dict_of_bad_words(fp)
 
     # get the data out of the file
     f = open(fp, 'r')
@@ -61,6 +73,8 @@ def reintroduce_spaces(fp, nfp=None):
     f.close()
 
     n_data = f_data # potentially make 'pad_characters(f_data)'; do NOT do that, it reduced the number of courses I was getting from 59k to 43k, definitely not a good move
+
+    #potentially can move this to re.sub? I don't know what the speed difference would be
     for i in d: # this is where the big speed improvement is, it runs through 3500 entries instead of all of the tags in the xml
         n_data = n_data.replace(i, d[i])
 
