@@ -43,7 +43,7 @@ def reintroduce_spaces(fp, nfp=None):
     f_data = f.read()
     f.close()
 
-    n_data = f_data # potentially make 'pad_characters(f_data)'
+    n_data = pad_characters(f_data) # potentially make 'pad_characters(f_data)'
     for i in d: # this is where the big speed improvement is, it runs through 3500 entries instead of all of the tags in the xml
         n_data = n_data.replace(i, d[i])
 
