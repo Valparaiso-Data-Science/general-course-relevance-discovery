@@ -11,7 +11,12 @@ if platform == "linux":
         print("Use your package manager to install 'enchant'")
         print("--------------------------------------------------------------------------")
 elif platform == "darwin":
-    os.system("brew install enchant")
+    try:
+        os.system("brew install enchant")
+    except:
+        print("--------------------------------------------------------------------------")
+        print("brew is not installed; not able to install 'enchant'")
+        print("--------------------------------------------------------------------------")
 elif platform == "win32":
     print("--------------------------------------------------------------------------")
     print("You need to install 'enchant' for the wordninja parsing to work correctly")

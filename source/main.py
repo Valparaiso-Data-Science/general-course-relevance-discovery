@@ -28,11 +28,12 @@ from progress.bar import Bar
 # container for processed catalogs
 topicModel = pd.DataFrame()
 
-# directory variables
+# constants (may move to a separate file)
 SOURCE_DIR = "../fullPDFs"
 TRIMMED_DIR = "../temp_data/TRIMMED"
 SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
 CSV_DIR = "../courses" # work on implementing this variable throughout the code
+ALL_CSV = "AllSchools.csv"
 
 # toggle for keeping data from intermediary stages
 dirty = False
@@ -43,17 +44,17 @@ Prep.prepare()
 
 
 # trim file (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(parse.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
+Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict())
                     for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
 
 
 # clean the xml file (supertrim)
-Parallel(n_jobs=-1)(delayed(parse.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
+Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
                     for filename in Bar('Fixing Tags').iter(os.listdir(TRIMMED_DIR)))
 
 
 # make a csv from the files in temp_data/superTrimmedPDFs
-Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
+Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
                     for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list

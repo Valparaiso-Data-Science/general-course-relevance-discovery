@@ -8,7 +8,7 @@ import wordninja
 from reintroduce_spaces import reintroduce_spaces
 
 #course id regex string
-c_id_re_s = "[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
+c_id_re_s = r"[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"
 c_id_re = re.compile(c_id_re_s)
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
@@ -129,201 +129,18 @@ def createStack(xml, stack):
         createStack(subLevel, stack)
 
 
-def trimFile(in_path, out_path, filename, line_num_dict):
-    """
-    Write out a new file with content from source file that is only between the lines specified in line_num_dict
-
-    :param in_path: source directory
-    :param out_path: destination directory
-    :param filename: the particular file
-    :param line_num_dict: dictionary with keys represented by lowercase versions of filenames (no extension) and values
-                        tuples of two numbers (start line and end line)
-    """
-
-    # if xml file
-    if filename.endswith(".xml"):
-
-        # if information about at which lines to trim file, assign line numbers to `start` and `end`
-        if filename[:filename.rfind(".")].lower() in line_num_dict:
-            start, end = line_num_dict[filename[:filename.rfind(".")].lower()]
-
-        new_file_lines = []
-
-        with open(in_path + "/" + filename, "r") as f:
-            lines = f.readlines()
-
-            # if found information about line numbers, use it to trim out the lines
-            if filename[:filename.rfind(".")].lower() in line_num_dict:
-                new_file_lines = lines[start - 1:end]
-            # otherwise just save the whole file
-            else:
-                new_file_lines = lines
-
-        new_filename = filename[:filename.rfind(".")] + "TRIMMED" + filename[filename.rfind("."):]
-        with open(out_path + "/" + new_filename, "w") as f:
-            f.writelines(new_file_lines)
-
-
-def cleanXML(in_path, out_path, filename):
-    """
-    Removes unnecessary tags, as well as the contents of Figure tags.
-    (do we need a more precise/elaborate description here?)
-
-    :param in_path: source directory path (trimmed)
-    :param out_path: destination directory path (supertrimmed)
-    :param filename: name of the particular file in the directory
-    """
-
-    # Boolean to tell us if we are looking in a <Figure> element
-    isFig = False
-    nOFigs = 0
-    # Opens the trimmed XML
-    with open(in_path + "/" + filename, "r", encoding='utf-8') as file:
-        # Makes a new XML file where the super trimming will be saved
-        with open(out_path + "/" + filename.replace("TRIMMED", "SUPERTRIMMED"),
-                  "w", encoding='utf-8') as newfile:
-            # Writes an open <Part> tag. This allows us to parse the file as an XML later
-            newfile.write("<Part>\n")
-
-            # Loop through each line in the Trimmed XML
-            for line in file:
-
-                # turn file into string
-                text = str(line)
-                # Remove <Figure> tags and everything in them
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    nOFigs += 1
-                if len(re.findall(r"</Figure>", text)) == 1:
-                    text = ""
-                    nOFigs -= 1
-                    if nOFigs == 0:
-                        isFig = False
-                if isFig:
-                    text = ""
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    text = re.sub(r"<Figure\b.*>", "", text)
-                    isFig = True
-                # remove Sect tags
-                # text = re.sub("^<.*Span.*>", "", text)
-                text = text.replace("</Sect>", "")
-                text = text.replace("<Sect/>", "")
-                text = re.sub(r"<Sect\b.*>", "", text)
-                # remove Div tags
-                text = text.replace("</Div>", "")
-                text = re.sub(r"<Div\b.*>", "", text)
-                # remove caption tags
-                # text = text.replace("<Caption>","")
-                # text = text.replace("</Caption>", "")
-                # rmove part tags
-                text = re.sub(r"<Part\b.*>", "", text)
-                text = text.replace("</Part>", "")
-                # remove Span tags
-                text = re.sub(r"<Span\b.*>", "", text)
-                text = text.replace("</Span>", "")
-                text = text.replace("<Span/>", "")
-                # remove story tags
-                text = re.sub(r"<Story\b.*>", "", text)
-                text = text.replace("</Story>", "")
-
-                text = text.replace("<P>\n", "<P>")
-
-                # remove bad utf-8 character
-                text = text.replace(str(chr(65535)), "")
-
-                # some files have improperly rendered ampersand; replace with XML-acceptable version
-                text = text.replace("& ", "&amp; ")
-
-                # get rid of tags like `<?xml version="1.0" encoding="UTF-8" ?>`
-                text = re.sub(r"<[?!].*>", "", text)
-
-                # Writes the processed line to the super trimmed XML
-                newfile.write(text)
-            # Closing our open <Part> tag so we don't get any errors
-            newfile.write("</Part>\n")
 
 
 
-def alternativeFixTags(in_path, out_path, filename):
-    """
-    --IN DEVELOPMENT--
 
-    Identical functionality as fixTags above, but hopefully without a bug that makes a P tag disappear.
-    (do we need a more precise/elaborate description here?)
-
-    :param in_path: source directory path (trimmed)
-    :param out_path: destination directory path (supertrimmed)
-    :param filename: name of the particular file in the directory
-    """
-
-    # Boolean to tell us if we are looking in a <Figure> element
-    isFig = False
-    nOFigs = 0
-    # Opens the trimmed XML
-    with open(in_path + "/" + filename, "r", encoding='utf-8') as file:
-        # Makes a new XML file where the super trimming will be saved
-        with open(out_path + "/" + filename.replace("TRIMMED", "SUPERTRIMMED"),
-                  "w", encoding='utf-8') as newfile:
-            # Writes an open <Part> tag. This allows us to parse the file as an XML later
-            newfile.write("<Part>\n")
-
-            # Loop through each line in the Trimmed XML
-            for line in file:
-                # turn file into string
-                text = str(line)
-                # Remove <Figure> tags and everything in them
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    nOFigs += 1
-                if len(re.findall(r"</Figure>", text)) == 1:
-                    text = ""
-                    nOFigs -= 1
-                    if nOFigs == 0:
-                        isFig = False
-                if isFig:
-                    text = ""
-                if len(re.findall(r"<Figure\b.*>", text)) == 1:
-                    text = re.sub(r"<Figure\b.*>", "", text)
-                    isFig = True
-                # remove Sect tags
-                # text = re.sub("^<.*Span.*>", "", text)
-                text = text.replace("</Sect>", "")
-                text = text.replace("<Sect/>", "")
-                text = re.sub(r"<Sect\b.*>", "", text)
-                # remove Div tags
-                text = text.replace("</Div>", "")
-                text = re.sub(r"<Div\b.*>", "", text)
-                # remove caption tags
-                # text = text.replace("<Caption>","")
-                # text = text.replace("</Caption>", "")
-                # rmove part tags
-                text = re.sub(r"<Part\b.*>", "", text)
-                text = text.replace("</Part>", "")
-                # remove Span tags
-                text = re.sub(r"<Span\b.*>", "", text)
-                text = text.replace("</Span>", "")
-                text = text.replace("<Span/>", "")
-                # remove story tags
-                text = re.sub(r"<Story\b.*>", "", text)
-                text = text.replace("</Story>", "")
-
-                text = text.replace("<P>\n", "<P>")
-
-                # remove bad utf-8 character
-                text = text.replace(str(chr(65535)), "")
-
-                # some files have improperly rendered ampersand; replace with XML-acceptable version
-                text = text.replace("& ", "&amp; ")
-
-                # Writes the processed line to the super trimmed XML
-                newfile.write(text)
-            # Closing our open <Part> tag so we don't get any errors
-            newfile.write("</Part>\n")
-
-
-def makeCSV(filename, superTrimmedDir):
+def makeCSV(filename, superTrimmedDir, dirty):
 
     # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh'] # 'Youngstown']
+    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+
+    o_wn_colleges = ['Carlow', 'Caldwell'] # Carlow could be moved to n_wn; same with Caldwell
+    n_wn_colleges = ['Brown', '2011Cornell', 'Pittsburgh', 'Youngstown', 'Denison']
 
     for college in wn_colleges:
         if re.match(college,filename) is not None:
