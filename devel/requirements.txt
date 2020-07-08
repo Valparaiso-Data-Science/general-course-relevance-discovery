@@ -1,0 +1,16 @@
+spacy==2.2.4
+lxml==4.5.1
+numpy==1.18.5
+pydotplus==2.0.2
+wordninja==2.0.0
+matplotlib==3.2.1
+progress==1.5
+pycm==2.7
+graphviz==0.14
+seaborn==0.10.1
+nltk==3.5
+pandas==1.0.4
+ipython==7.15.0
+pyenchant==3.1.1
+scikit_learn==0.23.1
+pytest
