@@ -5,7 +5,7 @@ import os
 from lxml import etree
 import wordninja
 #from punct_split import punct_split
-from reintroduce_spaces import reintroduce_spaces
+from new_reintroduce_spaces import reintroduce_spaces
 
 #course id regex string
 c_id_re_s = r"[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}"

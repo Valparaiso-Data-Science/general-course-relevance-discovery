@@ -1,6 +1,7 @@
 import re
 import wordninja
-import punct_split
+import punct_split as ps
+import sys
 
 #fp = "Youngstown.xml"
 
@@ -23,7 +24,7 @@ def pad_characters(input_string):
     # do basically all of the methods in punct_split
     # however it does not use the spacy package at all
     # (the nlp model) or do any splitting here
-    return punct_split.space_coursecodes(punct_split.space_punct(punct_split.space_parantheses(punct_split.correct_apostrophe(input_string))))
+    return ps.space_coursecodes(ps.space_punct(ps.space_parantheses(ps.correct_apostrophe(input_string))))
 
 def get_dict_of_bad_words(fp):
     f = open(fp)
@@ -35,15 +36,38 @@ def get_dict_of_bad_words(fp):
         pl = pad_characters(l)
         for w in pl.split(" "): # split the line based off of spaces
             if re.match(long_str_re, w): # see if the word is more than 17 characters long
-                s_s = punct_split.semantic_split(w) # create 'split string' from the word
+                s_s = ps.semantic_split(w) # create 'split string' from the word
                 if not w == s_s: # if the two strings aren't the same
                     if s_s not in bad_strings_dict: # and the 'split string' is not in the dictionary already
                         bad_strings_dict.update({w: s_s}) # add it into the dictionary
 
     return bad_strings_dict
 
+# alternate implementation (is faster)
+# captures 6 more courses than above method
+def a_get_dict_of_bad_words(fp):
+    f = open(fp)
+    data = f.read()
+
+    bad_strings_dict = {} # dictionary has all of the strings and what they should be changed into
+    matches = list(set(re.findall(long_str_re, data)))
+
+    # rest of the code would be like this
+    for w in matches:
+        s_s = ps.semantic_split(w)
+        if not w == s_s:
+            # we don't have to lookup if w is in the dictionary because of the set above
+            bad_strings_dict.update({w: s_s})
+
+    # currently the only issue is that there are no padded characters with this method
+    # however, based off of some testing on my local machine, it doesn't seem to be that
+    # big of an issue
+
+    return bad_strings_dict
+
 def reintroduce_spaces(fp, nfp=None):
-    d = get_dict_of_bad_words(fp)
+    #d = get_dict_of_bad_words(fp)
+    d = a_get_dict_of_bad_words(fp)
 
     # get the data out of the file
     f = open(fp, 'r')
@@ -51,6 +75,8 @@ def reintroduce_spaces(fp, nfp=None):
     f.close()
 
     n_data = f_data # potentially make 'pad_characters(f_data)'; do NOT do that, it reduced the number of courses I was getting from 59k to 43k, definitely not a good move
+
+    #potentially can move this to re.sub? I don't know what the speed difference would be
     for i in d: # this is where the big speed improvement is, it runs through 3500 entries instead of all of the tags in the xml
         n_data = n_data.replace(i, d[i])
 
