@@ -43,6 +43,7 @@ def get_dict_of_bad_words(fp):
     return bad_strings_dict
 
 # alternate implementation (is faster)
+# captures 6 more courses than above method
 def a_get_dict_of_bad_words(fp):
     f = open(fp)
     data = f.read()
@@ -64,8 +65,8 @@ def a_get_dict_of_bad_words(fp):
     return bad_strings_dict
 
 def reintroduce_spaces(fp, nfp=None):
-    d = get_dict_of_bad_words(fp)
-    #d = a_get_dict_of_bad_words(fp)
+    #d = get_dict_of_bad_words(fp)
+    d = a_get_dict_of_bad_words(fp)
 
     # get the data out of the file
     f = open(fp, 'r')
