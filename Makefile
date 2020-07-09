@@ -12,6 +12,8 @@ setup:
 csv:
 	python3 source/CreateCSV.py source/
 	sh pre/parsevalpo.sh fullPDFs/ucat1920.xml courses/
+	mv courses/AllSchools.csv courses/all.csv
+	cat coures/all.csv courses/valpo.csv > courses/AllSchools.csv
 	@echo "You will need to combine AllSchools.csv and valpo.csv"
 
 clean:
