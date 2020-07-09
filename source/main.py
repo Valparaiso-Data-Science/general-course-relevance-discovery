@@ -76,19 +76,12 @@ print("\tfound targets")
 #%%
 features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
 labels = labeled_df["curricula relevance"]
-print('length of labels: '+ str(len(labels)))
-print('sum of labels: '+ str(sum(labels)))
-
-labeled_df.reset_index(inplace=True)
-dsci = labeled_df.loc[[labeled_df['curricula relevance'] == 1], 'CourseID']
-labeled_df.set_index('CourseID')
-print(dsci)
 
 print("Splitting Data")
 
-#randForest(features, labels)
+randForest(features, labels)
 #svm(features,labels,5)
-undersample(features, labels)
+#undersample(features, labels)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
