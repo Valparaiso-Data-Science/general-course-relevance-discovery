@@ -9,10 +9,6 @@ import Prep
 import const
 
 #libraries
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.tree import export_text
-from sklearn.tree import export_graphviz
 import os
 import pandas as pd
 import numpy as np
