@@ -58,14 +58,14 @@ def randForest(features,labels,splits=10):
             i +=1
         accs[count] = (accs[count]/len(preds))*100
         count += 1
-        print('Mean Accuracy: ' + str(rf.score(X_test,y_test)))
+        forAc = rf.score(X_test,y_test)
+        accs.append(forAc)
+        print('Mean Accuracy: ' + str(forAc))
         print(confusion_matrix(y_test, preds))
         #vizRFTrees(rf, 5, features)
     count = 0
-    for acc in accs:
-        #print("Mean Absolute Error for Forest #" + str(count) + ": " + str(error) + ' degrees.')
-        print("Accuracy for Forest #"+ str(count)+ ": " + str(acc) + " percent")
-        count += 1
+    modelAc= sum(accs)/len(accs)
+    print("Average Model Accuracy: "+ str(modelAc*100))
 
 def svm(features,labels,splits):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
