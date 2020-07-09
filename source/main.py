@@ -78,6 +78,11 @@ features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
 labels = labeled_df["curricula relevance"]
 print('length of labels: '+ str(len(labels)))
 print('sum of labels: '+ str(sum(labels)))
+
+dsci = labeled_df.set_index('curricula relevance')
+dsci_courses = dsci.loc[1, 'CourseID']
+print(dsci_courses)
+
 print("Splitting Data")
 
 #randForest(features, labels)
