@@ -23,6 +23,14 @@ You will also need the 'enchant' c library installed:
 * macOS users - getReqs.py takes care of it for you, just make sure you have homebrew installed
 * Windows users - you're on your own
 
+### Creating the Dataset
+
+If you want to just create the dataset, its as easy as running:
+```
+make csv
+```
+This will create 'AllSchools.csv' under courses, and with our current data, should get you around 60 thousand courses.
+
 ## Repo Structure
 
 This repo has a number of direcories, each with a function.
