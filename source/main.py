@@ -90,7 +90,7 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-randForest(features, labels)
+#randForest(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels, 0.5)
 
