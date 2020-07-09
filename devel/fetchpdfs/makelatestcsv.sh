@@ -2,25 +2,25 @@
 
 f="urls.csv"
 
-important_years="19-20 20-21"
-
-grep -E "^(u|b)" $f > t
-
-for y in $important_years
-do
-	grep $y t
-done
-
-
-schools=$(cut -d',' -f2 $f | sort | uniq)
-
+schools=$(grep -E "^[ubg]" $f | cut -d',' -f2 | sort -u)
 
 mkdir -pv temp
 
 for s in $schools
 do
-	grep $s urls.csv > temp/$s.csv
+	grep ",$s," urls.csv > temp/$s.csv
 done
 
+for c in $(ls temp)
+do
+	grep -v "^g" temp/$c | sort -nr > temp/$(echo $c | cut -d'.' -f1)_sorted.csv
+	rm temp/$c
+done
 
+> latest.csv
+for s_c in $(ls temp)
+do
+	sed q temp/$s_c >> latest.csv
+done
 
+rm -rf temp
