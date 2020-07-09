@@ -41,10 +41,7 @@ def createCSV():
     Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
     print("Creating 'valpo.csv'...")
-    try:
-        os.system("sh pre/parsevalpo.sh fullPDFs/ucat1920.xml courses/")
-    except:
-        os.system("sh ../pre/parsevalpo.sh ../fullPDFs/ucat1920.xml ../courses/")
+    os.system("sh ../pre/parsevalpo.sh ../fullPDFs/ucat1920.xml ../courses/")
 
     # collect all data frames in one list
     df_container = []
