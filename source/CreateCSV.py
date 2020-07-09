@@ -62,7 +62,7 @@ Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dir
 # collect all data frames in one list
 df_container = []
 for filename in Bar('Making topicModel').iter(os.listdir(const.CSV_DIR)):
-    df_container.append(pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV))
+    df_container.append(pd.read_csv(const.CSV_DIR + "/" + filename))
 # concatenate list into one joint data frame
 topicModel = pd.concat(df_container)
 
