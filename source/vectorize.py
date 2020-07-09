@@ -150,15 +150,18 @@ def cleanVectorizer(df):
 
 def labelTargetsdf(df):
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
-    vocabSplit = []
-    for word in vocab:
-        print(word)
-        try:
-	        df["curricula relevance"] = int(bool(df[word]) or bool(df["curricula relevance"]))
-            # df[word] | df["curricula relevance"]
-        #Keyword not found at all (so no column to begin with)
-        except:
-	        pass
+#     vocabSplit = []
+#     for word in vocab:
+#         print(word)
+#         try:
+# 	        df["curricula relevance"] = df[word] | df["curricula relevance"]
+#         #Keyword not found at all (so no column to begin with)
+#         except:
+# 	        pass
+    for r in df:
+        for word in vocab:
+            if df[word]==1:
+                df.iloc[r,"curricula relevance"]= 1
     return df
 #x = tfidf(courseAndDescDataFrame['Description'])
 #x.to_csv("test.csv")
