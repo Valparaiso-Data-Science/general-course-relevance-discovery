@@ -10,7 +10,7 @@ setup:
 	echo "-----\nIf you are wanting to run grobid, you will need to run: 'python3 devel/grobid/getgrobid.py'\n-----"
 
 csv:
-	python3 source/CreateCSV.py
+	python3 source/CreateCSV.py source/
 
 clean:
 	rm -rf courses/
