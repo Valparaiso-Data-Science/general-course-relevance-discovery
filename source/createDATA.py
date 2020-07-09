@@ -40,11 +40,13 @@ def createCSV():
     # make a csv from the files in temp_data/superTrimmedPDFs
     Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
+    '''
+    # fix the bug that is here; get an error in newClean complaining about a float
     print("Creating 'valpo.csv'...")
     os.system("sh ../pre/parsevalpo.sh ../fullPDFs/ucat1920.xml ../courses/")
     clean_valpo_df = newClean(pd.read_csv(const.CSV_DIR + "/" + "valpo.csv"))
     clean_valpo_df.to_csv(const.CSV_DIR + "/" + "valpo.csv")
-
+    '''
     # collect all data frames in one list
     df_container = []
     for filename in Bar('Making topicModel').iter(os.listdir(const.CSV_DIR)):
