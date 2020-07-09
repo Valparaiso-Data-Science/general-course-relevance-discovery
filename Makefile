@@ -11,6 +11,7 @@ setup:
 
 csv:
 	python3 source/CreateCSV.py source/
+	sh pre/parsevalpo.sh
 
 clean:
 	rm -rf courses/
