@@ -64,7 +64,7 @@ topicModel = pd.concat(df_container)
 cleaned_df = newClean(topicModel)
 print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
 cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
-'''
+
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
