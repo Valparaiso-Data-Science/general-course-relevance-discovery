@@ -154,7 +154,8 @@ def labelTargetsdf(df):
     for word in vocab:
         print(word)
         try:
-	        df["curricula relevance"] = df[word] | df["curricula relevance"]
+	        df["curricula relevance"] = int(bool(df[word]) or bool(df["curricula relevance"]))
+            # df[word] | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
         except:
 	        pass
