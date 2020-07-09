@@ -82,7 +82,7 @@ print("\tvect")
 pruned_df = cleanVectorizer(vect_df)
 print("\tpruned")
 labeled_df = labelTargetsdf(pruned_df)
-labeled_df.to_csv('../source/VectorizedCourses.csv',encoding='utf-8-sig')
+#labeled_df.to_csv('../source/VectorizedCourses.csv',encoding='utf-8-sig')
 print("\tfound targets")
 #%%
 features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
@@ -90,7 +90,7 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-#randForest(features, labels)
+randForest(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels, 0.5)
 
