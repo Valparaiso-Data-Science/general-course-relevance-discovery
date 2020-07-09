@@ -76,7 +76,8 @@ print("\tfound targets")
 #%%
 features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
 labels = labeled_df["curricula relevance"]
-
+print('length of labels: '+ str(len(labels)))
+print('sum of labels: '+ str(sum(labels)))
 print("Splitting Data")
 
 #randForest(features, labels)
