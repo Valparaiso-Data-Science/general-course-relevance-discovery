@@ -57,12 +57,12 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                 #Checks if the description is longer than 6 words
                 #Checks that there is only 1 Course ID in the line
                 #Checks that the next <P> tag doesn't start with a Course ID
-                if re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", elm.text) is not None and \
+                if re.match(c_id_re, elm.text) is not None and \
                         (elm.tag == courseTag) and \
                         (stack[counter + descTagsFromID].tag) == descTag and \
                         len(re.findall(r'\w+', elm.text)) < 19 and \
                         len(re.findall(r'\w+', stack[counter + descTagsFromID].text)) > 6 and \
-                        len(re.findall("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", elm.text)) < 2 and \
+                        len(re.findall(c_id_re, elm.text)) < 2 and \
                         re.match("^.{0,10}([A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1})", stack[counter + descTagsFromID].text) is None:
                     #Sets the description to the <P> tag after the identified Course ID
                     description = stack[counter + descTagsFromID].text
@@ -75,7 +75,7 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                         if (counter + descTagsFromID + extTags) < len(stack) and \
                             (stack[counter + descTagsFromID + extTags].tag) == descTag and \
                             len(re.findall(r'\w+',stack[counter + descTagsFromID + extTags].text)) >= 6 and \
-                            re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", stack[counter + descTagsFromID + extTags].text) is None:
+                            re.match(c_id_re, stack[counter + descTagsFromID + extTags].text) is None:
                                 #Append the tag to the already existing description
                                 description += stack[counter + descTagsFromID + extTags].text
                                 #If we reach the end of our loop, just set the description to what it was before this loop started
@@ -96,13 +96,13 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
                 #Checks if there is at least 15 words
                 #Checks if it is a <P> tag
                 #Checks if the college is known to have Course ID's and Descriptions in one <P> tag
-                elif re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", elm.text) is not None and \
-                    (len(re.findall("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", elm.text)) < 2 or (len(re.findall("preq|prereq",elm.text.lower())) >= 1))and \
+                elif re.match(c_id_re, elm.text) is not None and \
+                    (len(re.findall(c_id_re, elm.text)) < 2 or (len(re.findall("preq|prereq",elm.text.lower())) >= 1))and \
                     len(re.findall(r'\w+', elm.text)) >= 15 and \
                     (elm.tag == courseTag) and \
                     extParse:
                         #Gives us an index for the start and end of the Course ID
-                        matchID = re.match("[A-Z]{2,5}(-|\s+)[0-9]{3,4}[A-Z]{0,1}", elm.text)
+                        matchID = re.match(c_id_re, elm.text)
                         #Sets the Course ID to strictly the captial letters and numbers (ex: DATA 151)
                         courseID.append(elm.text[matchID.start():matchID.end()])
                         #Sets the description as everything besides the Course ID (Note: this means that the course title will be in the description)

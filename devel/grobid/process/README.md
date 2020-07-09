@@ -1,0 +1,1 @@
+This directory houses the new XML->CSV parser (in development), which is meant to process the outputs of the Grobid PDF->XML process.

@@ -7,7 +7,7 @@ import sys
 
 #This regex matches any string that is made up of
 #at least 17 capital or lowercase letters
-long_str_re = r"[a-zA-Z]{17,}"
+long_str_re = r"[a-zA-Z0-9]{8,}"
 
 #potential new re
 # does a look a head (?=[a-zA-Z]) for a lowercase

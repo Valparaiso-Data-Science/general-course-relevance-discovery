@@ -2,12 +2,11 @@
 import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree,randForest,undersample
-from reintroduce_spaces import reintroduce_spaces
+from ML import decisionTree,visTree
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 import Prep
-
+import const
 
 #libraries
 from sklearn.model_selection import train_test_split
@@ -31,15 +30,6 @@ from progress.bar import Bar
 # container for processed catalogs
 topicModel = pd.DataFrame()
 
-# constants (may move to a separate file)
-SOURCE_DIR = "../fullPDFs"
-TRIMMED_DIR = "../temp_data/TRIMMED"
-SUPERTRIMMED_DIR = "../temp_data/superTrimmedPDFs"
-CSV_DIR = "../courses" # work on implementing this variable throughout the code
-TRIM_CSV = "../Catalogs.csv"
-DATE = date.today() # can be useful if we want to date outputs
-ALL_CSV = "AllSchools.csv"
-
 # toggle for keeping data from intermediary stages
 dirty = False
 if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
@@ -50,31 +40,31 @@ Prep.prepare()
 
 
 # trim the xml files (whenever line number information available, otherwise keep whole file)
-Parallel(n_jobs=-1)(delayed(Prep.trimFile)(SOURCE_DIR, TRIMMED_DIR, filename, Prep.makeLineNumDict(TRIM_CSV))
-                    for filename in Bar('Trimming Files').iter(os.listdir(SOURCE_DIR)))
+Parallel(n_jobs=-1)(delayed(Prep.trimFile)(const.SOURCE_DIR, const.TRIMMED_DIR, filename, Prep.makeLineNumDict(const.TRIM_CSV))
+                    for filename in Bar('Trimming Files').iter(os.listdir(const.SOURCE_DIR)))
 
 
 # clean the xml files (fix problems and make it parseable)
-Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(TRIMMED_DIR , SUPERTRIMMED_DIR , filename)
-                    for filename in Bar('Fixing Files').iter(os.listdir(TRIMMED_DIR)))
+Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(const.TRIMMED_DIR , const.SUPERTRIMMED_DIR , filename)
+                    for filename in Bar('Fixing Files').iter(os.listdir(const.TRIMMED_DIR)))
 
 
 # make a csv from the files in temp_data/superTrimmedPDFs
-Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
-                    for filename in Bar('Making CSVs').iter(os.listdir(SUPERTRIMMED_DIR)))
+Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
+                    for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
 
 # collect all data frames in one list
 df_container = []
-for filename in Bar('Making topicModel').iter(os.listdir('../courses/')):
-    df_container.append(pd.read_csv('../courses/' + filename))
+for filename in Bar('Making topicModel').iter(os.listdir(const.CSV_DIR)):
+    df_container.append(pd.read_csv(const.CSV_DIR + "/" + filename))
 # concatenate list into one joint data frame
 topicModel = pd.concat(df_container)
 
 
 cleaned_df = newClean(topicModel)
-print("Creating '../courses/AllSchools.csv'...")
-cleaned_df.to_csv('../courses/AllSchools.csv', encoding="utf-8-sig")
-
+print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
+cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
+'''
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
@@ -82,7 +72,6 @@ print("\tvect")
 pruned_df = cleanVectorizer(vect_df)
 print("\tpruned")
 labeled_df = labelTargetsdf(pruned_df)
-#labeled_df.to_csv('../source/VectorizedCourses.csv',encoding='utf-8-sig')
 print("\tfound targets")
 #%%
 features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
