@@ -83,7 +83,7 @@ def newClean(df):
         cleanDesc = row['Descriptions']
         cleanDesc = cleanDesc.translate(cleanDesc.maketrans(string.punctuation, "\\" * len(string.punctuation)))
         cleanDesc = cleanDesc.replace("\\", '')
-        cleanDesc = ' '.join([word for word in cleanDesc.split() if word.lower() not in stopwords])
+        cleanDesc = ' '.join([word.lower() for word in cleanDesc.split() if word.lower() not in stopwords])
         schoolID.append(row['School'])
         courseID.append(row['CourseID'])
         description.append(cleanDesc)
