@@ -2,7 +2,7 @@
 import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree
+from ML import decisionTree,visTree, randForest,undersample
 from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 import Prep
