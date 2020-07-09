@@ -42,6 +42,8 @@ def createCSV():
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
     print("Creating 'valpo.csv'...")
     os.system("sh ../pre/parsevalpo.sh ../fullPDFs/ucat1920.xml ../courses/")
+    clean_valpo_df = newClean(pd.read_csv(const.CSV_DIR + "/" + "valpo.csv"))
+    clean_valpo_df.to_csv(const.CSV_DIR + "/" + "valpo.csv")
 
     # collect all data frames in one list
     df_container = []
