@@ -79,7 +79,9 @@ labels = labeled_df["curricula relevance"]
 print('length of labels: '+ str(len(labels)))
 print('sum of labels: '+ str(sum(labels)))
 
+labeled_df.reset_index(inplace=True)
 dsci = labeled_df.loc[[labeled_df['curricula relevance'] == 1], 'CourseID']
+labeled_df.set_index('CourseID')
 print(dsci)
 
 print("Splitting Data")
