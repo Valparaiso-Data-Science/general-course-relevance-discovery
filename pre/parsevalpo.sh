@@ -4,13 +4,19 @@
 file="../fullPDFs/ucat1920.xml"
 
 # clean ptags
-bash ptagclean.sh $file > 1
+#bash ptagclean.sh $file > 1
+# replace anything that has extra text in the ptag with '<p>'
+# basically '<p lots_of_extra_stuff asdfasdfasdf >' --> '<p>'
+sed "s|<p[^>]*>|<p>|" $file > 1
 # p -> P
-bash ptoPtag.sh 1 > 2
+#bash ptoPtag.sh 1 > 2
+sed 's|p>|P>|g' 1 > 2 #only have to do the back half
 # remove b tags from doc
-bash removeBtags 2 > 3
+#bash removeBtags 2 > 3
+sed -E "s~<(/|)b>~~g" 2 > 3
 # run idea.sh (puts all things that look like a course ID on their own line)
-bash idea.sh 3 > 4
+#bash idea.sh 3 > 4
+cat 3 | tr -d '\n' | sed -E 's~(<P>[A-Z]{2,} [0-9]{2,})~\n\1~g' > 4
 # all actual courses have this regex sequence
 grep '</P><P> </P><P>' 4 > 5
 # remove the junk at the top of the xml
@@ -68,3 +74,6 @@ do
 done
 
 # &"#"34;
+
+
+
