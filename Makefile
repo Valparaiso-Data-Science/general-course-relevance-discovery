@@ -11,7 +11,7 @@ setup:
 
 csv:
 	python3 source/CreateCSV.py source/
-	sh pre/parsevalpo.sh
+	sh pre/parsevalpo.sh fullPDFs/ucat1920.xml courses/
 
 clean:
 	rm -rf courses/
