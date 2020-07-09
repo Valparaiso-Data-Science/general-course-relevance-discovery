@@ -43,7 +43,7 @@ urls=$(grep $target_year $csv | cut -d',' -f4)
 mkdir -pv $output_d && cd $output_d
 for url in $urls
 do
-	wget $url & 2>&1 1> /dev/null
+	wget $url 2>&1 1> /dev/null &
 done
 wait
 
