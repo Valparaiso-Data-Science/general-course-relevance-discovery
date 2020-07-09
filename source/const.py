@@ -2,7 +2,7 @@
 Constants for our Python code (when ran from main)
 '''
 
-import date
+from datetime import date
 
 # constants (may move to a separate file)
 SOURCE_DIR = "../fullPDFs"
