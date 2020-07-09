@@ -163,16 +163,24 @@ def labelTargetsdf(df):
 #            if df[word]==1:
 #                df.iloc[r,"curricula relevance"]= 1
 
-    for word in vocab:
-        words = word.split()
-        isDsci = True
+    for topic in vocab:
+        words = topic.split()
+        isPresent = True
+        wordCol = [0] * df.size
+
         for w in words:
             try:
                 df[w]
             except:
-                isDsci = False
+                isPresent = False
                 break
-        df["curricula relevance"] = isDsci | df["curricula relevance"]
+        
+        if isPresent:
+            wordCol = df[words[0]]
+            for w in words:
+                wordCol = wordCol & df[w]
+
+        df["curricula relevance"] = wordCol | df["curricula relevance"]
     return df
 
 #x = tfidf(courseAndDescDataFrame['Description'])
