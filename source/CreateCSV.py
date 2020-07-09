@@ -32,8 +32,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
 if len(sys.argv) < 2:
-    print("You need to provide a directory for this script to work properly!
-            (Hint: You probably want to feed it 'source/')")
+    print("You need to provide a directory for this script to work properly!\n(Hint: You probably want to feed it 'source/')")
 else:
     os.chdir(sys.argv[1])
 
