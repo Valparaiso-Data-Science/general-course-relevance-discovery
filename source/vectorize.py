@@ -166,7 +166,7 @@ def labelTargetsdf(df):
     for topic in vocab:
         words = topic.split()
         isPresent = True
-        wordCol = [0] * df.size
+        wordCol = [0] * len(df)
 
         for w in words:
             try:
@@ -174,7 +174,7 @@ def labelTargetsdf(df):
             except:
                 isPresent = False
                 break
-        
+
         if isPresent:
             wordCol = df[words[0]]
             for w in words:
