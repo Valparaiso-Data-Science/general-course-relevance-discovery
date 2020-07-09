@@ -57,7 +57,8 @@ sed -e "s/#//" -e  "s/#//" -e "s/\"\"//g" 21 > 22 # get rid of the first two sep
 sed -e "s/#/,/" -e "s/ , /,/" 22  > 23 # split course id from description
 # add valpo's name; also final cleanup of 'weird' quotation marks
 sed -E -e "s~^~,Valpo,~" -e "s~&\"#\"34;~'~g" -e "s~(\ ){1,}~ ~g" 23 > 24
-cp 24 "$out_d/valpo.csv"
+nl 24 | sed "s/ //" > 25
+cp 25 "$out_d/valpo.csv"
 # remove all temporary files
 
 # if you want to remove double spaces '  '
