@@ -1,12 +1,9 @@
 #!/usr/bin/env sh
 
-help(){
-	echo ""
-}
-
 csv="urls.csv"
 
 echo "Valid Years:"
+# get a valid list of years
 years="$(cut -d',' -f3 $csv | sort | uniq | grep -vE "[a-z]") All"
 for y in $years
 do
@@ -24,6 +21,8 @@ valid_year=1 # 1 for incorrect
 
 for y in $years
 do
+	# if the input year matches one of the years in years,
+	# then set valid_year to be true
 	[ $target_year = $y ] && valid_year=0
 done
 
@@ -32,17 +31,15 @@ done
 
 echo ""
 echo "Downloading your PDFs for $target_year now..."
-#echo $target_year
-
-#sh downloadpdfs.sh $csv $target_year
 
 output_d="pdfs/"
 
 urls=$(grep $target_year $csv | cut -d',' -f4)
-
+# make the output directory and change into it
 mkdir -pv $output_d && cd $output_d
 for url in $urls
 do
+	# download the url via wget; silence the output; and concurrently
 	wget $url 2>&1 1> /dev/null &
 done
 wait
