@@ -4,6 +4,7 @@ Created on Mon Jul 22 13:50:39 2019
 
 @author: nrandle
 """
+import os
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn import tree,metrics
 from sklearn.svm import SVC
@@ -66,7 +67,9 @@ def randForest(features,labels,splits=10):
     count = 0
     modelAc= sum(accs)/len(accs)
     print("Average Model Accuracy: "+ str(modelAc*100))
-
+    results = open('../source/RandForestResult.txt','w')
+    r = results.write("Average Model Accuracy: "+ str(modelAc*100))
+    results.close()
 def svm(features,labels,splits):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
