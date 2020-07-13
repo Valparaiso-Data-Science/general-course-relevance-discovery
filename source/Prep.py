@@ -42,7 +42,7 @@ def prepare():
 
 def makeLineNumDict(csv_file_path): # maybe add a 'csv_file' as our input?
     # look for a csv file containing line number information
-    #(from which line to which line to trim) and gather the relevant
+    #   (from which line to which line to trim) and gather the relevant
     #   information (filename, start line, end line) in a dictionary
     line_num_dict = {}
     try:
