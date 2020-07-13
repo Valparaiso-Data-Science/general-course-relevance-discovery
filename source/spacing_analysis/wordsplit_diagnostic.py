@@ -9,6 +9,8 @@ import os
 import re
 import spacy
 import enchant
+import progress.bar
+import joblib
 import xml.etree.ElementTree as ET
 import numpy as np
 import pandas as pd
@@ -25,6 +27,8 @@ spell = enchant.Dict("en_US")
 
 # load language model into tokenizer
 nlp = spacy.load("en")
+
+TEMP_DIR = "temp"
 
 
 def split_gain(long_word, return_words=False):
@@ -118,15 +122,36 @@ def analyze_file(file_path):
     return stats
 
 
+def analyze_file_to_temp(file_path, temp_dir):
+    """
+    Wrapper for analyze_file that writes results to a separate file in a temporary directory
+
+    :param file_path: path to file to analyze
+    :param temp_dir: path to temporary directory to write analysis to
+    """
+
+    stats = analyze_file(file_path)
+
+    name = file_path[(file_path.rfind('/') + 1):file_path.rfind('.')]
+
+    with open(temp_dir + "/" + name + ".csv", "w") as f:
+        f.write(name + "," +
+                str(stats["total_words"]) + "," +
+                str(stats["matches"]) + "," +
+                str(stats["split"]) + "," +
+                str(stats["unsplit"]) + "," +
+                str(stats["word_gain"]))
+
+
 def main(argv):
 
-    target = "../fullPDFs/Carlow.xml"
+    target_dir_path = "../../fullPDFs/"
 
     if len(argv) > 1:
-        target = argv[1]
+        target_dir_path = argv[1]
 
-    ignorables = [".DS_Store", "Toy.xml"]
-    all_xmls = os.listdir("../fullPDFs")
+    ignorables = [".DS_Store"]
+    all_xmls = os.listdir(target_dir_path)
 
     for ignorable in ignorables:
         all_xmls.remove(ignorable)
@@ -140,21 +165,10 @@ def main(argv):
     unsplits = np.empty(len(all_xmls)).astype(int)
     avg_wordgain = np.empty(len(all_xmls)).astype(np.float64)
 
-    for i in range(len(all_xmls)):
-        print("\rProcessing: %d\\%d" % ((i+1), len(all_xmls)), end='')
-
-        target = all_xmls[i]
-
-        stats = analyze_file("../fullPDFs/" + target)
-
-        schools[i] = target[(target.rfind('/')+1):target.rfind('.')]
-        total_words[i] = stats["total_words"]
-        matches[i] = stats["matches"]
-        splits[i] = stats["split"]
-        unsplits[i] = stats["unsplit"]
-        avg_wordgain[i] = stats["word_gain"]
-
-    print("\rDone.")
+    os.mkdir(TEMP_DIR)
+    joblib.Parallel(n_jobs=-1)(
+        joblib.delayed(analyze_file_to_temp)(target_dir_path + "/" + filename, TEMP_DIR)
+        for filename in progress.bar.Bar('Diagnosing Spacing Errors').iter(all_xmls))
 
     bads = np.empty(len(schools)).astype(int)
     bad_space_inds = [np.where(schools == bad_spaced)[0] for bad_spaced in ["2011Cornell", "Brown", "Caldwell",
