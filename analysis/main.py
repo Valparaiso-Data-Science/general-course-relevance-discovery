@@ -276,7 +276,7 @@ for i in range(len(ds_schools_df)): #for each row
   frac = float(num/denom)
   ds_schools_df.loc[i, 'Weights'] = frac
   print("Creating 'csvs/0713_bok_courses_cat_weights.csv'...")
-  ds_schools_df.to_csv(data_path + 'csvs/0713_bok_courses_cat_weights.csv',index=False)
+  ds_schools_df.to_csv('csvs/0713_bok_courses_cat_weights.csv',index=False)
 
 #process words, create dictionaries for future function calls
 responses, school_list = process_words(stop_words,new_schools)
@@ -342,4 +342,4 @@ plt.legend()
 
 #save to csv
 print("Creating 'csvs/0713_FINAL_all_groups_all_results.csv'...")
-ds_schools_df.to_csv(data_path + 'csvs/0713_FINAL_all_groups_all_results.csv', index=False)
+ds_schools_df.to_csv('csvs/0713_FINAL_all_groups_all_results.csv', index=False)
