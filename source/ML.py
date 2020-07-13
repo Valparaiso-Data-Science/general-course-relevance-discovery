@@ -17,6 +17,7 @@ import pydotplus
 import graphviz
 from subprocess import call
 from imblearn.under_sampling import RandomUnderSampler, NearMiss
+import numpy as np
 
 def randForest(features,labels,splits=10):
     '''
@@ -53,7 +54,7 @@ def randForest(features,labels,splits=10):
         # y_test = labels.iloc[test_index]
         maj_train_index = undersample(X_train,y_train)
         ds_i = features.index[labels == 1]
-        train_index = maj_train_index.append(ds_i)
+        train_index = np.append(maj_train_index,ds_i)
         indices[0]=train_index
         fold_iterations[count]=indices
         count+=1

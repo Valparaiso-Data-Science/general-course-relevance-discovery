@@ -13,8 +13,8 @@ from nltk.tokenize import word_tokenize
 from pycm import ConfusionMatrix
 from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
-
-
+from nltk.stem import PorterStemmer
+ps = PorterStemmer()
 #Convert vectorized variable into csv output
 def toCSV(vectors):
     classIndex = 0
@@ -83,7 +83,7 @@ def newClean(df):
         cleanDesc = row['Descriptions']
         cleanDesc = cleanDesc.translate(cleanDesc.maketrans(string.punctuation, "\\" * len(string.punctuation)))
         cleanDesc = cleanDesc.replace("\\", '')
-        cleanDesc = ' '.join([word.lower() for word in cleanDesc.split() if word.lower() not in stopwords])
+        cleanDesc = ' '.join([ps.stem(word.lower()) for word in cleanDesc.split() if word.lower() not in stopwords])
         schoolID.append(row['School'])
         courseID.append(row['CourseID'])
         description.append(cleanDesc)
@@ -169,6 +169,7 @@ def labelTargetsdf(df):
         wordCol = [0] * len(df)
 
         for w in words:
+            w = ps.stem(w)
             try:
                 df[w]
             except:
