@@ -40,7 +40,7 @@ def randForest(features,labels,splits=10):
     accs = [0]*splits
     fold_iterations = [0]*10
     count=0
-    features.reset_index(inplace=True)
+    # features.reset_index(inplace=True)
     for train_index, test_index in skf.split(features, labels):
         indices = [0]*2
         indices[1]=test_index
