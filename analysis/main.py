@@ -13,6 +13,7 @@ nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
 import re
 from re import *
+from nltk.util import ngrams
 from nltk.corpus import stopwords
 import gower
 import matplotlib.pyplot as plt
