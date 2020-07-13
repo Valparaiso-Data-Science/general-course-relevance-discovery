@@ -56,7 +56,7 @@ for i in range(len(schools_df)):
 ds_schools_df = pd.DataFrame(temp_df)
 ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term']
 print("Creating 'csvs/0713_bok_courses.csv'...")
-ds_schools_df.to_csv('csvs/0713_bok_courses.csv',enconding="utf-8-sig")
+ds_schools_df.to_csv('csvs/0713_bok_courses.csv',encoding="utf-8-sig")
 
 #creating new columns with key words
 body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics']
