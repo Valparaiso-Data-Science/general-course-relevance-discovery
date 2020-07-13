@@ -67,5 +67,9 @@ if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("You need to provide a directory for this script to work properly!\n(Hint: You probably want to feed it 'source/')")
     else:
-        os.chdir(sys.argv[1])
+        try:
+            os.chdir(sys.argv[1])
+        except:
+            print("Error: Directory doesn't exist. Exiting...")
+            os.quit()
     createCSV()
