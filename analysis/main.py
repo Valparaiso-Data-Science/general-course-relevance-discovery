@@ -279,10 +279,10 @@ print("Creating 'csvs/0713_bok_courses_cat_weights.csv'...")
 ds_schools_df.to_csv('csvs/0713_bok_courses_cat_weights.csv',index=False)
 
 #process words, create dictionaries for future function calls
-responses, school_list = process_words(stop_words,new_schools)
+responses, ds_school_list = process_words(stop_words,ds_schools_df)
 
 #tfidf analysis
-tfidf(responses,school_list)
+tfidf(responses,ds_school_list)
 
 
 #MACHINE lEARNING
