@@ -8,6 +8,7 @@
 #from sklearn.feature_extraction.text import TfidfTransformer
 import numpy as np
 import pandas as pd
+import re
 from nltk.stem.porter import *
 from nltk.tokenize import word_tokenize
 from pycm import ConfusionMatrix
@@ -112,8 +113,20 @@ def vectorizer(courseDesc_df):
     # courseDesc_df = courseDesc_df.sample(n=5000,random_state=14)
     print(type(courseDesc_df))
     vectors = vectorizer.fit_transform(courseDesc_df['Descriptions']).toarray()
-
+    
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
+    
+    vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
+    for topic in vocab:
+        words = topic.split()
+        stem_words = []
+        for w in words:
+            stem_words.append(ps.stem(w))
+        stem_topic = ' '.join(w in stem_words)
+        courseFeatures_df[stem_topic] = [0]*len(courseFeatures_df)
+        for i,row in courseDesc_df['Descriptions'].iterrows():
+            if re.search(stem_topic,row) is not None:
+                courseFeatures_df.loc[courseFeatures_df.index[i],stem_topic] = 1
 
     return courseFeatures_df
 '''
@@ -150,40 +163,40 @@ def cleanVectorizer(df):
 
 def labelTargetsdf(df):
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
-#     vocabSplit = []
-#     for word in vocab:
-#         print(word)
-#         try:
-# 	        df["curricula relevance"] = df[word] | df["curricula relevance"]
-#         #Keyword not found at all (so no column to begin with)
-#         except:
-# 	        pass
-#    for r in df:
-#        for word in vocab:
-#            if df[word]==1:
-#                df.iloc[r,"curricula relevance"]= 1
-
     for topic in vocab:
         words = topic.split()
         stem_words = []
         for w in words:
             stem_words.append(ps.stem(w))
-        isPresent = True
-        wordCol = [0] * len(df)
+        stem_topic = ' '.join(w in stem_words)
+        try:
+ 	        df["curricula relevance"] = df[stem_topic] | df["curricula relevance"]
+        #Keyword not found at all (so no column to begin with)
+        except:
+ 	        pass
 
-        for w in stem_words:
-            try:
-                df[w]
-            except:
-                isPresent = False
-                break
+#USE EVERYTHING UNDER HERE
+    # for topic in vocab:
+    #     words = topic.split()
+    #     stem_words = []
+    #     for w in words:
+    #         stem_words.append(ps.stem(w))
+    #     isPresent = True
+    #     wordCol = [0] * len(df)
 
-        if isPresent:
-            wordCol = df[stem_words[0]]
-            for w in stem_words:
-                wordCol = wordCol & df[w]
+    #     for w in stem_words:
+    #         try:
+    #             df[w]
+    #         except:
+    #             isPresent = False
+    #             break
 
-        df["curricula relevance"] = wordCol | df["curricula relevance"]
+    #     if isPresent:
+    #         wordCol = df[stem_words[0]]
+    #         for w in stem_words:
+    #             wordCol = wordCol & df[w]
+
+    #     df["curricula relevance"] = wordCol | df["curricula relevance"]
     return df
 
 #x = tfidf(courseAndDescDataFrame['Description'])
