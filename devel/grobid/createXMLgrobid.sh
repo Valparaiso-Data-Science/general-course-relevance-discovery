@@ -2,7 +2,14 @@
 
 xml_out_dir="out" #obviously change
 
-mkdir -pv $xml_out_dir
+#mkdir -pv $xml_out_dir
+
+#csv_f=$1 # csv file is our input, we will download all of the pdfs in it and run them through grobid.
+
+default_year="latest" #default year to download pdfs from
+	# latest - uses makelatestcsv.sh to get the csv file
+	# 15-16,16-17,etc - automate getpdfs to download the appropriate pdfs
+	# all - use getpdfs download all function
 
 check_environment(){
 	docker --version || echo "Docker is not installed. Exiting..." && exit 1
@@ -19,8 +26,23 @@ copy_config(){
 }
 
 python_client(){
+	in_dir=$1
+	out_idr=$2
 	python3 grobid-python-client/grobid-client.py --input $in_dir --output $out_dir processFulltextDocument
 }
+
+down_pdfs(){
+	year=$1
+	cwd=$PWD
+	cd "../fetchpdfs"
+	case $year in
+		latest)./makelatestcsv.sh && echo All | ./getpdfs.sh latest.csv;;
+		All)echo All | ./getpdfs.sh;;
+		*) echo $year | ./getpdfs.sh;;
+	esac
+	cd $cwd
+}
+
 
 # need to figure out how to decide which catalogs to download (use the scripts in fetchpdfs)
 
