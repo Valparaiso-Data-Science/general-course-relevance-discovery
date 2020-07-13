@@ -122,7 +122,7 @@ def vectorizer(courseDesc_df):
         stem_words = []
         for w in words:
             stem_words.append(ps.stem(w))
-        stem_topic = ' '.join(w in stem_words)
+        stem_topic = ' '.join(w for w in stem_words)
         courseFeatures_df[stem_topic] = [0]*len(courseFeatures_df)
         for i,row in courseDesc_df['Descriptions'].iterrows():
             if re.search(stem_topic,row) is not None:
