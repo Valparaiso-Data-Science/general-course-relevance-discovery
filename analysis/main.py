@@ -275,8 +275,8 @@ for i in range(len(ds_schools_df)): #for each row
     d = d.split() #split for continuity
   frac = float(num/denom)
   ds_schools_df.loc[i, 'Weights'] = frac
-  print("Creating 'csvs/0713_bok_courses_cat_weights.csv'...")
-  ds_schools_df.to_csv('csvs/0713_bok_courses_cat_weights.csv',index=False)
+print("Creating 'csvs/0713_bok_courses_cat_weights.csv'...")
+ds_schools_df.to_csv('csvs/0713_bok_courses_cat_weights.csv',index=False)
 
 #process words, create dictionaries for future function calls
 responses, school_list = process_words(stop_words,new_schools)
