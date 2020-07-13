@@ -165,11 +165,13 @@ def labelTargetsdf(df):
 
     for topic in vocab:
         words = topic.split()
+        stem_words = []
+        for w in words:
+            stem_words.append(ps.stem(w))
         isPresent = True
         wordCol = [0] * len(df)
 
-        for w in words:
-            w = ps.stem(w)
+        for w in stem_words:
             try:
                 df[w]
             except:
@@ -177,8 +179,8 @@ def labelTargetsdf(df):
                 break
 
         if isPresent:
-            wordCol = df[words[0]]
-            for w in words:
+            wordCol = df[stem_words[0]]
+            for w in stem_words:
                 wordCol = wordCol & df[w]
 
         df["curricula relevance"] = wordCol | df["curricula relevance"]
