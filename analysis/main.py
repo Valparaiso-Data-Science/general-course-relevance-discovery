@@ -28,8 +28,8 @@ from tokenizer import tokenize
 nlp = spacy.load("en")
 
 ##Import CSV as Dataframes
-schools = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
-del(schools['Unnamed: 0'])
+schools_df = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
+del(schools_df['Unnamed: 0'])
 
 #read in body of knowledge txt file, convert to list
 text_file = open("edison.txt", "r")
