@@ -4,7 +4,7 @@ csv="urls.csv"
 
 echo "Valid Years:"
 # get a valid list of years
-years="$(cut -d',' -f3 $csv | sort | uniq | grep -vE "[a-z]") All"
+years="$(cut -d',' -f3 $csv | sort -u | grep -vE "[a-z]") All"
 for y in $years
 do
 	case $y in
