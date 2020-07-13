@@ -133,4 +133,4 @@ def tfidf(dictionary, schools):
 
   #saving dataframe to csv
   print("Creating 'csvs/0713_TFIDF_all.csv'...")
-  words.to_csv('csvs/-713_TFIDF_all.csv',encoding="utf-8-sig")
+  words.to_csv('csvs/0713_TFIDF_all.csv',encoding="utf-8-sig")
