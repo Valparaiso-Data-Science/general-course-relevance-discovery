@@ -14,7 +14,6 @@ nltk.download('averaged_perceptron_tagger')
 import re
 from re import *
 from nltk.corpus import stopwords
-!pip install gower
 import gower
 import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
