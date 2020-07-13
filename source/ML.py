@@ -38,38 +38,49 @@ def randForest(features,labels,splits=10):
     # skf.split(features,labels)
     # errors = []
     accs = [0]*splits
+    fold_iterations = [0]*10
     count=0
+    features.reset_index(inplace=True)
     for train_index, test_index in skf.split(features, labels):
+        indices = [0]*2
+        indices[1]=test_index
         print("TRAIN:", train_index, "TEST:", test_index)
         # X_train = [features.iloc[i] for i in train_index]
         # X_test=[features.iloc[i] for i in test_index]
         X_train = features.iloc[train_index]
-        X_test = features.iloc[test_index]
+        # X_test = features.iloc[test_index]
         y_train = labels.iloc[train_index]
-        y_test = labels.iloc[test_index]
-        X_train,y_train = undersample(X_train,y_train)
-        rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
-        rf.fit(X_train, y_train)
-        preds = rf.predict(X_test)
-        #errors.append(round(np.mean(abs(preds - y_test)),2))
-        i=0
-        for pred in preds:
-            if pred == y_test[i]:
-                accs[count]+=1
-            i +=1
-        accs[count] = (accs[count]/len(preds))*100
-        count += 1
-        forAc = rf.score(X_test,y_test)
-        accs.append(forAc)
-        print('Mean Accuracy: ' + str(forAc))
-        print(confusion_matrix(y_test, preds))
-        #vizRFTrees(rf, 5, features)
-    count = 0
-    modelAc= sum(accs)/len(accs)
-    print("Average Model Accuracy: "+ str(modelAc*100))
-    results = open('../source/RandForestResult.txt','w')
-    r = results.write("Average Model Accuracy: "+ str(modelAc*100))
-    results.close()
+        # y_test = labels.iloc[test_index]
+        maj_train_index = undersample(X_train,y_train)
+        ds_i = features.index[labels == 1]
+        train_index = maj_train_index.append(ds_i)
+        indices[0]=train_index
+        fold_iterations[count]=indices
+        count+=1
+    print(fold_iterations)    
+    # rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
+    #     rf.fit(X_train, y_train)
+    #     preds = rf.predict(X_test)
+    #     #errors.append(round(np.mean(abs(preds - y_test)),2))
+    #     i=0
+    #     for pred in preds:
+    #         if pred == y_test[i]:
+    #             accs[count]+=1
+    #         i +=1
+    #     accs[count] = (accs[count]/len(preds))*100
+    #     count += 1
+    #     forAc = rf.score(X_test,y_test)
+    #     accs.append(forAc)
+    #     print('Mean Accuracy: ' + str(forAc))
+    #     print(confusion_matrix(y_test, preds))
+    #     #vizRFTrees(rf, 5, features)
+    ####################################################
+    # count = 0
+    # modelAc= sum(accs)/len(accs)
+    # print("Average Model Accuracy: "+ str(modelAc*100))
+    # results = open('../source/RandForestResult.txt','w')
+    # r = results.write("Average Model Accuracy: "+ str(modelAc*100))
+    # results.close()
 def svm(features,labels,splits):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
@@ -106,11 +117,11 @@ def svm(features,labels,splits):
 def undersample(features, labels, split=0.5):
     #rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
     nmus = NearMiss(version=3,sampling_strategy={0:sum(labels),1:sum(labels)})
-    newFeatures, newLabels = nmus.fit_resample(features, labels)
+    newLabels = nmus.fit_resample(features, labels).sample_indices_
     print(len(newLabels))
-    print(sum(newLabels))
-    print(newFeatures)
-    return newFeatures, newLabels
+    #print(sum(newLabels))
+    # print(newFeatures)
+    return newLabels
 
 def vizRFTrees(rf, ntree,features):
     outfile='randFor_Tree'+ntree+'.dot'
