@@ -1,6 +1,5 @@
 
 import nltk
-#import spacy
 from nltk.tokenize import word_tokenize
 
 def tokenize(col):

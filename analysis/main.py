@@ -4,21 +4,23 @@
 #Import Statements
 
 import pandas as pd
-#import numpy as np
+import numpy as np
 import nltk
 import spacy
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 nltk.download('averaged_perceptron_tagger')
-#import string
 import re
 from re import *
-#from nltk.util import ngrams
 from nltk.corpus import stopwords
-#from nltk.tokenize import word_tokenize
-#from nltk.stem import WordNetLemmatizer
-#from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+!pip install gower
+import gower
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import linkage, fcluster, dendrogram
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from scipy.spatial.distance import cdist
 from get_df_name_func import get_df_name
 from process_words_funct import process_words
 from tfidf_analysis import tfidf
@@ -27,12 +29,8 @@ from tokenizer import tokenize
 nlp = spacy.load("en")
 
 ##Import CSV as Dataframes
-schools = pd.read_csv("AllSchools_updatedWordNinja.csv")
+schools = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
 del(schools['Unnamed: 0'])
-valpo = pd.read_csv("valpo-6-23-2020-spacing-fixed.csv",header=None)
-del(valpo[0])
-valpo.columns = ['School', 'CourseID', 'Descriptions']
-schools = schools.append(valpo,ignore_index=True)
 
 #read in body of knowledge txt file, convert to list
 text_file = open("edison.txt", "r")
@@ -40,14 +38,12 @@ bok = text_file.read().split('\n')
 for i in range(len(bok)):
   bok[i] = bok[i].lower()
 
-
-
 #retain only courses pertinent to Data Science
-fake_df = []
-for i in range(len(schools)):
-  des = str(schools['Descriptions'][i])
+temp_df = []
+for i in range(len(schools_df)):
+  des = str(schools_df['Descriptions'][i])
   des = des.lower()
-  fake_list = []
+  temp_list = []
   terms = []
   print(i)
   for w in bok:
@@ -56,12 +52,12 @@ for i in range(len(schools)):
       if w not in terms:
         terms.append(w)
   if len(terms) != 0:
-    fake_list = [schools['School'][i], schools['CourseID'][i], schools['Descriptions'][i],', '.join(terms)]
-    fake_df.append(fake_list)
-new_schools = pd.DataFrame(fake_df)
-new_schools.columns = ['School','CourseID','Descriptions','Data Science Term']
-print("Creating 'csvs/bok_courses.csv'...")
-new_schools.to_csv('csvs/bok_courses.csv',encoding="utf-8-sig")
+    temp_list = [schools_df['School'][i], schools_df['CourseID'][i], schools_df['Descriptions'][i],', '.join(terms)]
+    temp_df.append(temp_list)
+ds_schools_df = pd.DataFrame(temp_df)
+ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term']
+print("Creating 'csvs/0713_bok_courses.csv'...")
+ds_schools_df.to_csv('csvs/0713_bok_courses.csv',enconding="utf-8-sig")
 
 #creating new columns with key words
 body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics']
@@ -157,27 +153,58 @@ for i in range(len(ellie)):
 
 #adding keywords to columns
 for b in body:
-  new_schools[b] = 0
+  ds_schools_df[b] = 0
 for e in ellie:
-  new_schools[e] = 0
+  ds_schools_df[e] = 0
 
 j=0
-for j in range(len(new_schools)):
+for j in range(len(ds_schools_df)):
   for b in bok_cats:
     i = 0
     for i in range(len(bok_cats[b])):
-      comp = str(new_schools['Descriptions'][j]).lower()
+      comp = str(ds_schools_df['Descriptions'][j]).lower()
       if re.search('\s'+re.escape(bok_cats[b][i])+'\s',comp):
-        new_schools[b][j] = 1
+        ds_schools_df[b][j] = 1
 
   for e in ellie_cats:
     i = 0
     for i in range(len(ellie_cats[e])):
-      comp = str(new_schools['Descriptions'][j]).lower()
+      comp = str(ds_schools_df['Descriptions'][j]).lower()
       if re.search('\s'+re.escape(ellie_cats[e][i])+'\s',comp):
-        new_schools[e][j] = 1
-print("Creating 'csvs/bok_courses_cat_ellie.csv'...")
-new_schools.to_csv('csvs/bok_courses_cat_ellie.csv',index=False)
+        ds_schools_df[e][j] = 1
+
+#creating summation column
+ds_schools_df['Sum'] = ds_schools_df.sum(axis=1)
+
+#creating weights
+num = 0
+denom = 1
+frac = float(num/denom)
+
+#create "others" list with all keywords
+others = website
+others.extend(datavis)
+others.extend(statistics)
+others.extend(resmeth)
+others.extend(proglang)
+others.extend(algmodai)
+others.extend(collect)
+others.extend(sources)
+others.extend(types)
+others.extend(anal)
+others.extend(applic)
+others.extend(sim)
+others.extend(software)
+others.extend(lab)
+others = list(set(others))
+others.sort()
+
+#remove items from "others" already in "bok"
+i = len(others) - 1
+while i >=0:
+  if others[i] in bok:
+    del others[i]
+  i -=1
 
 
 #stop words definition
@@ -185,12 +212,134 @@ stop_words = list(stopwords.words('english'))
 nlp = spacy.load('en', disable=['parser', 'ner'])
 stop_words.append('-PRON-')
 #find way to remove all numbers
-first_stops = ['cr','ul']
-
+first_stops = ['cr','ul','ii','cog','pp','ps','geog','cosc','biol','el','sesp',
+               'eecs','oba','phys','phy','mth','cmsc','nur','ce','cs','iii'] #unkown/unnecessary abbreviations
+second_stops = ['make','impact','apply','change','involve','reside','vary','may',
+                'meet','use','include','pertain','tell','cover','devote',
+                'recognize','carry'] #verbs that are not useful
+third_stops = ['new','minimum','useful','mainly','large','liberal','formerly',
+               'especially','absolutely','graduate','odd','one','throughout',
+               'weekly','least','well','hour','common','require','along','least',
+               'long','related','prior','open','sophomore','junior','single',
+               'necessary'] #unuseful descriptors
+fourth_stops = ['treat','prereq','prerequisite','creditsprerequisite',
+                'corequisite','either','assignment','major','none','arts','core',
+                'andor','semester','hoursprereq','student','instructor','threehour',
+                'within','lecturescover','satisfactoryno','summer','yifat',
+                'givenfor','term','classroom','area','inquiry','researchintensive',
+                'year','via','teacher','ofhow'] #other unuseful words
 stop_words.extend(first_stops)
+stop_words.extend(second_stops)
+stop_words.extend(third_stops)
+stop_words.extend(fourth_stops)
+
+#remove stopwords from df:
+for i in range(len(ds_schools_df)): # for each row
+  des = ds_schools_df.loc[i,'Descriptions'].split()
+  j = len(des) - 1
+  while j >=0:
+    if des[j] in stop_words:
+      del des[j]
+    j-=1
+  ds_schools_df.loc[i,'Descriptions'] = ' '.join(des)
+
+#create weights
+ds_schools_df["Weights"] = 0
+for i in range(len(ds_schools_df)): #for each row
+  print(i)
+  num = 0
+  d = ds_schools_df['Descriptions'][i]
+  d = d.split() #split for word count
+  denom = len(d) #overall word count
+  for b in bok: #for each BoK term
+    b = b.split() #split for word count
+    b_len = len(b) #num of words in BoK term
+    b = ' '.join(b) #join for analysis
+    d = ' '.join(d).lower() #join for analysis
+    token = nltk.word_tokenize(d) #tokenize for ngrams
+    ngram = list(ngrams(token,b_len)) #create ngrams
+    for n in range(len(ngram)): #turn tuples to strings
+      ngram[n] = ' '.join(ngram[n])
+    num += (ngram.count(b) * b_len)
+    d = d.split() #split for continuity
+  for b in others: #for each "others" term
+    b = b.split() #split for word count
+    b_len = len(b) #num of words in "others" term
+    b = ' '.join(b) #join for analysis
+    d = ' '.join(d) #join for analysis
+    token = nltk.word_tokenize(d) #tokenize for ngrams
+    ngram = list(ngrams(token,b_len)) #create ngrams
+    for n in range(len(ngram)): #turn tuples to strings
+      ngram[n] = ' '.join(ngram[n])
+    num += (ngram.count(b) * 0.5)
+    d = d.split() #split for continuity
+  frac = float(num/denom)
+  ds_schools_df.loc[i, 'Weights'] = frac
+  print("Creating 'csvs/0713_bok_courses_cat_weights.csv'...")
+  ds_schools_df.to_csv(data_path + 'csvs/0713_bok_courses_cat_weights.csv',index=False)
 
 #process words, create dictionaries for future function calls
 responses, school_list = process_words(stop_words,new_schools)
 
 #tfidf analysis
 tfidf(responses,school_list)
+
+
+#MACHINE lEARNING
+#make floats finite
+for i in range(len(ds_schools_df)):
+  ds_schools_df.loc[i, 'Weights'] = float('%.5f'%(ds_schools_df.loc[i,'Weights']))
+
+#create gower matrix & linkage
+dm = gower.gower_matrix(ds_schools_df)
+
+# determine k using elbow method
+
+x1 = np.array(ds_schools_df['Sum'])
+x2 = np.array(ds_schools_df['Weights'])
+
+plt.plot()
+plt.xlim([0, 20])
+plt.ylim([0, 1])
+plt.title('Dataset')
+plt.scatter(x1, x2)
+plt.show()
+
+# create new plot and data
+plt.plot()
+X = np.array(list(zip(x1, x2))).reshape(len(x1), 2)
+colors = ['b', 'g', 'r']
+markers = ['o', 'v', 's']
+
+# k means determine k
+distortions = []
+K = range(1,10)
+for k in K:
+    kmeanModel = KMeans(n_clusters=k).fit(X)
+    kmeanModel.fit(X)
+    distortions.append(sum(np.min(cdist(X, kmeanModel.cluster_centers_, 'euclidean'), axis=1)) / X.shape[0])
+
+# Plot the elbow
+plt.plot(K, distortions, 'bx-')
+plt.xlabel('k')
+plt.ylabel('Distortion')
+plt.title('The Elbow Method showing the optimal k')
+plt.show()
+
+# create kmeans object
+kmeans = KMeans(n_clusters=4)
+# fit kmeans object to data
+kmeans.fit(dm)
+
+# save new clusters for chart
+y_km = kmeans.fit_predict(dm)
+ds_schools_df['category']=pd.DataFrame(y_km)
+
+groups = ds_schools_df.groupby("category")
+for name, group in groups:
+    plt.plot(group["Weights"], group["Sum"], marker="o", linestyle="", label=name)
+plt.legend()
+
+#save to csv
+print("Creating 'csvs/0713_FINAL_all_groups_all_results.csv'...")
+ds_schools_df.to_csv(data_path + 'csvs/0713_FINAL_all_groups_all_results.csv', index=False)

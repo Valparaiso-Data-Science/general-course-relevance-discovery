@@ -1,18 +1,11 @@
 import pandas as pd
-#import numpy as np
 import nltk
 import spacy
-#nltk.download('punkt')
-#nltk.download('stopwords')
-#nltk.download('wordnet')
-#nltk.download('averaged_perceptron_tagger')
 import string
 import re
 from re import *
 from nltk.util import ngrams
 from nltk.corpus import stopwords
-#from nltk.tokenize import word_tokenize
-#from nltk.stem import WordNetLemmatizer
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from get_df_name_func import get_df_name
 
@@ -23,9 +16,6 @@ def tfidf(dictionary, schools):
   #TF-IDF FOR EACH INDIVIDUAL SCHOOL
   #TERM = WORD/BIGRAM, DOCUMENT = DESCRIPTION, CORPUS = ALL DESCRIPTIONS FROM ONE SCHOOL
   corpus = []
-  #for school in schools:
-    #doc_string = ' '.join(dictionary[school])
-    #corpus.append(doc_string)
   for school in schools:
     print("School: %s -----------------" % school)
     corpus=dictionary[school]
@@ -80,8 +70,8 @@ def tfidf(dictionary, schools):
     print("\n---------------------------\n")
 
     #saving dataframe to csv
-    print("Creating 'csvs/TFIDF_"+school+".csv'...")
-    path_name = 'csvs/TFIDF_' + school +'.csv'
+    print("Creating 'csvs/0713_TFIDF_"+school+".csv'...")
+    path_name = 'csvs/0713_TFIDF_' + school +'.csv'
     words.to_csv(path_name,encoding="utf-8-sig")
 
 #TF-IDF FOR ALL SCHOOLS COMBINED
@@ -142,5 +132,5 @@ def tfidf(dictionary, schools):
   print("\n---------------------------\n")
 
   #saving dataframe to csv
-  print("Creating 'csvs/TFIDF_all.csv'...")
-  words.to_csv('csvs/TFIDF_all.csv',encoding="utf-8-sig")
+  print("Creating 'csvs/0713_TFIDF_all.csv'...")
+  words.to_csv('csvs/-713_TFIDF_all.csv',encoding="utf-8-sig")
