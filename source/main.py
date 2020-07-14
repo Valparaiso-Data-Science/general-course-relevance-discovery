@@ -38,7 +38,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 # Make all of the required directories; prep the work area
 Prep.prepare()
 
-
+'''
 # trim the xml files (whenever line number information available, otherwise keep whole file)
 Parallel(n_jobs=-1)(delayed(Prep.trimFile)(const.SOURCE_DIR, const.TRIMMED_DIR, filename, Prep.makeLineNumDict(const.TRIM_CSV))
                     for filename in Bar('Trimming Files').iter(os.listdir(const.SOURCE_DIR)))
@@ -64,9 +64,9 @@ topicModel = pd.concat(df_container)
 cleaned_df = newClean(topicModel)
 print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
 cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
-
-# import createDATA
-# createDATA.createCSV()
+'''
+import createDATA
+createDATA.createCSV()
 
 '''
 #Previously untouched last semester Spring2020 from here down
