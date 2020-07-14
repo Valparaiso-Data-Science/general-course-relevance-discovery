@@ -94,9 +94,9 @@ def randForest(features,labels):
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
     count = 0
     for fold in fold_iterations:
-        X_train = features.loc[fold[0]]
+        X_train = features.iloc[fold[0]]
         y_train = labels.iloc[fold[0]]
-        X_test = features.loc[fold[1]]
+        X_test = features.iloc[fold[1]]
         y_test = features.iloc[fold[1]]
         rf.fit(X_train, y_train)
         preds = rf.predict(X_test)
