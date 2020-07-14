@@ -20,13 +20,8 @@ import re
 import xml.etree
 from joblib import Parallel, delayed
 from xml.etree.ElementTree import ParseError
-
 from datetime import date
-
 from progress.bar import Bar
-
-# container for processed catalogs
-topicModel = pd.DataFrame()
 
 # toggle for keeping data from intermediary stages
 dirty = False
