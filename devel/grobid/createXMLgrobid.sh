@@ -34,6 +34,7 @@ python_client(){
 down_pdfs(){
 	year=$1
 	cwd=$PWD
+	d_s="../fetchpdfs"
 	cd "../fetchpdfs"
 	case $year in
 		latest)./makelatestcsv.sh && echo All | ./getpdfs.sh latest.csv;;
@@ -41,6 +42,7 @@ down_pdfs(){
 		*) echo $year | ./getpdfs.sh;;
 	esac
 	cd $cwd
+	mv -f "${d_s}/pdfs/" .
 }
 
 
