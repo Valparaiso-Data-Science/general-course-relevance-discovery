@@ -2,7 +2,7 @@
 import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree, randForest,undersample
+from ML import decisionTree,visTree, randForest,undersample,stratKFold
 #from xml_fix_utils import correct_ampersands, ignore_bad_chars
 
 import Prep
@@ -83,7 +83,7 @@ labels = labeled_df["curricula relevance"]
 
 print("Splitting Data")
 
-randForest(features, labels)
+stratKFold(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels)
 

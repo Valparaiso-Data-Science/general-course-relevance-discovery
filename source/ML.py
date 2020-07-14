@@ -18,8 +18,9 @@ import graphviz
 from subprocess import call
 from imblearn.under_sampling import RandomUnderSampler, NearMiss
 import numpy as np
+from numpy import asarray, save, load
 
-def randForest(features,labels,splits=10):
+def stratKFold(features,labels,splits=10):
     '''
     Parameters
     ----------
@@ -38,7 +39,6 @@ def randForest(features,labels,splits=10):
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
     # errors = []
-    accs = [0]*splits
     fold_iterations = [0]*10
     count=0
     # features.reset_index(inplace=True)
@@ -58,23 +58,35 @@ def randForest(features,labels,splits=10):
         indices[0]=train_index
         fold_iterations[count]=indices
         count+=1
-    print(fold_iterations)    
-    # rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
-    #     rf.fit(X_train, y_train)
-    #     preds = rf.predict(X_test)
-    #     #errors.append(round(np.mean(abs(preds - y_test)),2))
-    #     i=0
-    #     for pred in preds:
-    #         if pred == y_test[i]:
-    #             accs[count]+=1
-    #         i +=1
-    #     accs[count] = (accs[count]/len(preds))*100
-    #     count += 1
-    #     forAc = rf.score(X_test,y_test)
-    #     accs.append(forAc)
-    #     print('Mean Accuracy: ' + str(forAc))
-    #     print(confusion_matrix(y_test, preds))
-    #     #vizRFTrees(rf, 5, features)
+    fold_iterations = asarray(fold_iterations)
+    save('fold_iterations.npy',fold_iterations)
+    print(fold_iterations) 
+    
+def randForest(features,labels):
+    fold_iterations = load('fold_iterations.npy')
+    accs = [0]*len(fold_iterations)
+    rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
+    count = 0
+    for fold in fold_iterations:
+        X_train = features.iloc[fold[0]]
+        y_train = labels.iloc[fold[0]]
+        X_test = features.iloc[fold[1]]
+        y_test = features.iloc[fold[1]]
+        rf.fit(X_train, y_train)
+        preds = rf.predict(X_test)
+        #errors.append(round(np.mean(abs(preds - y_test)),2))
+        i=0
+        for pred in preds:
+            if pred == y_test[i]:
+                accs[count]+=1
+            i +=1
+        accs[count] = (accs[count]/len(preds))*100
+        count += 1
+        forAc = rf.score(X_test,y_test)
+        accs.append(forAc)
+        print('Mean Accuracy: ' + str(forAc))
+        print(confusion_matrix(y_test, preds))
+        #vizRFTrees(rf, 5, features)
     ####################################################
     # count = 0
     # modelAc= sum(accs)/len(accs)
