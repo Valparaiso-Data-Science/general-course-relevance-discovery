@@ -3,7 +3,7 @@
 import createDATA
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 from ML import decisionTree,visTree
-import Prep
+import prep
 import const
 
 #libraries
@@ -34,7 +34,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
     dirty = True
 
 # Make all of the required directories; prep the work area
-Prep.prepare()
+prep.prepare()
 # Create 'AllSchools.csv'
 createDATA.createCSV()
 

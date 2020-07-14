@@ -1,7 +1,7 @@
 # files in the current directory
 import parse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-import Prep
+import prep
 import const
 
 #libraries
@@ -18,17 +18,13 @@ def createCSV():
     # toggle for keeping data from intermediary stages
     dirty = False
 
-    # Make all of the required directories; prep the work area
-    Prep.prepare()
-
-
     # trim the xml files (whenever line number information available, otherwise keep whole file)
-    Parallel(n_jobs=-1)(delayed(Prep.trimFile)(const.SOURCE_DIR, const.TRIMMED_DIR, filename, Prep.makeLineNumDict(const.TRIM_CSV))
+    Parallel(n_jobs=-1)(delayed(prep.trimFile)(const.SOURCE_DIR, const.TRIMMED_DIR, filename, prep.makeLineNumDict(const.TRIM_CSV))
                         for filename in Bar('Trimming Files').iter(os.listdir(const.SOURCE_DIR)))
 
 
     # clean the xml files (fix problems and make it parseable)
-    Parallel(n_jobs=-1)(delayed(Prep.cleanXML)(const.TRIMMED_DIR , const.SUPERTRIMMED_DIR , filename)
+    Parallel(n_jobs=-1)(delayed(prep.cleanXML)(const.TRIMMED_DIR , const.SUPERTRIMMED_DIR , filename)
                         for filename in Bar('Fixing Files').iter(os.listdir(const.TRIMMED_DIR)))
 
 
@@ -64,4 +60,6 @@ if __name__ == "__main__":
         except:
             print("Error: Directory doesn't exist. Exiting...")
             os.quit()
+    # Make all of the required directories; prep the work area
+    prep.prepare()
     createCSV()
