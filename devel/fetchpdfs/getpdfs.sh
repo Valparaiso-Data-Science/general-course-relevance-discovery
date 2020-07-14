@@ -34,8 +34,14 @@ echo ""
 echo "Downloading your PDFs for $target_year now..."
 
 output_d="pdfs/"
-
+# currently a bug with this line, works for numeric years, but not the 'All' option
 urls=$(grep $target_year $csv | cut -d',' -f4)
+# case statement should fix it
+case $target_year in
+	All) urls=$(cut -d',' -f4 $csv);;
+	*) urls=$(grep $target_year $csv | cut -d',' -f4)
+esac
+
 # make the output directory and change into it
 mkdir -pv $output_d && cd $output_d
 for url in $urls
