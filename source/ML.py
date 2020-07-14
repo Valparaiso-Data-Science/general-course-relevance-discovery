@@ -34,6 +34,14 @@ def stratKFold(features,labels,splits=10):
     Returns
     -------
     None.
+    It does, however, save the indices to a file that can be used at a later point.
+    
+    Notes
+    -----
+    Saving the indices is done to save time. This block of code takes a pretty 
+    long time to run. Therefore it is possible to run the random forest using 
+    the already saved indices. This function should only be called if the data
+    is altered and the algorithm needs to be retrained. 
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -63,6 +71,23 @@ def stratKFold(features,labels,splits=10):
     print(fold_iterations) 
     
 def randForest(features,labels):
+    '''
+    Parameters
+    ----------
+    features : list
+        Array of feature data.
+    labels : list
+        Array of labels.
+
+    Returns
+    -------
+    None.
+    
+    Notes
+    -----
+    Ac
+
+    '''
     fold_iterations = load('fold_iterations.npy')
     accs = [0]*len(fold_iterations)
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
@@ -75,17 +100,13 @@ def randForest(features,labels):
         rf.fit(X_train, y_train)
         preds = rf.predict(X_test)
         #errors.append(round(np.mean(abs(preds - y_test)),2))
-        i=0
-        for pred in preds:
-            if pred == y_test[i]:
-                accs[count]+=1
-            i +=1
-        accs[count] = (accs[count]/len(preds))*100
-        count += 1
         forAc = rf.score(X_test,y_test)
-        accs.append(forAc)
-        print('Mean Accuracy: ' + str(forAc))
+        accs[count] = forAc
+        print('Mean Accuracy for forest #' + str(count) +': ' + str(forAc))
         print(confusion_matrix(y_test, preds))
+        count += 1
+    avgAcc = sum(accs)/len(accs)
+    print('Average Model Accuracy: '+ str(avgAcc))
         #vizRFTrees(rf, 5, features)
     ####################################################
     # count = 0
