@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
-csv="urls.csv"
+
+csv="${1:-urls.csv}"
 
 echo "Valid Years:"
 # get a valid list of years
