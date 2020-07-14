@@ -68,7 +68,7 @@ cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
 # import createDATA
 # createDATA.createCSV()
 
-'''
+
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")
 vect_df = vectorizer(cleaned_df)
