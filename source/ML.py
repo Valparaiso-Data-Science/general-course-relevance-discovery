@@ -116,10 +116,12 @@ def svm(features,labels,splits):
 
 
 def undersample(features, labels, split=0.5):
-    #rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
-    nmus = NearMiss(version=3,sampling_strategy={0:sum(labels),1:sum(labels)})
-    nmus.fit_resample(features, labels)
-    newLabels = nmus.sample_indices_
+    rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
+    # nmus = NearMiss(version=3,sampling_strategy={0:sum(labels),1:sum(labels)})
+    # nmus.fit_resample(features, labels)
+    # newLabels = nmus.sample_indices_
+    rus.fit_resample(features,labels)
+    newLabels = rus.sample_indices_
     print(len(newLabels))
     #print(sum(newLabels))
     # print(newFeatures)
