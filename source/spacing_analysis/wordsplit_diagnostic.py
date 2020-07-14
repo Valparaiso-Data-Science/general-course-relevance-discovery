@@ -148,30 +148,32 @@ def analyze_file_to_temp(file_path, temp_dir):
                 str(stats["word_gain"]))
 
 
-def main(argv):
+def analyze_dir(dir_path, out_filename=None):
+    """
+    Applies analyze_file_to_temp to each file in target dir and
 
-    target_dir_path = "../../fullPDFs/"
-
-    if len(argv) > 1:
-        target_dir_path = argv[1]
+    :param dir_path: target directory with XML files to analyze
+    :param out_filename: name of output csv file with results
+    """
 
     ignorables = [".DS_Store"]
-    all_xmls = os.listdir(target_dir_path)
+    all_xmls = os.listdir(dir_path)
 
     for ignorable in ignorables:
         if ignorable in all_xmls:
             all_xmls.remove(ignorable)
 
-    print(all_xmls)
-
     # call word spacing analysis on individual files in parallel (results are written to TEMP_DIR as individual files)
     os.mkdir(TEMP_DIR)
     joblib.Parallel(n_jobs=-1)(
-        joblib.delayed(analyze_file_to_temp)(target_dir_path + "/" + filename, TEMP_DIR)
+        joblib.delayed(analyze_file_to_temp)(dir_path + "/" + filename, TEMP_DIR)
         for filename in progress.bar.Bar('Diagnosing Spacing Errors').iter(all_xmls))
 
+    if out_filename is None:
+        out_filename = "diagnostic_results.csv"
+
     # read each individual file and write the results to master file
-    with open("diagnostic_results.csv", "w") as writeable:
+    with open(out_filename, "w") as writeable:
         # write first line of master file
         writeable.write("school,total words,matches,splits,unsplits,average word gain,bad spacing\n")
 
@@ -197,6 +199,16 @@ def main(argv):
             pass
 
     os.rmdir(TEMP_DIR)
+
+
+def main(argv):
+
+    target_dir_path = "../../fullPDFs/"
+
+    if len(argv) > 1:
+        target_dir_path = argv[1]
+
+    analyze_dir(target_dir_path)
 
 
 if __name__ == "__main__":
