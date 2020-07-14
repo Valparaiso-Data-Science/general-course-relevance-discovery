@@ -28,13 +28,17 @@ spell = enchant.Dict("en_US")
 # load language model into tokenizer
 nlp = spacy.load("en")
 
+# specify path to temporary directory
 TEMP_DIR = "temp"
+
+KNOWN_BAD_SPACING = {"2011Cornell", "Brown", "Caldwell", "Carlow", "Denison", "Pittsburgh", "Youngstown"}
 
 
 def split_gain(long_word, return_words=False):
     """
     Calculate word gain (number of meaningful words gained) after splitting a long string
 
+    :param long_word:  word to be split
     :param return_words: whether to return the list of resulting split words. default=False
     :return: number of words gained
             (if return_words) list of strings: split_words
@@ -125,6 +129,7 @@ def analyze_file(file_path):
 def analyze_file_to_temp(file_path, temp_dir):
     """
     Wrapper for analyze_file that writes results to a separate file in a temporary directory
+    (written this way to allow for processing in parallel)
 
     :param file_path: path to file to analyze
     :param temp_dir: path to temporary directory to write analysis to
@@ -154,40 +159,44 @@ def main(argv):
     all_xmls = os.listdir(target_dir_path)
 
     for ignorable in ignorables:
-        all_xmls.remove(ignorable)
+        if ignorable in all_xmls:
+            all_xmls.remove(ignorable)
 
     print(all_xmls)
 
-    schools = np.empty(len(all_xmls)).astype(object)
-    total_words = np.empty(len(all_xmls)).astype(int)
-    matches = np.empty(len(all_xmls)).astype(int)
-    splits = np.empty(len(all_xmls)).astype(int)
-    unsplits = np.empty(len(all_xmls)).astype(int)
-    avg_wordgain = np.empty(len(all_xmls)).astype(np.float64)
-
+    # call word spacing analysis on individual files in parallel (results are written to TEMP_DIR as individual files)
     os.mkdir(TEMP_DIR)
     joblib.Parallel(n_jobs=-1)(
         joblib.delayed(analyze_file_to_temp)(target_dir_path + "/" + filename, TEMP_DIR)
         for filename in progress.bar.Bar('Diagnosing Spacing Errors').iter(all_xmls))
 
-    bads = np.empty(len(schools)).astype(int)
-    bad_space_inds = [np.where(schools == bad_spaced)[0] for bad_spaced in ["2011Cornell", "Brown", "Caldwell",
-                                                                            "Carlow", "Denison", "Pittsburgh",
-                                                                            "Youngstown"]]
-    for ind in bad_space_inds:
-        bads[ind] = 1
+    # read each individual file and write the results to master file
+    with open("diagnostic_results.csv", "w") as writeable:
+        # write first line of master file
+        writeable.write("school,total words,matches,splits,unsplits,average word gain,bad spacing\n")
 
-    df = pd.DataFrame()
+        # loop over each temporary file
+        for file in os.listdir(TEMP_DIR):
+            # set to 1 if current file has spacing issues
+            bad_spacing = 1 if file[:file.rfind(".")] in KNOWN_BAD_SPACING else 0
 
-    df["school"] = schools
-    df["total words"] = total_words
-    df["matches"] = matches
-    df["splits"] = splits
-    df["unsplits"] = unsplits
-    df["average word gain"] = avg_wordgain
-    df["bad spacing"] = bads
+            with open(TEMP_DIR + "/" + file, "r") as readable:
+                lines = readable.readlines()
 
-    df.to_csv("wordgain_analysis.csv", index=False)
+                if len(lines) > 1:
+                    raise RuntimeError("Something went wrong in %s: more than 1 line." % file)
+
+                # write to the new file the info from the readable plus whether or not file has spacing issues
+                writeable.write(lines[0] + "," + str(bad_spacing) + "\n")
+
+    # delete individual files in the temporary directory
+    for deletable in os.listdir(TEMP_DIR):
+        try:
+            os.remove(TEMP_DIR + "/" + deletable)
+        except FileNotFoundError:
+            pass
+
+    os.rmdir(TEMP_DIR)
 
 
 if __name__ == "__main__":
