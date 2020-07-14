@@ -12,7 +12,9 @@ default_year="latest" #default year to download pdfs from
 	# all - use getpdfs download all function
 
 check_environment(){
-	docker --version || echo "Docker is not installed. Exiting..." && exit 1
+	#docker --version || echo "Docker is not installed. Exiting..." && exit 1
+	# this is commented out, because 'technically' you don't need docker installed
+	# on the local computer
 	python --version || echo "Python is not installed. Exiting..." && exit 1
 }
 
@@ -45,6 +47,31 @@ down_pdfs(){
 	mv -f "${d_s}/pdfs/" .
 }
 
+rand_s(){
+	#https://gist.github.com/earthgecko/3089509
+	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed q
+}
+
+sep_pdfs(){
+	cwd=$PWD
+	mkdir sep && cd sep
+	for pdf in $(ls ../pdfs/)
+	do
+		r_s=$(rand_s)
+		mkdir -v $r_s && cp ../pdfs/$pdf $r_s
+	done
+
+	cd $cwd
+}
+
+
+main(){
+	#check_environment
+	#start_docker
+	copy_config
+	down_pdfs $default_year
+	sep_pdfs
+}
 
 # need to figure out how to decide which catalogs to download (use the scripts in fetchpdfs)
 
