@@ -88,7 +88,7 @@ def randForest(features,labels):
     Ac
 
     '''
-    fold_iterations = load('fold_iterations.npy')
+    fold_iterations = load('fold_iterations.npy',allow_pickle=True)
     accs = [0]*len(fold_iterations)
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
     count = 0
