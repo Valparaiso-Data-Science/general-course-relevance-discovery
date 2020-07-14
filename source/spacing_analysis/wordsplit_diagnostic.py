@@ -159,10 +159,17 @@ def analyze_dir(dir_path, out_filename=None):
 
     :param dir_path: target directory with XML files to analyze
     :param out_filename: name of output csv file with results
+
+    :return: list of files that can not be determined to have good or bad spacing upon first pass
+                (first pass creates dataset for ADALINE training and relies on predetermined labels;
+                files that are not labeled in advance will be processed in second pass, using trained ADALINE
+                classifier)
     """
 
     ignorables = [".DS_Store"]
     all_xmls = os.listdir(dir_path)
+
+    unprocessed = []
 
     for ignorable in ignorables:
         if ignorable in all_xmls:
@@ -184,6 +191,12 @@ def analyze_dir(dir_path, out_filename=None):
 
         # loop over each temporary file
         for file in os.listdir(TEMP_DIR):
+            name = file[:file.rfind(".")]
+
+            if (name not in KNOWN_BAD_SPACING) and (name not in KNOWN_OK_SPACING):
+                unprocessed.append(file)
+                continue
+
             # set to 1 if current file has spacing issues
             bad_spacing = 1 if file[:file.rfind(".")] in KNOWN_BAD_SPACING else 0
 
@@ -204,6 +217,8 @@ def analyze_dir(dir_path, out_filename=None):
             pass
 
     os.rmdir(TEMP_DIR)
+
+    return unprocessed
 
 
 def main(argv):
