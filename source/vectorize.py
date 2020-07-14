@@ -169,7 +169,7 @@ def labelTargetsdf(df):
         stem_words = []
         for w in words:
             stem_words.append(ps.stem(w))
-        stem_topic = ' '.join(w in stem_words)
+        stem_topic = ' '.join(w for w in stem_words)
         try:
  	        df["curricula relevance"] = df[stem_topic] | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
