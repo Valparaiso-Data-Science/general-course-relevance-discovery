@@ -15,7 +15,6 @@ csv:
 	mv courses/AllSchools.csv courses/all.csv
 	cat courses/all.csv courses/valpo.csv > courses/AllSchools.csv
 	rm courses/all.csv
-	@echo "You will need to combine AllSchools.csv and valpo.csv"
 
 clean:
 	rm -rf courses/
