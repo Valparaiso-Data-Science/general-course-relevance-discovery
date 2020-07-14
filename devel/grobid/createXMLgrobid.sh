@@ -55,10 +55,10 @@ rand_s(){
 sep_pdfs(){
 	cwd=$PWD
 	mkdir sep && cd sep
-	for pdf in $(ls ../pdfs/)
+	for pdf in $(ls ../pdfs/ | tr ' ' '~')
 	do
 		r_s=$(rand_s)
-		mkdir -v $r_s && cp ../pdfs/$pdf $r_s
+		mkdir -v $r_s && cp "../pdfs/$(echo $pdf | tr '~' ' ')" $r_s
 	done
 
 	cd $cwd
@@ -68,10 +68,12 @@ sep_pdfs(){
 main(){
 	#check_environment
 	#start_docker
-	copy_config
+	#copy_config
 	down_pdfs $default_year
 	sep_pdfs
 }
+
+main
 
 # need to figure out how to decide which catalogs to download (use the scripts in fetchpdfs)
 
