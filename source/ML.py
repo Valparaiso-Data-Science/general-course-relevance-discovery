@@ -61,6 +61,7 @@ def stratKFold(features,labels,splits=10):
         y_train = labels.iloc[train_index]
         # y_test = labels.iloc[test_index]
         maj_train_index = undersample(X_train,y_train)
+        features.reset_index(inplace=True)
         ds_i = features.index[labels == 1]
         train_index = np.append(maj_train_index,ds_i)
         indices[0]=train_index
