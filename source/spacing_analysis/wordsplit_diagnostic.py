@@ -31,6 +31,11 @@ nlp = spacy.load("en")
 # specify path to temporary directory
 TEMP_DIR = "temp"
 
+KNOWN_OK_SPACING = {'UniofTexas', 'ColgateUni', 'UniOfChicago', 'Alma', 'Williamwoods', 'NorthCentralMissouri',
+                    'TexasA&M', 'ucat1920', 'Pepperdine', 'Purdue', 'Northwestern', 'Sagu', 'UniversityofWestGeorgia',
+                    'framingham', 'Grandview', 'WilliamJewell', 'SouthwestBaptist', 'EastCentral', 'Desales',
+                    'EastStroudsburg', 'OregonUni', 'NotreDame', 'McKendree', 'UniofNorthCarolina', 'Smith'}
+
 KNOWN_BAD_SPACING = {"2011Cornell", "Brown", "Caldwell", "Carlow", "Denison", "Pittsburgh", "Youngstown"}
 
 

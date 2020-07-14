@@ -1,5 +1,5 @@
 '''
-Simple linear classifier
+Simple linear classifier.
 
 Camille Ross & Marius Orehovschi
 Prof. Oliver Layton
