@@ -1,10 +1,6 @@
 # files in the current directory
 import parse
-#from topicModel import plot_10_most_common_words, listofDSCourse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-#from ML import decisionTree,visTree
-#from xml_fix_utils import correct_ampersands, ignore_bad_chars
-
 import Prep
 import const
 
@@ -13,7 +9,6 @@ import os
 import pandas as pd
 import sys
 from joblib import Parallel, delayed
-
 from progress.bar import Bar
 
 def createCSV():
