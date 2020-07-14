@@ -47,6 +47,7 @@ down_pdfs(){
 	mv -f "${d_s}/pdfs/" .
 }
 
+# this is the method that I would need to change
 rand_s(){
 	#https://gist.github.com/earthgecko/3089509
 	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed q
@@ -71,6 +72,12 @@ main(){
 	#copy_config
 	down_pdfs $default_year
 	sep_pdfs
+
+	for d in $(ls sep/)
+	do
+		python_client "sep/$d" $xml_out_dir
+	done
+
 }
 
 main
