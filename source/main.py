@@ -1,3 +1,9 @@
+'''
+The 'main' file that will run everything that we have implemented so far,
+    meaning that it will go through the ENTIRE process, dataset creation,
+    machine learning, etc.
+'''
+
 # files in the current directory
 #from topicModel import plot_10_most_common_words, listofDSCourse
 import createDATA
