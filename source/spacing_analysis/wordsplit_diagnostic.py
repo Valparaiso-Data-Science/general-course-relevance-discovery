@@ -1,6 +1,17 @@
 """
-    Simple test that finds long words (17 characters and longer) and computes some statistics about them that help us
-    understand whether the long words are legitimate words or incorrectly spaced phrases
+    Utility for determining if XML files in a directory have word spacing problems (as a result of PDF->XML via Adobe
+    Acrobat).
+
+    Creates a csv file with features: total number of words, number of word-like strings that are 17 chars or longer,
+    number of matches that resulted in meaningful words when split "splits", number of matches that did not result in
+    meaningful words when split "unsplits", average word gain when splitting, and "bad spacing" – 0 if no known (or
+    predicted) spacing errors and 1 if known (or predicted) spacing errors.
+
+    Upon first pass, only computes these features for 32 files that are known to either have or not have spacing errors.
+    Then trains ADALINE classifier on 2 features – log(num long word matches / total number of words) and average word
+    gain – to be able to predict existence of spacing issue in any new files.
+
+    Upon second pass, computes features for any new files and uses learned ADALINE parameters to
 """
 
 # pre-made
@@ -18,7 +29,10 @@ import matplotlib.pyplot as plt
 
 from lxml import etree
 
-# load home-made module from parent directory
+# home-made, same directory
+import adaline
+
+# home-made, parent directory
 sys.path.append("..")
 from punct_split import punct_split, has_vowels
 
@@ -31,12 +45,14 @@ nlp = spacy.load("en")
 # specify path to temporary directory
 TEMP_DIR = "temp"
 
-KNOWN_OK_SPACING = {'UniofTexas', 'ColgateUni', 'UniOfChicago', 'Alma', 'Williamwoods', 'NorthCentralMissouri',
-                    'TexasA&M', 'ucat1920', 'Pepperdine', 'Purdue', 'Northwestern', 'Sagu', 'UniversityofWestGeorgia',
-                    'framingham', 'Grandview', 'WilliamJewell', 'SouthwestBaptist', 'EastCentral', 'Desales',
-                    'EastStroudsburg', 'OregonUni', 'NotreDame', 'McKendree', 'UniofNorthCarolina', 'Smith'}
+KNOWN_OK_SPACING = {'UniofTexas.xml', 'ColgateUni.xml', 'UniOfChicago.xml', 'Alma.xml', 'Williamwoods.xml',
+                    'NorthCentralMissouri.xml', 'TexasA&M.xml', 'ucat1920.xml', 'Pepperdine.xml', 'Purdue.xml',
+                    'Northwestern.xml', 'Sagu.xml', 'UniversityofWestGeorgia.xml', 'framingham.xml', 'Grandview.xml',
+                    'WilliamJewell.xml', 'SouthwestBaptist.xml', 'EastCentral.xml', 'Desales.xml', 'EastStroudsburg.xml',
+                    'OregonUni.xml', 'NotreDame.xml', 'McKendree.xml', 'UniofNorthCarolina.xml', 'Smith.xml'}
 
-KNOWN_BAD_SPACING = {"2011Cornell", "Brown", "Caldwell", "Carlow", "Denison", "Pittsburgh", "Youngstown"}
+KNOWN_BAD_SPACING = {"2011Cornell.xml", "Brown.xml", "Caldwell.xml", "Carlow.xml", "Denison.xml", "Pittsburgh.xml",
+                     "Youngstown.xml"}
 
 
 def split_gain(long_word, return_words=False):
@@ -142,7 +158,7 @@ def analyze_file_to_temp(file_path, temp_dir):
 
     stats = analyze_file(file_path)
 
-    name = file_path[(file_path.rfind('/') + 1):file_path.rfind('.')]
+    name = file_path[(file_path.rfind('/') + 1):]
 
     with open(temp_dir + "/" + name + ".csv", "w") as f:
         f.write(name + "," +
@@ -153,12 +169,15 @@ def analyze_file_to_temp(file_path, temp_dir):
                 str(stats["word_gain"]))
 
 
-def analyze_dir(dir_path, out_filename=None):
+def analyze_dir(dir_path, out_filename="diagnostic_results.csv", process_set=None, no_process_set=None, lazy=True):
     """
     Applies analyze_file_to_temp to each file in target dir and
 
     :param dir_path: target directory with XML files to analyze
     :param out_filename: name of output csv file with results
+    :param process_set: set of files to process
+    :param no_process_set: set of files to avoid
+    :param lazy: whether to skip processing for already processed files
 
     :return: list of files that can not be determined to have good or bad spacing upon first pass
                 (first pass creates dataset for ADALINE training and relies on predetermined labels;
@@ -166,39 +185,53 @@ def analyze_dir(dir_path, out_filename=None):
                 classifier)
     """
 
+    all_dir_files = os.listdir(dir_path)
+
+    # skip useless files
     ignorables = [".DS_Store"]
-    all_xmls = os.listdir(dir_path)
-
-    unprocessed = []
-
     for ignorable in ignorables:
-        if ignorable in all_xmls:
-            all_xmls.remove(ignorable)
+        if ignorable in all_dir_files:
+            all_dir_files.remove(ignorable)
+
+    # if caller specified set of files to process, only keep files that are both in all_dir_files and in process_set
+    if process_set:
+        all_dir_files = list(process_set.intersection(all_dir_files))
+
+    # if caller specified files not to process, remove them from list
+    if no_process_set:
+        all_dir_files = list(set(all_dir_files).difference(no_process_set))
+
+    if lazy:
+        try:
+            already_processed = set(pd.read_csv(out_filename)["school"].values)
+            all_dir_files = list(set(all_dir_files).difference(already_processed))
+        except FileNotFoundError:
+            pass
+
+    if len(all_dir_files) == 0:
+        return
+
+    try:
+        # make directory
+        os.mkdir(TEMP_DIR)
+    except FileExistsError:
+        # if already exists, clean it up
+        [os.remove(TEMP_DIR + "/" + file) for file in os.listdir(TEMP_DIR)]
 
     # call word spacing analysis on individual files in parallel (results are written to TEMP_DIR as individual files)
-    os.mkdir(TEMP_DIR)
-    joblib.Parallel(n_jobs=-1)(
-        joblib.delayed(analyze_file_to_temp)(dir_path + "/" + filename, TEMP_DIR)
-        for filename in progress.bar.Bar('Diagnosing Spacing Errors').iter(all_xmls))
+    joblib.Parallel(n_jobs=-1)(joblib.delayed(analyze_file_to_temp)(dir_path + "/" + filename, TEMP_DIR)
+                               for filename in progress.bar.Bar('Diagnosing Spacing Errors').iter(all_dir_files))
 
-    if out_filename is None:
-        out_filename = "diagnostic_results.csv"
+    if (not lazy) or (not os.path.isfile(out_filename)) or (os.path.getsize(out_filename) == 0):
+        with open(out_filename, "w") as writeable:
+            # write first line of master file
+            writeable.write("school,total words,matches,splits,unsplits,average word gain\n")
 
     # read each individual file and write the results to master file
-    with open(out_filename, "w") as writeable:
-        # write first line of master file
-        writeable.write("school,total words,matches,splits,unsplits,average word gain,bad spacing\n")
+    with open(out_filename, "a") as writeable:
 
         # loop over each temporary file
         for file in os.listdir(TEMP_DIR):
-            name = file[:file.rfind(".")]
-
-            if (name not in KNOWN_BAD_SPACING) and (name not in KNOWN_OK_SPACING):
-                unprocessed.append(file)
-                continue
-
-            # set to 1 if current file has spacing issues
-            bad_spacing = 1 if file[:file.rfind(".")] in KNOWN_BAD_SPACING else 0
 
             with open(TEMP_DIR + "/" + file, "r") as readable:
                 lines = readable.readlines()
@@ -207,7 +240,7 @@ def analyze_dir(dir_path, out_filename=None):
                     raise RuntimeError("Something went wrong in %s: more than 1 line." % file)
 
                 # write to the new file the info from the readable plus whether or not file has spacing issues
-                writeable.write(lines[0] + "," + str(bad_spacing) + "\n")
+                writeable.write(lines[0] + "\n")
 
     # delete individual files in the temporary directory
     for deletable in os.listdir(TEMP_DIR):
@@ -218,17 +251,65 @@ def analyze_dir(dir_path, out_filename=None):
 
     os.rmdir(TEMP_DIR)
 
-    return unprocessed
+
+def train_mode(diagnostic_filename="diagnostic_results.csv"):
+
+    df = pd.read_csv(diagnostic_filename)
+    bad_spacing = []
+
+    for school in df["school"].values:
+        if school in KNOWN_OK_SPACING:
+            bad_spacing.append(0)
+        elif school in KNOWN_BAD_SPACING:
+            bad_spacing.append(1)
+        else:
+            raise RuntimeError("Training on school catalog %s with unknown spacing (that is, whether it's good or bad)."
+                               % school)
+
+    df["bad spacing"] = bad_spacing
+    df.to_csv(diagnostic_filename, index=False)
+
+
+def predict_mode(diagnostic_filename="diagnostic_results.csv", adaline_param_filename="adaline_wts.npy"):
+
+    df = pd.read_csv(diagnostic_filename)
+
+    # 1st feature: log of the ratio between long word (>=17 chars) matches and total number of words
+    log_match_ratio = np.log(df["matches"].values / df["total words"].values)
+
+    # 2nd feature: average word gain
+    avg_word_gain = df["average word gain"].values
+
+    # concatenate
+    features = np.vstack((log_match_ratio, avg_word_gain)).T
+
+    spacing_classifier = adaline.AdalineLogistic()
+    spacing_classifier.wts = np.load(adaline_param_filename)
+
+    # predict spacing for all files
+    predicted_spacing = spacing_classifier.predict(features)
+
+    # indices where prediction is actually necessary (i.e. spacing not previously labeled)
+    nan_inds = df["bad spacing"].apply(np.isnan).values
+
+    updated_spacing = df["bad spacing"].values
+    updated_spacing[nan_inds] = predicted_spacing[nan_inds]
+    df["bad spacing"] = updated_spacing.astype(int)
+
+    df.to_csv(diagnostic_filename, index=False)
 
 
 def main(argv):
-
     target_dir_path = "../../fullPDFs/"
 
     if len(argv) > 1:
         target_dir_path = argv[1]
 
-    analyze_dir(target_dir_path)
+    analyze_dir(target_dir_path, process_set=KNOWN_BAD_SPACING.union(KNOWN_OK_SPACING), lazy=False)
+    train_mode()
+
+    analyze_dir(target_dir_path, lazy=True)
+    predict_mode()
 
 
 if __name__ == "__main__":
