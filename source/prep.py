@@ -1,3 +1,9 @@
+'''
+Houses our code related to setting up our temporary data directories, as
+    well as code that does preparsing steps and makes parsing the XML easier.
+'''
+
+
 import os
 from progress.bar import Bar
 import pandas as pd
