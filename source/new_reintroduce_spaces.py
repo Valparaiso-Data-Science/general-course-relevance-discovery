@@ -1,5 +1,9 @@
+'''
+Wordninja related code resides here, utilizes the semantic split method from
+    punct_split (wraps the wordninja split function).
+'''
+
 import re
-import wordninja
 import punct_split as ps
 import sys
 
