@@ -1,3 +1,10 @@
+'''
+Responsible for creaing our csv that we end up running machine learning on.
+
+You may have to change some aspects of this script when you move to grobid.
+    * Mainly removing the wordninja step
+'''
+
 # files in the current directory
 import parse
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
@@ -45,7 +52,10 @@ def createCSV():
     # concatenate list into one joint data frame
     topicModel = pd.concat(df_container)
 
-
+    # clean up the dataframe; and make our final 'AllSchools.csv' file
+    #   * if you are not using the Makefile, you will be missing Valpo's courses
+    #   * if you are using the Makefile, the next step that happens is valpo's courses
+    #       are added into the csv.
     cleaned_df = newClean(topicModel)
     print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
     cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
@@ -56,6 +66,9 @@ if __name__ == "__main__":
         print("You need to provide a directory for this script to work properly!\n(Hint: You probably want to feed it 'source/')")
     else:
         try:
+            # this line exists because there is a weird quirk when running the script from the Makefile.
+            # if you run it without changing into the directory, the script can't find the imports, because
+            # the local files aren't part of the python path
             os.chdir(sys.argv[1])
         except:
             print("Error: Directory doesn't exist. Exiting...")
