@@ -63,7 +63,7 @@ def stratKFold(features,labels,splits=10):
         maj_train_index = undersample(X_train,y_train)
         features = features.reset_index(inplace=True)
         print('Features Head: \n')
-        print(features.head(5))
+        print(features)
         ds_i = features.index[labels == 1]
         print('Labels == 1: \n')
         print(labels == 1)
