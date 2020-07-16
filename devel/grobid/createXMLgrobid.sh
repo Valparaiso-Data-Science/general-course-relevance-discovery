@@ -24,16 +24,17 @@ start_docker(){
 }
 
 copy_config(){
-	cp config.json grobid-python-client/
+	cp config.json grobid-client-python/
 }
 
 python_client(){
 	in_dir=$1
 	out_idr=$2
-	python3 grobid-python-client/grobid-client.py --input $in_dir --output $out_dir processFulltextDocument
+	python3 grobid-client-python/grobid-client.py --input $in_dir processFulltextDocument
 }
 
 down_pdfs(){
+	# wrapper for ../getpdfs.sh
 	year=$1
 	cwd=$PWD
 	d_s="../fetchpdfs"
@@ -50,10 +51,15 @@ down_pdfs(){
 # this is the method that I would need to change
 rand_s(){
 	#https://gist.github.com/earthgecko/3089509
+	# it works by getting random strings from /dev/urandom
+	# then using 'tr' it gets rid of anything that isn't alphanumeric
+	# it then folds each line to only be 10 characters long
+	# then it prints out the first line
 	cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | sed q
 }
 
 sep_pdfs(){
+	# separate every pdf in 'pdfs/' into its own directory
 	cwd=$PWD
 	mkdir sep && cd sep
 	for pdf in $(ls ../pdfs/ | tr ' ' '~')
@@ -81,9 +87,4 @@ main(){
 }
 
 main
-
-# need to figure out how to decide which catalogs to download (use the scripts in fetchpdfs)
-
-
-
 
