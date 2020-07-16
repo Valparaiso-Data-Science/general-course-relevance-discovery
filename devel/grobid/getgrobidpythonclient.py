@@ -5,6 +5,8 @@ import time
 
 # directory name for grobid python client
 dirname = 'grobid-client-python'
+if sys.argv[1] is not None:
+    dirname = sys.argv[1]
 
 try:
     os.mkdir(dirname)
