@@ -290,5 +290,10 @@ if __name__ == "__main__":
 
     features, labels = preProcess()
 
-# ML.py ./source/ ./courses/AllSchools.csv svm
+    if ml_selection == "svm":
+        svm(features, labels, 10) # need to change this magic value
+    if ml_selection == "stratKfold":
+        stratKFold(features, labels)
+    if ml_selection == "randForest":
+        randForest(features, labels)
 
