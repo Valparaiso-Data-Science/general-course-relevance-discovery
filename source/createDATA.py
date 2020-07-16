@@ -1,5 +1,5 @@
 '''
-Responsible for creaing our csv that we end up running machine learning on.
+Main method for reading XML files and outputting a CSV file with course titles and descriptions.
 
 You may have to change some aspects of this script when you move to grobid.
     * Mainly removing the wordninja step
@@ -19,23 +19,24 @@ from joblib import Parallel, delayed
 from progress.bar import Bar
 
 def createCSV():
-    # container for processed catalogs
-    topicModel = pd.DataFrame()
+    """
+    Manages the three stages of the XML->CSV process.
+    """
 
     # toggle for keeping data from intermediary stages
     dirty = False
 
-    # trim the xml files (whenever line number information available, otherwise keep whole file)
+    # step 1. trim the xml files (whenever line number information available, otherwise keep whole file)
     Parallel(n_jobs=-1)(delayed(prep.trimFile)(const.SOURCE_DIR, const.TRIMMED_DIR, filename, prep.makeLineNumDict(const.TRIM_CSV))
                         for filename in Bar('Trimming Files').iter(os.listdir(const.SOURCE_DIR)))
 
 
-    # clean the xml files (fix problems and make it parseable)
+    # step 2. clean XML: remove most types of tags and contents of 'Figure' tags
     Parallel(n_jobs=-1)(delayed(prep.cleanXML)(const.TRIMMED_DIR , const.SUPERTRIMMED_DIR , filename)
                         for filename in Bar('Fixing Files').iter(os.listdir(const.TRIMMED_DIR)))
 
 
-    # make a csv from the files in temp_data/superTrimmedPDFs
+    # step 3 . call the parser that figures out course titles and descriptions from XML structure
     Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
     '''

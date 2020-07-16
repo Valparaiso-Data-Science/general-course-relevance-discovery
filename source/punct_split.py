@@ -1,3 +1,10 @@
+"""
+    Contains punct_split, a wrapper function for wordnina.split that: applies pre-semantic split based on punctuation
+    and course codes, and applies semantic split (wordninja split only when split results in actual meaningful words);
+
+    and all helper methods called in punct_split.
+"""
+
 import spacy
 import wordninja
 import sys

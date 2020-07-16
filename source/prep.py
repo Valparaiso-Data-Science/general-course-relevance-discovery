@@ -1,6 +1,5 @@
 '''
-Houses our code related to setting up our temporary data directories, as
-    well as code that does preparsing steps and makes parsing the XML easier.
+    Handles preprocessing raw XML into a form that makes it possible to extract course titles and descriptions.
 '''
 
 

@@ -1,7 +1,5 @@
 '''
-The 'main' file that will run everything that we have implemented so far,
-    meaning that it will go through the ENTIRE process, dataset creation,
-    machine learning, etc.
+Main file that runs the whole pipeline, from raw XML catalogs, to course classification with decision trees.
 '''
 
 # files in the current directory

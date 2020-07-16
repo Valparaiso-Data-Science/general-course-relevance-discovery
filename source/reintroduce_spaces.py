@@ -1,5 +1,6 @@
 """
-    XML parser that uses the wordninja package to reintroduce spaces into words that are crammed together.
+    XML parser that calls punct_split to correct spacing issues (words incorrectly concatenated together in the PDF->XML
+    process via Adobe Acrobat).
 """
 
 import sys
