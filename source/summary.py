@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+Prints out a simple summary of the courses extracted from the school catalogs.
+
 Created on Mon Jun  8 11:51:22 2020
 
 @author: Francisco Vazquez

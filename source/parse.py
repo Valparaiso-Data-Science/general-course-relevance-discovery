@@ -1,3 +1,8 @@
+"""
+    Contains functions that apply space correction (when needed) and extract course titles and descriptions out of
+    preprocessed XML.
+"""
+
 import re
 import xml.etree.ElementTree as ET
 import pandas as pd
@@ -13,8 +18,10 @@ c_id_re = re.compile(c_id_re_s)
 
 def parseXML(filepath, courseTag, descTag, descTagsFromID):
     '''
+    Extracts course titles and descriptions from preprocessed XML.
+
     IN: the file path, the tag for courses, the tag for descriptions, and the number of tags down the description will be
-    OUT: a dataframe of the courses
+    OUT: a Pandas dataframe of the courses
     '''
     # Get xml (tree) into a list (stack) and find courses (courseID & descriptions)
     parser = etree.XMLParser(recover=True)
@@ -111,39 +118,36 @@ def parseXML(filepath, courseTag, descTag, descTagsFromID):
     #Create a Pandas DataFrame with school being the filename, CourseID & Descriptions are set to their respective lists
     courses_df = pd.DataFrame(
         {'School': os.path.basename(filepath.replace(".xml", "")), 'CourseID': courseID, 'Descriptions': descriptions})
-    return (courses_df)
+    return courses_df
 
 
-def createStack(xml, stack):
+def createStack(element, stack):
     '''
-    IN: the xml object?
-    OUT: the stack
-    Responsible for creating the 'stack' (the thing that has all of the parsable xml text in it)
+    Recursively traverse element tree and save any found text to stack.
     '''
+
     #Remove null and blank lines
-    if xml.text is not None:
-        if not xml.text.isspace():
-            stack.append(xml)
+    if element.text is not None:
+        if not element.text.isspace():
+            stack.append(element)
     #Loop to bottom of a nested xml tag
-    for subLevel in xml:
+    for subLevel in element:
         createStack(subLevel, stack)
 
 
+def makeCSV(filename, superTrimmedDir):
+    """
+    Applies space correction if needed and calls parseXML (for extracting courses descriptions and titles out of XML)
 
+    :param filename: current file name
+    :param superTrimmedDir: path of the source directory
+    """
 
-
-
-def makeCSV(filename, superTrimmedDir, dirty):
-
-    # indicate that we used `SUPERTRIMMED_DIR` variable as defined at the top of the file
     #Checks if we are looking at a college we know needs WordNinja
-    wn_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
+    badspacing_colleges = ['Brown', '2011Cornell', 'Carlow', 'Caldwell', 'Denison', 'Pittsburgh', 'Youngstown']
 
-    o_wn_colleges = ['Carlow', 'Caldwell'] # Carlow could be moved to n_wn; same with Caldwell
-    n_wn_colleges = ['Brown', '2011Cornell', 'Pittsburgh', 'Youngstown', 'Denison']
-
-    for college in wn_colleges:
-        if re.match(college,filename) is not None:
+    for college in badspacing_colleges:
+        if re.match(college, filename) is not None:
             needsWN = True
             break
         else:
@@ -151,15 +155,15 @@ def makeCSV(filename, superTrimmedDir, dirty):
 
     #Checks if the college needs Word Ninja
     if needsWN:
+        # keep a pointer to the non-space-corrected file
         deletable = filename
 
         # reintroduce spaces and reassign `filename` to cleaned file
-        filename = reintroduce_spaces(superTrimmedDir+ "/" + filename)
+        filename = reintroduce_spaces(superTrimmedDir + "/" + filename)
         filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
 
-        if not dirty:
-            print("\nNow deleting:", deletable)
-            os.unlink(superTrimmedDir+ "/" + deletable)
+        # remove non-space-corrected file
+        os.unlink(superTrimmedDir + "/" + deletable)
 
     # use parseXML to find course headers and descriptions
     CSV = parseXML(superTrimmedDir+ "/" + filename, 'P', 'P', 1)
