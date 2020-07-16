@@ -3,6 +3,9 @@
 
 Wordninja related code resides here, utilizes the semantic split method from
     punct_split (wraps the wordninja split function).
+
+Takes in XML files that have spacing issues, finds the offending strings via regex,
+    then uses punct_split's wrapper for wordninja (semantic_split) to clean up the XML files.
 '''
 
 import re
@@ -80,7 +83,7 @@ def reintroduce_spaces(fp, nfp=None):
     IN: a file path
     OUT: a file path to the 'wordninja-ed' xml
     '''
-    #d = get_dict_of_bad_words(fp)
+    # uses the 'new' version of the dictionary creation (hence the prefix 'a_')
     d = a_get_dict_of_bad_words(fp)
 
     # get the data out of the file
