@@ -30,7 +30,7 @@ copy_config(){
 python_client(){
 	in_dir=$1
 	out_idr=$2
-	python3 grobid-client-python/grobid-client.py --input $in_dir --output $out_dir processFulltextDocument
+	python3 grobid-client-python/grobid-client.py --input $in_dir processFulltextDocument
 }
 
 down_pdfs(){
@@ -45,6 +45,7 @@ down_pdfs(){
 		*) echo $year | ./getpdfs.sh;;
 	esac
 	cd $cwd
+	[ -d pdfs ] && rm -rf pdfs
 	mv -f "${d_s}/pdfs/" .
 }
 
@@ -61,6 +62,7 @@ rand_s(){
 sep_pdfs(){
 	# separate every pdf in 'pdfs/' into its own directory
 	cwd=$PWD
+	[ -d sep ] && rm -rf sep
 	mkdir sep && cd sep
 	for pdf in $(ls ../pdfs/ | tr ' ' '~')
 	do
