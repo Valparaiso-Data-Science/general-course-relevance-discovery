@@ -88,14 +88,11 @@ def stratKFold(features,labels,splits=10):
         # y_test = labels.iloc[test_index]
         maj_train_index = undersample(X_train,y_train)
         #features = features.reset_index()
-        print('Features Head: \n')
-        print(features)
+        
         ds_i = features.index[labels == 1]
-        print('Labels == 1: \n')
-        print(labels == 1)
-        print('dsi: \n')
-        print(ds_i)
+        
         train_index = np.append(maj_train_index,ds_i)
+        print("NEW TRAIN: ", train_index)
         indices[0]=train_index
         fold_iterations[count]=indices
         count+=1
