@@ -27,7 +27,7 @@ from numpy import asarray, save, load
 
 def preProcess():
     cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
-    
+
     print("\tcleaned")
     vect_df = vectorizer(cleaned_df)
     print("\tvect")
@@ -38,7 +38,7 @@ def preProcess():
     #%%
     features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
     labels = labeled_df["curricula relevance"]
-    
+
     return features,labels
 
 def stratKFold(features,labels,splits=10):
@@ -291,6 +291,7 @@ if __name__ == "__main__":
 
     os.chdir(run_dir)
 
+    features, labels = preProcess()
 
 # ML.py ./source/ ./courses/AllSchools.csv svm
 
