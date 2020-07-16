@@ -26,3 +26,12 @@ Requirements:
 		* 'All' - for every pdf we have in urls.csv
 		* 'latest' - for the latest pdf from every school
 
+If you've done all of that, you may be ready to take on the beast, type:
+```
+bash createXMLgrobid.sh
+```
+or Alternatively:
+```
+./createXMLgrobid.sh
+```
+
