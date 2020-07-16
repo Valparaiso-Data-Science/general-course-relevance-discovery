@@ -37,7 +37,7 @@ def createCSV():
 
 
     # step 3 . call the parser that figures out course titles and descriptions from XML structure
-    Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR, dirty) # maybe make makeCSV take an output directory?
+    Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
     '''
     # fix the bug that is here; get an error in newClean complaining about a float
