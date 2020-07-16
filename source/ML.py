@@ -70,7 +70,7 @@ def stratKFold(features,labels,splits=10):
         y_train = labels.iloc[train_index]
         # y_test = labels.iloc[test_index]
         maj_train_index = undersample(X_train,y_train)
-        features = features.reset_index(inplace=True)
+        features = features.reset_index()
         print('Features Head: \n')
         print(features)
         ds_i = features.index[labels == 1]
