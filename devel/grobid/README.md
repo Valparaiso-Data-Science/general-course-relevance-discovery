@@ -18,11 +18,11 @@ Or Alternatively:
 ## getting xmls from grobid
 
 Requirements:
-	* The python grobid client (should be downloaded with `make setup`)
-	* Grobid running (createXMLgrobid.sh should take care of this for you)
-	* Making sure that the year in 'createXMLgrobid.sh' is set to what you want.
-		* Options:
-			* Numerical year (15-16, 17-18, etc.)
-			* 'All' - for every pdf we have in urls.csv
-			* 'latest' - for the latest pdf from every school
+* The python grobid client (should be downloaded with `make setup`)
+* Grobid running (createXMLgrobid.sh should take care of this for you)
+* Making sure that the year in 'createXMLgrobid.sh' is set to what you want.
+	* Options:
+		* Numerical year (15-16, 17-18, etc.)
+		* 'All' - for every pdf we have in urls.csv
+		* 'latest' - for the latest pdf from every school
 
