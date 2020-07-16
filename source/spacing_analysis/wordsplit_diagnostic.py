@@ -7,11 +7,11 @@
     meaningful words when split "unsplits", average word gain when splitting, and "bad spacing" – 0 if no known (or
     predicted) spacing errors and 1 if known (or predicted) spacing errors.
 
-    Upon first pass, only computes these features for 32 files that are known to either have or not have spacing errors.
+    In train mode, only computes these features for 32 files that are known to either have or not have spacing errors.
     Then trains ADALINE classifier on 2 features – log(num long word matches / total number of words) and average word
     gain – to be able to predict existence of spacing issue in any new files.
 
-    Upon second pass, computes features for any new files and uses learned ADALINE parameters to
+    In predict mode, uses the ADALINE classifier to determine if any new files have spacing issues.
 """
 
 # pre-made
@@ -86,7 +86,7 @@ def split_gain(long_word, return_words=False):
 
 def traverse_node(root, pattern, match_stack, stats):
     """
-    Find matches at current node, then move on to child nodes
+    XML DOM traversal utility – find matches at current node, then move on to child nodes
     """
 
     if root.text is not None:
@@ -103,9 +103,6 @@ def traverse_node(root, pattern, match_stack, stats):
 
                 if not is_word:
                     word_gain = split_gain(match)
-
-                if type(word_gain) != int:
-                    print("ouch")
 
                 # account for whether word is splittable or unsplittable
                 if word_gain != 0:
@@ -171,7 +168,7 @@ def analyze_file_to_temp(file_path, temp_dir):
 
 def analyze_dir(dir_path, out_filename="diagnostic_results.csv", process_set=None, no_process_set=None, lazy=True):
     """
-    Applies analyze_file_to_temp to each file in target dir and
+    Applies analyze_file_to_temp to each file in target dir and makes a csv table with the results of all files.
 
     :param dir_path: target directory with XML files to analyze
     :param out_filename: name of output csv file with results
@@ -253,6 +250,9 @@ def analyze_dir(dir_path, out_filename="diagnostic_results.csv", process_set=Non
 
 
 def train_mode(diagnostic_filename="diagnostic_results.csv"):
+    """
+    Compute file statistics for known files for subsequent training. Write results to diagnostic_filename.
+    """
 
     df = pd.read_csv(diagnostic_filename)
     bad_spacing = []
@@ -270,7 +270,15 @@ def train_mode(diagnostic_filename="diagnostic_results.csv"):
     df.to_csv(diagnostic_filename, index=False)
 
 
-def predict_mode(diagnostic_filename="diagnostic_results.csv", adaline_param_filename="adaline_wts.npy"):
+def append_mode(diagnostic_filename="diagnostic_results.csv", adaline_param_filename="adaline_wts.npy"):
+    """
+    Compute statistics for directory which may include previously unknown files. Unknown files initially get a NaN in
+    the column for 'bad spacing', which is then replaced by label predicted by ADALINE classifier.
+
+    :param diagnostic_filename: name of output file with results
+    :param adaline_param_filename: name of .npy file where trained ADALINE parameters are stored
+    :return:
+    """
 
     df = pd.read_csv(diagnostic_filename)
 
@@ -299,17 +307,43 @@ def predict_mode(diagnostic_filename="diagnostic_results.csv", adaline_param_fil
     df.to_csv(diagnostic_filename, index=False)
 
 
+def wordsplit_diagnostic(target_dir_path, mode='full'):
+    """
+    Main method for determining files with good and bad spacing.
+
+    :param mode: specifies what stages of training/predicting to be performed.
+                    'full' – train on known files, predict unknown
+                    'train' – only train on known files
+                    'append' – only analyze new files and predict whether they have spacing issues
+    """
+
+    if mode == "full":
+        analyze_dir(target_dir_path, process_set=KNOWN_BAD_SPACING.union(KNOWN_OK_SPACING), lazy=False)
+        train_mode()
+
+        analyze_dir(target_dir_path, lazy=True)
+        append_mode()
+
+    elif mode == "train":
+        analyze_dir(target_dir_path, process_set=KNOWN_BAD_SPACING.union(KNOWN_OK_SPACING), lazy=False)
+        train_mode()
+
+    elif mode == "append":
+        analyze_dir(target_dir_path, lazy=True)
+        append_mode()
+
+    else:
+        raise RuntimeError("Mode not understood. Please use 'full', 'train', or 'append'.")
+
+
 def main(argv):
+
     target_dir_path = "../../fullPDFs/"
 
     if len(argv) > 1:
         target_dir_path = argv[1]
 
-    analyze_dir(target_dir_path, process_set=KNOWN_BAD_SPACING.union(KNOWN_OK_SPACING), lazy=False)
-    train_mode()
-
-    analyze_dir(target_dir_path, lazy=True)
-    predict_mode()
+    wordsplit_diagnostic(target_dir_path, mode='full')
 
 
 if __name__ == "__main__":
