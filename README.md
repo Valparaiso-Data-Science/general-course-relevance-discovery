@@ -40,7 +40,7 @@ This repo has a number of direcories, each with a function.
 * *courses/* - The output csvs that we run machine learning on
 * *fullPDFs/* - The source XML (aka the raw data)
 * *devel/* - Contains things related to development and running the code.
-* *devel/grobid* - Contains scripts that can get grobid set up
+* *devel/grobid/* - Contains scripts that can get grobid set up
 
 ## Important Files
 
@@ -52,7 +52,7 @@ This repo has a number of direcories, each with a function.
 * devel/todo - current todo list for the project
 * devel/docker/Dockerimage - the docker image for this project
 * devel/grobid/urls.csv - csv file that has all of the urls for different pdfs
-
+* devel/grobid/createXMLgrobid.sh - shell script that automates the process of converting pdfs with grobid
 ## Development Guidelines
 
 * Small commits (easily understood)
