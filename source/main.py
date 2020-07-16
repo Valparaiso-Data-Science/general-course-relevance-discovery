@@ -41,7 +41,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 # Make all of the required directories; prep the work area
 prep.prepare()
 # Create 'AllSchools.csv'
-createDATA.createCSV()
+cleaned_df = createDATA.createCSV()
 
 
 #Previously untouched last semester Spring2020 from here down
