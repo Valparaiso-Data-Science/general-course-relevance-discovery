@@ -44,10 +44,10 @@ createDATA.createCSV()
 print("Splitting Data")
 features, labels = ML.preProcess()
 
-ML.stratKFold(features, labels)
+#ML.stratKFold(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels)
-#randForest(features,labels)
+randForest(features,labels)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
