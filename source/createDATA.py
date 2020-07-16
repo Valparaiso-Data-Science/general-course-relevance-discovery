@@ -61,6 +61,14 @@ def createCSV():
     print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
     cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
 
+    # if not 'dirty' mode, remove data from intermediary stages
+    if not dirty:
+        for file in os.listdir(const.TRIMMED_DIR):
+            os.unlink(const.TRIMMED_DIR + "/" + file)
+
+        for file in os.listdir(const.SUPERTRIMMED_DIR):
+            os.unlink(const.SUPERTRIMMED_DIR + "/" + file)
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
