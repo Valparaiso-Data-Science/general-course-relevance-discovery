@@ -88,9 +88,9 @@ def stratKFold(features,labels,splits=10):
         # y_test = labels.iloc[test_index]
         maj_train_index = undersample(X_train,y_train)
         #features = features.reset_index()
-        
+
         ds_i = features.index[labels == 1]
-        
+
         train_index = np.append(maj_train_index,ds_i)
         print("NEW TRAIN: ", train_index)
         indices[0]=train_index
@@ -279,7 +279,7 @@ if __name__ == "__main__":
     if not csv_file.__contains__("csv"):
         print("Invalid csv file was given as input. Exiting...")
         os.quit()
-    if ml_selection is not in valid_ml_selections:
+    if ml_selection not in valid_ml_selections:
         print("Valid machine learning choices:")
         for i in valid_ml_selections:
             print(i)
