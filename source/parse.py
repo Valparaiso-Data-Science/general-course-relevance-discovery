@@ -135,13 +135,12 @@ def createStack(element, stack):
         createStack(subLevel, stack)
 
 
-def makeCSV(filename, superTrimmedDir, dirty):
+def makeCSV(filename, superTrimmedDir):
     """
     Applies space correction if needed and calls parseXML (for extracting courses descriptions and titles out of XML)
 
     :param filename: current file name
     :param superTrimmedDir: path of the source directory
-    :param dirty: flag indicating whether to keep data at intermediary stages (data in TRIMMED and superTrimmedDir)
     """
 
     #Checks if we are looking at a college we know needs WordNinja
@@ -156,15 +155,15 @@ def makeCSV(filename, superTrimmedDir, dirty):
 
     #Checks if the college needs Word Ninja
     if needsWN:
+        # keep a pointer to the non-space-corrected file
         deletable = filename
 
         # reintroduce spaces and reassign `filename` to cleaned file
         filename = reintroduce_spaces(superTrimmedDir + "/" + filename)
         filename = filename[filename.rfind("/") + 1:]  # chop off the directory path, only leave name filename
 
-        if not dirty:
-            print("\nNow deleting:", deletable)
-            os.unlink(superTrimmedDir + "/" + deletable)
+        # remove non-space-corrected file
+        os.unlink(superTrimmedDir + "/" + deletable)
 
     # use parseXML to find course headers and descriptions
     CSV = parseXML(superTrimmedDir+ "/" + filename, 'P', 'P', 1)
