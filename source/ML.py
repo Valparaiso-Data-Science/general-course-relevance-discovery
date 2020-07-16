@@ -39,18 +39,18 @@ def stratKFold(features,labels,splits=10):
     -------
     None.
     It does, however, save the indices to a file that can be used at a later point.
-    
+
     Notes
     -----
-    Saving the indices is done to save time. This block of code takes a pretty 
-    long time to run. Therefore it is possible to run the random forest using 
+    Saving the indices is done to save time. This block of code takes a pretty
+    long time to run. Therefore it is possible to run the random forest using
     the already saved indices. This function should only be called if the data
-    is altered and the algorithm needs to be retrained. 
-    
-    The current implementation uses a random undersampler. This is not ideal. 
-    The goal is to convert to using a near miss algorithm to conduct the 
-    undersampling. The switch to random undersampling was done to save time 
-    when debugging the saving of the indices. 
+    is altered and the algorithm needs to be retrained.
+
+    The current implementation uses a random undersampler. This is not ideal.
+    The goal is to convert to using a near miss algorithm to conduct the
+    undersampling. The switch to random undersampling was done to save time
+    when debugging the saving of the indices.
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -84,8 +84,8 @@ def stratKFold(features,labels,splits=10):
         count+=1
     fold_iterations = asarray(fold_iterations)
     save('fold_iterations.npy',fold_iterations)
-    print(fold_iterations) 
-    
+    print(fold_iterations)
+
 def randForest(features,labels):
     '''
     Parameters
@@ -98,19 +98,19 @@ def randForest(features,labels):
     Returns
     -------
     None.
-    
+
     Notes
     -----
-    Prints out the average for each cross-validation iteration, as well as the 
-    overall average (Computed by taking the average of the averages) of the 
-    random forest. 
-    
+    Prints out the average for each cross-validation iteration, as well as the
+    overall average (Computed by taking the average of the averages) of the
+    random forest.
+
     It also loads in fold_iterations.npy which is a file that stores the indices
-    for each test-train split computed by the stratified k-fold function. The 
-    point of seperating the two was to save time. There should be no need to 
-    run stratKFold() unless changes are made directly to it. 
-    
-    
+    for each test-train split computed by the stratified k-fold function. The
+    point of seperating the two was to save time. There should be no need to
+    run stratKFold() unless changes are made directly to it.
+
+
 
     '''
     fold_iterations = load('fold_iterations.npy',allow_pickle=True)
@@ -154,16 +154,16 @@ def svm(features,labels,splits):
     Returns
     -------
     None.
-    
+
     Notes
     -----
-    This is not in a working state currently. This function is using an old 
+    This is not in a working state currently. This function is using an old
     code structure. Looking at the randForest() function, it does not do any
-    of the stratified k-fold, but instead loads a file of saved indices. If 
+    of the stratified k-fold, but instead loads a file of saved indices. If
     this code is looking to be used, one must first change the format to look
-    more like randForest(). Another reason we save the indices was to allow us 
-    to be able to do different machine-learning algorithms using the same 
-    test-train splits made by the k-fold function. 
+    more like randForest(). Another reason we save the indices was to allow us
+    to be able to do different machine-learning algorithms using the same
+    test-train splits made by the k-fold function.
 
     '''
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -207,15 +207,15 @@ def undersample(features, labels, split=0.5):
     labels : list
         Array of labels.
     split : float, optional
-        This is the ratio of minority class samples to 
-        the resampled majority class samples. The default is 0.5. Currently 
-        only used when we use random undersampling. It can, however, be used 
+        This is the ratio of minority class samples to
+        the resampled majority class samples. The default is 0.5. Currently
+        only used when we use random undersampling. It can, however, be used
         for near miss.
 
     Returns
     -------
     newLabels : numpy array
-        The indices of the resampled majority class samples determined by the 
+        The indices of the resampled majority class samples determined by the
         undersampling method.
 
     '''
@@ -250,3 +250,30 @@ def visTree(dTree):
     dot_data = tree.export_graphviz(dTree, out_file=None)
     graph = graphviz.Source(dot_data)
     return graph
+
+if __name__ == "__main__":
+
+    run_dir = sys.argv[1]
+    csv_file = sys.argv[2]
+    ml_selection = sys.argv[3]
+
+    valid_ml_selections = [ "svm", "stratKfold", "randForest" ]
+
+    if run_dir is None:
+        print("Invalid directory given as input. Exiting...")
+        os.quit()
+    if not csv_file.__contains__("csv"):
+        print("Invalid csv file was given as input. Exiting...")
+        os.quit()
+    if ml_selection is not in valid_ml_selections:
+        print("Valid machine learning choices:")
+        for i in valid_ml_selections:
+            print(i)
+        print("Invalid machine learning selection. Exiting...")
+        os.quit()
+
+    os.chdir(run_dir)
+
+
+# ML.py ./source/ ./courses/AllSchools.csv svm
+
