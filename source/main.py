@@ -7,7 +7,7 @@ import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 import createDATA
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
-from ML import decisionTree,visTree, randForest,undersample,stratKFold
+import ML
 import prep
 import const
 
@@ -42,10 +42,10 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 prep.prepare()
 # Create 'AllSchools.csv'
 createDATA.createCSV()
-features, labels = ML.preProcess()
 print("Splitting Data")
+features, labels = ML.preProcess()
 
-stratKFold(features, labels)
+ML.stratKFold(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels)
 #randForest(features,labels)
