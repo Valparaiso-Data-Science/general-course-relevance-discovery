@@ -1,20 +1,23 @@
+'''
+--Needs a more descriptive docstring--
+
+Wordninja related code resides here, utilizes the semantic split method from
+    punct_split (wraps the wordninja split function).
+'''
+
 import re
-import wordninja
 import punct_split as ps
 import sys
 
-#fp = "Youngstown.xml"
-
 #This regex matches any string that is made up of
-#at least 17 capital or lowercase letters
+#at least 8 capital or lowercase letters
 long_str_re = r"[a-zA-Z0-9]{8,}"
 
-#potential new re
+#potential new re (not adequately tested)
 # does a look a head (?=[a-zA-Z]) for a lowercase
 # or capital letter, if there is one, then look
 # then match a 17 character long string that can
 # contain capital/lowercase letters and digits
-
 # i am a little unsure if this re does exactly what
 # i want it to do, it needs a lot more testing
 # i think that it needs a '.*' after the equal sign
@@ -27,6 +30,10 @@ def pad_characters(input_string):
     return ps.space_coursecodes(ps.space_punct(ps.space_parantheses(ps.correct_apostrophe(input_string))))
 
 def get_dict_of_bad_words(fp):
+    '''
+    IN: a file path
+    OUT: a dictionary of 'bad words' and what they should be replaced with
+    '''
     f = open(fp)
     lines = f.readlines()
 
@@ -44,20 +51,23 @@ def get_dict_of_bad_words(fp):
     return bad_strings_dict
 
 # alternate implementation (is faster)
-# captures 6 more courses than above method
+# captures 6 more courses than above method (on youngstown)
 def a_get_dict_of_bad_words(fp):
+    '''
+    IN: a file path
+    OUT: a dictionary of 'bad words' and what they should be replaced with
+    '''
     f = open(fp)
     data = f.read()
 
     bad_strings_dict = {} # dictionary has all of the strings and what they should be changed into
     matches = list(set(re.findall(long_str_re, data)))
 
-    # rest of the code would be like this
     for w in matches:
         s_s = ps.semantic_split(w)
-        if not w == s_s:
+        if not w == s_s: # if the original string doesn't match the split string
+            bad_strings_dict.update({w: s_s}) # add it to the dictionary
             # we don't have to lookup if w is in the dictionary because of the set above
-            bad_strings_dict.update({w: s_s})
 
     # currently the only issue is that there are no padded characters with this method
     # however, based off of some testing on my local machine, it doesn't seem to be that
@@ -66,6 +76,10 @@ def a_get_dict_of_bad_words(fp):
     return bad_strings_dict
 
 def reintroduce_spaces(fp, nfp=None):
+    '''
+    IN: a file path
+    OUT: a file path to the 'wordninja-ed' xml
+    '''
     #d = get_dict_of_bad_words(fp)
     d = a_get_dict_of_bad_words(fp)
 
@@ -80,6 +94,10 @@ def reintroduce_spaces(fp, nfp=None):
     for i in d: # this is where the big speed improvement is, it runs through 3500 entries instead of all of the tags in the xml
         n_data = n_data.replace(i, d[i])
 
+    # it might be worth looking into using re.sub for the substitution, instead of '.replace', I don't
+    # know the full implementation details of them, so it may be worth trying out.
+    #re.sub(i, d[i], f_data)
+
     # if no name for outfile given, use source name + "_spaced"
     if nfp is None:
         nfp = fp[:fp.rfind(".")] + "_spaced" + fp[fp.rfind("."):]
@@ -88,7 +106,6 @@ def reintroduce_spaces(fp, nfp=None):
     nf = open(nfp, 'w') # this command will need to be changed to fit with the rest of the pipeline
     nf.write(n_data)
     nf.close()
-    #re.sub(i, d[i], f_data)
     return nfp
 
 #make_split_file(fp)

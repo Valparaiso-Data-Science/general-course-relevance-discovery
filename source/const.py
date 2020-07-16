@@ -1,5 +1,5 @@
 '''
-Constants for our Python code (when ran from main)
+Constants for file and directory names (when ran from main)
 '''
 
 from datetime import date
