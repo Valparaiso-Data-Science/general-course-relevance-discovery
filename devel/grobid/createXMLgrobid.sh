@@ -24,13 +24,13 @@ start_docker(){
 }
 
 copy_config(){
-	cp config.json grobid-python-client/
+	cp config.json grobid-client-python/
 }
 
 python_client(){
 	in_dir=$1
 	out_idr=$2
-	python3 grobid-python-client/grobid-client.py --input $in_dir --output $out_dir processFulltextDocument
+	python3 grobid-client-python/grobid-client.py --input $in_dir --output $out_dir processFulltextDocument
 }
 
 down_pdfs(){
