@@ -24,6 +24,9 @@ from subprocess import call
 from imblearn.under_sampling import RandomUnderSampler, NearMiss
 import numpy as np
 from numpy import asarray, save, load
+import pandas as pd
+
+from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 
 def preProcess():
     cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")

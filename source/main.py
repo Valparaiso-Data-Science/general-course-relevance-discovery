@@ -6,7 +6,6 @@ Main file that runs the whole pipeline, from raw XML catalogs, to course classif
 import parse
 #from topicModel import plot_10_most_common_words, listofDSCourse
 import createDATA
-from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 import ML
 import prep
 import const
