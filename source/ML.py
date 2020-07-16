@@ -9,6 +9,7 @@ Created on Mon Jul 22 13:50:39 2019
 @co-author: Frankie & Sasha
 """
 import os
+import const
 from sklearn.model_selection import train_test_split, StratifiedKFold
 from sklearn import tree,metrics
 from sklearn.svm import SVC
@@ -23,6 +24,22 @@ from subprocess import call
 from imblearn.under_sampling import RandomUnderSampler, NearMiss
 import numpy as np
 from numpy import asarray, save, load
+
+def preProcess():
+    cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
+    
+    print("\tcleaned")
+    vect_df = vectorizer(cleaned_df)
+    print("\tvect")
+    pruned_df = cleanVectorizer(vect_df)
+    print("\tpruned")
+    labeled_df = labelTargetsdf(pruned_df)
+    print("\tfound targets")
+    #%%
+    features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
+    labels = labeled_df["curricula relevance"]
+    
+    return features,labels
 
 def stratKFold(features,labels,splits=10):
     '''
