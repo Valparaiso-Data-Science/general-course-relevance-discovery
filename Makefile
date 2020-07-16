@@ -16,6 +16,15 @@ csv:
 	cat courses/all.csv courses/valpo.csv > courses/AllSchools.csv
 	rm courses/all.csv
 
+stratKfold:
+	python3 source/ML.py source/ courses/AllSchools.csv stratKfold
+
+svm:
+	python3 source/ML.py source/ courses/AllSchools.csv svm
+
+randForest:
+	python3 source/ML.py source/ courses/AllSchools.csv randForest
+
 clean:
 	rm -rf courses/
 	rm -rf temp_data/
