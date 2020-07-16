@@ -42,20 +42,7 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 prep.prepare()
 # Create 'AllSchools.csv'
 createDATA.createCSV()
-cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
-
-#Previously untouched last semester Spring2020 from here down
-print("\tcleaned")
-vect_df = vectorizer(cleaned_df)
-print("\tvect")
-pruned_df = cleanVectorizer(vect_df)
-print("\tpruned")
-labeled_df = labelTargetsdf(pruned_df)
-print("\tfound targets")
-#%%
-features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
-labels = labeled_df["curricula relevance"]
-
+features, labels = ML.preProcess()
 print("Splitting Data")
 
 stratKFold(features, labels)
