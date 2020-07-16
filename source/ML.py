@@ -3,6 +3,7 @@
 Created on Mon Jul 22 13:50:39 2019
 
 @author: nrandle
+@co-author: Frankie & Sasha
 """
 import os
 from sklearn.model_selection import train_test_split, StratifiedKFold
@@ -42,6 +43,11 @@ def stratKFold(features,labels,splits=10):
     long time to run. Therefore it is possible to run the random forest using 
     the already saved indices. This function should only be called if the data
     is altered and the algorithm needs to be retrained. 
+    
+    The current implementation uses a random undersampler. This is not ideal. 
+    The goal is to convert to using a near miss algorithm to conduct the 
+    undersampling. The switch to random undersampling was done to save time 
+    when debugging the saving of the indices. 
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -92,7 +98,16 @@ def randForest(features,labels):
     
     Notes
     -----
-    Ac
+    Prints out the average for each cross-validation iteration, as well as the 
+    overall average (Computed by taking the average of the averages) of the 
+    random forest. 
+    
+    It also loads in fold_iterations.npy which is a file that stores the indices
+    for each test-train split computed by the stratified k-fold function. The 
+    point of seperating the two was to save time. There should be no need to 
+    run stratKFold() unless changes are made directly to it. 
+    
+    
 
     '''
     fold_iterations = load('fold_iterations.npy',allow_pickle=True)
@@ -123,6 +138,31 @@ def randForest(features,labels):
     # r = results.write("Average Model Accuracy: "+ str(modelAc*100))
     # results.close()
 def svm(features,labels,splits):
+    '''
+    Parameters
+    ----------
+    features : list
+        Array of feature data.
+    labels : list
+        Array of labels.
+    splits : int
+        Number of splits to use in the stratified k-fold.
+
+    Returns
+    -------
+    None.
+    
+    Notes
+    -----
+    This is not in a working state currently. This function is using an old 
+    code structure. Looking at the randForest() function, it does not do any
+    of the stratified k-fold, but instead loads a file of saved indices. If 
+    this code is looking to be used, one must first change the format to look
+    more like randForest(). Another reason we save the indices was to allow us 
+    to be able to do different machine-learning algorithms using the same 
+    test-train splits made by the k-fold function. 
+
+    '''
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
     # errors = []
@@ -156,6 +196,26 @@ def svm(features,labels,splits):
 
 
 def undersample(features, labels, split=0.5):
+    '''
+    Parameters
+    ----------
+    features : list
+        Array of feature data.
+    labels : list
+        Array of labels.
+    split : float, optional
+        This is the ratio of minority class samples to 
+        the resampled majority class samples. The default is 0.5. Currently 
+        only used when we use random undersampling. It can, however, be used 
+        for near miss.
+
+    Returns
+    -------
+    newLabels : numpy array
+        The indices of the resampled majority class samples determined by the 
+        undersampling method.
+
+    '''
     rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
     # nmus = NearMiss(version=3,sampling_strategy={0:sum(labels),1:sum(labels)})
     # nmus.fit_resample(features, labels)
