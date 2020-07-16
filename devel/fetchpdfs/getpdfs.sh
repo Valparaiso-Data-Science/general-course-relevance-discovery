@@ -46,8 +46,10 @@ esac
 mkdir -pv $output_d && cd $output_d
 for url in $urls
 do
+
+	file_name_string="$(grep $url "../$csv" | cut -d',' -f2-3 | tr ',' '_').pdf"
 	# download the url via wget; silence the output; and concurrently
-	wget $url 2>&1 1> /dev/null &
+	wget $url -O "$file_name_string" 2>&1 1> /dev/null &
 done
 wait
 
