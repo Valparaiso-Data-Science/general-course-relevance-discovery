@@ -41,8 +41,8 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 # Make all of the required directories; prep the work area
 prep.prepare()
 # Create 'AllSchools.csv'
-cleaned_df = createDATA.createCSV()
-
+createDATA.createCSV()
+cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
 
 #Previously untouched last semester Spring2020 from here down
 print("\tcleaned")

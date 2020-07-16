@@ -68,7 +68,6 @@ def createCSV():
 
         for file in os.listdir(const.SUPERTRIMMED_DIR):
             os.unlink(const.SUPERTRIMMED_DIR + "/" + file)
-    return cleaned_df
 
 
 if __name__ == "__main__":
