@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-xml_out_dir="out" #obviously change
+xml_out_dir="grobid_xmls" #obviously change
 
 #mkdir -pv $xml_out_dir
 
@@ -83,9 +83,15 @@ main(){
 
 	for d in $(ls sep/)
 	do
-		python_client "sep/$d" $xml_out_dir
+		python_client "sep/$d"
 	done
 
+	xml_files=$(find sep -type f | grep xml)
+	for xml in xml_files
+	do
+		cp $xml $xml_out_dir
+	done
+	echo "XML files should now be in $xml_out_dir"
 }
 
 main
