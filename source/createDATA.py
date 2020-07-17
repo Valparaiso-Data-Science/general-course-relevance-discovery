@@ -57,6 +57,9 @@ def createCSV():
     #   * if you are not using the Makefile, you will be missing Valpo's courses
     #   * if you are using the Makefile, the next step that happens is valpo's courses
     #       are added into the csv.
+    #       * update 7-17 : the Makefile now no longer includes valpo's courses, there
+    #           are a few bugs with doing it the previous way, mainly that pandas
+    #           complained a lot. This is definitely something that needs to be fixed.
     cleaned_df = newClean(topicModel)
     print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
     cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
