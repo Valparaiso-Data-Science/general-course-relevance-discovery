@@ -128,6 +128,8 @@ def randForest(features,labels):
     point of seperating the two was to save time. There should be no need to
     run stratKFold() unless changes are made directly to it.
 
+    There is currently an index out of bounds error that is in the process of 
+    being debugged. The good news is that fold_iterations loads in. 
 
 
     '''
@@ -236,6 +238,13 @@ def undersample(features, labels, split=0.5):
     newLabels : numpy array
         The indices of the resampled majority class samples determined by the
         undersampling method.
+        
+    Notes
+    -----
+    The current implementation uses random undersampling for time purposes. 
+    It runs quicker and allowed us to test our code faster. This should not be
+    used in the final implementation. Using a near miss algorithm would be much
+    better. We recommend near miss 3. 
 
     '''
     rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
