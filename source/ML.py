@@ -259,12 +259,38 @@ def undersample(features, labels, split=0.5):
     return newLabels
 
 def vizRFTrees(rf, ntree,features):
+    '''
+    Parameters
+    ----------
+    rf : random forest
+        The final fit to all data random forest.
+    ntree : int
+        The number of trees you wish to display.
+    features : list
+        Array of feature data.
+
+    Returns
+    -------
+    None.
+    
+    Should theoretically print out the decision trees from the random forest.
+    
+    Notes
+    -----
+    This is not ready to be used for multiple reasons:
+        1. Random Forest code doesn't even work yet
+        2. Because of the point above, we are not sure this works. 
+
+    '''
     outfile='randFor_Tree'+ntree+'.dot'
     export_graphviz(rf.estimators_[ntree],outfile = outfile,feature_names=list(features.columns),
                     filled=True)
     call(['dot', '-Tpng', outfile, '-o', 'tree.png', '-Gdpi=600'])
     Image(filename='tree.png')
 
+# decisionTree and visTree were from the summer before ours (ie nathan wrote it)
+# Random forest was made to upgrade decision tree
+# vizRFTrees was made to replace visTree
 def decisionTree(feature_train,answer_train,depth):
 
     #forestClassifier = RandomForestClassifier(n_estimators=depth)
@@ -278,7 +304,7 @@ def visTree(dTree):
     dot_data = tree.export_graphviz(dTree, out_file=None)
     graph = graphviz.Source(dot_data)
     return graph
-
+# This allows for the code to be ran from the command line using the make file
 if __name__ == "__main__":
 
     run_dir = sys.argv[1]
