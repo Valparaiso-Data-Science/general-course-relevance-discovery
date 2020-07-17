@@ -35,6 +35,26 @@ make csv
 ```
 This will create 'AllSchools.csv' under courses, and with our current data, should get you around 60 thousand courses.
 
+### Machine Learning
+
+Currently the machine learning code is not finished yet, however you can make the test train split for the machine learning.
+
+To make the test-train split, run:
+```
+make stratKfold
+```
+
+To run the other machine learning code (which is still experimental at this stage), run:
+```
+make randForest
+```
+Or:
+```
+make svm
+```
+
+To run the code associated with Rand Forest, or the Support Vector Machine respectively.
+
 ## Repo Structure
 
 This repo has a number of direcories, each with a function.
