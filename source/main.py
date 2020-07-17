@@ -41,13 +41,13 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 prep.prepare()
 # Create 'AllSchools.csv'
 createDATA.createCSV()
-print("Splitting Data")
-features, labels = ML.preProcess()
+#print("Splitting Data")
+#features, labels = ML.preProcess()
 
 #ML.stratKFold(features, labels)
 #svm(features,labels,5)
 #undersample(features, labels)
-ML.randForest(features,labels)
+#ML.randForest(features,labels)
 
 '''
 feature_train, feature_test, answer_train, answer_test = train_test_split(features, labels, test_size=0.2)
