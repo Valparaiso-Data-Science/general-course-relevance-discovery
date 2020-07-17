@@ -2,6 +2,10 @@
 
 This repo is intended to house code that allows for data science topics discovery from university course catalogs
 
+## License
+
+The code is under the ECL-2.0
+
 ## Getting Started
 
 ### With Docker (Recommended)
