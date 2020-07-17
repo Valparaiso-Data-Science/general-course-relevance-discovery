@@ -81,6 +81,15 @@ This repo has a number of direcories, each with a function.
 * devel/docker/Dockerimage - the docker image for this project
 * devel/grobid/urls.csv - csv file that has all of the urls for different pdfs
 * devel/grobid/createXMLgrobid.sh - shell script that automates the process of converting pdfs with grobid
+
+## GROBID
+
+We are in the process of moving to grobid for doing our pdf to xml conversion for college pdfs that support it.
+
+Our current code assumes that you are using Adobe Acrobat for the pdf to XML conversion, and for some catalogs, it is the only way we can convert it (Purdue, MIT, Carnegie Mellon, etc.).
+
+If you want to test our GROBID code, head over to `devel/grobid/` and have a look at the README.
+
 ## Development Guidelines
 
 * Small commits (easily understood)
@@ -88,10 +97,10 @@ This repo has a number of direcories, each with a function.
 
 Current Branches:
 * master
-* machine-learning
-* sasha
 
 Historical Branches: (in order of most recent)
+* machine-learning
+* sasha
 * grobid_testing
 * syd-test-analysis
 * tfix
