@@ -11,10 +11,7 @@ setup:
 
 csv:
 	python3 source/createDATA.py source/
-	sh pre/parsevalpo.sh fullPDFs/ucat1920.xml courses/
-	mv courses/AllSchools.csv courses/all.csv
-	cat courses/all.csv courses/valpo.csv > courses/AllSchools.csv
-	rm courses/all.csv
+	@echo "Valpo is not included in the output CSV"
 
 stratKfold:
 	python3 source/ML.py source/ courses/AllSchools.csv stratKfold
