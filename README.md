@@ -12,7 +12,7 @@ The code is under the ECL-2.0
 
 This is the recommended route to take, because all of the dependencies are in the image.
 
-Go into the devel/docker folder and look at the readme and follow the steps there.
+Go into the `devel/docker/` folder and look at the readme and follow the steps there.
 
 ### On your personal computer
 
@@ -29,7 +29,7 @@ You will also need the 'enchant' c library installed:
 
 ### Creating the Dataset
 
-If you want to just create the dataset, its as easy as running:
+If you want to just create the dataset, it's as easy as running:
 ```
 make csv
 ```
@@ -53,7 +53,11 @@ Or:
 make svm
 ```
 
-To run the code associated with Rand Forest, or the Support Vector Machine respectively.
+To run the code associated with Random Forest, or the Support Vector Machine respectively.
+
+It is also important to note that both `randForest` and the `svm` do not work at the time of
+writing (7-17-2020). If you run the above commands, you are not going to get any meaningful
+output.
 
 ## Repo Structure
 
