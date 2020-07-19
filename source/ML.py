@@ -139,7 +139,10 @@ def randForest(features,labels):
     count = 0
     for fold in fold_iterations:
         print(fold[0].tolist())
+        print('Max of fold[0]: '+ str(max(fold[0].tolist())))
+        print()
         print(fold[1].tolist())
+        print('Max of fold[1]: '+ str(max(fold[1].tolist())))
         print('len of features: '+ str(len(features)))
         print('len of labels: ' + str(len(labels)))
         X_train = features.iloc[fold[0].tolist()]
