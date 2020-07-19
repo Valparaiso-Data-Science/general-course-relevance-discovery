@@ -135,13 +135,13 @@ def randForest(features,labels):
     '''
     fold_iterations = load('fold_iterations.npy',allow_pickle=True)
     accs = [0]*len(fold_iterations)
-    print('Length of fold_iterations: ' + str(len(fold_iterations)))
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
     count = 0
     for fold in fold_iterations:
-        print("length of fold: " + str(len(fold)))
-        print("Fold:\n")
-        print(fold)
+        print(fold[0].tolist())
+        print(fold[1].tolist())
+        print('len of features: '+ str(len(features)))
+        print('len of labels: ' + str(len(labels)))
         X_train = features.iloc[fold[0].tolist()]
         y_train = labels.iloc[fold[0].tolist()]
         X_test = features.iloc[fold[1].tolist()]
