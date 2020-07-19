@@ -139,6 +139,9 @@ def randForest(features,labels):
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
     count = 0
     for fold in fold_iterations:
+        print("length of fold: " + str(len(fold)))
+        print("Fold:\n")
+        print(fold)
         X_train = features.iloc[fold[0].tolist()]
         y_train = labels.iloc[fold[0].tolist()]
         X_test = features.iloc[fold[1].tolist()]
