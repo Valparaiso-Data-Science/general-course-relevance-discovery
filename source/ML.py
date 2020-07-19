@@ -134,7 +134,7 @@ def randForest(features,labels):
 
     '''
     features.reset_index(inplace=True)
-    labels.reset_index(inplace=True)
+    #labels.reset_index(inplace=True)
     fold_iterations = load('fold_iterations.npy',allow_pickle=True)
     accs = [0]*len(fold_iterations)
     rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
