@@ -2,10 +2,6 @@
 
 This repo is intended to house code that allows for data science topics discovery from university course catalogs
 
-## License
-
-The code is under the ECL-2.0
-
 ## Getting Started
 
 ### With Docker (Recommended)
@@ -62,22 +58,25 @@ output.
 ## Repo Structure
 
 This repo has a number of direcories, each with a function.
-* *pre/* - Has shell script that are made for preprocessing XML files
-* *source/* - Has all of the python code that does all of the 'magic'
+* *pre/* - Has shell scripts that are made for preprocessing XML files
+* *source/* - Has all of our python code that does all of the proverbial 'magic'
 * *source/tests/* - Contains all of the pytest tests for the repo
 * *courses/* - The output csvs that we run machine learning on
 * *fullPDFs/* - The source XML (aka the raw data)
 * *devel/* - Contains things related to development and running the code.
+* *devel/docker/* - Contains the Dockerfile
 * *devel/grobid/* - Contains scripts that can get grobid set up
 
 ## Important Files
 
-* Makefile - The makefile that allows for parts of the code to be done in 'stages'
+* Makefile - allows for parts of the code to be done in 'stages' (abstraction)
 * bok.txt - Edison body of knowledge words that are agreed to describe data science
-* Catalogs.csv - csv file that has line numbers where courses begin and end (for use with fileTrimmer.sh)
+* Catalogs.csv - csv file that has line numbers where courses begin and end
 * devel/known\_bugs - Known bugs are kept here, instead of ussing issues
+	* Not used anymore
 * requirements.txt - Contains all of the python libraries that are needed for this project (generated via 'pipreqs --force' in the project /)
 * devel/todo - current todo list for the project
+	* Not used anymore
 * devel/docker/Dockerimage - the docker image for this project
 * devel/grobid/urls.csv - csv file that has all of the urls for different pdfs
 * devel/grobid/createXMLgrobid.sh - shell script that automates the process of converting pdfs with grobid
@@ -113,3 +112,7 @@ Historical Branches: (in order of most recent)
 * pdf\_layout\_analysis
 * refactored-code
 * proto
+
+## License
+
+The code is under the ECL-2.0
