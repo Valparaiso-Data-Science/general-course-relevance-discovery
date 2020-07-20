@@ -254,7 +254,7 @@ def OldrandForest(features,labels,splits=10):
         X_test = features.iloc[test_index]
         y_train = labels.iloc[train_index]
         y_test = labels.iloc[test_index]
-        X_train,y_train = undersample(X_train,y_train)
+        X_train,y_train = Oldundersample(X_train,y_train)
         rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
         rf.fit(X_train, y_train)
         preds = rf.predict(X_test)
