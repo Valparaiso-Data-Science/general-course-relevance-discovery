@@ -35,3 +35,27 @@ or Alternatively:
 ./createXMLgrobid.sh
 ```
 
+## known issues
+
+There is an issue with pdf size and this method of creating XML files, the error that they throw from GROBID is a 500 error.
+For example, the catalog we get from Purdue is just far too big for GROBID to handle and it just spits out a 500 error.
+
+There are two ways at the time of writing we can solve this problem.
+1. We can just use Adobe for the offending pdfs.
+2. We can split up the pdfs to be smaller.
+
+Since number 1 is pretty straight forward, I think it'd be worthwhile to investigate number 2.
+
+[qpdf](http://qpdf.sourceforge.net/) is a program that can automate the process of splitting PDFs into sections that only contain certain pages.
+
+The manual has this example command to only get even pages between 2 and 20:
+```
+qpdf --pages <source>.pdf 1-20:even -- <output>.pdf
+```
+And to get odd pages from the whole document:
+```
+qpdf --pages <source>.pdf 1-z:odd -- <output>.pdf
+```
+
+If you want to read more on what qpdf can do, the manual is [here](http://qpdf.sourceforge.net/files/qpdf-manual.html).
+
