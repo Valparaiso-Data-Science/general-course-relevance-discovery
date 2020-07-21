@@ -60,9 +60,11 @@ def createCSV():
     #       * update 7-17 : the Makefile now no longer includes valpo's courses, there
     #           are a few bugs with doing it the previous way, mainly that pandas
     #           complained a lot. This is definitely something that needs to be fixed.
-    cleaned_df = newClean(topicModel)
+    cleaned_df, raw_df = newClean(topicModel)
     print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
     cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
+    print("Creating '" + const.CSV_DIR + "/Raw" + const.ALL_CSV + "'...")
+    raw_df.to_csv(const.CSV_DIR + "/Raw" + const.ALL_CSV, encoding="utf-8-sig")
 
     # if not 'dirty' mode, remove data from intermediary stages
     if not dirty:
