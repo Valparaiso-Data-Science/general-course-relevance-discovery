@@ -79,24 +79,29 @@ def newClean(df):
     import string
     schoolID = []
     courseID = []
-    description = []
+    cleanDescription = []
+    rawDescription = []
     stopwords = ['credits','spring','fall','course','students','offered','hours','credit','grade','typically']
     stopwords += first_stops
     stopwords += second_stops
     stopwords += third_stops
     stopwords += fourth_stops
     for i, row in df.iterrows():
-        cleanDesc = row['Descriptions']
-        cleanDesc = cleanDesc.translate(cleanDesc.maketrans(string.punctuation, "\\" * len(string.punctuation)))
-        cleanDesc = cleanDesc.replace("\\", '')
-        cleanDesc = ' '.join([ps.stem(word.lower()) for word in cleanDesc.split() if word.lower() not in stopwords])
+        desc = row['Descriptions']
+        desc = desc.translate(desc.maketrans(string.punctuation, "\\" * len(string.punctuation)))
+        desc = desc.replace("\\", '')
+        cleanDesc = ' '.join([ps.stem(word.lower()) for word in desc.split() if word.lower() not in stopwords])
+        rawDesc = ' '.join(word.lower() for word in desc.split())
         schoolID.append(row['School'])
         courseID.append(row['CourseID'])
-        description.append(cleanDesc)
+        cleanDescription.append(cleanDesc)
+        rawDescription.append(rawDesc)
 
-    cleanDF = pd.DataFrame(list(zip(schoolID, courseID, description)), columns=['School', 'CourseID', 'Descriptions'])
+    cleanDF = pd.DataFrame(list(zip(schoolID, courseID, cleanDescription)), columns=['School', 'CourseID', 'Descriptions'])
+    rawDF = pd.DataFrame(list(zip(schoolID, courseID, rawDescription)), columns=['School', 'CourseID', 'Descriptions'])
     print(cleanDF.head())
-    return (cleanDF)
+    print(rawDF.head())
+    return cleanDF, rawDF
 
 #Get significance weight of each word in the descriptions
 def tfidf(description):
