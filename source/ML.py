@@ -259,15 +259,15 @@ def OldrandForest(features,labels,splits=10):
         rf.fit(X_train, y_train)
         preds = rf.predict(X_test)
         #errors.append(round(np.mean(abs(preds - y_test)),2))
-        i=0
-        for pred in preds:
-            if pred == y_test[i]:
-                accs[count]+=1
-            i +=1
-        accs[count] = (accs[count]/len(preds))*100
-        count += 1
+        # i=0
+        # for pred in preds:
+        #     if pred == y_test[i]:
+        #         accs[count]+=1
+        #     i +=1
+        # accs[count] = (accs[count]/len(preds))*100
         forAc = rf.score(X_test,y_test)
-        accs.append(forAc)
+        accs[count] = forAc
+        count += 1
         print('Mean Accuracy: ' + str(forAc))
         print(confusion_matrix(y_test, preds))
         #vizRFTrees(rf, 5, features)
