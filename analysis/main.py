@@ -32,130 +32,110 @@ nlp = spacy.load("en")
 schools_df = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
 del(schools_df['Unnamed: 0'])
 
-#read in body of knowledge txt file, convert to list
+#read in body of knowledge (bok) txt file, convert to list
 text_file = open("edison.txt", "r")
 bok = text_file.read().split('\n')
-for i in range(len(bok)):
+for i in range(len(bok)): #lowercase each bok term
   bok[i] = bok[i].lower()
 
 #retain only courses pertinent to Data Science
 temp_df = []
-for i in range(len(schools_df)):
+for i in range(len(schools_df)): #for each course
   des = str(schools_df['Descriptions'][i])
   des = des.lower()
   temp_list = []
   terms = []
   print(i)
-  for w in bok:
-    pattern = r'\s'
-    if re.search(pattern+w+pattern,des):
-      if w not in terms:
-        terms.append(w)
-  if len(terms) != 0:
-    temp_list = [schools_df['School'][i], schools_df['CourseID'][i], schools_df['Descriptions'][i],', '.join(terms)]
-    temp_df.append(temp_list)
-ds_schools_df = pd.DataFrame(temp_df)
-ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term']
-print("Creating 'csvs/0713_bok_courses.csv'...")
+  for w in bok: #for each bok term
+    space = r'\s' #regex space pattern
+    if re.search(space+w+space,des): #if the course contains the bok term
+      if w not in terms: #if the bok term is not already in the list for that description
+        terms.append(w) #append bok term
+  if len(terms) != 0: #if at least 1 term is in the description
+    temp_list = [schools_df['School'][i], schools_df['CourseID'][i], schools_df['Descriptions'][i],', '.join(terms)] #append course to new list
+    temp_df.append(temp_list) #append list to new dataframe
+ds_schools_df = pd.DataFrame(temp_df) #create permanent new data frame
+ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term'] #label columns
+print("Creating 'csvs/0713_bok_courses.csv'...") #create csv of data science courses
 ds_schools_df.to_csv('csvs/0713_bok_courses.csv',encoding="utf-8-sig")
 
 #creating new columns with key words
-body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics']
-dsana = ['accuracy metrics','data analytics','data analysis','data analytics assessment',
-         'data lifecycle','data mining','data preparation','graph data analytics',
-         'machine learning','natural language processing','open data','operations research',
-         'optimisation','optimization','predictive analytics','prescriptive analytics',
-         'qualitative analytics','reinforced learning','simulation']
-dseng = ['big data infrastructures','cloud computing','cloud powered services',
-         'collaborative system','continuous improvement cycle','data access',
-         'data anonymisation','data driven','data handling','data lifecycle',
-         'data science engineering','data security','data warehouse solution',
-         'devops','dmp','engineering principles','etl','extract transform load',
-         'federated access control','ipr protection','nosql','olap','oltp',
-         'relational databases','simulation','sql','systems software']
-dman = ['data architecture','data archive services','data curation','data factories',
-        'data formats','data governance strategy','data handling','data integration',
-        'data lifecycle','data management','data management plan','data modeling',
-        'data modeling design','data provenance','data registries','data storage systems',
-        'data types','digital libraries','etl','extract transform load','linked data',
-        'meta data','metadata','meta-data','olap','oltp','open access','open data',
-        'open science','operational models','pid']
-remeprma = ['data collection','data driven','data lifecycle','data quality evaluation',
-            'project management','quality evaluation','research methods','team management',
-            'use cases analysis']
-busana = ['agile data driven','bpm','business analytics','business intelligence',
-          'cognitive technologies','crp','customer relations management',
-          'data marketing technologies','data driven marketing','data integration analytics',
-          'data warehouses technologies','econometrics','enterprises','open data',
-          'optimization','processes management','use cases analysis','user experience','ux']
-bok_cats = {}
-bodies = []
-bodies.append(dsana)
-bodies.append(dseng)
-bodies.append(dman)
-bodies.append(remeprma)
-bodies.append(busana)
+body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics'] #overall headings
+dsana = ['accuracy metrics','data analytics','data analysis','data analytics assessment', 'data lifecycle','data mining','data preparation','graph data analytics',
+         'machine learning','natural language processing','open data','operations research', 'optimisation','optimization','predictive analytics','prescriptive analytics',
+         'qualitative analytics','reinforced learning','simulation'] #keywords for this category
+dseng = ['big data infrastructures','cloud computing','cloud powered services','collaborative system','continuous improvement cycle','data access',
+         'data anonymisation','data driven','data handling','data lifecycle', 'data science engineering','data security','data warehouse solution',
+         'devops','dmp','engineering principles','etl','extract transform load','federated access control','ipr protection','nosql','olap','oltp',
+         'relational databases','simulation','sql','systems software'] #keywords for this category
+dman = ['data architecture','data archive services','data curation','data factories', 'data formats','data governance strategy','data handling','data integration',
+        'data lifecycle','data management','data management plan','data modeling', 'data modeling design','data provenance','data registries','data storage systems',
+        'data types','digital libraries','etl','extract transform load','linked data', 'meta data','metadata','meta-data','olap','oltp','open access','open data',
+        'open science','operational models','pid'] #keywords for this category
+remeprma = ['data collection','data driven','data lifecycle','data quality evaluation','project management','quality evaluation','research methods','team management',
+            'use cases analysis'] #keywords for this category
+busana = ['agile data driven','bpm','business analytics','business intelligence', 'cognitive technologies','crp','customer relations management',
+          'data marketing technologies','data driven marketing','data integration analytics', 'data warehouses technologies','econometrics','enterprises','open data',
+          'optimization','processes management','use cases analysis','user experience','ux'] #keywords for this category
+bok_cats = {} #dictionary to hold bok categories
+body_keywords = [] #list to hold bok keywords
+#append keyword lists to body_keywords
+body_keywords.append(dsana)
+body_keywords.append(dseng)
+body_keywords.append(dman)
+body_keywords.append(remeprma)
+body_keywords.append(busana)
 i=0
-for i in range(len(body)):
-  bok_cats[body[i]] = bodies[i]
+for i in range(len(body)): #assign each keyword list to their respective category name
+  bok_cats[body[i]] = body_keywords[i]
 
 
-ellie = ['Website','Data Visualization','Statistics','Experimental Design','Programming','Algorithms/Modeling/AI','Data Collection','Data Sources','Data Types','Data Analysis','Application','Simulation','Software','Lab']
-website = ['information technology','web design','website','network','webpage','web',
-           'shiny']
-datavis = ['graph','graphs','chart','charts','color theory','barplot','bar plot','visualization',
-           'visualisation','visualizations','visual','visuals','box plot','boxplot',
-           'color','colors','ggplot2','dashboard','boxplot','barplot','pie chart','piechart','tableau']
-statistics = ['anova','linear regression','chi squared','probability',
-              'hypothesis test','regression','statistics','statistic','distribution',
-              'variability','variance','percentile','standard deviation','mean',
-              'median','mode','average','trendline','trend line']
-resmeth = ['research methods','research','research process','design of experiment',
-           'design of experiments','research question','design study','design studies',
-           'research design']
-proglang = ['r','python','c++','mysql','c','spss','sql','nosql','programming language',
-            'programming languages','tools','sas','programming','pandas','package',
-            'library','coding','code']
-algmodai = ['artificial intelligence','ai','algorithm','algorithms','model','models','modeling',
-            'machine learning','predict','natural language processing','nlp',
-            'topic model','supervised learning','unsupervised learning',
-            'neural network','k-means cluster','clustering','decision tree']
-collect = ['data collection','collect','sample size','raw data','collection','collections']
-sources = ['data source','data sources','retrieve','database','databases','import']
-types = ['medicalpharmecutical','qualitative','quantitative','econometrics',
-         'public health','big data','large volumes']
-anal = ['data analysis','analyze data','analysis','summary','summarize','summarizing']
-applic = ['communication','results','interpretation','application',
-          'data representation','presentation']
-sim = ['simulation','simulations']
-software = ['software','github','rstudio','excel','microsoft','gis','colab','jupyter',
-            'tableau']
-lab = ['lab','labs','laboratory']
-ellie_cats = {}
-ellies = []
-ellies.append(website)
-ellies.append(datavis)
-ellies.append(statistics)
-ellies.append(resmeth)
-ellies.append(proglang)
-ellies.append(algmodai)
-ellies.append(collect)
-ellies.append(sources)
-ellies.append(types)
-ellies.append(anal)
-ellies.append(applic)
-ellies.append(sim)
-ellies.append(software)
-ellies.append(lab)
+diff = ['Website','Data Visualization','Statistics','Experimental Design','Programming','Algorithms/Modeling/AI','Data Collection','Data Sources','Data Types','Data Analysis','Application','Simulation','Software','Lab']
+website = ['information technology','web design','website','network','webpage','web','shiny'] #keywords for this category
+datavis = ['graph','graphs','chart','charts','color theory','barplot','bar plot','visualization', 'visualisation','visualizations','visual','visuals','box plot','boxplot',
+           'color','colors','ggplot2','dashboard','boxplot','barplot','pie chart','piechart','tableau'] #keywords for this category
+statistics = ['anova','linear regression','chi squared','probability', 'hypothesis test','regression','statistics','statistic','distribution',
+              'variability','variance','percentile','standard deviation','mean','median','mode','average','trendline','trend line'] #keywords for this category
+resmeth = ['research methods','research','research process','design of experiment', 'design of experiments','research question','design study','design studies',
+           'research design'] #keywords for this category
+proglang = ['r','python','c++','mysql','c','spss','sql','nosql','programming language', 'programming languages','tools','sas','programming','pandas','package',
+            'library','coding','code'] #keywords for this category
+algmodai = ['artificial intelligence','ai','algorithm','algorithms','model','models','modeling', 'machine learning','predict','natural language processing','nlp',
+            'topic model','supervised learning','unsupervised learning', 'neural network','k-means cluster','clustering','decision tree'] #keywords for this category
+collect = ['data collection','collect','sample size','raw data','collection','collections'] #keywords for this category
+sources = ['data source','data sources','retrieve','database','databases','import'] #keywords for this category
+types = ['medicalpharmecutical','qualitative','quantitative','econometrics', 'public health','big data','large volumes'] #keywords for this category
+analy = ['data analysis','analyze data','analysis','summary','summarize','summarizing'] #keywords for this category
+applic = ['communication','results','interpretation','application', 'data representation','presentation'] #keywords for this category
+sim = ['simulation','simulations'] #keywords for this category
+software = ['software','github','rstudio','excel','microsoft','gis','colab','jupyter', 'tableau'] #keywords for this category
+lab = ['lab','labs','laboratory'] #keywords for this category
+diff_cats = {} #dictionary to hold diff categories
+diff_keywords = [] #list to hold diff keywords
+#append keyword lists to diff_keywords
+diff.append(website)
+diff.append(datavis)
+diff.append(statistics)
+diff.append(resmeth)
+diff.append(proglang)
+diff.append(algmodai)
+diff.append(collect)
+diff.append(sources)
+diff.append(types)
+diff.append(analy)
+diff.append(applic)
+diff.append(sim)
+diff.append(software)
+diff.append(lab)
 i=0
-for i in range(len(ellie)):
-  ellie_cats[ellie[i]] = ellies[i]
+for i in range(len(ellie)): #assign each keyword list to their respective category name
+  diff_cats[ellie[i]] = diff_keywords[i]
 
 #adding keywords to columns
 for b in body:
   ds_schools_df[b] = 0
-for e in ellie:
-  ds_schools_df[e] = 0
+for d in diff:
+  ds_schools_df[d] = 0
 
 j=0
 for j in range(len(ds_schools_df)):
