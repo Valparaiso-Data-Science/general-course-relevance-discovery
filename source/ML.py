@@ -30,6 +30,19 @@ import pandas as pd
 from vectorize import newClean, vectorizer, cleanVectorizer, labelTargetsdf
 
 def preProcess():
+    '''
+    This process was moved from main.py into here since this process is only 
+    necessary for machine learning. Please see the respective functions in 
+    vectorize.py to know what they do. 
+    
+    There is a couple of line added in right before the return statement that 
+    allows you to see the percentage of courses that were classified as data 
+    science. This is important to check if your accuracy is as good as you think.
+    For example, if 3% are data science courses then having a 97% accuracy is 
+    pretty good, but you need to check if your confusion matrix shows that the 
+    allgorithm straight guessed non-data-science courses thus yielding a 97% 
+    accuracy. 
+    '''
     cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
 
     print("\tcleaned")
@@ -73,6 +86,11 @@ def stratKFold(features,labels,splits=10):
     The goal is to convert to using a near miss algorithm to conduct the
     undersampling. The switch to random undersampling was done to save time
     when debugging the saving of the indices.
+    
+    Basically everything that is commented out can be removed from the code. 
+    We just never got around to doing this. We also, in case you cannot tell,
+    tried using the same for-loop format in multiple places, so we just copied
+    and pasted in here. 
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -132,7 +150,9 @@ def randForest(features,labels):
     There is currently an index out of bounds error that is in the process of 
     being debugged. The good news is that fold_iterations loads in. 
 
-
+    If you end up using this code be sure to save the results to the txt file. 
+    The txt file is there to allow for the code to be ran on a computer overnight
+    and finish running at any time, while still allowing you to see your results.
     '''
     features.reset_index(inplace=True)
     #labels.reset_index(inplace=True)
@@ -193,7 +213,8 @@ def svm(features,labels,splits):
     this code is looking to be used, one must first change the format to look
     more like randForest(). Another reason we save the indices was to allow us
     to be able to do different machine-learning algorithms using the same
-    test-train splits made by the k-fold function.
+    test-train splits made by the k-fold function. So, in theory this function
+    when reformatted should easily be ran using the saved indices.
 
     '''
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -237,9 +258,17 @@ def OldrandForest(features,labels,splits=10):
         Array of labels.
     splits : int
         Number of splits to use in the stratified k-fold.
+        
     Returns
     -------
     None.
+    
+    Notes
+    -----
+    This is an old version of the random forest code that does not seperate
+    out the process of data splitting+undersampling from the random forest. 
+    This version works, unlike the other version, but it takes a very long time
+    to run. 
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
@@ -319,6 +348,36 @@ def undersample(features, labels, split=0.5):
     return newLabels
 
 def Oldundersample(features, labels, split=0.5):
+    '''
+    Parameters
+    ----------
+    features : list
+        Array of feature data.
+    labels : list
+        Array of labels.
+    split : float, optional
+        This is the ratio of minority class samples to
+        the resampled majority class samples. The default is 0.5. Currently
+        only used when we use random undersampling. It can, however, be used
+        for near miss.
+
+    Returns
+    -------
+    newLabels : list
+        The new set of labels after running near miss.
+    
+    newFeatures: list
+        See above.
+        
+    Notes
+    -----
+    This is an old version of the undersample code. Again, it takes a while to 
+    run given that it calculates distances for many points in a multidimensional
+    space, but it works. Print statements were added for debugging. Feel free 
+    to take them out or comment them out. There is also the line commented out 
+    for random under sampling. If you wish to use this you must change nmus to 
+    rus where it says .fit_resample()
+    '''
     #rus = RandomUnderSampler(sampling_strategy=split, random_state=19)
     nmus = NearMiss(version=3,sampling_strategy={0:sum(labels),1:sum(labels)})
     newFeatures, newLabels = nmus.fit_resample(features, labels)
@@ -347,8 +406,8 @@ def vizRFTrees(rf, ntree,features):
     Notes
     -----
     This is not ready to be used for multiple reasons:
-        1. Random Forest code doesn't even work yet
-        2. Because of the point above, we are not sure this works. 
+        1. Random Forest code doesn't even work yet.
+        2. Because of the point above, we are not sure if this function works. 
 
     '''
     outfile='randFor_Tree'+ntree+'.dot'
@@ -356,10 +415,13 @@ def vizRFTrees(rf, ntree,features):
                     filled=True)
     call(['dot', '-Tpng', outfile, '-o', 'tree.png', '-Gdpi=600'])
     Image(filename='tree.png')
-
-# decisionTree and visTree were from the summer before ours (ie nathan wrote it)
-# Random forest was made to upgrade decision tree
-# vizRFTrees was made to replace visTree
+'''
+decisionTree and visTree were from the summer before ours (ie nathan wrote it)
+    
+Random forest was made to upgrade decision tree
+    
+vizRFTrees was made to replace visTree
+'''
 def decisionTree(feature_train,answer_train,depth):
 
     #forestClassifier = RandomForestClassifier(n_estimators=depth)
