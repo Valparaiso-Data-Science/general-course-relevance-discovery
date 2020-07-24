@@ -138,20 +138,20 @@ for d in diff:
   ds_schools_df[d] = 0
 
 j=0
-for j in range(len(ds_schools_df)):
-  for b in bok_cats:
+for j in range(len(ds_schools_df)): #for each description
+  for b in bok_cats: #for each overall category in bok
     i = 0
-    for i in range(len(bok_cats[b])):
+    for i in range(len(bok_cats[b])): #for each keyword
       comp = str(ds_schools_df['Descriptions'][j]).lower()
-      if re.search('\s'+re.escape(bok_cats[b][i])+'\s',comp):
-        ds_schools_df[b][j] = 1
+      if re.search('\s'+re.escape(bok_cats[b][i])+'\s',comp): #search for keyword in description
+        ds_schools_df[b][j] = 1 #assign value of 1 if keyword exists in description
 
-  for e in ellie_cats:
+  for d in diff_cats: #for each overall category in diff
     i = 0
-    for i in range(len(ellie_cats[e])):
+    for i in range(len(diff_cats[d])): #for each keyword
       comp = str(ds_schools_df['Descriptions'][j]).lower()
-      if re.search('\s'+re.escape(ellie_cats[e][i])+'\s',comp):
-        ds_schools_df[e][j] = 1
+      if re.search('\s'+re.escape(diff_cats[d][i])+'\s',comp): #search for keyword in description
+        ds_schools_df[e][j] = 1 #assing value of 1 if keyword exists in description
 
 #creating summation column
 ds_schools_df['Sum'] = ds_schools_df.sum(axis=1)
@@ -180,6 +180,7 @@ others = list(set(others))
 others.sort()
 
 #remove items from "others" already in "bok"
+#this helps ensure that bok keywords can get a higher weight than non bok keywords 
 i = len(others) - 1
 while i >=0:
   if others[i] in bok:
@@ -191,7 +192,6 @@ while i >=0:
 stop_words = list(stopwords.words('english'))
 nlp = spacy.load('en', disable=['parser', 'ner'])
 stop_words.append('-PRON-')
-#find way to remove all numbers
 first_stops = ['cr','ul','ii','cog','pp','ps','geog','cosc','biol','el','sesp',
                'eecs','oba','phys','phy','mth','cmsc','nur','ce','cs','iii'] #unkown/unnecessary abbreviations
 second_stops = ['make','impact','apply','change','involve','reside','vary','may',
@@ -278,6 +278,7 @@ dm = gower.gower_matrix(ds_schools_df)
 x1 = np.array(ds_schools_df['Sum'])
 x2 = np.array(ds_schools_df['Weights'])
 
+#plot points
 plt.plot()
 plt.xlim([0, 20])
 plt.ylim([0, 1])
