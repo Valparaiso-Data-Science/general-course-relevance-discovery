@@ -1,5 +1,5 @@
 spacy==2.2.4
-lxml==4.5.1
+lxml==4.6.3
 numpy==1.18.5
 pydotplus==2.0.2
 wordninja==2.0.0
