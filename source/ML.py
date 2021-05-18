@@ -125,9 +125,11 @@ def stratKFold(features,labels,splits=10):
         "fold_iterations" will remain the same (recall that this will now only
         include the last 9 folds), and a new file to save "pred_fold" will be 
         created.
+        
+        Random states were also changed so that they are the same. 
     '''
 
-    skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
+    skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 2021)
     # skf.split(features,labels)
     # errors = []
     pred_fold = [0] #This was added to save the indices of the first fold
@@ -199,35 +201,100 @@ def randForest(features,labels):
     If you end up using this code be sure to save the results to the txt file. 
     The txt file is there to allow for the code to be ran on a computer overnight
     and finish running at any time, while still allowing you to see your results.
+    
+    UPDATE (as of 5/18/2021): 
+        We needed to rebuild the random forest and we are now building/training
+        it using only Smith and Valpo. From here we plan on splitting the data
+        using the 10 stratified folds, and using 9 of those folds to build the 
+        model. After the model is built we will then predict whether or not a 
+        course is data science using the random forest model. The first 
+        prediction will be done on the witheld fold, and the second round of 
+        predictions will be done on all of Brown. 
+        
+        Changing here is the for loop which will no longer be used. Instead a 
+        new for loop will be created to concatenate the 9 folds. Test/Train 
+        splits in those folds are being ignored. Then the random forest is 
+        being built on those 9 folds. Then, the witheld fold will be predicted 
+        on using the random forest. A line is also added to subset AllSchools.csv
+        to select only the courses from Brown. Then the random forest will 
+        make predictions on the courses from Brown. The results will be saved 
+        to a text file. Also, the same lines from the stratified k-fold function
+        that subset to get Smith and Valpo are also added again. This is 
+        necessary because "features" and "labels" from the parameters are based 
+        on AllSchools.csv. This also ensures no errors when using the indices. 
+        
+        Random states were also changed so that they are the same. 
     '''
+    brown_feat = features.loc[features["School"]=="BrownSUPERTRIMMED"]
+    brown_label = labels.loc[labels["School"]=="BrownSUPERTRIMMED"]
+    #The lines above get the features and labels for Brown
+    features = features.loc[features["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #The line above is added to subset AllSchools.csv and only use Valpo and Smith
+    labels = labels.loc[labels["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     features.reset_index(inplace=True)
     #labels.reset_index(inplace=True)
     fold_iterations = load('fold_iterations.npy',allow_pickle=True)
-    accs = [0]*len(fold_iterations)
-    rf = RandomForestClassifier(n_estimators = 100, random_state = 42)
-    count = 0
+    pred_fold = load('pred_fold.npy',allow_pickle=True)
+    accs = [0]*len(fold_iterations) #This is to be used with the original for loop
+    rf = RandomForestClassifier(n_estimators = 100, random_state = 2021)
+    train_x = [] #Created to hold all train data from the 9 folds
+    train_y = [] #Created to hold all train data from the 9 folds
+    count = 0 #Used with the original for loop
     for fold in fold_iterations:
-        print(fold[0].tolist())
-        print('Max of fold[0]: '+ str(max(fold[0].tolist())))
-        print()
-        print(fold[1].tolist())
-        print('Max of fold[1]: '+ str(max(fold[1].tolist())))
-        print('len of features: '+ str(len(features)))
-        print('len of labels: ' + str(len(labels)))
-        X_train = features.iloc[fold[0].tolist()]
-        y_train = labels.iloc[fold[0].tolist()]
-        X_test = features.iloc[fold[1].tolist()]
-        y_test = labels.iloc[fold[1].tolist()]
-        rf.fit(X_train, y_train)
-        preds = rf.predict(X_test)
-        #errors.append(round(np.mean(abs(preds - y_test)),2))
-        forAc = rf.score(X_test,y_test)
-        accs[count] = forAc
-        print('Mean Accuracy for forest #' + str(count) +': ' + str(forAc))
-        print(confusion_matrix(y_test, preds))
-        count += 1
-    avgAcc = sum(accs)/len(accs)
-    print('Average Model Accuracy: '+ str(avgAcc))
+        ###Below is the original for loop#####
+    #     print(fold[0].tolist())
+    #     print('Max of fold[0]: '+ str(max(fold[0].tolist())))
+    #     print()
+    #     print(fold[1].tolist())
+    #     print('Max of fold[1]: '+ str(max(fold[1].tolist())))
+    #     print('len of features: '+ str(len(features)))
+    #     print('len of labels: ' + str(len(labels)))
+    #     X_train = features.iloc[fold[0].tolist()]
+    #     y_train = labels.iloc[fold[0].tolist()]
+    #     X_test = features.iloc[fold[1].tolist()]
+    #     y_test = labels.iloc[fold[1].tolist()]
+    #     rf.fit(X_train, y_train)
+    #     preds = rf.predict(X_test)
+    #     #errors.append(round(np.mean(abs(preds - y_test)),2))
+    #     forAc = rf.score(X_test,y_test)
+    #     accs[count] = forAc
+    #     print('Mean Accuracy for forest #' + str(count) +': ' + str(forAc))
+    #     print(confusion_matrix(y_test, preds))
+    #     count += 1
+    # avgAcc = sum(accs)/len(accs)
+    # print('Average Model Accuracy: '+ str(avgAcc))
+        ###END OF ORIGINAL LOOP#####
+        
+        train_x.append(features.iloc[fold[0].tolist()]) 
+        train_y.append(labels.iloc[fold[0].tolist()])
+        train_x.append(features.iloc[fold[1].tolist()])
+        train_y.append(labels.iloc[fold[1].tolist()])
+        #The lines above append all 9 folds together 
+   
+    rf.fit(train_x,train_y) #Fits the model using the 9 folds
+    
+    test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
+    test_y = labels.iloc[pred_fold[1].tolist()] #test set from witheld fold
+    fold_prediction = rf.predict(test_x) #Make the model predict using the witheld fold
+    fold_conf_matrix = confusion_matrix(test_y,fold_prediction) #See how the model did on that fold
+    fold_accuracy = rf.score(test_x,test_y) #Accuracy of the witheld fold
+    
+    brown_prediction = rf.predict(brown_feat) #Make the model predict using Brown
+    brown_conf_matrix = confusion_matrix(brown_label,brown_prediction) #See how the model did on Brown
+    brown_accuracy = rf.score(brown_feat,brown_label) #Accuracy of Brown
+    
+    results = open('../source/RandForestResult.txt','w')
+    results.write("THE WITHELD FOLD: \n")
+    results.write("\t CONFUSION MATRIX: \n")
+    results.write("\t \t" + str(fold_conf_matrix) + "\n")
+    results.write("\t ACCURACY: \n")
+    results.write("\t \t" + str(fold_accuracy) + "\n\n")
+    results.write("BROWN:\n")
+    results.write("\t CONFUSION MATRIX: \n")
+    results.write("\t \t" + str(brown_conf_matrix) + "\n")
+    results.write("\t ACCURACY: \n")
+    results.write("\t \t" + str(brown_accuracy) + "\n\n")
         #vizRFTrees(rf, 5, features)
     ####################################################
     # count = 0
