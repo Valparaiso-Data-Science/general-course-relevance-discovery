@@ -135,9 +135,11 @@ def stratKFold(features,labels,splits=10):
     pred_fold = [0] #This was added to save the indices of the first fold
     fold_iterations = [0]*9 #Changed to 9 because the first fold is being witheld
     count=0
-    features = features.loc[features["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    print("Keys for features:" + str(features.keys()))
+    print("Keys for labels:" + str(labels.keys()))
+    features = features.loc[features['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
-    labels = labels.loc[labels["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    labels = labels.loc[labels['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     features.reset_index(inplace=True)
     for train_index, test_index in skf.split(features, labels):
