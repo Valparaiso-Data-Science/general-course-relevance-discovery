@@ -42,6 +42,20 @@ def preProcess():
     pretty good, but you need to check if your confusion matrix shows that the 
     allgorithm straight guessed non-data-science courses thus yielding a 97% 
     accuracy. 
+    
+    UPDATE (as of 5/18/2021): 
+        We needed to rebuild the random forest and we are now building/training
+        it using only Smith and Valpo. From here we plan on splitting the data
+        using the 10 stratified folds, and using 9 of those folds to build the 
+        model. After the model is built we will then predict whether or not a 
+        course is data science using the random forest model. The first 
+        prediction will be done on the witheld fold, and the second round of 
+        predictions will be done on all of Brown. 
+        
+        Nothing is being changed here, but this update will be in all relavent 
+        functions. If anything in the code is to change it will be documented 
+        in the documentation as well as in comments next to changed or added 
+        code. 
     '''
     cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
 
@@ -91,13 +105,38 @@ def stratKFold(features,labels,splits=10):
     We just never got around to doing this. We also, in case you cannot tell,
     tried using the same for-loop format in multiple places, so we just copied
     and pasted in here. 
+    
+    UPDATE (as of 5/18/2021): 
+        We needed to rebuild the random forest and we are now building/training
+        it using only Smith and Valpo. From here we plan on splitting the data
+        using the 10 stratified folds, and using 9 of those folds to build the 
+        model. After the model is built we will then predict whether or not a 
+        course is data science using the random forest model. The first 
+        prediction will be done on the witheld fold, and the second round of 
+        predictions will be done on all of Brown. 
+        
+        Being added here is a line that subsets "features" and "labels" so that 
+        they only include Smith and Valpo. Also being changed are the saved
+        indices. "fold_iterations" will only include the last 9 folds as this 
+        is what the model is being built on. The indices of the first fold will
+        be saved in a new variable, "pred_fold", named as such since it will be 
+        the fold that gets predicted. Both will be saved so that the model can
+        be built without having to run this part everytime. The file for saving
+        "fold_iterations" will remain the same (recall that this will now only
+        include the last 9 folds), and a new file to save "pred_fold" will be 
+        created.
     '''
 
     skf = StratifiedKFold(n_splits=splits,shuffle=True, random_state = 19)
     # skf.split(features,labels)
     # errors = []
-    fold_iterations = [0]*10
+    pred_fold = [0] #This was added to save the indices of the first fold
+    fold_iterations = [0]*9 #Changed to 9 because the first fold is being witheld
     count=0
+    features = features.loc[features["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #The line above is added to subset AllSchools.csv and only use Valpo and Smith
+    labels = labels.loc[labels["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     features.reset_index(inplace=True)
     for train_index, test_index in skf.split(features, labels):
         indices = [0]*2
@@ -117,10 +156,17 @@ def stratKFold(features,labels,splits=10):
         train_index = np.append(maj_train_index,ds_i)
         print("NEW TRAIN: ", train_index)
         indices[0]=train_index
-        fold_iterations[count]=indices
+        if count != 0: #Since the first fold is being witheld, this if statement
+                       #is being added to only do the normal process on the other 
+                       #9 folds
+            fold_iterations[count-1]=indices #added the "-1" to account for the first fold being witheld
+        else:
+            pred_fold[count] = indices #The entire else statement has been added to save the first fold
         count+=1
     fold_iterations = asarray(fold_iterations)
     save('fold_iterations.npy',fold_iterations)
+    pred_fold = asarray(pred_fold)
+    save('pred_fold.npy',pred_fold)
     print(fold_iterations)
 
 def randForest(features,labels):
