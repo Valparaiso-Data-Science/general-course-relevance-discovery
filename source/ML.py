@@ -174,7 +174,7 @@ def stratKFold(features,labels,splits=10):
     save('fold_iterations.npy',fold_iterations)
     pred_fold = asarray(pred_fold)
     save('pred_fold.npy',pred_fold)
-    print(fold_iterations)
+    # print(fold_iterations)
 
 def randForest(features,labels,extra_df):
     '''
@@ -224,7 +224,8 @@ def randForest(features,labels,extra_df):
         predictions on the courses from Brown. The results will be saved to a 
         text file.  
         
-        Random states were also changed so that they are the same. 
+        Random states were also changed so that they are the same.
+        
     '''
     # brown_feat = features.loc[features["School"]=="BrownSUPERTRIMMED"]
     # brown_label = labels.loc[labels["School"]=="BrownSUPERTRIMMED"]
@@ -282,10 +283,14 @@ def randForest(features,labels,extra_df):
     for i in fold_1:
         train_x.append(features.iloc[i])
         train_y.append(labels.iloc[i])
-    print("Train X:")
-    print(train_x)
-    print("Train Y:")
-    print(train_y)
+    print("Fold 0:")
+    print(fold_0)
+    print("Fold 1: ")
+    print(fold_1)
+    # print("Train X:")
+    # print(train_x)
+    # print("Train Y:")
+    # print(train_y)
     rf.fit(train_x,train_y) #Fits the model using the 9 folds
     
     test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
