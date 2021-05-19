@@ -173,7 +173,7 @@ def cleanVectorizer(df):
     #print(count)
     #list.append(df.index)
     cleanDF=df[list].copy()
-    cleanDF["curricula relevance"] = 0 #This was originally set to False (may have to change back)
+    cleanDF["curricula relevance"] = False #This was originally set to False (may have to change back)
 
     return(cleanDF)
 
@@ -190,11 +190,11 @@ def labelTargetsdf(df):
         #Keyword not found at all (so no column to begin with)
         except:
  	        pass
-    for i, row in df.iterrows():            #Added this loop to only keep 
-        if row["curricula relevance"] < 2:  #courses with more than one data
-            row["curricula relevance"] = False  #science topic being taught
-        else:
-            row["curriula relevance"] = True
+    # for i, row in df.iterrows():            #Added this loop to only keep 
+    #     if row["curricula relevance"] < 2:  #courses with more than one data
+    #         row["curricula relevance"] = False  #science topic being taught
+    #     else:
+    #         row["curriula relevance"] = True
 
 #USE EVERYTHING UNDER HERE
     # for topic in vocab:
