@@ -137,7 +137,9 @@ def vectorizer(courseDesc_df):
         stem_topic = ' '.join(w for w in stem_words)
         print(stem_topic)
         courseFeatures_df[stem_topic] = [0]*len(courseFeatures_df)
+        print("i should be reset")
         for i,row in courseDesc_df.iterrows():
+            print("i: " + str(i))
             if re.search(stem_topic,row['Descriptions']) is not None:
                 courseFeatures_df.loc[courseFeatures_df.index[i],stem_topic] = 1
 
