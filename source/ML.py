@@ -290,8 +290,12 @@ def randForest(features,labels,extra_df):
     print(type(fold_1))
     print("Train X:")
     print(type(train_x))
+    train_x_csv = pd.DataFrame(train_x)
+    train_x_csv.to_csv(const.CSV_DIR + "/" + "Train_X.csv", encoding="utf-8-sig")
     print("Train Y:")
     print(type(train_y))
+    train_y_csv = pd.DataFrame(train_y)
+    train_y_csv.to_csv(const.CSV_DIR + "/" + "Train_Y.csv", encoding="utf-8-sig")
     rf.fit(train_x,train_y) #Fits the model using the 9 folds
     
     test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
