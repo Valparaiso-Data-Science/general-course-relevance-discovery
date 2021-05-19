@@ -71,6 +71,7 @@ def preProcess():
     labeled_df = labelTargetsdf(pruned_df)
     print("\tfound targets")
     #%%
+    labeled_df.to_csv(const.CSV_DIR + "/" + "ValpoAndSmith_LabeledAndVecorized.csv", encoding="utf-8-sig")
     features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
     labels = labeled_df["curricula relevance"]
     print(labeled_df.loc[labeled_df["curricula relevance"]==True])
@@ -284,13 +285,13 @@ def randForest(features,labels,extra_df):
         train_x.append(features.iloc[i])
         train_y.append(labels.iloc[i])
     print("Fold 0:")
-    print(fold_0)
+    print(type(fold_0))
     print("Fold 1: ")
-    print(fold_1)
+    print(type(fold_1))
     print("Train X:")
-    print(train_x)
+    print(type(train_x))
     print("Train Y:")
-    print(train_y)
+    print(type(train_y))
     rf.fit(train_x,train_y) #Fits the model using the 9 folds
     
     test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
