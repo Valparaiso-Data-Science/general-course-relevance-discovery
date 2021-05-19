@@ -288,9 +288,9 @@ def randForest(features,labels,extra_df):
     print("Fold 1: ")
     print(fold_1)
     print("Train X:")
-    # print(train_x)
-    # print("Train Y:")
-    # print(train_y)
+    print(train_x)
+    print("Train Y:")
+    print(train_y)
     rf.fit(train_x,train_y) #Fits the model using the 9 folds
     
     test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
