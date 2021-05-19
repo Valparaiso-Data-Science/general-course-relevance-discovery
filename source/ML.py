@@ -61,6 +61,8 @@ def preProcess():
     subset_df = cleaned_df.loc[cleaned_df['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     brown_df = cleaned_df.loc[cleaned_df['School']=='BrownSUPERTRIMMED']
     
+    subset_df.to_csv(const.CSV_DIR + "/" + "ValpoAndSmith.csv", encoding="utf-8-sig")
+    
     print("\tcleaned")
     vect_df = vectorizer(subset_df)
     print("\tvect")
@@ -278,12 +280,12 @@ def randForest(features,labels,extra_df):
     fold_conf_matrix = confusion_matrix(test_y,fold_prediction) #See how the model did on that fold
     fold_accuracy = rf.score(test_x,test_y) #Accuracy of the witheld fold
     
-    brown_feat = extra_df.drop("curricula relevance",axis = 1).astype("bool")
-    brown_label = extra_df["curricula relevance"]
+    # brown_feat = extra_df.drop("curricula relevance",axis = 1).astype("bool")
+    # brown_label = extra_df["curricula relevance"]
     
-    brown_prediction = rf.predict(brown_feat) #Make the model predict using Brown
-    brown_conf_matrix = confusion_matrix(brown_label,brown_prediction) #See how the model did on Brown
-    brown_accuracy = rf.score(brown_feat,brown_label) #Accuracy of Brown
+    # brown_prediction = rf.predict(brown_feat) #Make the model predict using Brown
+    # brown_conf_matrix = confusion_matrix(brown_label,brown_prediction) #See how the model did on Brown
+    # brown_accuracy = rf.score(brown_feat,brown_label) #Accuracy of Brown
     
     results = open('../source/RandForestResult.txt','w')
     results.write("THE WITHELD FOLD: \n")
@@ -291,11 +293,12 @@ def randForest(features,labels,extra_df):
     results.write("\t \t" + str(fold_conf_matrix) + "\n")
     results.write("\t ACCURACY: \n")
     results.write("\t \t" + str(fold_accuracy) + "\n\n")
-    results.write("BROWN:\n")
-    results.write("\t CONFUSION MATRIX: \n")
-    results.write("\t \t" + str(brown_conf_matrix) + "\n")
-    results.write("\t ACCURACY: \n")
-    results.write("\t \t" + str(brown_accuracy) + "\n\n")
+    # results.write("BROWN:\n")
+    # results.write("\t CONFUSION MATRIX: \n")
+    # results.write("\t \t" + str(brown_conf_matrix) + "\n")
+    # results.write("\t ACCURACY: \n")
+    # results.write("\t \t" + str(brown_accuracy) + "\n\n")
+    results.close()
         #vizRFTrees(rf, 5, features)
     ####################################################
     # count = 0
