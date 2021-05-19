@@ -126,8 +126,8 @@ def vectorizer(courseDesc_df):
     # print("Vectors: ")
     # print(vectors)
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
-    print("CourseDesc_DF: " + courseDesc_df.size())
-    print("CourseFeatures_DF: " + courseFeatures_df.size())
+    print("CourseDesc_DF: " + str(len(courseDesc_df.index)))
+    print("CourseFeatures_DF: " + str(len(courseFeatures_df.index)))
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
     for topic in vocab:
         words = topic.split()
