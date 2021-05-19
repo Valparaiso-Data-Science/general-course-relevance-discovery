@@ -276,10 +276,12 @@ def randForest(features,labels,extra_df):
         fold_0.append(fold[0])
         fold_1.append(fold[1])
         #The lines above append all 9 folds together 
-    train_x = features.iloc[fold_0.tolist()]
-    train_x.append(labels.iloc[fold_0.tolist()])
-    train_y = features.iloc[fold_1.tolist()]
-    train_y.append(labels.iloc[fold_1.tolist()])
+    for i in fold_0:
+        train_x.append(features.iloc[i])
+        train_y.append(labels.iloc[i])
+    for i in fold_1:
+        train_x.append(features.iloc[i])
+        train_y.append(labels.iloc[i])
     print("Train X:")
     print(train_x)
     print("Train Y:")
