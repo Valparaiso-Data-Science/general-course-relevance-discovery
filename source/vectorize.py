@@ -123,7 +123,8 @@ def vectorizer(courseDesc_df):
     # courseDesc_df = courseDesc_df.sample(n=5000,random_state=14)
     print(type(courseDesc_df))
     vectors = vectorizer.fit_transform(courseDesc_df['Descriptions']).toarray()
-    
+    print("Vectors: ")
+    print(vectors)
     courseFeatures_df = pd.DataFrame(vectors, columns = vectorizer.get_feature_names(),index=courseDesc_df["CourseID"])
     
     vocab = [line.rstrip('\n').lower() for line in open('../bok.txt')]
