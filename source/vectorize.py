@@ -142,7 +142,7 @@ def vectorizer(courseDesc_df):
         for i,row in courseDesc_df.iterrows():
             # print("i: " + str(i))
             if re.search(stem_topic,row['Descriptions']) is not None:
-                courseFeatures_df.loc[courseFeatures_df.index[i],stem_topic] = 1
+                courseFeatures_df.loc[courseFeatures_df.index[(i%(len(courseFeatures_df.index)))],stem_topic] = 1
 
     return courseFeatures_df
 '''
