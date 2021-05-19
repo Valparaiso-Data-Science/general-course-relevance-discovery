@@ -173,7 +173,7 @@ def stratKFold(features,labels,splits=10):
     save('pred_fold.npy',pred_fold)
     print(fold_iterations)
 
-def randForest(features,labels):
+def randForest(features,labels,extra_df):
     '''
     Parameters
     ----------
@@ -277,6 +277,9 @@ def randForest(features,labels):
     fold_prediction = rf.predict(test_x) #Make the model predict using the witheld fold
     fold_conf_matrix = confusion_matrix(test_y,fold_prediction) #See how the model did on that fold
     fold_accuracy = rf.score(test_x,test_y) #Accuracy of the witheld fold
+    
+    brown_feat = extra_df.drop("curricula relevance",axis = 1).astype("bool")
+    brown_label = extra_df["curricula relevance"]
     
     brown_prediction = rf.predict(brown_feat) #Make the model predict using Brown
     brown_conf_matrix = confusion_matrix(brown_label,brown_prediction) #See how the model did on Brown
