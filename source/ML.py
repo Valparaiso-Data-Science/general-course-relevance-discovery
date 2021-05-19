@@ -52,15 +52,17 @@ def preProcess():
         prediction will be done on the witheld fold, and the second round of 
         predictions will be done on all of Brown. 
         
-        Nothing is being changed here, but this update will be in all relavent 
-        functions. If anything in the code is to change it will be documented 
-        in the documentation as well as in comments next to changed or added 
-        code. 
+        Adding in lines to subset AllSchools to only include Smith and Valpo. 
+        Also creating a new variable that will be returned that will include 
+        Brown's courses. 
     '''
     cleaned_df = pd.read_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="ISO-8859-1")
-
+    
+    subset_df = cleaned_df.loc[cleaned_df['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
+    brown_df = cleaned_df.loc[cleaned_df['School']=='BrownSUPERTRIMMED']
+    
     print("\tcleaned")
-    vect_df = vectorizer(cleaned_df)
+    vect_df = vectorizer(subset_df)
     print("\tvect")
     pruned_df = cleanVectorizer(vect_df)
     print("\tpruned")
@@ -71,7 +73,7 @@ def preProcess():
     labels = labeled_df["curricula relevance"]
     print('Percentage of classified data science courses: ' + str(sum(labels)/len(labels)))
 
-    return features,labels
+    return features,labels,brown_df
 
 def stratKFold(features,labels,splits=10):
     '''
@@ -115,16 +117,14 @@ def stratKFold(features,labels,splits=10):
         prediction will be done on the witheld fold, and the second round of 
         predictions will be done on all of Brown. 
         
-        Being added here is a line that subsets "features" and "labels" so that 
-        they only include Smith and Valpo. Also being changed are the saved
-        indices. "fold_iterations" will only include the last 9 folds as this 
-        is what the model is being built on. The indices of the first fold will
-        be saved in a new variable, "pred_fold", named as such since it will be 
-        the fold that gets predicted. Both will be saved so that the model can
-        be built without having to run this part everytime. The file for saving
-        "fold_iterations" will remain the same (recall that this will now only
-        include the last 9 folds), and a new file to save "pred_fold" will be 
-        created.
+        Being changed are the saved indices. "fold_iterations" will only 
+        include the last 9 folds as this is what the model is being built on. 
+        The indices of the first fold will be saved in a new variable, 
+        "pred_fold", named as such since it will be the fold that gets 
+        predicted. Both will be saved so that the model can be built without 
+        having to run this part everytime. The file for saving "fold_iterations" 
+        will remain the same (recall that this will now only include the last 9 
+        folds), and a new file to save "pred_fold" will be created.
         
         Random states were also changed so that they are the same. 
     '''
@@ -137,9 +137,9 @@ def stratKFold(features,labels,splits=10):
     count=0
     print("Keys for features:" + str(features.keys()))
     print("Keys for labels:" + str(labels.keys()))
-    features = features.loc[features['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #features = features.loc[features['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
-    labels = labels.loc[labels['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
+    #labels = labels.loc[labels['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     features.reset_index(inplace=True)
     for train_index, test_index in skf.split(features, labels):
@@ -217,22 +217,18 @@ def randForest(features,labels):
         new for loop will be created to concatenate the 9 folds. Test/Train 
         splits in those folds are being ignored. Then the random forest is 
         being built on those 9 folds. Then, the witheld fold will be predicted 
-        on using the random forest. A line is also added to subset AllSchools.csv
-        to select only the courses from Brown. Then the random forest will 
-        make predictions on the courses from Brown. The results will be saved 
-        to a text file. Also, the same lines from the stratified k-fold function
-        that subset to get Smith and Valpo are also added again. This is 
-        necessary because "features" and "labels" from the parameters are based 
-        on AllSchools.csv. This also ensures no errors when using the indices. 
+        on using the random forest. Then the random forest will make 
+        predictions on the courses from Brown. The results will be saved to a 
+        text file.  
         
         Random states were also changed so that they are the same. 
     '''
-    brown_feat = features.loc[features["School"]=="BrownSUPERTRIMMED"]
-    brown_label = labels.loc[labels["School"]=="BrownSUPERTRIMMED"]
-    #The lines above get the features and labels for Brown
-    features = features.loc[features["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
-    #The line above is added to subset AllSchools.csv and only use Valpo and Smith
-    labels = labels.loc[labels["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    # brown_feat = features.loc[features["School"]=="BrownSUPERTRIMMED"]
+    # brown_label = labels.loc[labels["School"]=="BrownSUPERTRIMMED"]
+    # #The lines above get the features and labels for Brown
+    # features = features.loc[features["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
+    # #The line above is added to subset AllSchools.csv and only use Valpo and Smith
+    # labels = labels.loc[labels["School"].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     features.reset_index(inplace=True)
     #labels.reset_index(inplace=True)
