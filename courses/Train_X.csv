@@ -1,0 +1,253 @@
+﻿,0
+0,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+199     199                              BIO 204 Microbiology   False  False  False  False  ...         False  False          False          False            False           False
+1385   1385                         PHI 127 Indian Philosophy   False  False  False  False  ...         False  False          False          False            False           False
+1214   1214                    PHY 117 Introductory Physics I   False  False  False  False  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+334     334         ENG 249 Literatures of the Black Atlantic   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[427 rows x 2798 columns]"
+1,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+199     199                              BIO 204 Microbiology   False  False  False  False  ...         False  False          False          False            False           False
+1385   1385                         PHI 127 Indian Philosophy   False  False  False  False  ...         False  False          False          False            False           False
+1214   1214                    PHY 117 Introductory Physics I   False  False  False  False  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+336     336  CLT 260 Health and Illness: Literary Explorati...  False  False  False   True  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[427 rows x 2798 columns]"
+2,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+197     197                              BIO 202 Cell Biology   False  False  False  False  ...         False  False          False          False            False           False
+1385   1385                         PHI 127 Indian Philosophy   False  False  False  False  ...         False  False          False          False            False           False
+1213   1213           PHY 110 Energy, Environment and Climate   False  False  False  False  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+334     334         ENG 249 Literatures of the Black Atlantic   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[427 rows x 2798 columns]"
+3,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+199     199                              BIO 204 Microbiology   False  False  False  False  ...         False  False          False          False            False           False
+1385   1385                         PHI 127 Indian Philosophy   False  False  False  False  ...         False  False          False          False            False           False
+1216   1216                   PHY 209 The Big Bang and Beyond   False  False  False   True  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+335     335                          CLT 253 Literary Ecology   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[427 rows x 2798 columns]"
+4,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+200     200                   BIO 205 Microbiology Laboratory   False  False  False  False  ...         False  False          False          False            False           False
+652     652         LSS 100 Landscape, Environment and Design   False  False  False  False  ...         False  False          False          False            False           False
+1215   1215                   PHY 118 Introductory Physics II   False  False  False  False  ...         False  False          False          False            False           False
+1337   1337                    ARH 280 Art Historical Studies   False  False  False  False  ...         False  False          False          False            False           False
+639     639               ENG 318 Blackness and the Long Poem   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[424 rows x 2798 columns]"
+5,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+200     200                   BIO 205 Microbiology Laboratory   False  False  False  False  ...         False  False          False          False            False           False
+649     649                             THE 361 Screenwriting   False  False  False  False  ...         False  False          False          False            False           False
+1215   1215                   PHY 118 Introductory Physics II   False  False  False  False  ...         False  False          False          False            False           False
+1337   1337                    ARH 280 Art Historical Studies   False  False  False  False  ...         False  False          False          False            False           False
+636     636                     ENG 308 Seminar: One Big Book   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[424 rows x 2798 columns]"
+6,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+195     195                         BIO 200 Animal Physiology   False  False  False  False  ...         False  False          False          False            False           False
+648     648  CLT 300 Literary Theory and Literary Practice:...  False  False  False   True  ...         False  False          False          False            False           False
+1215   1215                   PHY 118 Introductory Physics II   False  False  False  False  ...         False  False          False          False            False           False
+1337   1337                    ARH 280 Art Historical Studies   False  False  False  False  ...         False  False          False          False            False           False
+635     635                       ENG 399 Teaching Literature   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[424 rows x 2798 columns]"
+7,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+199     199                              BIO 204 Microbiology   False  False  False  False  ...         False  False          False          False            False           False
+648     648  CLT 300 Literary Theory and Literary Practice:...  False  False  False   True  ...         False  False          False          False            False           False
+1213   1213           PHY 110 Energy, Environment and Climate   False  False  False  False  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+635     635                       ENG 399 Teaching Literature   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[424 rows x 2798 columns]"
+8,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+195     195                         BIO 200 Animal Physiology   False  False  False  False  ...         False  False          False          False            False           False
+646     646                   THE 261 Writing for the Theatre   False  False  False  False  ...         False  False          False          False            False           False
+1213   1213           PHY 110 Energy, Environment and Climate   False  False  False  False  ...         False  False          False          False            False           False
+1336   1336         REL 270 Zen Buddhism and Japanese Culture   False  False  False  False  ...         False  False          False          False            False           False
+632     632                   ENG 295 Advanced Poetry Writing   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1504   1504  HST 371 Seminar: Problems in 19th-Century Unit...  False  False  False  False  ...         False  False          False          False            False            True
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1510   1510                      ACC 223 Financial Accounting   False  False  False   True  ...         False  False          False          False             True           False
+
+[424 rows x 2798 columns]"
+9,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+3         3  AFR 218 History of Southern Africa (1600 to ab...  False  False  False   True  ...         False  False          False          False            False           False
+27       27  ENG 241 The Empire Writes Back: Postcolonial L...  False  False  False  False  ...         False  False          False          False            False           False
+50       50        AMS 240 Introduction to Disability Studies   False  False  False  False  ...         False  False          False          False            False           False
+63       63  CLS 150 Roots: Greek and Latin Elements in Eng...  False  False  False  False  ...         False  False          False          False            False           False
+64       64  CLT 202 Western Classics in Translation, from ...  False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1485   1485                      SWG 318 Women Against Empire   False  False  False  False  ...         False  False          False          False            False           False
+1503   1503   HST 313 Seminar: Problems in East Asian History   False  False  False  False  ...         False  False          False          False            False           False
+1523   1523  IDP 155 Entrepreneurship I: Introduction to In...  False  False  False   True  ...         False  False          False          False            False           False
+1528   1528               IDP 170 Frontiers in Biomathematics   False  False  False   True  ...         False  False          False          False            False           False
+1530   1530                  IDP 208 Womenâs Medical Issues   False  False   True  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+10,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+0         0  CLT 100 Introduction to Comparative Literature...  False  False  False  False  ...         False  False          False          False            False           False
+11       11             AFR 111 Introduction to Black Culture   False  False  False   True  ...         False  False          False          False            False           False
+15       15  AFR 212 Family Matters: Representations, Polic...  False  False  False  False  ...         False  False          False          False            False           False
+16       16  AFR 218 History of Southern Africa (1600 to ab...  False  False  False   True  ...         False  False          False          False            False           False
+22       22  AFR 335 Seminar: Free Blacks in the U.S. Befor...  False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1498   1498     HST 209 (C) Aspects of Middle Eastern History   False  False  False  False  ...         False  False          False          False            False           False
+1509   1509                  SPN 250 Iberian Cultural History   False  False  False  False  ...         False  False          False          False            False           False
+1515   1515         IDP 109 Aerial Imagery and Cinematography   False  False  False  False  ...         False  False          False          False            False           False
+1520   1520               IDP 145 Process, Prose and Pedagogy   False  False  False  False  ...         False  False          False          False            False           False
+1531   1531  IDP 210 The Pedagogy of Student-Faculty Partne...  False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+11,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+5         5                 HST 257 (L) Early African History   False  False  False  False  ...         False  False          False          False            False           False
+6         6                         HST 258 (L) Modern Africa   False  False  False  False  ...         False  False          False          False             True           False
+13       13   AFR 155 Introduction to Black Womenâs Studies   False  False  False  False  ...         False  False          False          False            False           False
+14       14                        AFR 201 Methods of Inquiry   False  False  False  False  ...         False  False          False          False            False           False
+24       24                           AFR 400 Special Studies   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1483   1483     SWG 290 Gender, Sexuality and Popular Culture   False  False  False  False  ...         False  False          False          False            False           False
+1484   1484                   SWG 314 Documenting Queer Lives   False  False  False  False  ...         False  False          False          False            False           False
+1493   1493  CLT 266 Studies in South African Literature an...  False  False  False  False  ...         False  False          False          False            False           False
+1525   1525                   IDP 158 Economics of Innovation   False  False  False  False  ...         False  False          False          False            False           False
+1529   1529            IDP 203 Women and Work in Saudi Arabia   False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+12,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+2         2           FYS 165 Childhood in African Literature   False  False  False  False  ...         False  False          False          False            False           False
+9         9         GOV 233 Problems in Political Development   False  False  False  False  ...         False  False          False          False            False           False
+36       36     SPN 246 Latin American Literature and Culture   False  False  False  False  ...         False  False          False          False            False           False
+41       41  AMS 201 Introduction to the Study of American ...  False  False  False  False  ...         False  False          False          False            False           False
+69       69               REL 112 Introduction to the Bible I   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1514   1514                    IDP 107 Digital Media Literacy    True  False  False  False  ...         False  False          False          False            False           False
+1517   1517           IDP 116 Introduction to Design Thinking   False  False  False  False  ...         False  False          False          False            False           False
+1524   1524  IDP 156 Entrepreneurship II: Entrepreneurship ...  False  False  False   True  ...         False  False          False          False            False           False
+1532   1532              IDP 239 UX: Designing for Disruption   False  False  False  False  ...         False  False          False          False            False           False
+1535   1535  IDP 320 Seminar on Global Learning: Womenâs ...  False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+13,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+17       17          AFR 242 Death and Dying in Black Culture   False  False  False   True  ...         False  False          False          False            False           False
+31       31  HST 265 (L) Citizenship in the United States, ...  False  False  False  False  ...         False  False          False          False            False           False
+58       58            ENG 384 Writing About American Society   False  False  False  False  ...         False  False          False          False            False           False
+65       65  FYS 117 The Bible and the American Public Square   False  False  False  False  ...         False  False          False          False            False           False
+83       83     ANT 252 The City and the Countryside in China   False  False  False   True  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1492   1492  CLT 100 Introduction to Comparative Literature...  False  False  False  False  ...         False  False          False          False            False           False
+1501   1501           HST 270 (C) Aspects of American History   False  False  False  False  ...         False  False          False          False            False           False
+1511   1511  EDP 291 Mellon Mays Undergraduate Fellows Rese...  False  False  False  False  ...         False  False          False          False            False           False
+1516   1516                             IDP 115 AEMES Seminar   False  False  False  False  ...         False  False          False          False            False           False
+1533   1533  IDP 250 Applied Design and Prototyping: Design...  False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+14,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+10       10              GOV 257 Colloquium: Refugee Politics   False  False  False  False  ...         False  False          False          False            False           False
+18       18              AFR 243 Black Activist Autobiography   False  False  False   True  ...         False  False          False          False            False           False
+44       44          AMS 227 Trade and Theft in Early America   False  False  False  False  ...         False  False          False          False            False           False
+46       46  AMS 230 Colloquium: The Asian/Pacific/American...  False  False  False   True  ...         False  False          False          False            False           False
+49       49          AMS 236 Difference and the Digital Media   False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1429   1429                           SDS 400 Special Studies   False  False  False  False  ...         False  False          False          False            False           False
+1490   1490               ARH 374 Studies in 20th-Century Art   False  False  False  False  ...         False  False          False          False            False           False
+1494   1494              ENG 290 Crafting Creative Nonfiction   False  False  False  False  ...         False  False          False          False            False           False
+1507   1507  POR 381 Seminar in Portuguese and Brazilian St...  False  False  False  False  ...         False  False          False           True            False           False
+1519   1519               IDP 136 Applied Learning Strategies   False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+15,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+8         8             GOV 227 Contemporary African Politics   False  False  False  False  ...         False  False          False          False            False           False
+32       32  HST 266 (L) Emancipation and the Afterlife of ...  False  False  False  False  ...         False  False          False          False            False           False
+37       37                   SWG 100 Issues in Queer Studies   False  False  False   True  ...         False  False          False          False             True           False
+45       45                        AMS 229 Native New England   False  False  False   True  ...         False  False          False          False            False           False
+53       53  AMS 302 Seminar: The Material Culture of New E...  False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1500   1500     HST 263 (C) Aspects of Latin American History   False  False  False  False  ...         False  False          False          False            False           False
+1508   1508  SPN 230 Latin American and Peninsular Culture ...  False  False  False  False  ...         False  False          False          False            False            True
+1513   1513  IDP 101 Becoming Foreign: Acquiring Global Com...  False  False  False   True  ...         False  False          False          False            False           False
+1527   1527                         IDP 168 Intuitive Knowing    True  False  False  False  ...         False  False          False          False            False           False
+1539   1539             SPE 100 The Art of Effective Speaking   False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+16,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+4         4                         HST 234 (C) Global Africa   False  False  False  False  ...         False  False          False          False            False           False
+21       21  AFR 289 (C) Race, Feminism and Resistance in M...  False  False  False  False  ...         False  False          False          False            False           False
+26       26  ENG 222 Spirometers, Speculums and the Scales ...  False  False  False   True  ...         False  False          False          False            False           False
+30       30                         HST 258 (L) Modern Africa   False  False  False  False  ...         False  False          False          False             True           False
+38       38  SWG 204 This Bridge Called My Back: Women of C...  False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1473   1473      SWG 105 Intro to LGBT Histories and Cultures   False  False  False  False  ...         False  False          False          False            False           False
+1487   1487       SWG 333 Sexual Harassment and Social Change   False  False  False  False  ...         False  False          False          False            False           False
+1496   1496            GOV 305 Seminar in American Government   False  False  False  False  ...         False  False          False          False            False           False
+1502   1502  HST 280 (C) Inquiries into United States Socia...  False  False  False  False  ...         False  False          False          False            False           False
+1536   1536                           IDP 325 Art/Math Studio   False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
+17,"      index                                           CourseID   abil    abl  abort  about  ...  machin learn    pid  project manag  relat databas  research method  statist method
+1         1  FRN 262 After Algeria: Revolution, Republic an...  False  False  False  False  ...         False  False          False          False            False           False
+7         7           AFR 370 Seminar: Modern Southern Africa   False  False  False  False  ...         False  False          False          False             True           False
+12       12   AFR 117 History of Afro-American People to 1960   False  False  False  False  ...         False  False          False          False            False           False
+23       23           AFR 370 Seminar: Modern Southern Africa   False  False  False  False  ...         False  False          False          False             True           False
+29       29  FYS 182 Fighting the Power: Black Protest and ...  False  False  False  False  ...         False  False          False          False            False           False
+...     ...                                                ...    ...    ...    ...    ...  ...           ...    ...            ...            ...              ...             ...
+1506   1506  LAS 301 Seminar: Topics in Latin American and ...  False  False  False  False  ...         False  False          False          False            False           False
+1512   1512  EDP 292 Mellon Mays Undergraduate Fellows Rese...  False  False  False  False  ...         False  False          False          False            False           False
+1521   1521                   IDP 150 Introduction to AutoCAD   False  False  False  False  ...         False  False          False          False            False           False
+1522   1522                IDP 151 Introduction to SolidWorks   False  False  False  False  ...         False  False          False          False            False           False
+1538   1538           QSK 102 Quantitative Skills in Practice   False  False  False  False  ...         False  False          False          False            False           False
+
+[154 rows x 2798 columns]"
