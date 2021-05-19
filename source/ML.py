@@ -272,7 +272,10 @@ def randForest(features,labels,extra_df):
         train_x.append(features.iloc[fold[1].tolist()])
         train_y.append(labels.iloc[fold[1].tolist()])
         #The lines above append all 9 folds together 
-   
+    print("Train X:")
+    print(train_x)
+    print("Train Y:")
+    print(train_y)
     rf.fit(train_x,train_y) #Fits the model using the 9 folds
     
     test_x = features.iloc[pred_fold[0].tolist()] #test set from witheld fold
