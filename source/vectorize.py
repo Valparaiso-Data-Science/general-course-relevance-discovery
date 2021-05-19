@@ -173,7 +173,7 @@ def cleanVectorizer(df):
     #print(count)
     #list.append(df.index)
     cleanDF=df[list].copy()
-    cleanDF["curricula relevance"] = False
+    cleanDF["curricula relevance"] = 0 #This was originally set to False (may have to change back)
 
     return(cleanDF)
 
@@ -193,6 +193,8 @@ def labelTargetsdf(df):
     for i, row in df.iterrows():            #Added this loop to only keep 
         if row["curricula relevance"] < 2:  #courses with more than one data
             row["curricula relevance"] = 0  #science topic being taught
+        else:
+            row["curriula relevance"] = 1
 
 #USE EVERYTHING UNDER HERE
     # for topic in vocab:
