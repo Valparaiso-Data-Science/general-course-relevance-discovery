@@ -242,6 +242,8 @@ def randForest(features,labels,extra_df):
     train_x = [] #Created to hold all train data from the 9 folds
     train_y = [] #Created to hold all train data from the 9 folds
     count = 0 #Used with the original for loop
+    fold_0 = []
+    fold_1 = []
     for fold in fold_iterations:
         ###Below is the original for loop#####
     #     print(fold[0].tolist())
@@ -267,11 +269,17 @@ def randForest(features,labels,extra_df):
     # print('Average Model Accuracy: '+ str(avgAcc))
         ###END OF ORIGINAL LOOP#####
         
-        train_x.append(features.iloc[fold[0].tolist()]) 
-        train_y.append(labels.iloc[fold[0].tolist()])
-        train_x.append(features.iloc[fold[1].tolist()])
-        train_y.append(labels.iloc[fold[1].tolist()])
+        # train_x.append(features.iloc[fold[0].tolist()]) 
+        # train_y.append(labels.iloc[fold[0].tolist()])
+        # train_x.append(features.iloc[fold[1].tolist()])
+        # train_y.append(labels.iloc[fold[1].tolist()])
+        fold_0.append(fold[0])
+        fold_1.append(fold[1])
         #The lines above append all 9 folds together 
+    train_x = features.iloc[fold_0]
+    train_x.append(labels.iloc[fold_0])
+    train_y = features.iloc[fold_1]
+    train_y.append(labels.iloc[fold_1])
     print("Train X:")
     print(train_x)
     print("Train Y:")
