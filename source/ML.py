@@ -73,7 +73,7 @@ def preProcess():
     #%%
     features = labeled_df.drop("curricula relevance",axis = 1).astype("bool")
     labels = labeled_df["curricula relevance"]
-    print(labels)
+    print(labeled_df.loc[labeled_df["curricula relevance"]==True])
     print('Percentage of classified data science courses: ' + str(sum(labels)/len(labels)))
 
     return features,labels,brown_df
