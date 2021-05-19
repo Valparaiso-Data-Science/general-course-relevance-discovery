@@ -192,9 +192,9 @@ def labelTargetsdf(df):
  	        pass
     for i, row in df.iterrows():            #Added this loop to only keep 
         if row["curricula relevance"] < 2:  #courses with more than one data
-            row["curricula relevance"] = 0  #science topic being taught
+            row["curricula relevance"] = False  #science topic being taught
         else:
-            row["curriula relevance"] = 1
+            row["curriula relevance"] = True
 
 #USE EVERYTHING UNDER HERE
     # for topic in vocab:
