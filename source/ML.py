@@ -287,7 +287,7 @@ def randForest(features,labels,extra_df):
     print(fold_0)
     print("Fold 1: ")
     print(fold_1)
-    # print("Train X:")
+    print("Train X:")
     # print(train_x)
     # print("Train Y:")
     # print(train_y)
