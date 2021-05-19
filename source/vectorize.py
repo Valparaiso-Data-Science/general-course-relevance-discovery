@@ -185,11 +185,14 @@ def labelTargetsdf(df):
         for w in words:
             stem_words.append(ps.stem(w))
         stem_topic = ' '.join(w for w in stem_words)
-        try:
- 	        df["curricula relevance"] = df[stem_topic] | df["curricula relevance"]
+        try:                    #Changed to += To count how many BoK words it has
+ 	        df["curricula relevance"] += df[stem_topic] | df["curricula relevance"]
         #Keyword not found at all (so no column to begin with)
         except:
  	        pass
+    for i, row in df.iterrows():            #Added this loop to only keep 
+        if row["curricula relevance"] < 2:  #courses with more than one data
+            row["curricula relevance"] = 0  #science topic being taught
 
 #USE EVERYTHING UNDER HERE
     # for topic in vocab:
