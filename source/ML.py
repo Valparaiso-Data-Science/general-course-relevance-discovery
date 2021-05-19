@@ -138,8 +138,8 @@ def stratKFold(features,labels,splits=10):
     pred_fold = [0] #This was added to save the indices of the first fold
     fold_iterations = [0]*9 #Changed to 9 because the first fold is being witheld
     count=0
-    print("Keys for features:" + str(features.keys()))
-    print("Keys for labels:" + str(labels.keys()))
+    # print("Keys for features:" + str(features.keys()))
+    # print("Keys for labels:" + str(labels.keys()))
     #features = features.loc[features['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
     #The line above is added to subset AllSchools.csv and only use Valpo and Smith
     #labels = labels.loc[labels['School'].isin(["Valpo","SmithSUPERTRIMMED"])]
@@ -148,7 +148,7 @@ def stratKFold(features,labels,splits=10):
     for train_index, test_index in skf.split(features, labels):
         indices = [0]*2
         indices[1]=test_index
-        print("TRAIN:", train_index, "TEST:", test_index)
+        # print("TRAIN:", train_index, "TEST:", test_index)
         # X_train = [features.iloc[i] for i in train_index]
         # X_test=[features.iloc[i] for i in test_index]
         X_train = features.iloc[train_index]
@@ -161,7 +161,7 @@ def stratKFold(features,labels,splits=10):
         ds_i = features.index[labels == 1]
 
         train_index = np.append(maj_train_index,ds_i)
-        print("NEW TRAIN: ", train_index)
+        #print("NEW TRAIN: ", train_index)
         indices[0]=train_index
         if count != 0: #Since the first fold is being witheld, this if statement
                        #is being added to only do the normal process on the other 
@@ -276,10 +276,10 @@ def randForest(features,labels,extra_df):
         fold_0.append(fold[0])
         fold_1.append(fold[1])
         #The lines above append all 9 folds together 
-    train_x = features.iloc[fold_0]
-    train_x.append(labels.iloc[fold_0])
-    train_y = features.iloc[fold_1]
-    train_y.append(labels.iloc[fold_1])
+    train_x = features.iloc[fold_0.tolist()]
+    train_x.append(labels.iloc[fold_0.tolist()])
+    train_y = features.iloc[fold_1.tolist()]
+    train_y.append(labels.iloc[fold_1.tolist()])
     print("Train X:")
     print(train_x)
     print("Train Y:")
