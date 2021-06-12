@@ -9,7 +9,7 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from get_df_name_func import get_df_name
 
-nlp = spacy.load("en")
+nlp = spacy.load('en_core_web_sm')
 def tfidf(dictionary, schools):
   answers = dictionary
   overall_denom = 0

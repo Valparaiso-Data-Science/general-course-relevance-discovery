@@ -9,6 +9,7 @@ import createDATA
 import ML
 import prep
 import const
+#import removeduplicates
 
 #libraries
 from sklearn.model_selection import train_test_split
@@ -41,8 +42,26 @@ if len(sys.argv) > 1 and sys.argv[1] == 'dirty':
 prep.prepare()
 # Create 'AllSchools.csv'
 createDATA.createCSV()
+
+# remove duplicates from csv
+#removeduplicates.remove()
+
+
+# 0713_FINAL_all_groups_all_results
+# post processing on csv
+# verify data cleanlenss
+# call get rid of duplicates
+# can output at as dataframe instead of csv
+# check dataframe for duplicates
+
+
+
+
+
 #print("Splitting Data")
 #features, labels = ML.preProcess()
+
+
 
 #ML.stratKFold(features, labels)
 #svm(features,labels,5)

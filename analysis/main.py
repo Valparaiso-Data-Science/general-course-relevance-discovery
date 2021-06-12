@@ -26,7 +26,7 @@ from process_words_funct import process_words
 from tfidf_analysis import tfidf
 from tokenizer import tokenize
 
-nlp = spacy.load("en")
+nlp = spacy.load('en_core_web_sm')
 
 ##Import CSV as Dataframes
 schools_df = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
@@ -45,7 +45,7 @@ for i in range(len(schools_df)): #for each course
   des = des.lower()
   temp_list = []
   terms = []
-  print(i)
+  #print(i)
   for w in bok: #for each bok term
     space = r'\s' #regex space pattern
     if re.search(space+w+space,des): #if the course contains the bok term
@@ -113,23 +113,24 @@ lab = ['lab','labs','laboratory'] #keywords for this category
 diff_cats = {} #dictionary to hold diff categories
 diff_keywords = [] #list to hold diff keywords
 #append keyword lists to diff_keywords
-diff.append(website)
-diff.append(datavis)
-diff.append(statistics)
-diff.append(resmeth)
-diff.append(proglang)
-diff.append(algmodai)
-diff.append(collect)
-diff.append(sources)
-diff.append(types)
-diff.append(analy)
-diff.append(applic)
-diff.append(sim)
-diff.append(software)
-diff.append(lab)
+diff_keywords.append(website)
+diff_keywords.append(datavis)
+diff_keywords.append(statistics)
+diff_keywords.append(resmeth)
+diff_keywords.append(proglang)
+diff_keywords.append(algmodai)
+diff_keywords.append(collect)
+diff_keywords.append(sources)
+diff_keywords.append(types)
+diff_keywords.append(analy)
+diff_keywords.append(applic)
+diff_keywords.append(sim)
+diff_keywords.append(software)
+diff_keywords.append(lab)
 i=0
-for i in range(len(ellie)): #assign each keyword list to their respective category name
-  diff_cats[ellie[i]] = diff_keywords[i]
+# this was originally ellie  not sure why
+for i in range(len(diff)): #assign each keyword list to their respective category name
+  diff_cats[diff[i]] = diff_keywords[i]
 
 #adding keywords to columns
 for b in body:
@@ -138,6 +139,7 @@ for d in diff:
   ds_schools_df[d] = 0
 
 j=0
+
 for j in range(len(ds_schools_df)): #for each description
   for b in bok_cats: #for each overall category in bok
     i = 0

@@ -36,10 +36,13 @@ def createCSV():
                         for filename in Bar('Fixing Files').iter(os.listdir(const.TRIMMED_DIR)))
 
 
+
     # step 3 . call the parser that figures out course titles and descriptions from XML structure
     Parallel(n_jobs=-1)(delayed(parse.makeCSV)(filename, const.SUPERTRIMMED_DIR) # maybe make makeCSV take an output directory?
                         for filename in Bar('Making CSVs').iter(os.listdir(const.SUPERTRIMMED_DIR)))
     '''
+
+    # step 4.
     # fix the bug that is here; get an error in newClean complaining about a float
     print("Creating 'valpo.csv'...")
     os.system("sh ../pre/parsevalpo.sh ../fullPDFs/ucat1920.xml ../courses/")
@@ -49,7 +52,22 @@ def createCSV():
     # collect all data frames in one list
     df_container = []
     for filename in Bar('Making topicModel').iter(os.listdir(const.CSV_DIR)):
-        df_container.append(pd.read_csv(const.CSV_DIR + "/" + filename))
+        df_temp = pd.read_csv(const.CSV_DIR + "/" + filename)
+        #df_temp.drop_duplicates(subset= ['CourseID'],inplace= True) 
+        #df_test1 = df_temp.drop_duplicates(subset= ['CourseID'])
+        #df_temp.drop_duplicates(subset= ['CourseID','Description'],keep = "first") 
+        df_temp = pd.drop_duplicates(subset= ['School','CourseID', 'Descriptions'], keep= 'last') 
+
+        #df_temp.value_counts(subset = ['CourseID','Description'])
+        # if the counts are 1 
+        # if the counts are 2 or higher identical copies keep the first or last one 
+        # use first or last 
+        # detect duplicates and determines which ones you want to keep 
+        # output to a seperate output file 
+        # how many duplicates do we have then determine next steps 
+
+        df_container.append(df.temp)
+        # read into temp dataframe drop from temp dataframe read into temp dataframe 
     # concatenate list into one joint data frame
     topicModel = pd.concat(df_container)
 
@@ -60,7 +78,13 @@ def createCSV():
     #       * update 7-17 : the Makefile now no longer includes valpo's courses, there
     #           are a few bugs with doing it the previous way, mainly that pandas
     #           complained a lot. This is definitely something that needs to be fixed.
+
+    #  remove_duplicate add it in there 
+# false drops all duplicates would lose valuable information 
+# 
+    #investigate newClean 
     cleaned_df = newClean(topicModel)
+
     print("Creating '" + const.CSV_DIR + "/" + const.ALL_CSV + "'...")
     cleaned_df.to_csv(const.CSV_DIR + "/" + const.ALL_CSV, encoding="utf-8-sig")
 

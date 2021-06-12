@@ -10,7 +10,7 @@ from nltk.stem import WordNetLemmatizer
 from tokenizer import tokenize
 from get_df_name_func import get_df_name
 
-nlp = spacy.load("en")
+nlp = spacy.load('en_core_web_sm')
 def process_words(stops,df):
   og_dict = {} #dictionary of full responses
   responses = {} #dictionary of processed responses
