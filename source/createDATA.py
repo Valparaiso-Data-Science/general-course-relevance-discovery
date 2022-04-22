@@ -52,22 +52,11 @@ def createCSV():
     # collect all data frames in one list
     df_container = []
     for filename in Bar('Making topicModel').iter(os.listdir(const.CSV_DIR)):
-        df_temp = pd.read_csv(const.CSV_DIR + "/" + filename)
-        #df_temp.drop_duplicates(subset= ['CourseID'],inplace= True) 
-        #df_test1 = df_temp.drop_duplicates(subset= ['CourseID'])
-        #df_temp.drop_duplicates(subset= ['CourseID','Description'],keep = "first") 
-        df_temp = pd.drop_duplicates(subset= ['School','CourseID', 'Descriptions'], keep= 'last') 
+        #df_temp = pd.read_csv(const.CSV_DIR + "/" + filename)
+        #df_temp = pd.drop_duplicates(subset= ['School','CourseID', 'Descriptions'], keep= 'last') 
+        df_container.append(pd.read_csv(const.CSV_DIR + "/" + filename))
+        #df_container.append(df_temp)
 
-        #df_temp.value_counts(subset = ['CourseID','Description'])
-        # if the counts are 1 
-        # if the counts are 2 or higher identical copies keep the first or last one 
-        # use first or last 
-        # detect duplicates and determines which ones you want to keep 
-        # output to a seperate output file 
-        # how many duplicates do we have then determine next steps 
-
-        df_container.append(df.temp)
-        # read into temp dataframe drop from temp dataframe read into temp dataframe 
     # concatenate list into one joint data frame
     topicModel = pd.concat(df_container)
 
@@ -79,9 +68,6 @@ def createCSV():
     #           are a few bugs with doing it the previous way, mainly that pandas
     #           complained a lot. This is definitely something that needs to be fixed.
 
-    #  remove_duplicate add it in there 
-# false drops all duplicates would lose valuable information 
-# 
     #investigate newClean 
     cleaned_df = newClean(topicModel)
 
