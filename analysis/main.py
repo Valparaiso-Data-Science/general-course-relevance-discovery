@@ -26,26 +26,27 @@ from process_words_funct import process_words
 from tfidf_analysis import tfidf
 from tokenizer import tokenize
 
-nlp = spacy.load("en")
+nlp = spacy.load('en_core_web_sm')
 
 ##Import CSV as Dataframes
-schools_df = pd.read_csv("AllSchools-07-10-2020-FROZEN.csv")
+schools_df = pd.read_csv("Smith-07-10-2020-FROZEN.csv")
 del(schools_df['Unnamed: 0'])
 
-#read in body of knowledge (bok) txt file, convert to list
-text_file = open("edison.txt", "r")
+
+text_file = open("blank4.txt", "r")
 bok = text_file.read().split('\n')
 for i in range(len(bok)): #lowercase each bok term
   bok[i] = bok[i].lower()
 
+
 #retain only courses pertinent to Data Science
 temp_df = []
 for i in range(len(schools_df)): #for each course
-  des = str(schools_df['Descriptions'][i])
+  des = str(schools_df['CourseID'][i])
   des = des.lower()
   temp_list = []
   terms = []
-  print(i)
+  #print(i)
   for w in bok: #for each bok term
     space = r'\s' #regex space pattern
     if re.search(space+w+space,des): #if the course contains the bok term
@@ -56,8 +57,8 @@ for i in range(len(schools_df)): #for each course
     temp_df.append(temp_list) #append list to new dataframe
 ds_schools_df = pd.DataFrame(temp_df) #create permanent new data frame
 ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term'] #label columns
-print("Creating 'csvs/0713_bok_courses.csv'...") #create csv of data science courses
-ds_schools_df.to_csv('csvs/0713_bok_courses.csv',encoding="utf-8-sig")
+print("Creating 'csvs/SMITH_THE_courses.csv'...") #create csv of data science courses
+ds_schools_df.to_csv('csvs/SMITH_blank_courses.csv',encoding="utf-8-sig")
 
 #creating new columns with key words
 body = ['Data Science Analytics','Data Science Engineering','Data Management','Research Methods and Project Management','Business Analytics'] #overall headings
@@ -113,23 +114,24 @@ lab = ['lab','labs','laboratory'] #keywords for this category
 diff_cats = {} #dictionary to hold diff categories
 diff_keywords = [] #list to hold diff keywords
 #append keyword lists to diff_keywords
-diff.append(website)
-diff.append(datavis)
-diff.append(statistics)
-diff.append(resmeth)
-diff.append(proglang)
-diff.append(algmodai)
-diff.append(collect)
-diff.append(sources)
-diff.append(types)
-diff.append(analy)
-diff.append(applic)
-diff.append(sim)
-diff.append(software)
-diff.append(lab)
+diff_keywords.append(website)
+diff_keywords.append(datavis)
+diff_keywords.append(statistics)
+diff_keywords.append(resmeth)
+diff_keywords.append(proglang)
+diff_keywords.append(algmodai)
+diff_keywords.append(collect)
+diff_keywords.append(sources)
+diff_keywords.append(types)
+diff_keywords.append(analy)
+diff_keywords.append(applic)
+diff_keywords.append(sim)
+diff_keywords.append(software)
+diff_keywords.append(lab)
 i=0
-for i in range(len(ellie)): #assign each keyword list to their respective category name
-  diff_cats[ellie[i]] = diff_keywords[i]
+# this was originally ellie  not sure why
+for i in range(len(diff)): #assign each keyword list to their respective category name
+  diff_cats[diff[i]] = diff_keywords[i]
 
 #adding keywords to columns
 for b in body:
@@ -138,6 +140,7 @@ for d in diff:
   ds_schools_df[d] = 0
 
 j=0
+
 for j in range(len(ds_schools_df)): #for each description
   for b in bok_cats: #for each overall category in bok
     i = 0
@@ -151,7 +154,7 @@ for j in range(len(ds_schools_df)): #for each description
     for i in range(len(diff_cats[d])): #for each keyword
       comp = str(ds_schools_df['Descriptions'][j]).lower()
       if re.search('\s'+re.escape(diff_cats[d][i])+'\s',comp): #search for keyword in description
-        ds_schools_df[e][j] = 1 #assing value of 1 if keyword exists in description
+        ds_schools_df[d][j] = 1 #assing value of 1 if keyword exists in description
 
 #creating summation column
 ds_schools_df['Sum'] = ds_schools_df.sum(axis=1)
@@ -171,7 +174,7 @@ others.extend(algmodai)
 others.extend(collect)
 others.extend(sources)
 others.extend(types)
-others.extend(anal)
+others.extend(analy)
 others.extend(applic)
 others.extend(sim)
 others.extend(software)
@@ -322,5 +325,7 @@ for name, group in groups:
 plt.legend()
 
 #save to csv
-print("Creating 'csvs/0713_FINAL_all_groups_all_results.csv'...")
-ds_schools_df.to_csv('csvs/0713_FINAL_all_groups_all_results.csv', index=False)
+print("Creating 'csvs/SMITH_FINAL_THE_results.csv'...")
+ds_schools_df.to_csv('csvs/SMITH_FINAL_THE_results.csv', index=False)
+
+

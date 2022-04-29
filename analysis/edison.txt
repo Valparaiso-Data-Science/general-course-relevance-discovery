@@ -1,123 +1,405 @@
 accuracy metrics
+accuracy metricss
+accuracy metricses
 Agile Data Driven
+Agile Data Drivens
+Agile Data Drivenes
 Artificial Intelligence
+Artificial Intelligences
+Artificial Intelligencees
 Big Data infrastructures
+Big Data infrastructuress
+Big Data infrastructureses
 BPM
+BPMs
+BPMes
 Business Analytics
+Business Analyticss
+Business Analyticses
 Business Intelligence
+Business Intelligences
+Business Intelligencees
 Cloud Computing
+Cloud Computings
+Cloud Computinges
 cloud powered services
+cloud powered servicess
+cloud powered serviceses
 cognitive technologies
+cognitive technologiess
+cognitive technologieses
 collaborative system
+collaborative systems
+collaborative systemes
 continuous improvement cycle
+continuous improvement cycles
+continuous improvement cyclees
 CRP
+CRPs
+CRPes
 Customer Relations Management
+Customer Relations Managements
+Customer Relations Managementes
 data access
+data accesss
+data accesses
 data analysis applications
+data analysis applicationss
+data analysis applicationses
 Data Analytics
+Data Analyticss
+Data Analyticses
 data analysis
+data analysiss
+data analysises
 data analytics assessment
+data analytics assessments
+data analytics assessmentes
 data anonymisation
+data anonymisations
+data anonymisationes
 data architecture
+data architectures
+data architecturees
 data archive services
+data archive servicess
+data archive serviceses
 data collection
+data collections
+data collectiones
 data collection process
+data collection processs
+data collection processes
 data curation
+data curations
+data curationes
 data dashboard
+data dashboards
+data dashboardes
 data driven
+data drivens
+data drivenes
 data marketing technologies
+data marketing technologiess
+data marketing technologieses
 data driven marketing
+data driven marketings
+data driven marketinges
 data factories
+data factoriess
+data factorieses
 data formats
+data formatss
+data formatses
 data governance strategy
+data governance strategys
+data governance strategyes
 data handling
+data handlings
+data handlinges
 data handling services
+data handling servicess
+data handling serviceses
 data integration
+data integrations
+data integrationes
 data integration analytics
+data integration analyticss
+data integration analyticses
 data interoperability
+data interoperabilitys
+data interoperabilityes
 data lifecycle
+data lifecycles
+data lifecyclees
 data lifecycle management
+data lifecycle managements
+data lifecycle managementes
 data management
+data managements
+data managementes
 Data Management Plan
+Data Management Plans
+Data Management Planes
 Data Mining
+Data Minings
+Data Mininges
 data modeling
+data modelings
+data modelinges
 data modeling design
+data modeling designs
+data modeling designes
 data preparation
+data preparations
+data preparationes
 data preprocessing
+data preprocessings
+data preprocessinges
 data pre-processing
+data pre-processings
+data pre-processinges
 data provenance
+data provenances
+data provenancees
 data quality controls
+data quality controlss
+data quality controlses
 data quality evaluation
+data quality evaluations
+data quality evaluationes
 data registries
+data registriess
+data registrieses
 data science
+data sciences
+data sciencees
 Data Science Engineering
+Data Science Engineerings
+Data Science Engineeringes
 data security
+data securitys
+data securityes
 Data storage systems
+Data storage systemss
+Data storage systemses
 data types
+data typess
+data typeses
 data visualisation
+data visualisations
+data visualisationes
 data visualization
+data visualizations
+data visualizationes
 Data Warehouse solutions
+Data Warehouse solutionss
+Data Warehouse solutionses
 Data Warehouses technologies
+Data Warehouses technologiess
+Data Warehouses technologieses
 design data infrastructure
+design data infrastructures
+design data infrastructurees
 DevOps
+DevOpss
+DevOpses
 digital libraries
+digital librariess
+digital librarieses
 DMP
+DMPs
+DMPes
 Econometrics
+Econometricss
+Econometricses
 engineering principles
+engineering principless
+engineering principleses
 enterprises
+enterprisess
+enterpriseses
 ETL
+ETLs
+ETLes
 Extract Transform Load
+Extract Transform Loads
+Extract Transform Loades
 federated access control
+federated access controls
+federated access controles
 Graph Data Analytics
+Graph Data Analyticss
+Graph Data Analyticses
 high performance networks
+high performance networkss
+high performance networkses
 IPR protection
+IPR protections
+IPR protectiones
 Latent Dirichlet Allocation
+Latent Dirichlet Allocations
+Latent Dirichlet Allocationes
 linked data
+linked datas
+linked dataes
 Machine Learning
+Machine Learnings
+Machine Learninges
 Mechanism Design
+Mechanism Designs
+Mechanism Designes
 meta data
+meta datas
+meta dataes
 metadata
+metadatas
+metadataes
 meta-data
+meta-datas
+meta-dataes
 methods data analysis
+methods data analysiss
+methods data analysises
 model data collection
+model data collections
+model data collectiones
 modeling simulation
+modeling simulations
+modeling simulationes
 Natural Language Processing
+Natural Language Processings
+Natural Language Processinges
 non relational databases
+non relational databasess
+non relational databaseses
 NoSQL
+NoSQLs
+NoSQLes
 OLAP
+OLAPs
+OLAPes
 OLTP
+OLTPs
+OLTPes
 Open Access
+Open Accesss
+Open Accesses
 Open Data
+Open Datas
+Open Dataes
 Open Science
+Open Sciences
+Open Sciencees
 operational models
+operational modelss
+operational modelses
 Operations Research
+Operations Researchs
+Operations Researches
 Optimisation
+Optimisations
+Optimisationes
 Optimization
+Optimizations
+Optimizationes
 organisational network analysis
+organisational network analysiss
+organisational network analysises
 organizational network analysis
+organizational network analysiss
+organizational network analysises
 organizations information
+organizations informations
+organizations informationes
 PID
+PIDs
+PIDes
 Predictive Analytics
+Predictive Analyticss
+Predictive Analyticses
 Prescriptive Analytics
+Prescriptive Analyticss
+Prescriptive Analyticses
 process structured data
+process structured datas
+process structured dataes
 process unstructured data
+process unstructured datas
+process unstructured dataes
 Processes Management
+Processes Managements
+Processes Managementes
 project management
+project managements
+project managementes
 Qualitative analytics
+Qualitative analyticss
+Qualitative analyticses
 quality evaluation
+quality evaluations
+quality evaluationes
 quality risk management
+quality risk managements
+quality risk managementes
 Recommender Ranking system
+Recommender Ranking systems
+Recommender Ranking systemes
 reinforced learning
+reinforced learnings
+reinforced learninges
 relational databases
+relational databasess
+relational databaseses
 Research Methods
+Research Methodss
+Research Methodses
 Project Management
+Project Managements
+Project Managementes
 Simulation
+Simulations
+Simulationes
 SQL
+SQLs
+SQLes
 statistics methods
+statistics methodss
+statistics methodses
 structured approach
+structured approachs
+structured approaches
 system design development
+system design developments
+system design developmentes
 systems software
+systems softwares
+systems softwarees
 team management
+team managements
+team managementes
 Use cases analysis
+Use cases analysiss
+Use cases analysises
 User Experience
+User Experiences
+User Experiencees
 UX
+UXs
+UXes
+communicating data
+communicating datas
+communicating dataes
+data science
+data sciences
+data sciencees
+statistical methods
+statistical methodss
+statistical methodses
+communicating data
+communicating datas
+communicating dataes
+data science
+data sciences
+data sciencees
+statistical methods
+statistical methodss
+statistical methodses
+visual analytics
+visual analyticss
+visual analyticses
+data journalism
+data journalisms
+data journalismes
+machine learning
+machine learnings
+machine learninges
+research intergroup relationships
+research intergroup relationshipss
+research intergroup relationshipses
+statistical data sciences
+statistical data sciencess
+statistical data scienceses
+statistical data sciences
+statistical data sciencess
+statistical data scienceses

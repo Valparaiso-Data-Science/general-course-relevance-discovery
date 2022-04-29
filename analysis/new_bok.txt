@@ -1,0 +1,160 @@
+accuracy metrics
+Accuracy metric
+Agile Data Driven
+Artificial Intelligence
+AI
+Big data
+Big Data infrastructures
+Big Data Infrastructure
+Data Infrastructure 
+BPM
+Business Analytics
+Business Analysis 
+Business Intelligence
+Cloud Computing
+Cloud Computation
+cloud powered services
+cognitive technologies
+collaborative system
+continuous improvement cycle
+CRP
+Customer Relations Management
+data access
+data analysis applications
+Data Analytics
+data analysis
+data analytics assessment
+data anonymisation
+data architecture
+data archive services
+data collection
+Data collections
+data collection process
+data curation
+Curated data
+data dashboard
+data driven
+data-driven
+data marketing technologies
+data driven marketing
+data factories
+data formats
+data governance strategy
+data handling
+data handling services
+data integration
+data integration analytics
+data interoperability
+Data journalism
+data lifecycle
+data lifecycle management
+data management
+Data Management Plan
+Data Mining
+Text mining
+data modeling
+data modeling design
+data preparation
+data preprocessing
+data pre-processing
+data provenance
+data quality controls
+data quality evaluation
+data registries
+data science
+Data sciences
+Data scientist
+Data Science Engineering
+data security
+Secure data
+Data storage systems
+data types
+data visualisation
+data visualization
+visual Analytics
+visual
+Data analysis
+Data Warehouse solutions
+Data Warehouses technologies
+design data infrastructure
+DevOps
+digital libraries
+DMP
+Data management platform
+Econometrics
+engineering principles
+enterprises
+ETL
+Extract Transform Load
+federated access control
+Graph Data Analytics
+high performance networks
+Information visualization
+IPR protection
+Intellectual property rights
+IPR
+Latent Dirichlet Allocation
+LDA
+linked data
+Machine Learning
+Mechanism Design
+meta data
+metadata
+meta-data
+methods data analysis
+model data collection
+modeling simulation
+Natural Language Processing
+NLP
+non relational databases
+Non-relational databases 
+NoSQL
+OLAP
+Online analytical processing
+OLTP
+Online transaction processing
+Open Access
+Open Data
+Open Science
+operational models
+Operations Research
+Optimisation
+Optimization
+organisational network analysis
+organisational network analytics
+organizational network analysis
+organizational network analytics
+organizations information
+PID
+Personal identifiers
+Personally identifiable information
+Predictive Analytics
+Predictive analysis
+Prescriptive Analytics
+Prescriptive analysis
+process structured data
+process unstructured data
+Processes Management
+project management
+Qualitative analytics
+Qualitative analysis
+quality evaluation
+quality risk management
+Recommender Ranking system
+Recommender Ranking systems
+reinforced learning
+relational databases
+Research Methods
+Project Management
+Simulation
+simulations
+SQL
+statistics methods
+Statistical methods
+structured approach
+system design development
+systems software
+team management
+Use cases analysis
+User Experience
+UX

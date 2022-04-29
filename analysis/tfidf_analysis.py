@@ -9,7 +9,7 @@ from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from get_df_name_func import get_df_name
 
-nlp = spacy.load("en")
+nlp = spacy.load('en_core_web_sm')
 def tfidf(dictionary, schools):
   answers = dictionary
   overall_denom = 0
@@ -70,8 +70,8 @@ def tfidf(dictionary, schools):
     print("\n---------------------------\n")
 
     #saving dataframe to csv
-    print("Creating 'csvs/0713_TFIDF_"+school+".csv'...")
-    path_name = 'csvs/0713_TFIDF_' + school +'.csv'
+    print("Creating 'csvs/SMITH_TFIDF_"+school+".csv'...")
+    path_name = 'csvs/SMITH_TFIDF_' + school +'.csv'
     words.to_csv(path_name,encoding="utf-8-sig")
 
 #TF-IDF FOR ALL SCHOOLS COMBINED
@@ -133,5 +133,5 @@ def tfidf(dictionary, schools):
   print("\n---------------------------\n")
 
   #saving dataframe to csv
-  print("Creating 'csvs/0713_TFIDF_all.csv'...")
-  words.to_csv('csvs/0713_TFIDF_all.csv',encoding="utf-8-sig")
+  print("Creating 'csvs/SMITH_TFIDF_all.csv'...")
+  words.to_csv('csvs/SMITH_TFIDF_all.csv',encoding="utf-8-sig")

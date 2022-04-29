@@ -10,12 +10,13 @@ import wordninja
 import sys
 import re
 import enchant
+import en_core_web_sm
 
 # word tokenizer
 nlp = spacy.load("en_core_web_sm")
 
 # spell checker
-spell = enchant.Dict("en_US")
+spell = enchant.Dict()
 
 no_space_punct = {'-', '/'}
 post_space_punct = {"(", "[", "{", "<"}
