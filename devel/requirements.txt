@@ -1,6 +1,6 @@
 spacy==2.2.4
 lxml==4.6.5
-numpy==1.21.0
+numpy==1.22.0
 pydotplus==2.0.2
 wordninja==2.0.0
 matplotlib==3.2.1
