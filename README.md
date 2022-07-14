@@ -4,25 +4,28 @@ This repo is intended to house code that allows for data science topics discover
 
 ## Getting Started
 
-### With Docker (Recommended)
+### With Anaconda (Recommended)
 
-This is the recommended route to take, because all of the dependencies are in the image.
-
-Go into the `devel/docker/` folder and look at the readme and follow the steps there.
+Go to anaconda.com and install Anaconda.
 
 ### On your personal computer
 
-Make sure that you have python 3 installed, a version of make, and optionally a POSIX compliant shell interpreter (bash or dash will work).
-To install all of the required dependencies, run:
+To create a conda environment with all of the requirements, cd into the directory with the tripods.yml file (general-course-relevance-discovery), open your terminal environment and run
 ```
-make setup
+conda env create --file tripods.yml   
 ```
+Now you should have an environment with all the requirements installed.
 
-You will also need the 'enchant' c library installed:
-* Linux/BSD users - just use your package manager
-* macOS users - getReqs.py takes care of it for you, just make sure you have homebrew installed
-* Windows users - you're on your own
+In order to use the environment, run
 
+```
+conda activate tripods
+```
+To deactivate the environment run
+
+```
+conda deactivate
+```
 ### Creating the Dataset
 
 If you want to just create the dataset, it's as easy as running:
@@ -57,7 +60,7 @@ output.
 
 ## Repo Structure
 
-This repo has a number of direcories, each with a function.
+This repo has a number of directories, each with a function.
 * *pre/* - Has shell scripts that are made for preprocessing XML files
 * *source/* - Has all of our python code that does all of the proverbial 'magic'
 * *source/tests/* - Contains all of the pytest tests for the repo
@@ -95,23 +98,11 @@ If you want to test our GROBID code, head over to `devel/grobid/` and have a loo
 * Branches for new features (as to not disrupt people using master)
 
 Current Branches:
-* master
+* main
 
 Historical Branches: (in order of most recent)
 * machine-learning
-* sasha
-* grobid_testing
-* syd-test-analysis
-* tfix
-* superninja
-* docker
-* nfrankie
-* wordninja
 * frankie
-* unit-tests
-* pdf\_layout\_analysis
-* refactored-code
-* proto
 
 ## License
 
