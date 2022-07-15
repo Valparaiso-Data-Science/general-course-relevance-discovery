@@ -45,6 +45,8 @@ Finally, there are functions to support visualizing the output recommendations, 
 - Should we add ML extensions or no? 
 - Add origin story? 
 
+To identify such courses across disciplines, researchers have turned to college course catalogs. From the course catalogs, we extract the course ID, title, and descriptions. The course ID will contain both the course's department code as well as the specific course number. For example, SDS 100 is the course ID where SDS is the department code for "Program in Statistical and Data Sciences" and 100 is the course number. 
+
 
 # Statement of need
 
@@ -53,6 +55,11 @@ For exmaple, a student may have enjoyed a course on Korean Art and is looking to
 These classes could be in an art history department, but there also may be related courses in a Film and Media studies department or in an East Asian Studies department. 
 If our example student constrains herself only to the 'traditional' or 'expected' art history department, she may miss out on courses that would captivate her interest. 
 This package seeks to support exploring a course catalog begining with a PDF of a catalog and a coherent list of search terms. 
+
+This kind of exporation can be key as colleges seek to develop new programs. One particularly timely example is Data Science. 
+Departments such as psychology or biology also teach statistical concepts, which leads researchers to believe that many other departments may be teaching data science concepts. 
+Identifying departments in which data science concepts are taught can allow colleges and universities to restructure or develop their data science curriculum. 
+
 
 
 
@@ -64,6 +71,18 @@ In this section, we document a few examples from three different institutions. T
   - Should we do one for the 5C? 
 - Brown U examples: 
 - Valpo? 
+
+## Smith College
+
+### Data Science
+
+We derived a keywords list that consists of data science terms from the Edison Body of Knowledge. The Edison Body of Knowledge is used to provide universities guidance when structuring their data science curriculum. By combining both components the output is a file that contains all courses labeled as relevant to Data Science.
+
+## Keyword lists
+
+- How to "augment" them by adding "s" and "es" to each term
+- This tool does not overcome "garbage in, garbage out" 
+
 
 ## Everything below from template 
 # Mathematics
