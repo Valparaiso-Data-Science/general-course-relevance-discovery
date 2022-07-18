@@ -45,8 +45,25 @@ Finally, there are functions to support visualizing the output recommendations, 
 - Should we add ML extensions or no? 
 - Add origin story? 
 
-To identify such courses across disciplines, researchers have turned to college course catalogs. From the course catalogs, we extract the course ID, title, and descriptions. The course ID will contain both the course's department code as well as the specific course number. For example, SDS 100 is the course ID where SDS is the department code for "Program in Statistical and Data Sciences" and 100 is the course number. 
+To identify such courses across disciplines, researchers have turned to college course catalogs. 
+From the course catalogs, we extract the course ID, title, and description for each course. 
+The goal is to create a list of course IDs that contain content that _might_ be of interest given a list of set of search terms. 
+**CODE NAME** leverages the words in the course decriptions and the titles to build the list of course IDs. 
+The course ID will contain both the course's department code as well as the specific course number, but it does not contain any "content" words. 
+For example, SDS 100 is the course ID where SDS is the department code for "Program in Statistical and Data Sciences" and 100 is the course number, while the course title and description give information about what content is in SDS 100. 
 
+Course catalogs exist in a variety of forms and styles, from searchable databases to printed books of information. 
+**CODE NAME** works on a PDF version of course catalogs as most schools continue to print physical course catalogs, meaning that PDFs of that printed catalog are often availab. 
+**CODE NAME** has a three-step pipeline to ultimately offer a list of courses related to a set of search terms. The pipeline consists of preprocessing, processing, and finally analysis:
+
+1. The **_preprocessing_** stage converts course catalog PDFs to a paresable XML file. During the preprocessing stage, irrelevant information is removed so parsing can begin right when courses are formally being listed in a catalog. Once these sections are removed, the cleaned XML is passed into the processing stage. 
+2. The **_processing_** stage converts the cleaned XML into a CSV file that is used for analysis. 
+3. The **_analysis_** stage identifies courses in the CSV file that teach concepts listed in a keywords list of given search terms. Once those courses are identified they are appended to a list of recommendations.
+
+Each step includes wrestles with slightly different challenges of this task. 
+In the preprocessing step, the code must accommodate different formatting and spacing issues present after doing a direct PDF to XML conversion. 
+Then the processing stage must be nimble enough to recognize the difference between a list of courses (like would be in a list of major requirements) and a course that names another course ID (or its own course ID) in the description. 
+The analysis stage then makes use of text analysis techniques to then select courses that are potentially related to the list of supplied terms. 
 
 # Statement of need
 
