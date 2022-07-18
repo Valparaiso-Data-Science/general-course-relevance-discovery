@@ -36,16 +36,35 @@ bibliography: paper.bib
 In this paper, we present **CODE NAME** to support the automatic searching of collegiete course catalogs to find courses related to a set of search terms. 
 In addition to justifying the need for this kind of package, we will share a few examples of using this code on real course catalogs from US institutions, finding courses from a variety of subject-interests. 
 
-The package **CODE NAME** processes the course catalog and then visualizes their recommended courses in a few views. 
+The package **CODE NAME** processes the course catalog and then recommends courses that are related to a list of given search terms. 
+To create a list of recommendations, the course 
 For processing the course catalogs, **CODE NAME** first leverages tools for digitizing course catalog PDFs. 
 Then it processes those digitalized catalogs to find course descriptions that are related to a list of provided. 
 Finally, there are functions to support visualizing the output recommendations, highlighting the department codes for the recommendations as well as the level for each course. 
 
-- Discuss why PDFs (ie. static version of catalog, many have historical pdfs)
-- Should we add ML extensions or no? 
-- Add origin story? 
+# Statement of need
 
-To identify such courses across disciplines, researchers have turned to college course catalogs. 
+With the growing number of interdisciplinary and cross-displinary courses and programs--like data science--there is a need to unearth where and in which departments certain concepts and topics are explored. 
+For exmaple, a student may have enjoyed a course on Korean Art and is looking to take courses on similar content. 
+These classes could be in an art history department, but there also may be related courses in a Film and Media studies department or in an East Asian Studies department. 
+If our example student constrains herself only to the 'traditional' or 'expected' art history department, she may miss out on courses that would captivate her interest. 
+This package seeks to support exploring a course catalog begining with a PDF of a catalog and a coherent list of search terms. 
+
+This kind of exporation can be key as colleges seek to develop new programs and want to first understand what courses already exist at their institution. 
+One particularly timely example is Data Science. 
+Departments such as psychology or biology also teach statistical concepts, which leads researchers to believe that many other departments may be teaching data science concepts. 
+Identifying departments in which data science concepts are taught can allow colleges and universities to restructure or develop their data science curriculum. 
+
+Another use case is to examine the growth (or contraction) of courses across institutions over time. 
+For example, one may want to see how Data Science offerings differ between two institutions or how the number data science courses have grown at a particular institution. 
+Similarly could also use this package to detail contractions of departments by seeing how course IDs (and specifically the department codes) change over time. 
+For example, one might be able to detect that when the Italian and German departments combine by seeing what course IDs are used for the same list of search terms for Italian prose. 
+
+# Methods
+
+ADD INTRO PARAGRAPH
+
+To identify courses across disciplines that may share common content, researchers have turned to college course catalogs. 
 From the course catalogs, we extract the course ID, title, and description for each course. 
 The goal is to create a list of course IDs that contain content that _might_ be of interest given a list of set of search terms. 
 **CODE NAME** leverages the words in the course decriptions and the titles to build the list of course IDs. 
@@ -65,19 +84,15 @@ In the preprocessing step, the code must accommodate different formatting and sp
 Then the processing stage must be nimble enough to recognize the difference between a list of courses (like would be in a list of major requirements) and a course that names another course ID (or its own course ID) in the description. 
 The analysis stage then makes use of text analysis techniques to then select courses that are potentially related to the list of supplied terms. 
 
-# Statement of need
-
-With the growing number of interdisciplinary and cross-displinary courses and programs--like data science--there is a need to unearth where and in which departments certain concepts and topics are explored. 
-For exmaple, a student may have enjoyed a course on Korean Art and is looking to take courses on similar content. 
-These classes could be in an art history department, but there also may be related courses in a Film and Media studies department or in an East Asian Studies department. 
-If our example student constrains herself only to the 'traditional' or 'expected' art history department, she may miss out on courses that would captivate her interest. 
-This package seeks to support exploring a course catalog begining with a PDF of a catalog and a coherent list of search terms. 
-
-This kind of exporation can be key as colleges seek to develop new programs. One particularly timely example is Data Science. 
-Departments such as psychology or biology also teach statistical concepts, which leads researchers to believe that many other departments may be teaching data science concepts. 
-Identifying departments in which data science concepts are taught can allow colleges and universities to restructure or develop their data science curriculum. 
 
 
+
+## Limitations
+
+The **CODE NAME** package does have a few limitations. 
+Chiefly, it is very sensitive to the quality and specificity of the search term list. 
+That is to say that the methods in this code cannot offer high quality recommendations if the list of search terms is itself not well defined. 
+This means that **CODE NAME** is specifically designed to be a _tool_ to work with someone searching through a catalog for relevant courses and not just an "answer machine" working entirely separately from a human. 
 
 
 # Examples
