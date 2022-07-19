@@ -45,7 +45,7 @@ _Finally, there are functions to support visualizing the output recommendations,
 # Statement of need
 
 With the growing number of interdisciplinary and cross-displinary courses and programs--like data science--there is a need to unearth where and in which departments certain concepts and topics are explored. 
-For exmaple, a student may have enjoyed a course on Korean Art and is looking to take courses on similar content. 
+For example, a student may have enjoyed a course on Korean Art and is looking to take courses on similar content. 
 These classes could be in an art history department, but there also may be related courses in a Film and Media studies department or in an East Asian Studies department. 
 If our example student constrains herself only to the 'traditional' or 'expected' art history department, she may miss out on courses that would captivate her interest. 
 This package seeks to support exploring a course catalog begining with a PDF of a catalog and a coherent list of search terms. 
@@ -57,8 +57,8 @@ Identifying departments in which data science concepts are taught can allow coll
 
 Another use case is to examine the growth (or contraction) of courses across institutions over time. 
 For example, one may want to see how Data Science offerings differ between two institutions or how the number data science courses have grown at a particular institution. 
-Similarly could also use this package to detail contractions of departments by seeing how course IDs (and specifically the department codes) change over time. 
-For example, one might be able to detect that when the Italian and German departments combine by seeing what course IDs are used for the same list of search terms for Italian prose. 
+Similarly, one could also use this package to detail contractions of departments by seeing how course IDs (and specifically the department codes) change over time. 
+For example, one might be able to detect when an Italian and German department combine by seeing a change in what course IDs are used for the same list of search terms for Italian prose. 
 
 # Methods
 
@@ -71,14 +71,14 @@ The course ID will contain both the course's department code as well as the spec
 For example, SDS 100 is the course ID where SDS is the department code for "Program in Statistical and Data Sciences" and 100 is the course number, while the course title and description give information about what content is in SDS 100. 
 
 Course catalogs exist in a variety of forms and styles, from searchable databases to printed books of information. 
-**CODE NAME** works on a PDF version of course catalogs as most schools continue to print physical course catalogs, meaning that PDFs of that printed catalog are often availab. 
+**CODE NAME** works on a PDF version of course catalogs as even schools that continue to print physical course catalogs typically also publish PDFs of the catalog online.
 **CODE NAME** has a three-step pipeline to ultimately offer a list of courses related to a set of search terms. The pipeline consists of preprocessing, processing, and finally analysis:
 
 1. The **_preprocessing_** stage converts course catalog PDFs to a paresable XML file. During the preprocessing stage, irrelevant information is removed so parsing can begin right when courses are formally being listed in a catalog. Once these sections are removed, the cleaned XML is passed into the processing stage. 
 2. The **_processing_** stage converts the cleaned XML into a CSV file that is used for analysis. 
 3. The **_analysis_** stage identifies courses in the CSV file that teach concepts listed in a keywords list of given search terms. Once those courses are identified they are appended to a list of recommendations.
 
-Each step includes wrestles with slightly different challenges of this task. 
+Each step included wrestles with slightly different challenges in this task. 
 In the preprocessing step, the code must accommodate different formatting and spacing issues present after doing a direct PDF to XML conversion. 
 Then the processing stage must be nimble enough to recognize the difference between a list of courses (like would be in a list of major requirements) and a course that names another course ID (or its own course ID) in the description. 
 The analysis stage then makes use of text analysis techniques to then select courses that are potentially related to the list of supplied terms. 
