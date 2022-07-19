@@ -37,10 +37,10 @@ In this paper, we present **CODE NAME** to support the automatic searching of co
 In addition to justifying the need for this kind of package, we will share a few examples of using this code on real course catalogs from US institutions, finding courses from a variety of subject-interests. 
 
 The package **CODE NAME** processes the course catalog and then recommends courses that are related to a list of given search terms. 
-To create a list of recommendations, the course 
-For processing the course catalogs, **CODE NAME** first leverages tools for digitizing course catalog PDFs. 
-Then it processes those digitalized catalogs to find course descriptions that are related to a list of provided. 
-Finally, there are functions to support visualizing the output recommendations, highlighting the department codes for the recommendations as well as the level for each course. 
+To create a list of recommendations, the code works in two steps. 
+First **CODE NAME** processes the course catalogs, by leveraging tools for digitizing course catalog PDFs. 
+Then it processes those digitalized catalogs to find course descriptions that are related to a list of provided terms. 
+_Finally, there are functions to support visualizing the output recommendations, highlighting the department codes for the recommendations as well as the level for each course. (need to add this functionality)_
 
 # Statement of need
 
@@ -64,8 +64,7 @@ For example, one might be able to detect that when the Italian and German depart
 
 ADD INTRO PARAGRAPH
 
-To identify courses across disciplines that may share common content, researchers have turned to college course catalogs. 
-From the course catalogs, we extract the course ID, title, and description for each course. 
+To identify courses across disciplines that may share common content, researchers have turned to college course catalogs, which contain rich information about each course including the course ID, title, and description. 
 The goal is to create a list of course IDs that contain content that _might_ be of interest given a list of set of search terms. 
 **CODE NAME** leverages the words in the course decriptions and the titles to build the list of course IDs. 
 The course ID will contain both the course's department code as well as the specific course number, but it does not contain any "content" words. 
@@ -94,6 +93,10 @@ Chiefly, it is very sensitive to the quality and specificity of the search term 
 That is to say that the methods in this code cannot offer high quality recommendations if the list of search terms is itself not well defined. 
 This means that **CODE NAME** is specifically designed to be a _tool_ to work with someone searching through a catalog for relevant courses and not just an "answer machine" working entirely separately from a human. 
 
+Another issue that we encountered with the search term list in the development **CODE NAME** is whether or not plurals are included in a list. For example, one might include "visualization" in their search term list, but not "visualizations" (or vice versa). 
+Given that the text analysis tools used in **CODE NAME** are seeking exact matches for search terms, **CODE NAME** will not "know" that "visualization" is part of "visualizations." 
+To help support the most complete search for courses, **CODE NAME** has the functionality to add plurals (albeit crudely) by creating an extended search term list that is 1) the original list combined with 2) the original list with "s" added to each term and 3) the original list with "es" added to each term.
+
 
 # Examples
 
@@ -110,10 +113,6 @@ In this section, we document a few examples from three different institutions. T
 
 We derived a keywords list that consists of data science terms from the Edison Body of Knowledge. The Edison Body of Knowledge is used to provide universities guidance when structuring their data science curriculum. By combining both components the output is a file that contains all courses labeled as relevant to Data Science.
 
-## Keyword lists
-
-- How to "augment" them by adding "s" and "es" to each term
-- This tool does not overcome "garbage in, garbage out" 
 
 
 ## Everything below from template 
