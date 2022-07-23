@@ -4,6 +4,7 @@
 
 import pandas as pd
 import numpy as np
+import re
 from re import *
 
 
@@ -41,14 +42,13 @@ def load_terms(term_filename):
 	# -- NOTE: We do this as a for loop to allow for the possibilty that 
 	# --       terms are more than just one word.
 	for i in range(len(bok)): 
-  		bok[i] = bok[i].lower()
+		bok[i] = bok[i].lower()
+		# Remove any duplicate terms
+		# Code based on this discussion: 
+		# https://stackoverflow.com/questions/12897374/get-unique-values-from-a-list-in-python
+		bok = list(set(bok))
 
-  	# Remove any duplicate terms
-  	# Code based on this discussion: 
-  	# https://stackoverflow.com/questions/12897374/get-unique-values-from-a-list-in-python
-  	bok = list(set(bok))
-
-  	return bok
+	return bok
 
 def recommend_courses(clean_terms, course_df, search_cols):
 	""" Search a dataframe of courses called COURSE_DF for classes that contain 
@@ -76,11 +76,13 @@ def recommend_courses(clean_terms, course_df, search_cols):
 					found_terms.append(term)
 
 		if len(found_terms) > 0:
-			pass
 			# Create a new row that the OG data frame row, plus the list of 
 			# found terms
+			course_row = list(course_df.iloc[i])
+			course_row.append(found_terms)
 
 			# add this to the temp_df
+			temp_df.append(course_row)
 
 	#Create a dataframe of the recommended courses
 	courses_rec_cols = course_cols
@@ -91,26 +93,11 @@ def recommend_courses(clean_terms, course_df, search_cols):
 
 	return courses_rec_df
 	
-
-
-"""
-for i in range(len(schools_df)): #for each course
-  des = str(schools_df['CourseID'][i])
-  des = des.lower()
-  temp_list = []
-  terms = []
-  #print(i)
-  for w in bok: #for each bok term
-    space = r'\s' #regex space pattern
-    if re.search(space+w+space,des): #if the course contains the bok term
-      if w not in terms: #if the bok term is not already in the list for that description
-        terms.append(w) #append bok term
-  if len(terms) != 0: #if at least 1 term is in the description
-    temp_list = [schools_df['School'][i], schools_df['CourseID'][i], schools_df['Descriptions'][i],', '.join(terms)] #append course to new list
-    temp_df.append(temp_list) #append list to new dataframe
-ds_schools_df = pd.DataFrame(temp_df) #create permanent new data frame
-ds_schools_df.columns = ['School','CourseID','Descriptions','Data Science Term'] #label columns
-print("Creating 'csvs/SMITH_THE_courses.csv'...") #create csv of data science courses
-ds_schools_df.to_csv('csvs/SMITH_blank_courses.csv',encoding="utf-8-sig")
-
-"""
+def save_course_recs(dir_name, out_filename, out_dataframe):
+	pass 
+	
+	# Check if the directory has the ending / 
+	if dir_name[-1] != "/":
+		dir_name = dir_name + "/"
+	print("Saving data frame to directory" , str(dir_name)) 
+	ds_schools_df.to_csv('csvs/SMITH_blank_courses.csv',encoding="utf-8-sig")
