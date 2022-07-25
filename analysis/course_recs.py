@@ -8,6 +8,8 @@ import re
 from re import *
 
 
+
+
 def import_df(school_filename):
 	""" Load dataframe in SCHOOL_FILENAME. Delete the first unnamed column.
 	FILENAME must be a CSV. """
@@ -24,6 +26,8 @@ def import_df(school_filename):
 		del(schools_df['Unnamed: 0'])
 
 	return schools_df
+
+
 
 def load_terms(term_filename):
 	""" Load term list from TERM_FILENAME. Lowercase all terms and remove 
@@ -93,11 +97,22 @@ def recommend_courses(clean_terms, course_df, search_cols):
 
 	return courses_rec_df
 	
-def save_course_recs(dir_name, out_filename, out_dataframe):
-	pass 
-	
-	# Check if the directory has the ending / 
-	if dir_name[-1] != "/":
-		dir_name = dir_name + "/"
+def save_course_recs(dir_name, out_filename, course_dataframe):
+	""" Save the data frame of courses to a CSV"""
+
+	assert out_filename[-3:] == 'csv', "File must be a CSV"
+
+	# Create the output file name:
+	full_out_file = dir_name + out_filename
+
 	print("Saving data frame to directory" , str(dir_name)) 
-	ds_schools_df.to_csv('csvs/SMITH_blank_courses.csv',encoding="utf-8-sig")
+	course_dataframe.to_csv(full_out_file,encoding="utf-8-sig")
+
+	return 
+
+
+
+
+
+##### 
+# Need to run: python -m spacy download en_core_web_sm for main.py
