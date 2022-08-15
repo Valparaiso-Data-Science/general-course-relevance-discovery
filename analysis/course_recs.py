@@ -27,8 +27,6 @@ def import_df(school_filename):
 
 	return schools_df
 
-
-
 def load_terms(term_filename):
 	""" Load term list from TERM_FILENAME. Lowercase all terms and remove 
 	any duplicates. """
