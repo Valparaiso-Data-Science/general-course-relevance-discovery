@@ -2,9 +2,7 @@
 Main file that runs the whole pipeline, from raw XML catalogs, to course classification with decision trees.
 '''
 
-# files in the current directory
 import parse
-#from topicModel import plot_10_most_common_words, listofDSCourse
 import createDATA
 import ML
 import prep

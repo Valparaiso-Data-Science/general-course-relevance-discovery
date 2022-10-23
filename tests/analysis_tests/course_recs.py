@@ -21,6 +21,8 @@ def import_df(school_filename):
 	cols = list(schools_df.columns)
 	if cols[0] == 'Unnamed: 0':
 		del(schools_df['Unnamed: 0'])
+
+	print(schools_df)
 	return schools_df
 # import_df("test.csv")
 
@@ -72,6 +74,7 @@ def recommend_courses(clean_terms, course_df):
 
 
 		for term in clean_terms: 
+			print("term:", term, "\n")
 			space = r'\s' #regex space pattern
 			if re.search(space+term+space,course_info):
 				if term not in found_terms:
