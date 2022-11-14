@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Tripods Home</h1>
+<p>Welcome to TripodsWeb</p>
+<li><a href="{% url 'school-create' %}">Add School</a></li>
+<li><a href="{% url 'catalog-create' %}">Add Catalog</a></li>
+<li><a href="{% url 'request-create' %}">Add Request</a></li>
+{% endblock %}

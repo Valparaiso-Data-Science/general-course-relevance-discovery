@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Catalog List</h1>
+  {% if catalog_list %}
+  <ul>
+    {% for catalog in catalog_list %}
+      <li>
+        <a href="{{ Catalog.get_absolute_url }}">{{ catalog.name }}</a>
+        ({{catalog.year}})
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no catalogs.</p>
+  {% endif %}
+{% endblock %}
