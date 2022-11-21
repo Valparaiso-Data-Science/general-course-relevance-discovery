@@ -1,6 +1,5 @@
 import re
 from django.shortcuts import render, get_object_or_404
-from tripodsApp.forms import*
 from .models import School, Catalog, Request
 from django.views import generic
 from django.http import HttpResponseRedirect
@@ -19,7 +18,7 @@ class SchoolCreate(CreateView):
 
 class CatalogCreate(CreateView):
     model = Catalog
-    fields = ['name', 'school', 'year', 'pdf']
+    fields = ['name', 'school', 'year', 'pdf', 'xml_file']
 
     def get_success_url(self):
         return reverse_lazy('index')

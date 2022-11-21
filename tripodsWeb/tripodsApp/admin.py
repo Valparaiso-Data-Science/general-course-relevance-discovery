@@ -12,7 +12,7 @@ class SchoolAdmin(admin.ModelAdmin):
 admin.site.register(School, SchoolAdmin)
 
 class RequestAdmin(admin.ModelAdmin):
-    list_display = ('school', 'catalog', 'rq_type')
+    list_display = ('school', 'catalog', 'rq_type', 'category')
 
 admin.site.register(Request, RequestAdmin)
 

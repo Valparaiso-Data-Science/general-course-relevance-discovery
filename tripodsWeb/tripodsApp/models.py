@@ -45,6 +45,7 @@ class Catalog(models.Model):
     school = models.ForeignKey(School, on_delete=models.CASCADE, default=None)
     year = models.IntegerField('Year', default=None)
     pdf = models.URLField('PDF URL', max_length=200, default=None)
+    xml_file = models.FileField(upload_to='media/', default=None)
  
 
     def __str__(self):
@@ -75,7 +76,7 @@ class Request(models.Model):
 
     def __str__(self):
         """String for representing the Model object."""
-        return '{0} {1} {2} {3} {4}'.format(self.id, self.name, self.year, self.rq_type, self.category)
+        return '{0} {1} {2} {3}'.format(self.school, self.catalog, self.rq_type, self.category)
     
     def get_absolute_url(self):
         """Returns the URL to access a particular instance of the model."""
