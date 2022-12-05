@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Tripods Web</h1>
+
+<p>To begin, fill out the form below. If you do not see your school, add a school with the link below.</p>
+<li><a href="{% url 'school_form' %}">Add School</a></li>
+<p>Next, check if your course catalog already exists in the form. If your catalog is not there, you can upload a PDF and we will process it.</p>
+<li><a href="{% url 'catalogForm' %}">Add Course Catalog</a></li>
+
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+<input type="Submit" name="submit" value="Submit"/>
+</form>
+
+<p>When the page is done loading, go here for your results. Don't click on this page before submitting a request!</p>
+<a href="{% url 'results' %}" target="_blank" rel="noopener noreferrer">Results</a>
+
+{% endblock %}

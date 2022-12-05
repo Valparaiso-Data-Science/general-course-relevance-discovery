@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+
+
+{% block content %}
+<h3>Couldn't find your school? Enter it in the form below: </h3>
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+  </form>
+  <p>Then, add the course catalog for your school: <a href="{% url 'catalogForm' %}">Add Catalog</a></p>
+
+{% endblock %}
