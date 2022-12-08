@@ -17,7 +17,6 @@ class SchoolCreate(CreateView):
         return reverse_lazy('index')
 
 def catalogForm(request):
-    #submitbutton= request.POST.get("submit")
     form = CatalogForm(request.POST, request.FILES)
     print(request.FILES)
     if request.method == 'POST':

@@ -8,12 +8,13 @@ Front End: (courseFinder)
 	- hide results link until request has been processed
 	- show some sort of loading screen or indication to the user that the code is still running
 	- "request type" was planned and used in the request form, but not used
-* Email results to user as well as rendering on results.html
+* Email results to user as well as rendering on results.html? 
 * Styling the HTML pages
 * Unit testing for the website
 
 Back End: (tripodscode)
-* source/ code outputs empty csv on certain XMLs, like smith 2018. this was not an issue in spring 2021
+* some XMLs will only run though the pipeline successfully if they are trimmed, ie smith 2018. 
+* some XMLs, like Brown 2022 will not run thorugh the pipeline and fail during the analysis stage. 
 * Ideally users would be able to upload a PDF and Grobid would convert it to an XML
 * In views.py index():
 	- make the tripods code run not based on system calls?
