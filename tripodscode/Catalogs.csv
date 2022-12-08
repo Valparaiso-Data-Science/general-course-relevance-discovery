@@ -1,0 +1,57 @@
+Catalog Name,Line of first course,Line of last course,XML Format (<p> course ID / Name / Credits </p><p>desc</p><p></p>,XML Style ,Who Checked,Special Notes
+Alma,2058,14530, <p>course ID Title </p>blankline <p>credits desc Prereq</P>,alma,Gabe,Some descs have <figure></figure> right before in the same <p>
+ArizonaCollege,1271,3318,<Course_Description_h>course ID</Course_Description_h>blank line<Course_Description_h> Title </Course_Description_h> blank line<Credits> credits </Credits> blank line<Course_Description_C> desc </Course_Description_C> blank line <FOOTNOTE> prereq </FOOTNOTE> blank line,arizona,Gabe,1st course has dif. format (See notes 2)    Replace <BODY_COPY> in nursing section
+Ball State,4043,54653,<p>Course ID Title (credits) desc </p> blank line <p> prereq </p> blank line,ballstate,Gabe,
+Bethel,7445,10717,<p> Course ID Title credits </p> blank line <p> desc prereq </p> blank line,bethel,Gabe,Desc/prereqs can be spread across multiple lines (See Notes 4)
+Caldwell,2446,13691,<p> Course ID Title (credits) </p> blank line <p> desc prereq </p> blank line,bethel,James,
+Desales,5358,15348,<p> Course ID title credits </p> blank line <p> desc prereqs </p> blank line,bethel,Gabe,
+Grandview,10579,14351,<p>Course ID title credits</p> blank line <p> desc prereqs</p> blank line,bethel,Gabe,
+McKendree,24612,29836,<p> Course ID title credits </p> blank line <p> desc prereqs </p>,bethel,Gabe,Some course desc are broken up into multiple <p> lines
+NorthCentralMissouri,7514,9638,<p>Course ID Title credits</p> blank line <p>desc prereq</p> blank line,bethel,James,
+OregonUni,9950,194419,<p> Course ID title credits </p> blank line <p> desc prereqs </p> blank line,bethel,James,"Courses with desc have . after courseID, ones without dont (potentially covered with tag checks but dont know yet)"
+UniofNorthCarolina,19422,140532,<p> Course ID title credits </p> blank line <p> desc prereqs </p> blank line,bethel,Gabe,
+Brown,5200,114968,<Div> <P>Course ID Title</P> blank line <P>desc </P> blank line <P/> prereq</P> blank line <P> <Table> <TBody> <TR> <TD> <P>___</P> </TD> blank line <TD> <P>Course ID</P> </TD> blank line <TD> <P>___</P> </TD> blank line <TD> <P>___</P> </TD> blank line <TD> <P>Days of Week</P> </TD> blank line <TD> <P>course start time-end time (credits)</P> </TD> blank line <TD> <P>instructor</P> </TD> </TR> </TBody> </Table> </P> </Div> blank line,brown,James,___ == unsure what to label
+Carlow,3515,12337,<p> Course ID Title </p> blank line <p> desc credits </p> blank line <p> prereq </p> blank line,carlow,James, 
+ClemonUniversity,15246,24158,<p> Course ID Title credits desc prereq </p>,clemonU,James,credits format example: 3(3)
+Regis,7408,31497,<p> Course ID title (credits) descr prereq </p>,clemonU,James,
+UniofNebraska,3526,4832,<p> Course ID title credits desc prereqs </p> blank line,clemonU,Gabe,
+ColgateUni,12970,25420,"<p> Course ID - Title </p> blank line <p> desc </p> blank line <p> credits, crosslisted, prereq, major/minor restric, class restric, restric, area of inquiry, CORE </p> blank line",colgateU,James,
+Colorado2012,2816,8500,<p> Course ID title desc prereqs units(credits?) </p> blank line,colorado,Gabe,Lack of spacing between words (completely random); units take the place of credits 
+CristopherNewport,7012,,<Course Title>Course ID Title (credits) </Course Title> blank line <Course_Prerequisite>Prereq/Coreq</Course_Prerequisite> blank line <Course_Prerequisite>Season of Year</Course_Prerequisite> blank line <Course_Descrp>Descr</Course_Descrp> blank line,cristopher,James,Some course descriptions took up multiple lines of code
+Denison,4212,31323,<Div> <p> Course ID Title credits </p> blank line <p>desc</p> blank line <p>prereqs</p> </div> blank line,denison,Gabe,
+DePauw,3619,21821,<p> Course ID </p> blank line <p> Title </p> blank line <p> desc </p> blank line <p> fill? </p> blank line <p> prereqs credits </p> blank line,depauw,Gabe,"fill = ""Ditribution Area Prerequisites Credts"""
+EastCentral,16971,22603,<p> Course ID title</p> blank line <p> hours(credits) prereqs desc</p> blank line,eastcentral,Gabe,
+EastStroudsburg,3794,13507,<p> Course ID title credits </p> blank line <p> desc </p> blank line <p> prereqs </p> blank line,eaststroudsburg,Gabe,1st course starts in the middle of <p>
+Framingham,4994,17286,<p>Course ID title </p> blank line <p>desc prereqs </p< blank line,framingham (bethel?),Gabe,No credits in course description
+JohnWood,5560,6947,<p>Course ID title credits desc </p> blank line,johnWood,James,
+Loyola,59,28339,<sect><h6>Course ID (credits) CourseNumber date</h6> blank line <p>title</p> blank line <p>desc</p> blank line <p>prereq</p> blank line <p>outcome</p> blank line <p>Components Course equivalents Requirement group Room requirements</p> blank line <p>Report ID Run date Run time</p></sect>,loyola,James,
+MACU,7974,9854,<p> Course ID title credits desc prereqs </p> blank line,macu,Gabe,1st course for each field starts in te middle of the line
+MarylandUni,57,154959,<table><tr><tr> Course ID </th> blank line <th> title </th> </tr> blank line <tr> <td> ? </td> blank line <td> credits </td> blank line <td> teaching method </td> </tr> blank line <tr> <td/> blank line <td> desc </td> </tr> </table> <p> prereqs </p>,maryland,Gabe,Grabbed class list instead of course description NEEDS XML CONVERT
+NewYorkUniversity,708,3448,<Course_-_Catalog_Tit>Title</Course_-_Catalog_Tit> blank line <Course_-_Information>Course ID credits time professor</Course_-_Information> blank line <Course_-_Notes_descr>notes desc</Course_-_Notes_descr> blank line <Course_-_Description>desc</Course_-_Description> blank line,newYork,James,The xml order doesn't seem to match the pdf order
+Puget,1346,1722,<Body_EndParaNOIndent>Course ID title credits descr</Body_EndParaNOIndent>,puget,James,
+Rosemont,23569,29489,<p>Course ID - Title</p> blank line <p>Credits</p> blank line <p>Desc</p> blank line <p></p> blank line,rosemont,James,
+Stritch,10120,16890,<p>Course ID - Title</p> blank line <p>(credits)</p> blank line <p>Course Desc Prereq</p> blank line <p></p> blank line,rosemont,James,
+Sagu,19041,21727,<_No_paragraph_style_>Course ID Title hours</_No_paragraph_style_> blank line <_No_paragraph_style_>Course Desc</_No_paragraph_style_> blank line,sagu,James,
+SouthwestBaptist,4271,7791,<p>Course ID Title - hours</p> blank line <p>desc</p> blank line,sagu,James,
+UniversityofWestGeorgia,35680,46380,<P> Couse ID - Course Name </P>  blank line <P> Course Description and Prerequisites </P> blankline <P> </P> blankline,similar to caldwell and carlow,ethan,insert picture*
+Smith,10167,41415,<p>Course ID Title</p> blank line <p>Course Desc Credits</p> blank line <p>Members of Department</p> blank line <p>Years/seasons offered</p> blank line,smith,James,
+UniofTexas,4820,88431,<p> Course ID title </p> blank line <p> desc prereqs </p> blank line,texas / bethel?,Gabe,"Courses that start a ""section"" start in the middle of a line"
+UniOfChicago,2079,35752,<p>Course ID title credits</p> blank line <p>desc </p>,uniOfChicago,James,
+VirginiaTech,12140,31439,<P> Course Id Title desc prereqs credits </p>,virginia / clemonU?,Gabe,
+WilliamJewell,4313,15838,<NormalParagraphStyle>Course ID Title credits </NormalParagraphStyle> blank line <NormalParagraphStyle> desc prereq </NormalParagraphStyle> blank line <NormalParagraphStyle/>,william,Gabe,Break Line between courses
+Williamwoods,59049,71509,<p>course ID Title</p> blank line <p>desc prereq</p> blank line <p>credits</p> blank line,woods,James,Theres a break inbetween undergraduate and graduate courses
+Youngstown,33004,425699,<p> <p>course Id Title Credits </p>blankline<p>desc<p/>pre-req<p/></p></p>blankline,young,Group,
+Fontbonne,,,Xml File has almost nothing,,Gabe,Reconvert XML
+Kalamazoo,,,,,,Not easlily parsed
+LehighUni,,,,,,XML doesn't match PDF
+Northwestern,2693,26757,<p>Course ID Title (credits)</p> blank line <p>Desc</p>,,James,Some courses are put into the same line of code
+NotreDame,7435,18671,<P> CourseID CourseTitle (tab) Credits </P> (blankline) <P> CourseDesc </P> (blankline) <P> </P>,,ethan,"Courses have the department info intermixed within; Some courses are listed in two different departments; Before every major/department's course listing there is an <H3 id=""LinkTarget_(4digitNum)""> COURSE OFFERINGS </H3> "
+Pepperdine,5026,16308,<p> Course ID title (credits) </p> blank line <p> desc </p> blank line,,James,
+Pittsburgh,45509,66557,<p>Course ID title </p> blank line <p>Min Credits Max Credits description</p> blank line,,James,
+Purdue,68,45512,<p> Course ID title </p> blank line <p>credits descr</p> blank line <p> </p>,,James,
+Rochester,580,4900,<p> Course ID title descr prereq</p>,,James,
+Rollins,,,,,ethan,
+RowanUniversity,55212,68992,<p>Course ID Title credits</p> blank line <p>prereq</p> blank line <p>desc</p> blank line,,James,
+SaintXavier,48203,60693,<P>newline<P>CourseID</P> blankline <P> Credit Hours </P> blankline <P> Pre/Co-reqs </P> blankline <P> Course Desc </P> newline </P>,,ethan,
+TexasA_M,11649,85225,<P>CourseIDNum CourseTitle Credits</P> blank line <P> Course Description </P> blankline <P> </P>,,ethan,
+2011Cornell?,,,,,,

@@ -7,10 +7,6 @@ Main file that runs the whole pipeline, from raw XML catalogs, to course classif
 #from topicModel import plot_10_most_common_words, listofDSCourse
 import createDATA
 import prep
-
-from subprocess import call
-
-#librariesimport os
 import pandas as pd
 import sys
 

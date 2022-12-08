@@ -7,12 +7,6 @@ from django.db import connection
 from django.urls import reverse_lazy
 from subprocess import call
 import pandas as pd
-import importlib
-
-#from tripodscode.analysis import sendResponse
-# from email.mime.multiparti mport MIMEMultipart
-# from email.mime.text import MIMEText
-# import smtplib
 
 
 class SchoolCreate(CreateView):
@@ -37,13 +31,7 @@ def catalogForm(request):
     return render(request, 'catalogForm.html', context)
 
 def results(request):
-    csv_file = "/Users/cnguyen/testing/tripodsWeb/tripodscode/analysis copy/final_resultstest_save_course_recs.csv"
-    data = pd.read_csv(csv_file)
-    data_string = data[['CourseID','Descriptions','FoundTerms']]
-    datahtml = data_string.to_html()
-    text_file = open("courseFinder/templates/results.html", "w")
-    text_file.write(datahtml)
-    text_file.close()
+
     return render(request,'results.html')
 
 def index(request):
@@ -76,21 +64,19 @@ def index(request):
 
             with open('search_terms.txt', 'w') as f:
                 f.write(search_terms)
-            #os.system('python3 main.py')
-            call(["python3", "main.py"], cwd='/Users/cnguyen/testing/tripodsWeb/tripodscode/source/')
-            call(["python3", "main.py"], cwd='/Users/cnguyen/testing/tripodsWeb/tripodscode/analysis copy/')
-            
 
-            # csv_file = "/Users/cnguyen/testing/tripodsWeb/tripodscode/analysis copy/final_resultstest_save_course_recs.csv"
-            # data = pd.read_csv(csv_file)
-            # data_string = data[['CourseID','Descriptions','FoundTerms']]
-            # datahtml = data_string.to_html()
-            # text_file = open("results.html", "w")
-            # text_file.write(datahtml)
-            # text_file.close()
+            call(["python3", "main.py"], cwd='/Users/cnguyen/testing/tripodsWeb/general-course-relevance-discovery/tripodscode/source/')
+            call(["python3", "main.py"], cwd='/Users/cnguyen/testing/tripodsWeb/general-course-relevance-discovery/tripodscode/analysis copy/')
             
             form.save()
-
+        csv_file = "/Users/cnguyen/testing/tripodsWeb/general-course-relevance-discovery/tripodscode/analysis copy/final_resultstest_save_course_recs.csv"
+        data = pd.read_csv(csv_file)
+        data_string = data[['CourseID','Descriptions','FoundTerms']]
+        datahtml = data_string.to_html()
+        text_file = open("courseFinder/templates/results.html", "w")
+        text_file.write(datahtml)
+        text_file.close()
+            
 
     context = {
         'form': form,
@@ -111,9 +97,9 @@ def cleanXMLPath(xml_path):
     s = ['(', ')', ',', '\'']
     final = d.translate({ord(x): '' for x in s})
     print(final)
-    src = '/Users/cnguyen/testing/tripodsWeb/'+final
+    src = '/Users/cnguyen/testing/tripodsWeb/general-course-relevance-discovery/'+final
     print(src)
-    dst = '/Users/cnguyen/testing/tripodsWeb/tripodscode/XMLs/requested.xml'
+    dst = '/Users/cnguyen/testing/tripodsWeb/general-course-relevance-discovery/tripodscode/XMLs/requested.xml'
     shutil.copy(src, dst)
     return final
 

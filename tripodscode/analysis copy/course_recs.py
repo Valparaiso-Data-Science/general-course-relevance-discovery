@@ -110,7 +110,4 @@ def save_course_recs(dir_name, out_filename, course_dataframe):
 
 	return out_filename
 
-def resultsLoaded():
-	return True
-##### 
 # Need to run: python -m spacy download en_core_web_sm for main.py
