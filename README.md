@@ -9,6 +9,7 @@ See next steps under general-course-relevance-discovery/tripodscode/devel/todo
 Go to anaconda.com and install Anaconda.
 
 ### On your personal computer
+To begin, go to the bottom of the tripods.yml file and change the directory path to match your local device. 
 
 To create a conda environment with all of the requirements, cd into the directory with the tripods.yml file (general-course-relevance-discovery), open your terminal environment and run
 ```
