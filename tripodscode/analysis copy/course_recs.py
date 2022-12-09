@@ -67,7 +67,7 @@ def recommend_courses(clean_terms, course_df):
 
 		# Loop over the listed search columns: 
 		##is this necessary if parse.py is manually parsing and organizing XML to CSV to fit the course_df["Course ID"]
-		course_info = str(course_df["CourseID"][i])
+		course_info = str(course_df["Descriptions"][i])
 		course_info = course_info.lower()
 
 
