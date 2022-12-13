@@ -14,7 +14,7 @@ Front End: (courseFinder)
 
 Back End: (tripodscode)
 * some XMLs will only run though the pipeline successfully if they are trimmed, ie smith 2018. 
-* some XMLs, like Brown 2022 will not run thorugh the pipeline and fail during the analysis stage. 
+* when analysis is run on only course description, the output dataframe is not able to catch any courses. Course_recs only works on courseIDs.
 * Ideally users would be able to upload a PDF and Grobid would convert it to an XML
 * In views.py index():
 	- make the tripods code run not based on system calls?
