@@ -1,5 +1,5 @@
 # general-course-relevance-discovery
-Repo made to extract data science relevant courses from university course catalogs
+Repo made to extract relevant courses from university course catalogs. This project allows users to search course catalogs for terms of interest and recive a list of courses containing those terms. To run the python code, instructions are below. To run a Django server version of the code, instructions are under "Running TripodsWeb locally". 
 See next steps under general-course-relevance-discovery/tripodscode/devel/todo
 
 ## Getting Started
