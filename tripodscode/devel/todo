@@ -1,0 +1,40 @@
+Fall 2022 To Dos:
+
+Front End: (courseFinder)
+* Page layout is reliant on user knowing how to navigate so automatic renders to the next page school form->catalog form->index page would be good
+* On the index page:
+	- make the Catalog dropdown menu dependant on the School selected
+	- make data entered more stict, ie only being able to uplaod a XML
+	- hide results link until request has been processed
+	- show some sort of loading screen or indication to the user that the code is still running
+	- "request type" was planned and used in the request form, but not used
+* Email results to user as well as rendering on results.html? 
+* Styling the HTML pages
+* Unit testing for the website
+
+Back End: (tripodscode)
+* some XMLs will only run though the pipeline successfully if they are trimmed, ie smith 2018. 
+* when analysis is run on only course description, the output dataframe is not able to catch any courses. Course_recs only works on courseIDs.
+* Ideally users would be able to upload a PDF and Grobid would convert it to an XML
+* In views.py index():
+	- make the tripods code run not based on system calls?
+* In punct_split.py:
+	- the enchant library is not easily available for M1+ Macs, consider nltk library instead? the code is removed for now
+	- https://stackoverflow.com/questions/3788870how-to-check-if-a-word-is-an-english-word-with-python 
+	- https://github.com/pyenchant/pyenchant/issues/265 
+
+* Continue to clean up the source folder, maybe functionalize main in the way analysis/main.py is
+
+--------------------------------------------------------------------------------------------------
+
+Previous To Dos:
+* refactor parse.py - multiple different things that we could do, it'd be good to start with looking at the regex for courses (make the checks into a function (like 'isACourseID'))
+
+* as a subdirectory. and move bok.txt to data/ aswell. there are only a few lines in total that we would need to change
+
+* change the git clone command in the docker image to be 'git clone --depth 1 <url>' to improve the speed at which the docker file is made? The most time consuming process of creating the image is downloading the repo.
+	$ not a good solution, if you run git pull, you download the repo's entire git history
+
+* work on documentation and commenting our code
+	$ most code now has comments
+

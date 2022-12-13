@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h3>Don't have the XML of your course catalog? </h3>
+<a href="https://www.adobe.com/acrobat/hub/how-to/how-to-convert-pdf-to-xml">Try converting the PDF version to XML using Adobe.</a>
+<p> Or email tinkerlab@smith.edu your PDF and we will upload the XML version to our database for you to use!</p>
+  <form action="{% url 'catalogForm' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" />
+  </form>
+{% endblock %}
