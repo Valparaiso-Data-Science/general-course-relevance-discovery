@@ -10,7 +10,7 @@ graphviz==0.14
 seaborn==0.10.1
 nltk==3.6.6
 pandas==1.0.4
-ipython==7.16.3
+ipython==8.10.0
 pyenchant==3.1.1
 scikit_learn==0.23.1
 pytest
